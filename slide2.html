@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>2단원 - 거듭제곱과 지수법칙</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{width:100%;min-height:100vh;background:#F0D8C5;font-family:'Nanum Gothic',sans-serif;overflow-x:hidden}
+
+  .container{max-width:480px;margin:0 auto;padding:0 0 120px 0}
+  .progress-bar{position:fixed;top:0;left:0;width:100%;height:4px;background:rgba(0,0,0,0.1);z-index:1000}
+  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#D8A883,#7A4C14);transition:width .5s ease;border-radius:0 2px 2px 0}
+
+  .step-card{background:#F8F0E4;border-radius:20px;margin:16px;padding:28px 24px;opacity:0;transform:translateY(40px);transition:all .6s cubic-bezier(.16,1,.3,1);pointer-events:none;box-shadow:0 2px 12px rgba(0,0,0,.06);position:relative;overflow:hidden;max-height:0}
+  .step-card.visible{opacity:1;transform:translateY(0);pointer-events:auto;max-height:5000px}
+  .step-card.white-card{background:#fff}
+  .divider{width:40px;height:3px;background:#D8A883;border-radius:2px;margin:4px auto;opacity:0;transition:opacity .5s ease .3s;max-height:0}
+  .divider.visible{opacity:1;max-height:20px;margin:8px auto}
+
+  /* 퀴즈 */
+  .quiz-area{margin-top:20px}
+  .quiz-question{font-size:17px;font-weight:800;color:#333;text-align:center;line-height:1.8;margin-bottom:14px}
+  .blank-btn{display:inline-flex;align-items:center;justify-content:center;min-width:80px;padding:6px 14px;background:#fff;border:2.5px dashed #D8A883;border-radius:10px;font-size:17px;font-weight:800;color:#D8A883;cursor:pointer;transition:all .3s;vertical-align:middle;gap:4px;font-family:'Nanum Gothic',sans-serif}
+  .blank-btn:active{transform:scale(.95)}
+  .blank-btn .q-mark{font-size:20px}
+  .blank-btn.solved{border-style:solid;border-color:#2E7D32;color:#2E7D32;background:rgba(46,125,50,.06);cursor:default}
+
+  /* 지수 전용 작은 빈칸 */
+  .blank-btn.blank-exp{min-width:30px;padding:1px 6px;font-size:13px;border-width:2px;border-radius:7px;vertical-align:super;gap:2px}
+  .blank-btn.blank-exp .q-mark{font-size:13px}
+  .blank-btn.blank-exp .katex{font-size:1em}
+
+  .choices-wrap{display:none;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:14px;animation:fadeUp .3s ease}
+  .choices-wrap.open{display:flex}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .choice-btn{padding:10px 18px;border:2px solid #ddd;border-radius:12px;background:#fff;font-size:16px;font-weight:700;color:#555;cursor:pointer;transition:all .3s;font-family:'Nanum Gothic',sans-serif;min-width:80px;text-align:center}
+  .choice-btn:active{transform:scale(.95)}
+  .choice-btn.correct{border-color:#2E7D32;background:#2E7D32;color:#fff;animation:popCorrect .5s ease}
+  .choice-btn.wrong{border-color:#e53935;background:#fbe9e7;color:#e53935;animation:shake .4s ease}
+  @keyframes popCorrect{0%{transform:scale(1)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  .quiz-feedback{text-align:center;margin-top:12px;font-size:15px;font-weight:800;opacity:0;transition:opacity .3s}
+  .quiz-feedback.show{opacity:1}
+  .quiz-feedback.fail{color:#e53935}
+
+  /* □ = 패턴 (분수 내부 빈칸) */
+  .sq-eq{display:block;text-align:center;margin-top:10px;font-size:18px;font-weight:800;color:#555}
+  .sq-eq .sq{color:#D8A883;font-size:22px}
+
+  /* 인트로 */
+  .intro-card{text-align:center;padding:40px 24px 32px;margin-top:24px}
+  .intro-card .character-wrap{display:flex;align-items:flex-start;justify-content:center;gap:12px;margin-bottom:20px}
+  .intro-card .character-img{width:56px;height:46px;flex-shrink:0}
+  .intro-card .speech{background:#fff;border-radius:16px;padding:12px 16px;font-size:15px;color:#7A4C14;line-height:1.6;text-align:left;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .intro-card .speech::before{content:'';position:absolute;left:-8px;top:14px;border:6px solid transparent;border-right-color:#fff}
+  .intro-card .topic-title{font-size:36px;font-weight:800;color:#7A4C14;margin-top:8px;letter-spacing:-1px}
+
+  /* 수식 크기 */
+  .math-hero{text-align:center;padding:20px 0}
+  .math-hero .katex{font-size:5em;color:#646466}
+  .math-medium{text-align:center;margin-bottom:8px}
+  .math-medium .katex{font-size:3.5em;color:#646466}
+  .formula-katex{text-align:center;margin:16px 0 8px}
+  .formula-katex .katex{font-size:1.5em}
+  .quiz-question .katex{font-size:1.05em}
+  .choice-btn .katex{font-size:1em}
+  .note-example .katex{font-size:1.1em}
+  .blank-btn .katex{font-size:1em}
+
+  /* 화살표 라벨 */
+  .arrow-labels{display:flex;justify-content:center;gap:32px;width:100%}
+  .arrow-label-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 24px;border-radius:16px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+  .arrow-label-item .arrow-icon{font-size:20px;color:#D8A883}
+  .arrow-label-item .label-name{font-size:22px;font-weight:800;color:#333}
+  .arrow-label-item .label-target{font-size:40px;font-weight:800;line-height:1}
+  .arrow-label-item.exponent-item .label-target{color:#2E7D32}
+  .arrow-label-item.base-item .label-target{color:#D85A3A}
+
+  /* 정의 */
+  .def-list{display:flex;flex-direction:column;gap:16px}
+  .def-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+  .def-bullet{width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:12px solid #646466;flex-shrink:0}
+  .def-item .def-keyword{font-size:20px;font-weight:800;color:#7A4C14}
+  .def-item .def-desc{font-size:16px;font-weight:700;color:#555}
+
+  /* 참고 */
+  .note-box{background:#fff;border-radius:14px;border-left:4px solid #D8A883;padding:18px 20px}
+  .note-box .note-title{font-size:16px;font-weight:800;color:#7A4C14;margin-bottom:10px}
+  .note-box .note-content{font-size:18px;font-weight:800;color:#333;line-height:1.7}
+  .note-box .hl{color:#77573A;font-size:22px}
+  .note-example{margin-top:12px;padding:12px 14px;background:#F8F0E4;border-radius:10px;font-size:20px;font-weight:800;color:#646466;text-align:center}
+
+  /* 법칙 카드 */
+  .law-header{text-align:center;margin-bottom:16px}
+  .law-header .law-title{font-size:16px;font-weight:800;color:#646466}
+  .law-formula{text-align:center;padding:16px;background:#fff;border-radius:14px;margin:12px 0;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+  .law-formula .katex{font-size:1.6em}
+  .law-hint{text-align:center;font-size:15px;font-weight:800;color:#D85A3A;margin:8px 0}
+  .law-example{padding:14px;background:#fff;border-radius:12px;margin-top:12px;text-align:center;border-left:3px solid #D8A883}
+  .law-example .katex{font-size:1.2em}
+  .law-example-label{font-size:13px;font-weight:800;color:#9E846B;margin-bottom:6px}
+
+  /* 케이스 정리 */
+  .case-list{display:flex;flex-direction:column;gap:12px}
+  .case-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+  .case-tag{font-size:13px;font-weight:800;padding:4px 10px;border-radius:8px;flex-shrink:0}
+  .case-tag.big{background:rgba(46,125,50,.1);color:#2E7D32}
+  .case-tag.small{background:rgba(216,90,58,.1);color:#D85A3A}
+  .case-tag.equal{background:rgba(100,100,102,.1);color:#646466}
+  .case-item .katex{font-size:1.1em}
+
+  /* 음수 참고 */
+  .sign-table{display:flex;gap:12px;margin-top:12px}
+  .sign-card{flex:1;text-align:center;padding:14px 12px;border-radius:12px;background:#fff}
+  .sign-card .sign-label{font-size:13px;font-weight:800;margin-bottom:6px}
+  .sign-card .sign-result{font-size:20px;font-weight:800}
+  .sign-card.pos{border:2px solid #2E7D32}
+  .sign-card.pos .sign-label{color:#2E7D32}
+  .sign-card.pos .sign-result{color:#2E7D32}
+  .sign-card.neg{border:2px solid #D85A3A}
+  .sign-card.neg .sign-label{color:#D85A3A}
+  .sign-card.neg .sign-result{color:#D85A3A}
+
+  .formula-labels{display:flex;justify-content:center;gap:20px;margin-top:16px}
+  .formula-label-tag{padding:8px 20px;border-radius:20px;font-size:15px;font-weight:800}
+  .formula-label-tag.tag-base{background:rgba(216,90,58,.1);color:#D85A3A}
+  .formula-label-tag.tag-exp{background:rgba(46,125,50,.1);color:#2E7D32}
+
+  /* 하단 버튼 */
+  .next-btn-wrap{position:fixed;bottom:0;left:0;width:100%;padding:16px;background:linear-gradient(transparent,#F0D8C5 40%);z-index:999;display:flex;justify-content:center}
+  .next-btn{max-width:448px;width:100%;padding:16px;background:#7A4C14;color:#fff;border:none;border-radius:14px;font-size:18px;font-weight:800;font-family:'Nanum Gothic',sans-serif;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 16px rgba(122,76,20,.3);display:flex;align-items:center;justify-content:center;gap:8px}
+  .next-btn:active{transform:scale(.97);background:#5a3810}
+  .next-btn.done{background:#2E7D32;box-shadow:0 4px 16px rgba(46,125,50,.3)}
+  .next-btn.locked{background:#bbb;box-shadow:0 4px 16px rgba(0,0,0,.1);pointer-events:none}
+  .next-btn .btn-icon{font-size:20px}
+
+  /* 완료 */
+  .complete-card{text-align:center;padding:40px 24px}
+  .complete-card .check-icon{font-size:48px;margin-bottom:12px}
+  .complete-card .complete-title{font-size:24px;font-weight:800;color:#7A4C14;margin-bottom:8px}
+  .complete-card .complete-desc{font-size:15px;color:#9E846B;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="container" id="container">
+
+<!-- ===== STEP 0: 인트로 ===== -->
+<div class="step-card intro-card" data-step="0">
+  <div class="character-wrap">
+    <img class="character-img" src="images/shape_2.png" alt="캐릭터" onerror="this.style.display='none'">
+    <div class="speech">지수는 거듭제곱에서<br>나오는 거였지~</div>
+  </div>
+  <div class="topic-title">거듭제곱</div>
+  <div class="quiz-area" data-quiz="0">
+    <div class="quiz-question">같은 수나 문자를 여러 번<br><button class="blank-btn" id="blank0"><span class="q-mark">❓</span></button> 을 거듭제곱이라 해요</div>
+    <div class="choices-wrap" id="choices0">
+      <button class="choice-btn" data-answer="곱하는 것">곱하는 것</button>
+      <button class="choice-btn" data-answer="나누는 것">나누는 것</button>
+      <button class="choice-btn" data-answer="더하는 것">더하는 것</button>
+      <button class="choice-btn" data-answer="빼는 것">빼는 것</button>
+    </div>
+    <div class="quiz-feedback" id="feedback0"></div>
+  </div>
+</div>
+<div class="divider" data-step="0"></div>
+
+<!-- ===== STEP 1: 2³ ===== -->
+<div class="step-card white-card" data-step="1">
+  <div class="math-hero">$$\color{#D85A3A}{2}^{\color{#2E7D32}{3}}$$</div>
+  <div style="text-align:center;font-size:15px;color:#888;margin-bottom:8px">2를 3번 곱한다는 뜻이에요!</div>
+  <div class="quiz-area" data-quiz="1">
+    <div class="quiz-question">$\color{#D85A3A}{2}^{\color{#2E7D32}{3}} = \color{#D85A3A}{2} \times \color{#D85A3A}{2} \times \color{#D85A3A}{2} =$ <button class="blank-btn" id="blank1"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices1">
+      <button class="choice-btn" data-answer="8">8</button>
+      <button class="choice-btn" data-answer="6">6</button>
+      <button class="choice-btn" data-answer="9">9</button>
+      <button class="choice-btn" data-answer="12">12</button>
+    </div>
+    <div class="quiz-feedback" id="feedback1"></div>
+  </div>
+</div>
+<div class="divider" data-step="1"></div>
+
+<!-- ===== STEP 2: 지수/밑 ===== -->
+<div class="step-card" data-step="2">
+  <div style="display:flex;flex-direction:column;gap:20px;align-items:center">
+    <div class="math-medium">$$\color{#D85A3A}{2}^{\color{#2E7D32}{3}}$$</div>
+    <div class="arrow-labels">
+      <div class="arrow-label-item exponent-item"><div class="arrow-icon">↗</div><div class="label-target">3</div><div class="label-name">지수</div></div>
+      <div class="arrow-label-item base-item"><div class="arrow-icon">↙</div><div class="label-target">2</div><div class="label-name">밑</div></div>
+    </div>
+  </div>
+  <div class="quiz-area" data-quiz="2">
+    <div class="quiz-question">$\color{#D85A3A}{2}^{\color{#2E7D32}{3}}$에서 곱한 횟수 $\color{#2E7D32}{3}$은<br><button class="blank-btn" id="blank2"><span class="q-mark">❓</span></button> (이)라고 해요</div>
+    <div class="choices-wrap" id="choices2">
+      <button class="choice-btn" data-answer="지수">지수</button>
+      <button class="choice-btn" data-answer="밑">밑</button>
+      <button class="choice-btn" data-answer="계수">계수</button>
+      <button class="choice-btn" data-answer="차수">차수</button>
+    </div>
+    <div class="quiz-feedback" id="feedback2"></div>
+  </div>
+</div>
+<div class="divider" data-step="2"></div>
+
+<!-- ===== STEP 3: 정의 ===== -->
+<div class="step-card" data-step="3">
+  <div class="def-list">
+    <div class="def-item"><div class="def-bullet"></div><div><span class="def-keyword">지수</span><span class="def-desc"> : 거듭해서 곱한 횟수</span></div></div>
+    <div class="def-item"><div class="def-bullet"></div><div><span class="def-keyword">밑</span><span class="def-desc"> : 거듭해서 곱한 수나 문자</span></div></div>
+  </div>
+  <div class="quiz-area" data-quiz="3">
+    <div class="quiz-question">밑이란 거듭해서 곱한<br><button class="blank-btn" id="blank3"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices3">
+      <button class="choice-btn" data-answer="수나 문자">수나 문자</button>
+      <button class="choice-btn" data-answer="횟수">횟수</button>
+      <button class="choice-btn" data-answer="결과">결과</button>
+      <button class="choice-btn" data-answer="합">합</button>
+    </div>
+    <div class="quiz-feedback" id="feedback3"></div>
+  </div>
+</div>
+<div class="divider" data-step="3"></div>
+
+<!-- ===== STEP 4: 계산 5² ===== -->
+<div class="step-card white-card" data-step="4">
+  <div style="text-align:center">
+    <div style="font-size:18px;font-weight:800;color:#7A4C14;margin-bottom:16px">🔢 계산 연습!</div>
+    <div style="font-size:20px;font-weight:800;color:#646466;margin-bottom:8px">5를 <strong style="color:#2E7D32">2번</strong> 곱하면?</div>
+  </div>
+  <div class="quiz-area" data-quiz="4">
+    <div class="quiz-question">$5^2 = 5 \times 5 =$ <button class="blank-btn" id="blank4"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices4">
+      <button class="choice-btn" data-answer="25">25</button>
+      <button class="choice-btn" data-answer="10">10</button>
+      <button class="choice-btn" data-answer="15">15</button>
+      <button class="choice-btn" data-answer="32">32</button>
+    </div>
+    <div class="quiz-feedback" id="feedback4"></div>
+  </div>
+</div>
+<div class="divider" data-step="4"></div>
+
+<!-- ===== STEP 5: 공식 ===== -->
+<div class="step-card" data-step="5">
+  <div style="text-align:center">
+    <div class="formula-katex">$$\underbrace{\color{#D85A3A}{a} \times \color{#D85A3A}{a} \times \cdots \times \color{#D85A3A}{a}}_{\color{#7A4C14}{n\text{번}}} = \color{#D85A3A}{a}^{\color{#2E7D32}{n}}$$</div>
+    <div class="formula-labels">
+      <span class="formula-label-tag tag-base">$\color{#D85A3A}{a}$ → 밑</span>
+      <span class="formula-label-tag tag-exp">$\color{#2E7D32}{n}$ → 지수</span>
+    </div>
+  </div>
+  <div class="quiz-area" data-quiz="5">
+    <div class="quiz-question">$a$를 $n$번 곱한 것을 기호로 쓰면<br><button class="blank-btn" id="blank5"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices5">
+      <button class="choice-btn" data-answer="aⁿ">$a^n$</button>
+      <button class="choice-btn" data-answer="a+n">$a + n$</button>
+      <button class="choice-btn" data-answer="a×n">$a \times n$</button>
+      <button class="choice-btn" data-answer="n×a">$n \times a$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback5"></div>
+  </div>
+</div>
+<div class="divider" data-step="5"></div>
+
+<!-- ===== STEP 6: a¹=a ===== -->
+<div class="step-card" data-step="6">
+  <div class="note-box">
+    <div class="note-title">💡 참고</div>
+    <div class="note-content">지수가 <span class="hl">1</span>일 때는<br>지수를 생략할 수 있어!</div>
+    <div class="note-example">$\color{#D85A3A}{a}^{\color{#2E7D32}{1}} = \color{#D85A3A}{a}$ &nbsp;&nbsp;예) $5^1 = 5$</div>
+  </div>
+  <div class="quiz-area" data-quiz="6">
+    <div class="quiz-question">$7^1 =$ <button class="blank-btn" id="blank6"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices6">
+      <button class="choice-btn" data-answer="7">$7$</button>
+      <button class="choice-btn" data-answer="1">$1$</button>
+      <button class="choice-btn" data-answer="0">$0$</button>
+      <button class="choice-btn" data-answer="49">$49$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback6"></div>
+  </div>
+</div>
+<div class="divider" data-step="6"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 지수법칙 시작 (같은 소단원 – 섹션 구분 없음) -->
+<!-- ═══════════════════════════════════════ -->
+
+<!-- ===== STEP 7: 밑이 같은 거듭제곱의 곱 ===== -->
+<div class="step-card" data-step="7">
+  <div class="law-header">
+    <div class="law-title">밑이 같은 거듭제곱의 곱</div>
+  </div>
+  <div class="law-formula">$$\color{#00AAEE}{a}^m \times \color{#00AAEE}{a}^n = \color{#00AAEE}{a}^{m+n}$$</div>
+  <div class="law-hint">💡 지수끼리 더하기!</div>
+  <div class="law-example">
+    <div class="law-example-label">예시</div>
+    $$a^3 \times a^2 = \underbrace{a \times a \times a}_{3\text{번}} \times \underbrace{a \times a}_{2\text{번}} = a^{3+2} = a^5$$
+  </div>
+  <div style="margin-top:12px;padding:10px 14px;background:#FFF8F0;border-radius:10px;text-align:center;font-size:14px;color:#7A4C14;font-weight:700">
+    ⚠️ 밑이 다르면 계산 불가! &nbsp; 예) $x^3 \times y^2$ → 더 이상 못 줄임
+  </div>
+  <div class="quiz-area" data-quiz="7">
+    <div class="quiz-question">$a^3 \times a^4 = a$<button class="blank-btn blank-exp" id="blank7"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices7">
+      <button class="choice-btn" data-answer="7">$7$</button>
+      <button class="choice-btn" data-answer="12">$12$</button>
+      <button class="choice-btn" data-answer="1">$1$</button>
+      <button class="choice-btn" data-answer="34">$34$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback7"></div>
+  </div>
+</div>
+<div class="divider" data-step="7"></div>
+
+<!-- ===== STEP 8: 거듭제곱의 거듭제곱 ===== -->
+<div class="step-card" data-step="8">
+  <div class="law-header">
+    <div class="law-title">거듭제곱의 거듭제곱</div>
+  </div>
+  <div class="law-formula">$$(\color{#00AAEE}{a}^m)^n = \color{#00AAEE}{a}^{m \times n}$$</div>
+  <div class="law-hint">💡 지수끼리 곱하기!</div>
+  <div class="law-example">
+    <div class="law-example-label">예시</div>
+    $$(a^2)^3 = a^2 \times a^2 \times a^2 = a^{2+2+2} = a^{2 \times 3} = a^6$$
+  </div>
+  <div class="quiz-area" data-quiz="8">
+    <div class="quiz-question">$(a^2)^5 = a$<button class="blank-btn blank-exp" id="blank8"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices8">
+      <button class="choice-btn" data-answer="10">$10$</button>
+      <button class="choice-btn" data-answer="7">$7$</button>
+      <button class="choice-btn" data-answer="32">$32$</button>
+      <button class="choice-btn" data-answer="25">$25$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback8"></div>
+  </div>
+</div>
+<div class="divider" data-step="8"></div>
+
+<!-- ===== STEP 9: 연습 ===== -->
+<div class="step-card white-card" data-step="9">
+  <div style="text-align:center;font-size:18px;font-weight:800;color:#7A4C14;margin-bottom:16px">📝 연습 문제</div>
+  <div class="quiz-area" data-quiz="9">
+    <div class="quiz-question">$b^3 \times b$<button class="blank-btn blank-exp" id="blank9"><span class="q-mark">❓</span></button> $= b^7$</div>
+    <div class="choices-wrap" id="choices9">
+      <button class="choice-btn" data-answer="4">$4$</button>
+      <button class="choice-btn" data-answer="10">$10$</button>
+      <button class="choice-btn" data-answer="21">$21$</button>
+      <button class="choice-btn" data-answer="3">$3$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback9"></div>
+  </div>
+</div>
+<div class="divider" data-step="9"></div>
+
+<!-- ===== STEP 10: 나눗셈 준비 ===== -->
+<div class="step-card" data-step="10">
+  <div class="note-box">
+    <div class="note-title">💡 잠깐! 이것 기억하고 있어?</div>
+    <div class="note-content" style="font-size:16px">
+      <div style="margin-bottom:8px">나눗셈은 <strong style="color:#D85A3A">분수의 곱셈</strong>으로 바꿀 수 있어!</div>
+      <div class="note-example">$2a \div a = 2a \times \dfrac{1}{a} = 2$</div>
+      <div style="margin-top:10px;font-size:14px;color:#7A4C14">* 약분해서 1이 되는 것은 1을 생략할 수 있어</div>
+    </div>
+  </div>
+  <div class="quiz-area" data-quiz="10">
+    <div class="quiz-question">$3a \div a =$ <button class="blank-btn" id="blank10"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices10">
+      <button class="choice-btn" data-answer="3">$3$</button>
+      <button class="choice-btn" data-answer="3a">$3a$</button>
+      <button class="choice-btn" data-answer="a">$a$</button>
+      <button class="choice-btn" data-answer="0">$0$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback10"></div>
+  </div>
+</div>
+<div class="divider" data-step="10"></div>
+
+<!-- ===== STEP 11: m > n ===== -->
+<div class="step-card" data-step="11">
+  <div class="law-header">
+    <div class="law-title">밑이 같은 거듭제곱의 나눗셈</div>
+  </div>
+  <div class="law-formula">$$\color{#00AAEE}{a}^m \div \color{#00AAEE}{a}^n = \color{#00AAEE}{a}^{m-n} \quad (m > n)$$</div>
+  <div class="law-hint">💡 지수끼리 빼기! (큰 − 작은)</div>
+  <div class="law-example">
+    <div class="law-example-label">예시 (m &gt; n)</div>
+    $$a^5 \div a^2 = \frac{a \cdot a \cdot a \cdot a \cdot a}{a \cdot a} = a^{5-2} = a^3$$
+  </div>
+  <div class="quiz-area" data-quiz="11">
+    <div class="quiz-question">$a^5 \div a^3 = a$<button class="blank-btn blank-exp" id="blank11"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices11">
+      <button class="choice-btn" data-answer="2">$2$</button>
+      <button class="choice-btn" data-answer="8">$8$</button>
+      <button class="choice-btn" data-answer="15">$15$</button>
+      <button class="choice-btn" data-answer="3">$3$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback11"></div>
+  </div>
+</div>
+<div class="divider" data-step="11"></div>
+
+<!-- ===== STEP 12: m < n ===== -->
+<div class="step-card" data-step="12">
+  <div class="law-header">
+    <div class="law-title">지수가 작은 쪽이 앞에 올 때 (m &lt; n)</div>
+  </div>
+  <div class="law-formula">$$\color{#00AAEE}{a}^m \div \color{#00AAEE}{a}^n = \frac{1}{\color{#00AAEE}{a}^{n-m}} \quad (m < n)$$</div>
+  <div class="law-example">
+    <div class="law-example-label">예시 (m &lt; n)</div>
+    $$a^2 \div a^5 = \frac{a \cdot a}{a \cdot a \cdot a \cdot a \cdot a} = \frac{1}{a^{5-2}} = \frac{1}{a^3}$$
+  </div>
+  <div class="quiz-area" data-quiz="12">
+    <div class="quiz-question">$a^2 \div a^5 = \dfrac{1}{a^{\color{#D8A883}{\square}}}$<br><span class="sq-eq"><span class="sq">□</span> = <button class="blank-btn blank-exp" id="blank12"><span class="q-mark">❓</span></button></span></div>
+    <div class="choices-wrap" id="choices12">
+      <button class="choice-btn" data-answer="3">$3$</button>
+      <button class="choice-btn" data-answer="7">$7$</button>
+      <button class="choice-btn" data-answer="10">$10$</button>
+      <button class="choice-btn" data-answer="2">$2$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback12"></div>
+  </div>
+</div>
+<div class="divider" data-step="12"></div>
+
+<!-- ===== STEP 13: m = n ===== -->
+<div class="step-card" data-step="13">
+  <div class="law-header">
+    <div class="law-title">지수가 같을 때 (m = n)</div>
+  </div>
+  <div class="law-formula">$$\color{#00AAEE}{a}^n \div \color{#00AAEE}{a}^n = 1$$</div>
+  <div class="law-example">
+    <div class="law-example-label">예시 (m = n)</div>
+    $$a^2 \div a^2 = \frac{a \cdot a}{a \cdot a} = 1$$
+  </div>
+  <div class="quiz-area" data-quiz="13">
+    <div class="quiz-question">$a^4 \div a^4 =$ <button class="blank-btn" id="blank13"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices13">
+      <button class="choice-btn" data-answer="1">$1$</button>
+      <button class="choice-btn" data-answer="0">$0$</button>
+      <button class="choice-btn" data-answer="a">$a$</button>
+      <button class="choice-btn" data-answer="a⁴">$a^4$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback13"></div>
+  </div>
+</div>
+<div class="divider" data-step="13"></div>
+
+<!-- ===== STEP 14: 나눗셈 정리 ===== -->
+<div class="step-card white-card" data-step="14">
+  <div style="text-align:center;font-size:18px;font-weight:800;color:#7A4C14;margin-bottom:16px">📋 나눗셈 정리 ($a \neq 0$)</div>
+  <div class="case-list">
+    <div class="case-item"><span class="case-tag big">m &gt; n</span><div>$a^m \div a^n = a^{m-n}$</div></div>
+    <div class="case-item"><span class="case-tag small">m &lt; n</span><div>$a^m \div a^n = \dfrac{1}{a^{n-m}}$</div></div>
+    <div class="case-item"><span class="case-tag equal">m = n</span><div>$a^m \div a^n = 1$</div></div>
+  </div>
+  <div class="quiz-area" data-quiz="14">
+    <div class="quiz-question">$7^4 \div 7 = 7$<button class="blank-btn blank-exp" id="blank14"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices14">
+      <button class="choice-btn" data-answer="3">$3$</button>
+      <button class="choice-btn" data-answer="4">$4$</button>
+      <button class="choice-btn" data-answer="5">$5$</button>
+      <button class="choice-btn" data-answer="28">$28$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback14"></div>
+  </div>
+</div>
+<div class="divider" data-step="14"></div>
+
+<!-- ===== STEP 15: (ab)ⁿ ===== -->
+<div class="step-card" data-step="15">
+  <div class="law-header">
+    <div class="law-title">곱의 거듭제곱</div>
+  </div>
+  <div class="law-formula">$$(\color{#00AAEE}{a}\color{#00AAEE}{b})^n = \color{#00AAEE}{a}^n \times \color{#00AAEE}{b}^n$$</div>
+  <div class="law-hint">💡 각각에 지수로!</div>
+  <div class="law-example">
+    <div class="law-example-label">예시</div>
+    $$(ab)^2 = (ab)(ab) = a^2 b^2$$
+  </div>
+  <div style="margin-top:12px">
+    <div class="note-box">
+      <div class="note-title">🔢 음수 밑의 거듭제곱</div>
+      <div class="sign-table">
+        <div class="sign-card pos"><div class="sign-label">(음수)^짝수</div><div class="sign-result">+ 양수</div><div style="font-size:13px;color:#888;margin-top:4px">$(-2)^2=+4$</div></div>
+        <div class="sign-card neg"><div class="sign-label">(음수)^홀수</div><div class="sign-result">− 음수</div><div style="font-size:13px;color:#888;margin-top:4px">$(-2)^3=-8$</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="quiz-area" data-quiz="15">
+    <div class="quiz-question">$(-3a)^2 =$ <button class="blank-btn" id="blank15"><span class="q-mark">❓</span></button></div>
+    <div class="choices-wrap" id="choices15">
+      <button class="choice-btn" data-answer="9a²">$9a^2$</button>
+      <button class="choice-btn" data-answer="-9a²">$-9a^2$</button>
+      <button class="choice-btn" data-answer="6a²">$6a^2$</button>
+      <button class="choice-btn" data-answer="-6a²">$-6a^2$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback15"></div>
+  </div>
+</div>
+<div class="divider" data-step="15"></div>
+
+<!-- ===== STEP 16: (a/b)ⁿ ===== -->
+<div class="step-card" data-step="16">
+  <div class="law-header">
+    <div class="law-title">몫의 거듭제곱</div>
+  </div>
+  <div class="law-formula">$$\left(\frac{\color{#00AAEE}{a}}{\color{#00AAEE}{b}}\right)^n = \frac{\color{#00AAEE}{a}^n}{\color{#00AAEE}{b}^n} \quad (b \neq 0)$$</div>
+  <div class="law-hint">💡 분모, 분자 각각에 지수로!</div>
+  <div class="law-example">
+    <div class="law-example-label">예시</div>
+    $$\left(\frac{a}{5}\right)^2 = \frac{a^2}{5^2} = \frac{a^2}{25}$$
+  </div>
+  <div class="quiz-area" data-quiz="16">
+    <div class="quiz-question">$\left(\dfrac{a}{3}\right)^2 = \dfrac{a^2}{\color{#D8A883}{\square}}$<br><span class="sq-eq"><span class="sq">□</span> = <button class="blank-btn" id="blank16"><span class="q-mark">❓</span></button></span></div>
+    <div class="choices-wrap" id="choices16">
+      <button class="choice-btn" data-answer="9">$9$</button>
+      <button class="choice-btn" data-answer="6">$6$</button>
+      <button class="choice-btn" data-answer="3">$3$</button>
+      <button class="choice-btn" data-answer="a²">$a^2$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback16"></div>
+  </div>
+</div>
+<div class="divider" data-step="16"></div>
+
+<!-- ===== STEP 17: 종합연습1 ===== -->
+<div class="step-card white-card" data-step="17">
+  <div style="text-align:center;font-size:18px;font-weight:800;color:#7A4C14;margin-bottom:4px">📝 종합 연습 ①</div>
+  <div style="text-align:center;font-size:13px;color:#9E846B;margin-bottom:16px">나눗셈 문제</div>
+  <div class="quiz-area" data-quiz="17">
+    <div class="quiz-question">$5^2 \div 5^4 = \dfrac{1}{5^{\color{#D8A883}{\square}}}$<br><span class="sq-eq"><span class="sq">□</span> = <button class="blank-btn blank-exp" id="blank17"><span class="q-mark">❓</span></button></span></div>
+    <div class="choices-wrap" id="choices17">
+      <button class="choice-btn" data-answer="2">$2$</button>
+      <button class="choice-btn" data-answer="6">$6$</button>
+      <button class="choice-btn" data-answer="8">$8$</button>
+      <button class="choice-btn" data-answer="3">$3$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback17"></div>
+  </div>
+</div>
+<div class="divider" data-step="17"></div>
+
+<!-- ===== STEP 18: 종합연습2 ===== -->
+<div class="step-card white-card" data-step="18">
+  <div style="text-align:center;font-size:18px;font-weight:800;color:#7A4C14;margin-bottom:4px">📝 종합 연습 ②</div>
+  <div style="text-align:center;font-size:13px;color:#9E846B;margin-bottom:16px">빈칸 채우기</div>
+  <div class="quiz-area" data-quiz="18">
+    <div class="quiz-question">$(a^2 b)^3 = a$<button class="blank-btn blank-exp" id="blank18"><span class="q-mark">❓</span></button> $\cdot b^3$</div>
+    <div class="choices-wrap" id="choices18">
+      <button class="choice-btn" data-answer="6">$6$</button>
+      <button class="choice-btn" data-answer="5">$5$</button>
+      <button class="choice-btn" data-answer="8">$8$</button>
+      <button class="choice-btn" data-answer="23">$23$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback18"></div>
+  </div>
+</div>
+<div class="divider" data-step="18"></div>
+
+<!-- ===== STEP 19: 종합연습3 ===== -->
+<div class="step-card white-card" data-step="19">
+  <div style="text-align:center;font-size:18px;font-weight:800;color:#7A4C14;margin-bottom:4px">📝 종합 연습 ③</div>
+  <div class="quiz-area" data-quiz="19">
+    <div class="quiz-question">$\left(\dfrac{x}{y^3}\right)^2 = \dfrac{x^2}{y^{\color{#D8A883}{\square}}}$<br><span class="sq-eq"><span class="sq">□</span> = <button class="blank-btn blank-exp" id="blank19"><span class="q-mark">❓</span></button></span></div>
+    <div class="choices-wrap" id="choices19">
+      <button class="choice-btn" data-answer="6">$6$</button>
+      <button class="choice-btn" data-answer="5">$5$</button>
+      <button class="choice-btn" data-answer="9">$9$</button>
+      <button class="choice-btn" data-answer="32">$32$</button>
+    </div>
+    <div class="quiz-feedback" id="feedback19"></div>
+  </div>
+</div>
+<div class="divider" data-step="19"></div>
+
+<!-- ===== STEP 20: 학습 완료 ===== -->
+<div class="step-card complete-card" data-step="20">
+  <div class="check-icon">🎉</div>
+  <div class="complete-title">지수법칙 학습 완료!</div>
+  <div class="complete-desc">
+    거듭제곱의 뜻과 지수법칙을<br>모두 배웠어요!<br><br>
+    ✅ $a^m \times a^n = a^{m+n}$<br>
+    ✅ $(a^m)^n = a^{mn}$<br>
+    ✅ $a^m \div a^n$ (세 가지 경우)<br>
+    ✅ $(ab)^n = a^n b^n$<br>
+    ✅ $\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}$<br><br>
+    모든 퀴즈를 맞혔어요! 대단해요! 👏<br><br>
+    위로 스크롤해서 다시 복습할 수 있어요!
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="next-btn-wrap">
+  <button class="next-btn locked" id="nextBtn">
+    <span id="btnText">❓ 생각해봅시다</span>
+    <span class="btn-icon" id="btnIcon">🔒</span>
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(document.getElementById('container'), {
+      delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
+      throwOnError: false
+    });
+  }
+
+  const TOTAL = 21; // steps 0-20
+  let current = -1;
+  const nextBtn = document.getElementById('nextBtn');
+  const btnText = document.getElementById('btnText');
+  const btnIcon = document.getElementById('btnIcon');
+  const progressFill = document.getElementById('progressFill');
+
+  const ANSWERS = {
+    0:'곱하는 것', 1:'8', 2:'지수', 3:'수나 문자', 4:'25', 5:'aⁿ', 6:'7',
+    7:'7', 8:'10', 9:'4', 10:'3', 11:'2', 12:'3', 13:'1',
+    14:'3', 15:'9a²', 16:'9', 17:'2', 18:'6', 19:'6'
+  };
+  const ANSWERS_LATEX = { 5:'a^n', 15:'9a^2' };
+
+  const solved = {};
+
+  function showStep(n) {
+    if (n >= TOTAL) return;
+    current = n;
+    document.querySelectorAll('[data-step="'+n+'"]').forEach(el => el.classList.add('visible'));
+    progressFill.style.width = ((n+1)/TOTAL*100)+'%';
+    if (typeof renderMathInElement === 'function') {
+      document.querySelectorAll('.step-card[data-step="'+n+'"]').forEach(card => {
+        renderMathInElement(card, {
+          delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
+          throwOnError: false
+        });
+      });
+    }
+    updateBtn();
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.step-card[data-step="'+n+'"]');
+      const target = cards[cards.length-1];
+      if (target) target.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 150);
+  }
+
+  function updateBtn() {
+    const n = current;
+    if (n >= TOTAL-1) {
+      nextBtn.classList.remove('locked'); nextBtn.classList.add('done');
+      btnText.textContent = '처음으로'; btnIcon.textContent = '↑';
+    } else if (n < 0) {
+      nextBtn.classList.add('locked');
+      btnText.textContent = '시작하기'; btnIcon.textContent = '→';
+    } else if (ANSWERS[n] !== undefined && !solved[n]) {
+      nextBtn.classList.add('locked'); nextBtn.classList.remove('done');
+      btnText.textContent = '❓ 생각해봅시다'; btnIcon.textContent = '🔒';
+    } else {
+      nextBtn.classList.remove('locked'); nextBtn.classList.remove('done');
+      btnText.textContent = '다음 ('+(n+1)+'/'+(TOTAL-1)+')'; btnIcon.textContent = '→';
+    }
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (nextBtn.classList.contains('locked')) return;
+    if (current >= TOTAL-1) { window.scrollTo({top:0,behavior:'smooth'}); return; }
+    showStep(current+1);
+  });
+
+  Object.keys(ANSWERS).forEach(qStr => {
+    const q = parseInt(qStr);
+    const blankBtn = document.getElementById('blank'+q);
+    const choicesWrap = document.getElementById('choices'+q);
+    if (!blankBtn || !choicesWrap) return;
+
+    blankBtn.addEventListener('click', () => {
+      if (solved[q]) return;
+      choicesWrap.classList.toggle('open');
+    });
+
+    choicesWrap.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (solved[q]) return;
+        const answer = btn.getAttribute('data-answer');
+        const feedback = document.getElementById('feedback'+q);
+        if (answer === ANSWERS[q]) {
+          btn.classList.add('correct');
+          solved[q] = true;
+          if (ANSWERS_LATEX[q] && typeof katex !== 'undefined') {
+            katex.render(ANSWERS_LATEX[q], blankBtn, {throwOnError:false});
+          } else {
+            blankBtn.textContent = ANSWERS[q];
+          }
+          blankBtn.classList.add('solved');
+          setTimeout(() => { choicesWrap.classList.remove('open'); }, 600);
+          updateBtn();
+          setTimeout(() => { if (current < TOTAL-1) showStep(current+1); }, 1200);
+        } else {
+          btn.classList.add('wrong');
+          feedback.textContent = '❌ 다시 생각해보세요!';
+          feedback.className = 'quiz-feedback show fail';
+          setTimeout(() => { btn.classList.remove('wrong'); feedback.className='quiz-feedback'; }, 1000);
+        }
+      });
+    });
+  });
+
+  showStep(0);
+});
+</script>
+</body>
+</html>
