@@ -1,0 +1,608 @@
+{/* ── Imports ── */}
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { ConceptCard } from '@/components/cards/concept-card'
+import { LawCard } from '@/components/cards/law-card'
+import { DefinitionCard } from '@/components/cards/definition-card'
+import { NoteCard, NoteExample } from '@/components/cards/note-card'
+import { SummaryCard } from '@/components/cards/summary-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { ArrowLabels, FormulaLabels } from '@/components/math'
+import { LawExample } from '@/components/content/law-example'
+import { SignTable } from '@/components/content/sign-table'
+import { steps } from './unit5-exponent/steps-data'
+
+export const meta = {
+  slug: 'unit5-exponent',
+  title: '거듭제곱과 지수법칙',
+  subtitle: '중2 수학 · 단원2',
+}
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 0 — 인트로                                  */}
+{/* ──────────────────────────────────────────────── */}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="지수는 거듭제곱에서 나오는 거였지~"
+    topicTitle="거듭제곱"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>같은 수나 문자를 여러 번 {blank} 을 거듭제곱이라 해요</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 1 — 2³ 의 의미                              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={1}>
+  <ConceptCard
+    variant="white"
+    formula={"\\color{#D85A3A}{2}^{\\color{#2E7D32}{3}}"}
+    formulaSize="katex-hero"
+    description="2를 3번 곱한다는 뜻이에요!"
+  >
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\color{#D85A3A}{2}^{\\color{#2E7D32}{3}} = \\color{#D85A3A}{2} \\times \\color{#D85A3A}{2} \\times \\color{#D85A3A}{2} ="} />
+            {' '}{blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 2 — 밑과 지수 소개                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={2}>
+  <ConceptCard
+    variant="default"
+    formula={"\\color{#D85A3A}{2}^{\\color{#2E7D32}{3}}"}
+    formulaSize="katex-medium"
+  >
+    <div className="flex flex-col gap-5 items-center">
+      <ArrowLabels
+        items={[
+          { arrow: '↗', label: '지수', target: '3', color: '#2E7D32' },
+          { arrow: '↙', label: '밑', target: '2', color: '#D85A3A' },
+        ]}
+      />
+    </div>
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\color{#D85A3A}{2}^{\\color{#2E7D32}{3}}"} />
+            에서 곱한 횟수{' '}
+            <MathInline tex={"\\color{#2E7D32}{3}"} />은<br />
+            {blank} (이)라고 해요
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 3 — 정의 카드                               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={3}>
+  <DefinitionCard
+    items={[
+      { keyword: '지수', description: '거듭해서 곱한 횟수' },
+      { keyword: '밑', description: '거듭해서 곱한 수나 문자' },
+    ]}
+  >
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <>밑이란 거듭해서 곱한 {blank}</>
+        )}
+      />
+    )}
+  </DefinitionCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 4 — 계산 연습                               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={4}>
+  <PracticeCard title="🔢 계산 연습!">
+    <div className="text-center text-xl font-extrabold text-slide-gray mb-2">
+      5를 <strong className="text-slide-green">2번</strong> 곱하면?
+    </div>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"5^2 = 5 \\times 5 ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 5 — a^n 일반화                              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={5}>
+  <ConceptCard
+    variant="default"
+    formula={"\\underbrace{\\color{#D85A3A}{a} \\times \\color{#D85A3A}{a} \\times \\cdots \\times \\color{#D85A3A}{a}}_{\\color{#7A4C14}{n\\text{번}}} = \\color{#D85A3A}{a}^{\\color{#2E7D32}{n}}"}
+    formulaSize="katex-formula"
+  >
+    <FormulaLabels
+      items={[
+        { label: <><MathInline tex="a" /> → 밑</>, variant: 'base' },
+        { label: <><MathInline tex="n" /> → 지수</>, variant: 'exponent' },
+      ]}
+    />
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex="a" />를 <MathInline tex="n" />번 곱한 것을 기호로 쓰면<br />
+            {blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 6 — 지수 1 참고                             */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={6}>
+  <NoteCard title="💡 참고">
+    <div className="text-lg font-extrabold text-gray-700 leading-[1.7]">
+      지수가 <span className="text-slide-brown text-[22px]">1</span>일 때는<br />
+      지수를 생략할 수 있어!
+    </div>
+    <NoteExample>
+      <MathInline tex={"\\color{#D85A3A}{a}^{\\color{#2E7D32}{1}} = \\color{#D85A3A}{a}"} />
+      &nbsp;&nbsp;예) <MathInline tex="5^1 = 5" />
+    </NoteExample>
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex="7^1 =" /> {blank}
+          </>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 7 — 지수법칙 1: 곱                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={7}>
+  <LawCard
+    title="밑이 같은 거듭제곱의 곱"
+    formula={"\\color{#00AAEE}{a}^m \\times \\color{#00AAEE}{a}^n = \\color{#00AAEE}{a}^{m+n}"}
+    hint="💡 지수끼리 더하기!"
+    example={
+      <LawExample
+        label="예시"
+        tex={"a^3 \\times a^2 = \\underbrace{a \\times a \\times a}_{3\\text{번}} \\times \\underbrace{a \\times a}_{2\\text{번}} = a^{3+2} = a^5"}
+      />
+    }
+    extraNote={
+      <div className="mt-3 p-2.5 px-3.5 bg-slide-warning-bg rounded-[10px] text-center text-sm text-slide-brown font-bold">
+        ⚠️ 밑이 다르면 계산 불가! &nbsp; 예) <MathInline tex={"x^3 \\times y^2"} /> → 더 이상 못 줄임
+      </div>
+    }
+  >
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"a^3 \\times a^4 = a"} />{blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 8 — 지수법칙 2: 거듭제곱의 거듭제곱          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={8}>
+  <LawCard
+    title="거듭제곱의 거듭제곱"
+    formula={"(\\color{#00AAEE}{a}^m)^n = \\color{#00AAEE}{a}^{m \\times n}"}
+    hint="💡 지수끼리 곱하기!"
+    example={
+      <LawExample
+        label="예시"
+        tex={"(a^2)^3 = a^2 \\times a^2 \\times a^2 = a^{2+2+2} = a^{2 \\times 3} = a^6"}
+      />
+    }
+  >
+    {steps[8].quiz && (
+      <QuizArea
+        stepId={8}
+        quiz={steps[8].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex="(a^2)^5 = a" />{blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 9 — 연습 문제                               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={9}>
+  <PracticeCard title="📝 연습 문제">
+    {steps[9].quiz && (
+      <QuizArea
+        stepId={9}
+        quiz={steps[9].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"b^3 \\times b"} />{blank} <MathInline tex="= b^7" />
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 10 — 나눗셈 도입                            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={10}>
+  <NoteCard title="💡 잠깐! 이것 기억하고 있어?">
+    <div className="text-base font-extrabold text-gray-700 leading-[1.7] mb-2">
+      나눗셈은 <strong className="text-slide-red">분수의 곱셈</strong>으로 바꿀 수 있어!
+    </div>
+    <NoteExample>
+      <MathInline tex={"2a \\div a = 2a \\times \\dfrac{1}{a} = 2"} />
+    </NoteExample>
+    <div className="mt-2.5 text-sm text-slide-brown">
+      * 약분해서 1이 되는 것은 1을 생략할 수 있어
+    </div>
+    {steps[10].quiz && (
+      <QuizArea
+        stepId={10}
+        quiz={steps[10].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"3a \\div a ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 11 — 나눗셈 m > n                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={11}>
+  <LawCard
+    title="밑이 같은 거듭제곱의 나눗셈"
+    formula={"\\color{#00AAEE}{a}^m \\div \\color{#00AAEE}{a}^n = \\color{#00AAEE}{a}^{m-n} \\quad (m > n)"}
+    hint="💡 지수끼리 빼기! (큰 − 작은)"
+    example={
+      <LawExample
+        label="예시 (m > n)"
+        tex={"a^5 \\div a^2 = \\frac{a \\cdot a \\cdot a \\cdot a \\cdot a}{a \\cdot a} = a^{5-2} = a^3"}
+      />
+    }
+  >
+    {steps[11].quiz && (
+      <QuizArea
+        stepId={11}
+        quiz={steps[11].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"a^5 \\div a^3 = a"} />{blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 12 — 나눗셈 m < n                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={12}>
+  <LawCard
+    title="지수가 작은 쪽이 앞에 올 때 (m < n)"
+    formula={"\\color{#00AAEE}{a}^m \\div \\color{#00AAEE}{a}^n = \\frac{1}{\\color{#00AAEE}{a}^{n-m}} \\quad (m < n)"}
+    example={
+      <LawExample
+        label="예시 (m < n)"
+        tex={"a^2 \\div a^5 = \\frac{a \\cdot a}{a \\cdot a \\cdot a \\cdot a \\cdot a} = \\frac{1}{a^{5-2}} = \\frac{1}{a^3}"}
+      />
+    }
+  >
+    {steps[12].quiz && (
+      <QuizArea
+        stepId={12}
+        quiz={steps[12].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"a^2 \\div a^5 = \\dfrac{1}{a^{\\color{#D8A883}{\\square}}}"} />
+            <br />
+            <span className="block text-center mt-2.5 text-lg font-extrabold text-gray-500">
+              <span className="text-slide-accent text-[22px]">□</span> = {blank}
+            </span>
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 13 — 나눗셈 m = n                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={13}>
+  <LawCard
+    title="지수가 같을 때 (m = n)"
+    formula={"\\color{#00AAEE}{a}^n \\div \\color{#00AAEE}{a}^n = 1"}
+    example={
+      <LawExample
+        label="예시 (m = n)"
+        tex={"a^2 \\div a^2 = \\frac{a \\cdot a}{a \\cdot a} = 1"}
+      />
+    }
+  >
+    {steps[13].quiz && (
+      <QuizArea
+        stepId={13}
+        quiz={steps[13].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"a^4 \\div a^4 ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 14 — 나눗셈 정리                            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={14}>
+  <SummaryCard
+    title="📋 나눗셈 정리 (a ≠ 0)"
+    cases={[
+      { tag: 'm > n', tagVariant: 'big', content: <MathInline tex={"a^m \\div a^n = a^{m-n}"} /> },
+      { tag: 'm < n', tagVariant: 'small', content: <MathInline tex={"a^m \\div a^n = \\dfrac{1}{a^{n-m}}"} /> },
+      { tag: 'm = n', tagVariant: 'equal', content: <MathInline tex={"a^m \\div a^n = 1"} /> },
+    ]}
+  >
+    {steps[14].quiz && (
+      <QuizArea
+        stepId={14}
+        quiz={steps[14].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"7^4 \\div 7 = 7"} />{blank}
+          </>
+        )}
+      />
+    )}
+  </SummaryCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 15 — 곱의 거듭제곱                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={15}>
+  <LawCard
+    title="곱의 거듭제곱"
+    formula={"(\\color{#00AAEE}{a}\\color{#00AAEE}{b})^n = \\color{#00AAEE}{a}^n \\times \\color{#00AAEE}{b}^n"}
+    hint="💡 각각에 지수로!"
+    example={
+      <LawExample label="예시" tex="(ab)^2 = (ab)(ab) = a^2 b^2" />
+    }
+    extraNote={
+      <div className="mt-3">
+        <div className="bg-white rounded-[14px] border-l-4 border-slide-accent py-4.5 px-5">
+          <div className="text-base font-extrabold text-slide-brown mb-2.5">
+            🔢 음수 밑의 거듭제곱
+          </div>
+          <SignTable />
+        </div>
+      </div>
+    }
+  >
+    {steps[15].quiz && (
+      <QuizArea
+        stepId={15}
+        quiz={steps[15].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex="(-3a)^2 =" /> {blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 16 — 몫의 거듭제곱                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={16}>
+  <LawCard
+    title="몫의 거듭제곱"
+    formula={"\\left(\\frac{\\color{#00AAEE}{a}}{\\color{#00AAEE}{b}}\\right)^n = \\frac{\\color{#00AAEE}{a}^n}{\\color{#00AAEE}{b}^n} \\quad (b \\neq 0)"}
+    hint="💡 분모, 분자 각각에 지수로!"
+    example={
+      <LawExample
+        label="예시"
+        tex={"\\left(\\frac{a}{5}\\right)^2 = \\frac{a^2}{5^2} = \\frac{a^2}{25}"}
+      />
+    }
+  >
+    {steps[16].quiz && (
+      <QuizArea
+        stepId={16}
+        quiz={steps[16].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\left(\\dfrac{a}{3}\\right)^2 = \\dfrac{a^2}{\\color{#D8A883}{\\square}}"} />
+            <br />
+            <span className="block text-center mt-2.5 text-lg font-extrabold text-gray-500">
+              <span className="text-slide-accent text-[22px]">□</span> = {blank}
+            </span>
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 17 — 종합 연습 ①                           */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={17}>
+  <PracticeCard title="📝 종합 연습 ①" subtitle="나눗셈 문제">
+    {steps[17].quiz && (
+      <QuizArea
+        stepId={17}
+        quiz={steps[17].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"5^2 \\div 5^4 = \\dfrac{1}{5^{\\color{#D8A883}{\\square}}}"} />
+            <br />
+            <span className="block text-center mt-2.5 text-lg font-extrabold text-gray-500">
+              <span className="text-slide-accent text-[22px]">□</span> = {blank}
+            </span>
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 18 — 종합 연습 ②                           */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={18}>
+  <PracticeCard title="📝 종합 연습 ②" subtitle="빈칸 채우기">
+    {steps[18].quiz && (
+      <QuizArea
+        stepId={18}
+        quiz={steps[18].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex="(a^2 b)^3 = a" />{blank} <MathInline tex={"\\cdot b^3"} />
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 19 — 종합 연습 ③                           */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={19}>
+  <PracticeCard title="📝 종합 연습 ③">
+    {steps[19].quiz && (
+      <QuizArea
+        stepId={19}
+        quiz={steps[19].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\left(\\dfrac{x}{y^3}\\right)^2 = \\dfrac{x^2}{y^{\\color{#D8A883}{\\square}}}"} />
+            <br />
+            <span className="block text-center mt-2.5 text-lg font-extrabold text-gray-500">
+              <span className="text-slide-accent text-[22px]">□</span> = {blank}
+            </span>
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 20 — 완료 카드                              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={20}>
+  <CompleteCard
+    emoji="🎉"
+    title="지수법칙 학습 완료!"
+  >
+    <div className="text-left inline-block">
+      거듭제곱의 뜻과 지수법칙을<br />모두 배웠어요!<br /><br />
+      ✅ <MathInline tex={"a^m \\times a^n = a^{m+n}"} /><br />
+      ✅ <MathInline tex="(a^m)^n = a^{mn}" /><br />
+      ✅ <MathInline tex={"a^m \\div a^n"} /> (세 가지 경우)<br />
+      ✅ <MathInline tex="(ab)^n = a^n b^n" /><br />
+      ✅ <MathInline tex={"\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}"} /><br /><br />
+    </div>
+    모든 퀴즈를 맞혔어요! 대단해요! 👏<br /><br />
+    위로 스크롤해서 다시 복습할 수 있어요!
+  </CompleteCard>
+</Step>
+
+</SlideContent>
