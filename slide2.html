@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnText.textContent = '시작하기'; btnIcon.textContent = '→';
     } else if (ANSWERS[n] !== undefined && !solved[n]) {
       nextBtn.classList.add('locked'); nextBtn.classList.remove('done');
-      btnText.textContent = '❓ 생각해봅시다'; btnIcon.textContent = '🔒';
+      btnText.textContent = '❓ 클릭하여 채워봅시다'; btnIcon.textContent = '🔒';
     } else {
       nextBtn.classList.remove('locked'); nextBtn.classList.remove('done');
       btnText.textContent = '다음 ('+(n+1)+'/'+(TOTAL-1)+')'; btnIcon.textContent = '→';
