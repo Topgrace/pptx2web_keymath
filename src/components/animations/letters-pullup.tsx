@@ -33,7 +33,7 @@ export function LettersPullUp({
 }) {
   return (
     <motion.span
-      className={cn('inline-block overflow-hidden pb-[2px]', className)}
+      className={cn('inline-block overflow-hidden pb-0.5', className)}
       variants={containerVariants}
       initial="hidden"
       animate={enabled ? 'visible' : 'hidden'}

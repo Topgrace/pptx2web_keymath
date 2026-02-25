@@ -1,0 +1,25 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { ChapterIntroNeoCard } from '@/components/cards/chapter-intro-neo-card'
+import { CarDisassembleCard } from '@/components/cards/car-disassemble-card'
+
+export const meta = {
+  slug: 'unit1-ch1-intro',
+  title: 'I. 소인수분해',
+  subtitle: '대단원 인트로',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <ChapterIntroNeoCard
+    chapterNum="I"
+    chapterTitle="소인수분해"
+    speechText="이번 단원에서는 소인수분해를 통해서 자연수의 성질에 대해 살펴볼 거야."
+  />
+</Step>
+
+<Step id={1}>
+  <CarDisassembleCard />
+</Step>
+
+</SlideContent>

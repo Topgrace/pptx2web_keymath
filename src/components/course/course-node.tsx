@@ -41,7 +41,7 @@ export function CourseNode({ unit, index }: CourseNodeProps) {
         <div className="relative pl-6 group">
             {/* Timeline Dot */}
             <div className={cn(
-                "absolute -left-[9px] top-3 w-4 h-4 rounded-full border-4 border-white dark:border-background-dark shadow-sm z-10",
+                "absolute -left-2.25 top-3 w-4 h-4 rounded-full border-4 border-white dark:border-background-dark shadow-sm z-10",
                 dotColor,
                 isUnlocked && "animate-pulse" // Accent ping for active node
             )} />

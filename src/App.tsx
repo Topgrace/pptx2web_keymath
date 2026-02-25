@@ -11,6 +11,7 @@ const Unit8Page = lazy(() => import('@/pages/Unit8Page'))
 const Unit9Page = lazy(() => import('@/pages/Unit9Page'))
 const Unit10Page = lazy(() => import('@/pages/Unit10Page'))
 const Unit11Page = lazy(() => import('@/pages/Unit11Page'))
+const Unit1Ch1IntroPage = lazy(() => import('@/pages/Unit1Ch1IntroPage'))
 
 
 function Loading() {
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/unit9" element={<Unit9Page />} />
         <Route path="/unit10" element={<Unit10Page />} />
         <Route path="/unit11" element={<Unit11Page />} />
+        <Route path="/ch1-intro" element={<Unit1Ch1IntroPage />} />
 
         {/* Catch-all redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />
