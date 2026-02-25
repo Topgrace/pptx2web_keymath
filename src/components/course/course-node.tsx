@@ -14,8 +14,6 @@ export function CourseNode({ unit, index }: CourseNodeProps) {
     const isUnlocked = unit.status === 'unlocked'
     const navigate = useNavigate()
 
-    const displayIndex = (index + 1).toString().padStart(2, '0')
-
     // Click handler instead of Link to maintain button semantics from template
     const handleUnitClick = () => {
         if (!isLocked && unit.path) {
@@ -60,12 +58,6 @@ export function CourseNode({ unit, index }: CourseNodeProps) {
                 )}
             >
                 <div className="flex items-center space-x-3 text-left">
-                    <span className={cn(
-                        "text-sm font-semibold w-6",
-                        isUnlocked ? "text-dashboard-accent font-bold" : "text-muted-light dark:text-muted-dark"
-                    )}>
-                        {displayIndex}
-                    </span>
                     <span className={cn(
                         "text-sm font-medium transition-colors line-clamp-2",
                         isUnlocked && "font-bold text-text-light dark:text-text-dark",
