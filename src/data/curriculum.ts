@@ -28,8 +28,71 @@ export const semesters: SemesterData[] = [
     chapters: [
       {
         id: '1-1-ch1',
-        title: '수와 연산 (준비중)',
-        units: [{ id: '1-1-u1', title: '소인수분해', status: 'locked' }]
+        title: 'I. 소인수분해',
+        units: [
+          { id: '1-1-u1', title: '1. 소수와 합성수', status: 'locked' },
+          { id: '1-1-u2', title: '2. 거듭제곱', status: 'locked' },
+          { id: '1-1-u3', title: '3. 소인수분해', status: 'locked' },
+          { id: '1-1-u4', title: '4. 제곱인 수 만들기', status: 'locked' },
+          { id: '1-1-u5', title: '5. 약수와 약수의 개수 구하기', status: 'locked' },
+          { id: '1-1-u6', title: '6. 공약수와 최대공약수', status: 'locked' },
+          { id: '1-1-u7', title: '7. 공배수와 최소공배수', status: 'locked' },
+          { id: '1-1-u8', title: '8. 최대공약수와 최소공배수의 관계', status: 'locked' }
+        ]
+      },
+      {
+        id: '1-1-ch2',
+        title: 'II. 정수와 유리수',
+        units: [
+          { id: '1-1-u9', title: '9. 정수와 유리수', status: 'locked' },
+          { id: '1-1-u10', title: '10. 수직선 위에 수 나타내기', status: 'locked' },
+          { id: '1-1-u11', title: '11. 절댓값과 크기 비교', status: 'locked' },
+          { id: '1-1-u12', title: '12. 덧셈', status: 'locked' },
+          { id: '1-1-u13', title: '13. 뺄셈', status: 'locked' },
+          { id: '1-1-u14', title: '14. 덧셈과 뺄셈의 혼합 계산', status: 'locked' },
+          { id: '1-1-u15', title: '15. 곱셈', status: 'locked' },
+          { id: '1-1-u16', title: '16. 곱셈에서 사용되는 법칙', status: 'locked' },
+          { id: '1-1-u17', title: '17. 세 수 이상의 곱셈', status: 'locked' },
+          { id: '1-1-u18', title: '18. 나눗셈', status: 'locked' },
+          { id: '1-1-u19', title: '19. 유리수의 혼합 계산', status: 'locked' }
+        ]
+      },
+      {
+        id: '1-1-ch3',
+        title: 'III. 문자와 식',
+        units: [
+          { id: '1-1-u20', title: '20. 문자의 사용', status: 'locked' },
+          { id: '1-1-u21', title: '21. 곱셈 기호와 나눗셈 기호의 생략', status: 'locked' },
+          { id: '1-1-u22', title: '22. 식의 값', status: 'locked' },
+          { id: '1-1-u23', title: '23. 단항식, 다항식, 일차식', status: 'locked' },
+          { id: '1-1-u24', title: '24. 단항식과 수의 곱셈, 나눗셈', status: 'locked' },
+          { id: '1-1-u25', title: '25. 일차식과 수의 곱셈, 나눗셈', status: 'locked' },
+          { id: '1-1-u26', title: '26. 동류항의 계산', status: 'locked' },
+          { id: '1-1-u27', title: '27. 식의 계산 응용', status: 'locked' }
+        ]
+      },
+      {
+        id: '1-1-ch4',
+        title: 'IV. 일차방정식',
+        units: [
+          { id: '1-1-u28', title: '28. 등식, 방정식, 항등식', status: 'locked' },
+          { id: '1-1-u29', title: '29. 등식의 성질', status: 'locked' },
+          { id: '1-1-u30', title: '30. 이항과 일차방정식', status: 'locked' },
+          { id: '1-1-u31', title: '31. 계수가 복잡한 일차방정식의 풀이', status: 'locked' },
+          { id: '1-1-u32', title: '32. 일차방정식의 활용 (1)', status: 'locked' },
+          { id: '1-1-u33', title: '33. 일차방정식의 활용 (2)', status: 'locked' }
+        ]
+      },
+      {
+        id: '1-1-ch5',
+        title: 'V. 그래프와 비례 관계',
+        units: [
+          { id: '1-1-u34', title: '34. 좌표와 순서쌍', status: 'locked' },
+          { id: '1-1-u35', title: '35. 사분면', status: 'locked' },
+          { id: '1-1-u36', title: '36. 그래프', status: 'locked' },
+          { id: '1-1-u37', title: '37. 정비례', status: 'locked' },
+          { id: '1-1-u38', title: '38. 반비례', status: 'locked' }
+        ]
       }
     ]
   },
