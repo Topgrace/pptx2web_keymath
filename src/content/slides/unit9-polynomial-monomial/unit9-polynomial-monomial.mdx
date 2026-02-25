@@ -1,0 +1,349 @@
+{/* ── Imports ── */}
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { ConceptCard } from '@/components/cards/concept-card'
+import { LawCard } from '@/components/cards/law-card'
+import { NoteCard, NoteExample } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { LawExample } from '@/components/content/law-example'
+import { SolutionSteps, SolutionLine, SolutionArrow } from '@/components/content/solution-steps'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: 'unit9-polynomial-monomial',
+  title: '(단항식) × (다항식)',
+  subtitle: '중2 수학 · 단원2',
+}
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 0 — 인트로                                  */}
+{/* ──────────────────────────────────────────────── */}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="단항식과 다항식의 곱셈을 배워보자~"
+    topicTitle="(단항식) × (다항식)"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>단항식과 다항식의 곱은 {blank} 으로 계산해요</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 1 — 분배법칙                                */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={1}>
+  <LawCard
+    title="분배법칙"
+    formula={"\\color{#D85A3A}{a}(\\color{#00AAEE}{b}+\\color{#2E7D32}{c}) = \\color{#D85A3A}{a}\\color{#00AAEE}{b}+\\color{#D85A3A}{a}\\color{#2E7D32}{c}"}
+    hint="💡 괄호 밖의 것을 안의 각 항에 곱하기!"
+  >
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"a(b+c) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 2 — 전개의 뜻                               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={2}>
+  <ConceptCard
+    variant="white"
+    formula={"\\text{전개}"}
+    formulaSize="katex-law"
+    description="분배법칙으로 괄호를 푸는 것!"
+  >
+    <div className="mt-3 space-y-2">
+      <div className="bg-white rounded-[14px] border-l-4 border-slide-formula py-3 px-4">
+        <div className="text-sm font-extrabold text-slide-formula mb-1.5">전개 = 괄호를 풀어서 다항식으로!</div>
+        <div className="text-sm text-slide-gray">전개하여 얻은 다항식 → <strong>전개식</strong></div>
+      </div>
+    </div>
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>분배법칙으로 괄호를 푸는 것을 {blank} (이)라 해요</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 3 — 2a(4a+b) 전개 예시                      */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={3}>
+  <ConceptCard
+    variant="default"
+    formula={"\\color{#D85A3A}{2a} \\times (\\color{#00AAEE}{4a}+\\color{#2E7D32}{b})"}
+    formulaSize="katex-law"
+  >
+    <SolutionSteps>
+      <SolutionLine label="분배법칙 적용">
+        <MathInline tex={"\\color{#D85A3A}{2a} \\times \\color{#00AAEE}{4a} + \\color{#D85A3A}{2a} \\times \\color{#2E7D32}{b}"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine>
+        <MathInline tex={"= 8a^2 + 2ab"} />
+      </SolutionLine>
+    </SolutionSteps>
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"2a(4a+b) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 4 — (다항식)×(단항식)도 똑같이!              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={4}>
+  <NoteCard title="💡 (다항식)×(단항식)도 똑같이!">
+    <div className="text-lg font-extrabold text-gray-700 leading-[1.7]">
+      순서가 바뀌어도 <strong className="text-slide-formula">분배법칙</strong>을 이용하여 전개!
+    </div>
+    <NoteExample>
+      <div className="space-y-1">
+        <div><MathInline tex={"(4a+b) \\times 2a"} /></div>
+        <div><MathInline tex={"= 4a \\times 2a + b \\times 2a"} /></div>
+        <div><MathInline tex={"= 8a^2 + 2ab"} /></div>
+      </div>
+    </NoteExample>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(4a+b) \\times 2a ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 5 — 음수 × 다항식                           */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={5}>
+  <ConceptCard
+    variant="default"
+    formula={"(4a+b) \\times (\\color{#D85A3A}{-2a})"}
+    formulaSize="katex-law"
+  >
+    <SolutionSteps>
+      <SolutionLine label="분배법칙 적용 (부호 주의!)">
+        <MathInline tex={"4a \\times (-2a) + b \\times (-2a)"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine>
+        <MathInline tex={"= -8a^2 - 2ab"} />
+      </SolutionLine>
+    </SolutionSteps>
+    <div className="mt-2 p-2.5 px-3.5 bg-slide-warning-bg rounded-[10px] text-center text-sm text-slide-brown font-bold">
+      ⚠️ 음수를 곱하면 부호가 바뀌어요!
+    </div>
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(4a+b) \\times (-2a) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 6 — 연습 (1) 4x(6x+3y)                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={6}>
+  <PracticeCard title="📝 전개 연습 (1)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"4x(6x+3y)"} />
+    </div>
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"4x(6x+3y) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 7 — 연습 (2) -a(ab+2b)                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={7}>
+  <PracticeCard title="📝 전개 연습 (2)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"-a(ab+2b)"} />
+    </div>
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"-a(ab+2b) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 8 — 연습 (3) (7x-3)×2x                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={8}>
+  <PracticeCard title="📝 전개 연습 (3)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"(7x-3) \\times 2x"} />
+    </div>
+    {steps[8].quiz && (
+      <QuizArea
+        stepId={8}
+        quiz={steps[8].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(7x-3) \\times 2x ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 9 — 전개식이란                               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={9}>
+  <ConceptCard
+    variant="white"
+    formula={"\\text{전개식}"}
+    formulaSize="katex-formula"
+    description="전개하여 얻은 다항식"
+  >
+    <div className="mt-3 bg-white rounded-[14px] border-l-4 border-slide-formula py-3 px-4">
+      <div className="katex-inline text-center space-y-1">
+        <div><MathInline tex={"2a(4a+b) = 8a^2+2ab"} /></div>
+        <div className="text-sm text-slide-gray mt-1">↑ 이것이 <strong className="text-slide-formula">전개식</strong></div>
+      </div>
+    </div>
+    {steps[9].quiz && (
+      <QuizArea
+        stepId={9}
+        quiz={steps[9].quiz}
+        renderBlank={(blank) => (
+          <>전개하여 얻은 다항식을 {blank} (이)라 해요</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 10 — 정리                                   */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={10}>
+  <ConceptCard
+    variant="default"
+    formula={"\\text{(단항식) × (다항식) 정리}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 space-y-2.5">
+      <div className="p-2.5 px-3.5 bg-emerald-50 rounded-[10px] text-center font-bold" style={{color: '#149273'}}>
+        괄호 밖의 단항식을 안의 각 항에 곱하기!
+      </div>
+      <div className="katex-inline text-center">
+        <MathInline tex={"a(b+c) = ab + ac"} />
+      </div>
+      <div className="katex-inline text-center">
+        <MathInline tex={"a(b-c) = ab - ac"} />
+      </div>
+    </div>
+    {steps[10].quiz && (
+      <QuizArea
+        stepId={10}
+        quiz={steps[10].quiz}
+        renderBlank={(blank) => (
+          <>분배법칙에서 괄호 밖의 단항식을 괄호 안의 {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 11 — 완료 카드                              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={11}>
+  <CompleteCard
+    emoji="🎉"
+    title="(단항식) × (다항식) 학습 완료!"
+  >
+    <div className="text-left inline-block">
+      단항식과 다항식의 곱셈을<br />모두 배웠어요!<br /><br />
+      ✅ 분배법칙<br />
+      ✅ 전개와 전개식 개념<br />
+      ✅ <MathInline tex={"a(b+c) = ab+ac"} /><br />
+      ✅ 음수 곱하기 주의<br /><br />
+    </div>
+    모든 퀴즈를 맞혔어요! 대단해요! 👏<br /><br />
+    위로 스크롤해서 다시 복습할 수 있어요!
+  </CompleteCard>
+</Step>
+
+</SlideContent>

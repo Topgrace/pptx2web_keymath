@@ -1,0 +1,281 @@
+{/* ── Imports ── */}
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { ConceptCard } from '@/components/cards/concept-card'
+import { LawCard } from '@/components/cards/law-card'
+import { NoteCard, NoteExample } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { SolutionSteps, SolutionLine, SolutionArrow } from '@/components/content/solution-steps'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: 'unit10-division',
+  title: '(다항식) ÷ (단항식)',
+  subtitle: '중2 수학 · 단원2',
+}
+
+<SlideContent>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 0 — 인트로                                  */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="다항식을 단항식으로 나누는 걸 배워보자~"
+    topicTitle="(다항식) ÷ (단항식)"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>다항식 ÷ 단항식은 {blank} 로 바꿔서 계산해요</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 1 — 나눗셈 방법                              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={1}>
+  <LawCard
+    title="(다항식) ÷ (단항식)"
+    formula={"(8xy+6x) \\div 2x"}
+    hint="💡 분수 꼴로 바꾸거나, 곱셈으로 바꾸거나!"
+  >
+    <SolutionSteps>
+      <SolutionLine label="분수 꼴로 바꾸기">
+        <MathInline tex={"\\frac{8xy+6x}{2x}"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine label="각 항을 분모로 나누기">
+        <MathInline tex={"\\frac{8xy}{2x} + \\frac{6x}{2x}"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine>
+        <MathInline tex={"= 4y + 3"} />
+      </SolutionLine>
+    </SolutionSteps>
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(8xy+6x) \\div 2x ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 2 — 방법1: 분수 꼴                           */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={2}>
+  <ConceptCard
+    variant="default"
+    formula={"\\text{방법 1: 분수 꼴로 바꾸기}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 bg-white rounded-[14px] border-l-4 border-slide-green py-3 px-4">
+      <div className="text-sm font-extrabold text-slide-green mb-1.5">분수 꼴 → 각 항을 약분</div>
+      <SolutionSteps>
+        <SolutionLine>
+          <MathInline tex={"\\frac{8xy+6x}{2x} = \\frac{8xy}{2x} + \\frac{6x}{2x}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine>
+          <MathInline tex={"= 4y + 3"} />
+        </SolutionLine>
+      </SolutionSteps>
+    </div>
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 3 — 방법2: 곱셈으로 바꾸기                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={3}>
+  <ConceptCard
+    variant="default"
+    formula={"\\text{방법 2: 곱셈으로 바꾸기}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 bg-white rounded-[14px] border-l-4 border-slide-formula py-3 px-4">
+      <div className="text-sm font-extrabold text-slide-formula mb-1.5">÷ → × 역수 변환 후 분배법칙</div>
+      <SolutionSteps>
+        <SolutionLine>
+          <MathInline tex={"(8xy+6x) \\times \\frac{1}{2x}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine>
+          <MathInline tex={"= 8xy \\times \\frac{1}{2x} + 6x \\times \\frac{1}{2x}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine>
+          <MathInline tex={"= 4y + 3"} />
+        </SolutionLine>
+      </SolutionSteps>
+    </div>
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 4 — 방법 선택 팁                             */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={4}>
+  <NoteCard title="💡 어떤 방법이든 결과는 같아!">
+    <div className="text-base font-extrabold text-gray-700 leading-[1.7]">
+      어떤 방법으로 계산해도<br />
+      결과는 같지만<br />
+      <strong className="text-slide-formula">(분수 꼴)÷(단항식)</strong>은<br />
+      <strong className="text-slide-red">곱셈으로 바꿔서</strong> 계산!
+    </div>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <>(분수 꼴)÷(단항식)은 {blank} 계산해요</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 5 — 연습 (1) (6a²b+9ab) ÷ 3a              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={5}>
+  <PracticeCard title="📝 나눗셈 연습 (1)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"(6a^2b+9ab) \\div 3a"} />
+    </div>
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(6a^2b+9ab) \\div 3a ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 6 — 연습 (2) (12x³-8x²) ÷ 4x             */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={6}>
+  <PracticeCard title="📝 나눗셈 연습 (2)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"(12x^3-8x^2) \\div 4x"} />
+    </div>
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(12x^3-8x^2) \\div 4x ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 7 — 연습 (3) (2x²+5x) ÷ 3x               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={7}>
+  <PracticeCard title="📝 나눗셈 연습 (3)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"(2x^2+5x) \\div 3x"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      힌트: 깔끔하게 나누어떨어지지 않으면 분수 형태로!
+    </div>
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(2x^2+5x) \\div 3x ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 8 — 정리                                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={8}>
+  <ConceptCard
+    variant="white"
+    formula={"\\text{(다항식) ÷ (단항식) 정리}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 space-y-2.5">
+      <div className="p-2.5 px-3.5 bg-emerald-50 rounded-[10px] text-center font-bold" style={{color: '#149273'}}>
+        다항식의 각 항을 단항식으로 나누기!
+      </div>
+      <div className="katex-inline text-center text-sm space-y-1">
+        <div><MathInline tex={"(A+B) \\div C = \\frac{A}{C} + \\frac{B}{C}"} /></div>
+      </div>
+    </div>
+    {steps[8].quiz && (
+      <QuizArea
+        stepId={8}
+        quiz={steps[8].quiz}
+        renderBlank={(blank) => (
+          <>(다항식)÷(단항식)은 다항식의 {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 9 — 완료 카드                               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={9}>
+  <CompleteCard
+    emoji="🎉"
+    title="(다항식) ÷ (단항식) 학습 완료!"
+  >
+    <div className="text-left inline-block">
+      다항식의 나눗셈을<br />모두 배웠어요!<br /><br />
+      ✅ 분수 꼴로 바꿔 계산<br />
+      ✅ 곱셈으로 바꿔 계산<br />
+      ✅ 각 항을 단항식으로 약분<br /><br />
+    </div>
+    모든 퀴즈를 맞혔어요! 대단해요! 👏<br /><br />
+    위로 스크롤해서 다시 복습할 수 있어요!
+  </CompleteCard>
+</Step>
+
+</SlideContent>

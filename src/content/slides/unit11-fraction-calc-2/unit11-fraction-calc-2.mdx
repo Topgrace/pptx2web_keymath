@@ -1,0 +1,434 @@
+{/* ── Imports ── */}
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { ConceptCard } from '@/components/cards/concept-card'
+import { LawCard } from '@/components/cards/law-card'
+import { NoteCard, NoteExample } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { SolutionSteps, SolutionLine, SolutionArrow } from '@/components/content/solution-steps'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: 'unit11-fraction-calc-2',
+  title: '분수 모양의 식 계산 (2)',
+  subtitle: '중2 수학 · 단원2',
+}
+
+<SlideContent>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 0 — 인트로                                  */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="복잡한 분수 모양의 식을 계산해보자~"
+    topicTitle="분수 모양의 식 계산 (2)"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>분수 모양의 식에서 괄호를 풀 때 사용하는 법칙은 {blank}</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 1 — 개념: 복잡한 분수식 → 전개 후 통분       */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={1}>
+  <ConceptCard
+    variant="white"
+    formula={"\\text{괄호가 있는 분수 모양의 식}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 bg-white rounded-[14px] border-l-4 border-slide-green py-3 px-4">
+      <div className="text-sm font-extrabold text-slide-green mb-1.5">핵심: 괄호가 있으면 전개 먼저!</div>
+      <SolutionSteps>
+        <SolutionLine label="① 분배법칙으로 전개">
+          <MathInline tex={"\\frac{2(a+b)}{3} \\rightarrow \\frac{2a+2b}{3}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine label="② 통분">
+          분모가 다르면 통분!
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine label="③ 분자끼리 계산">
+          동류항 정리!
+        </SolutionLine>
+      </SolutionSteps>
+    </div>
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <>분수 모양의 식에 괄호가 있으면 {blank} 해야 해요</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 2 — 법칙: 분수식 계산 순서                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={2}>
+  <LawCard
+    title="분수 모양의 식 계산 순서"
+    formula={"\\frac{A(x+y)}{m} \\pm \\frac{B(x-y)}{n}"}
+    hint="💡 전개 → 통분 → 분자 정리"
+  >
+    <SolutionSteps>
+      <SolutionLine label="Step 1">
+        괄호 안을 <strong className="text-slide-red">분배법칙</strong>으로 전개
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine label="Step 2">
+        분모가 다르면 <strong className="text-slide-formula">통분</strong>
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine label="Step 3">
+        분자의 <strong className="text-slide-green">동류항 정리</strong>
+      </SolutionLine>
+    </SolutionSteps>
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>전개 후 분모가 다르면 {blank} 해야 해요</>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 3 — 예시 1: 2(a+b)/3 - (a-3b)/6            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={3}>
+  <ConceptCard
+    variant="default"
+    formula={"\\frac{2(a+b)}{3} - \\frac{a-3b}{6}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 bg-white rounded-[14px] border-l-4 border-slide-formula py-3 px-4">
+      <div className="text-sm font-extrabold text-slide-formula mb-1.5">풀이 과정</div>
+      <SolutionSteps>
+        <SolutionLine label="전개">
+          <MathInline tex={"\\frac{2a+2b}{3} - \\frac{a-3b}{6}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine label="통분 (분모 6)">
+          <MathInline tex={"\\frac{2(2a+2b)}{6} - \\frac{a-3b}{6}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine label="분자 계산">
+          <MathInline tex={"\\frac{4a+4b-a+3b}{6} = \\frac{3a+7b}{6}"} />
+        </SolutionLine>
+      </SolutionSteps>
+    </div>
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\frac{2(a+b)}{3} - \\frac{a-3b}{6} ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 4 — 예시 2: (3x-y)/2 + (x+2y)/4            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={4}>
+  <ConceptCard
+    variant="default"
+    formula={"\\frac{3x-y}{2} + \\frac{x+2y}{4}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 bg-white rounded-[14px] border-l-4 border-slide-green py-3 px-4">
+      <div className="text-sm font-extrabold text-slide-green mb-1.5">풀이 과정</div>
+      <SolutionSteps>
+        <SolutionLine label="통분 (분모 4)">
+          <MathInline tex={"\\frac{2(3x-y)}{4} + \\frac{x+2y}{4}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine label="전개 + 분자 계산">
+          <MathInline tex={"\\frac{6x-2y+x+2y}{4}"} />
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine label="정리">
+          <MathInline tex={"= \\frac{7x}{4}"} />
+        </SolutionLine>
+      </SolutionSteps>
+    </div>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\frac{3x-y}{2} + \\frac{x+2y}{4} ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 5 — Note: 계산 순서 정리                     */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={5}>
+  <NoteCard title="📌 분수 모양의 식 계산 TIP">
+    <div className="text-base font-extrabold text-gray-700 leading-[1.7]">
+      <strong className="text-slide-red">1.</strong> 괄호가 있으면 <strong className="text-slide-red">분배법칙</strong>으로 전개<br />
+      <strong className="text-slide-formula">2.</strong> 분모가 다르면 <strong className="text-slide-formula">통분</strong><br />
+      <strong className="text-slide-green">3.</strong> 분자의 <strong className="text-slide-green">동류항 정리</strong><br /><br />
+      💡 부호 실수 조심!<br />
+      뺄셈에서는 <strong className="text-slide-red">빼는 분수의 모든 항</strong>의<br />
+      부호를 바꿔야 해요!
+    </div>
+  </NoteCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 6 — 연습 (1): 3(2a-b)/4 + (a+b)/2          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={6}>
+  <PracticeCard title="📝 연습 문제 (1)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"\\frac{3(2a-b)}{4} + \\frac{a+b}{2}"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      힌트: 분배법칙으로 전개 후 통분하세요!
+    </div>
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\frac{3(2a-b)}{4} + \\frac{a+b}{2} ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 7 — 연습 (2): (5x+y)/3 - 2(x-y)/9         */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={7}>
+  <PracticeCard title="📝 연습 문제 (2)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"\\frac{5x+y}{3} - \\frac{2(x-y)}{9}"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      힌트: 2(x-y)를 전개 먼저!
+    </div>
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\frac{5x+y}{3} - \\frac{2(x-y)}{9} ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 8 — 연습 (3): (a-2b)/5 - (3a+b)/10         */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={8}>
+  <PracticeCard title="📝 연습 문제 (3)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"\\frac{a-2b}{5} - \\frac{3a+b}{10}"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      힌트: 뺄셈일 때 부호 조심!
+    </div>
+    {steps[8].quiz && (
+      <QuizArea
+        stepId={8}
+        quiz={steps[8].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\frac{a-2b}{5} - \\frac{3a+b}{10} ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 9 — 개념: 정수 + 분수 모양 합치기             */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={9}>
+  <ConceptCard
+    variant="default"
+    formula={"\\text{정수} \\pm \\frac{\\text{다항식}}{\\text{단항식}}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 bg-white rounded-[14px] border-l-4 border-slide-formula py-3 px-4">
+      <div className="text-sm font-extrabold text-slide-formula mb-1.5">정수를 분수 형태로!</div>
+      <SolutionSteps>
+        <SolutionLine label="정수 변환">
+          <MathInline tex={"2x = \\frac{2x}{1} = \\frac{8x}{4}"} /> (분모 맞추기)
+        </SolutionLine>
+        <SolutionArrow />
+        <SolutionLine label="통분 후 계산">
+          분모가 같아지면 분자끼리 계산!
+        </SolutionLine>
+      </SolutionSteps>
+    </div>
+    {steps[9].quiz && (
+      <QuizArea
+        stepId={9}
+        quiz={steps[9].quiz}
+        renderBlank={(blank) => (
+          <>정수와 분수 모양의 식을 계산하려면 {blank} 바꿔야 해요</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 10 — 연습 (4): 2x - (x+3)/4                */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={10}>
+  <PracticeCard title="📝 연습 문제 (4)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"2x - \\frac{x+3}{4}"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      힌트: 2x를 분모 4인 분수로 바꾸세요!
+    </div>
+    {steps[10].quiz && (
+      <QuizArea
+        stepId={10}
+        quiz={steps[10].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"2x - \\frac{x+3}{4} ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 11 — 연습 (5): (2a+b)/3 + a - b            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={11}>
+  <PracticeCard title="📝 연습 문제 (5)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"\\frac{2a+b}{3} + a - b"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      힌트: a-b를 분모 3인 분수로 바꾸세요!
+    </div>
+    {steps[11].quiz && (
+      <QuizArea
+        stepId={11}
+        quiz={steps[11].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"\\frac{2a+b}{3} + a - b ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 12 — 총정리                                  */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={12}>
+  <ConceptCard
+    variant="white"
+    formula={"\\text{분수 모양의 식 계산 (2) 총정리}"}
+    formulaSize="katex-formula"
+  >
+    <div className="mt-3 space-y-2.5">
+      <div className="p-2.5 px-3.5 bg-red-50 rounded-[10px] text-center font-bold" style={{color: '#D85A3A'}}>
+        괄호 → 분배법칙으로 전개!
+      </div>
+      <div className="p-2.5 px-3.5 bg-blue-50 rounded-[10px] text-center font-bold" style={{color: '#00AAEE'}}>
+        분모가 다르면 → 통분!
+      </div>
+      <div className="p-2.5 px-3.5 bg-emerald-50 rounded-[10px] text-center font-bold" style={{color: '#149273'}}>
+        정수가 있으면 → 분수로 바꾸기!
+      </div>
+      <div className="katex-inline text-center text-sm space-y-1 mt-2">
+        <div><MathInline tex={"\\text{전개} \\rightarrow \\text{통분} \\rightarrow \\text{분자 정리}"} /></div>
+      </div>
+    </div>
+    {steps[12].quiz && (
+      <QuizArea
+        stepId={12}
+        quiz={steps[12].quiz}
+        renderBlank={(blank) => (
+          <>분수 모양의 식 계산 순서는 {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 13 — 완료 카드                               */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={13}>
+  <CompleteCard
+    emoji="🎉"
+    title="분수 모양의 식 계산 (2) 학습 완료!"
+  >
+    <div className="text-left inline-block">
+      복잡한 분수 모양의 식도<br />모두 계산할 수 있어요!<br /><br />
+      ✅ 분배법칙으로 전개<br />
+      ✅ 통분 후 분자 정리<br />
+      ✅ 정수를 분수로 바꿔 계산<br /><br />
+    </div>
+    모든 퀴즈를 맞혔어요! 대단해요! 👏<br /><br />
+    위로 스크롤해서 다시 복습할 수 있어요!
+  </CompleteCard>
+</Step>
+
+</SlideContent>

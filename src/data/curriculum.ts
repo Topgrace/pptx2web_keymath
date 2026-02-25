@@ -64,11 +64,11 @@ export const semesters: SemesterData[] = [
         units: [
           { id: '2-1-u5', title: '5. 지수법칙', status: 'unlocked', path: '/unit5' },
           { id: '2-1-u6', title: '6. 단항식의 곱셈과 나눗셈', status: 'unlocked', path: '/unit6' },
-          { id: '2-1-u7', title: '7. 다항식의 덧셈과 뺄셈', status: 'locked' },
-          { id: '2-1-u8', title: '8. 분수 모양의 식 계산 (1)', status: 'locked' },
-          { id: '2-1-u9', title: '9. (단항식) × (다항식)', status: 'locked' },
-          { id: '2-1-u10', title: '10. (다항식) ÷ (단항식)', status: 'locked' },
-          { id: '2-1-u11', title: '11. 분수 모양의 식 계산 (2)', status: 'locked' }
+          { id: '2-1-u7', title: '7. 다항식의 덧셈과 뺄셈', status: 'unlocked', path: '/unit7' },
+          { id: '2-1-u8', title: '8. 분수 모양의 식 계산 (1)', status: 'unlocked', path: '/unit8' },
+          { id: '2-1-u9', title: '9. (단항식) × (다항식)', status: 'unlocked', path: '/unit9' },
+          { id: '2-1-u10', title: '10. (다항식) ÷ (단항식)', status: 'unlocked', path: '/unit10' },
+          { id: '2-1-u11', title: '11. 분수 모양의 식 계산 (2)', status: 'unlocked', path: '/unit11' }
         ]
       },
       {
