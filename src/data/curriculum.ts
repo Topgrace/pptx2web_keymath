@@ -30,6 +30,7 @@ export const semesters: SemesterData[] = [
         id: '1-1-ch1',
         title: 'I. 소인수분해',
         units: [
+          { id: '1-1-ch1-intro', title: '대단원 인트로', status: 'locked' },
           { id: '1-1-u1', title: '1. 소수와 합성수', status: 'locked' },
           { id: '1-1-u2', title: '2. 거듭제곱', status: 'locked' },
           { id: '1-1-u3', title: '3. 소인수분해', status: 'locked' },
@@ -44,6 +45,7 @@ export const semesters: SemesterData[] = [
         id: '1-1-ch2',
         title: 'II. 정수와 유리수',
         units: [
+          { id: '1-1-ch2-intro', title: '대단원 인트로', status: 'locked' },
           { id: '1-1-u9', title: '9. 정수와 유리수', status: 'locked' },
           { id: '1-1-u10', title: '10. 수직선 위에 수 나타내기', status: 'locked' },
           { id: '1-1-u11', title: '11. 절댓값과 크기 비교', status: 'locked' },
@@ -61,6 +63,7 @@ export const semesters: SemesterData[] = [
         id: '1-1-ch3',
         title: 'III. 문자와 식',
         units: [
+          { id: '1-1-ch3-intro', title: '대단원 인트로', status: 'locked' },
           { id: '1-1-u20', title: '20. 문자의 사용', status: 'locked' },
           { id: '1-1-u21', title: '21. 곱셈 기호와 나눗셈 기호의 생략', status: 'locked' },
           { id: '1-1-u22', title: '22. 식의 값', status: 'locked' },
@@ -75,6 +78,7 @@ export const semesters: SemesterData[] = [
         id: '1-1-ch4',
         title: 'IV. 일차방정식',
         units: [
+          { id: '1-1-ch4-intro', title: '대단원 인트로', status: 'locked' },
           { id: '1-1-u28', title: '28. 등식, 방정식, 항등식', status: 'locked' },
           { id: '1-1-u29', title: '29. 등식의 성질', status: 'locked' },
           { id: '1-1-u30', title: '30. 이항과 일차방정식', status: 'locked' },
@@ -87,6 +91,7 @@ export const semesters: SemesterData[] = [
         id: '1-1-ch5',
         title: 'V. 그래프와 비례 관계',
         units: [
+          { id: '1-1-ch5-intro', title: '대단원 인트로', status: 'locked' },
           { id: '1-1-u34', title: '34. 좌표와 순서쌍', status: 'locked' },
           { id: '1-1-u35', title: '35. 사분면', status: 'locked' },
           { id: '1-1-u36', title: '36. 그래프', status: 'locked' },
