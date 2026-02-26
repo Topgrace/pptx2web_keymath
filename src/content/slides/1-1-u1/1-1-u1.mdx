@@ -40,13 +40,9 @@ export const meta = {
 </Step>
 
 <Step id={1}>
-  <PrimeCompositeNeoCard />
-</Step>
-
-<Step id={2}>
   <ConceptCard
     variant="white"
-    topContent={<PrimeEtymologyMotion className="mb-1" />}
+    topContent={<PrimeEtymologyMotion className="mb-1" stepId={1} />}
     formula={"\\text{(소수)} = 1 \\times \\text{(자기 자신)}"}
     formulaSize="katex-formula"
     sequenceDelays={{ formula: 2.3, children: 3.0 }}
@@ -56,7 +52,7 @@ export const meta = {
     </div>
     {steps[2].quiz && (
       <QuizArea
-        stepId={2}
+        stepId={1}
         quiz={steps[2].quiz}
         renderBlank={(blank) => (
           <>따라서 소수의 약수 개수는 항상 {blank}</>
@@ -66,10 +62,10 @@ export const meta = {
   </ConceptCard>
 </Step>
 
-<Step id={3}>
+<Step id={2}>
   <ConceptCard
     variant="default"
-    topContent={<CompositeEtymologyMotion className="mb-1" stepId={3} />}
+    topContent={<CompositeEtymologyMotion className="mb-1" stepId={2} />}
     formula={"12 = 1 \\times 12 = 2 \\times 6 = 3 \\times 4"}
     formulaSize="katex-formula"
     sequenceDelays={{ formula: 2.3, children: 3.0 }}
@@ -84,7 +80,7 @@ export const meta = {
     </div>
     {steps[3].quiz && (
       <QuizArea
-        stepId={3}
+        stepId={2}
         quiz={steps[3].quiz}
         renderBlank={(blank) => (
           <>합성수의 약수 개수는 {blank}</>
@@ -94,14 +90,14 @@ export const meta = {
   </ConceptCard>
 </Step>
 
-<Step id={4}>
+<Step id={3}>
   <NoteCard title="소수 예시">
     <div className="text-[15px] font-bold text-slide-gray leading-[1.8]">
       소수의 예: 2, 3, 5, 7, 11, 13, 17, 19 ...      
     </div>
     {steps[4].quiz && (
       <QuizArea
-        stepId={4}
+        stepId={3}
         quiz={steps[4].quiz}
         renderBlank={(blank) => (
           <>소수에서 2만 유일한 짝수이고, <br />나머지 소수는 모두 {blank}</>
@@ -111,7 +107,7 @@ export const meta = {
   </NoteCard>
 </Step>
 
-<Step id={5}>
+<Step id={4}>
   <ConceptCard
     variant="white"
     formula={"\\text{합성수 예시: }4,6,8,9,10,12,\\dots"}
@@ -120,7 +116,7 @@ export const meta = {
     <CompositeConfusionTable />
     {steps[5].quiz && (
       <QuizArea
-        stepId={5}
+        stepId={4}
         quiz={steps[5].quiz}
         renderBlank={(blank) => (
           <>119는 {blank}이다.</>
@@ -130,14 +126,14 @@ export const meta = {
   </ConceptCard>
 </Step>
 
-<Step id={6}>
+<Step id={5}>
   <NoteCard title="1의 특수성">
     <div className="text-[16px] font-extrabold text-slide-red text-center">
       1은 소수도 아니고, 합성수도 아니에요.
     </div>
     {steps[6].quiz && (
       <QuizArea
-        stepId={6}
+        stepId={5}
         quiz={steps[6].quiz}
         renderBlank={(blank) => (
           <>1의 약수의 개수는 {blank}이다.</>
@@ -147,7 +143,7 @@ export const meta = {
   </NoteCard>
 </Step>
 
-<Step id={7}>
+<Step id={6}>
   <NoteCard variant="white" title="헷갈리기 쉬운 용어">
     <div className="text-[15px] font-bold text-slide-gray leading-[1.8]">
       소수(素數): prime number
@@ -158,7 +154,7 @@ export const meta = {
     </div>
     {steps[7].quiz && (
       <QuizArea
-        stepId={7}
+        stepId={6}
         quiz={steps[7].quiz}
         renderBlank={(blank) => (
           <>0.5는 {blank} 에 해당해요.</>
@@ -168,7 +164,7 @@ export const meta = {
   </NoteCard>
 </Step>
 
-<Step id={8}>
+<Step id={7}>
   <PracticeCard title="연습 1" subtitle="수 분류하기">
     <div className="text-center text-lg font-extrabold text-slide-gray mb-1.5">
       49는 어떤 수일까요?
@@ -178,7 +174,7 @@ export const meta = {
     </div>
     {steps[8].quiz && (
       <QuizArea
-        stepId={8}
+        stepId={7}
         quiz={steps[8].quiz}
         renderBlank={(blank) => (
           <>49는 {blank}</>
@@ -188,14 +184,14 @@ export const meta = {
   </PracticeCard>
 </Step>
 
-<Step id={9}>
+<Step id={8}>
   <PracticeCard title="연습 2" subtitle="약수 개수로 판단하기">
     <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
       약수가 6개인 수는 소수일까요, 합성수일까요?
     </div>
     {steps[9].quiz && (
       <QuizArea
-        stepId={9}
+        stepId={8}
         quiz={steps[9].quiz}
         renderBlank={(blank) => (
           <>정답은 {blank}</>
@@ -205,7 +201,7 @@ export const meta = {
   </PracticeCard>
 </Step>
 
-<Step id={10}>
+<Step id={9}>
   <SummaryCard
     title="핵심 정리"
     cases={[
@@ -216,7 +212,7 @@ export const meta = {
   >
     {steps[10].quiz && (
       <QuizArea
-        stepId={10}
+        stepId={9}
         quiz={steps[10].quiz}
         renderBlank={(blank) => (
           <>약수가 1과 자기 자신뿐인 수는 {blank}</>
@@ -224,6 +220,10 @@ export const meta = {
       />
     )}
   </SummaryCard>
+</Step>
+
+<Step id={10}>
+  <PrimeCompositeNeoCard stepId={10} />
 </Step>
 
 <Step id={11}>

@@ -102,7 +102,6 @@ const rawSteps: Step[] = [
         { label: '소수', value: '소수' },
         { label: '합성수', value: '합성수' },
         { label: '둘 다 아님', value: '둘 다 아님' },
-        { label: '소수(小數)', value: '소수(小數)' },
       ],
     },
   },
@@ -115,7 +114,6 @@ const rawSteps: Step[] = [
         { label: '소수', value: '소수' },
         { label: '합성수', value: '합성수' },
         { label: '둘 다 아님', value: '둘 다 아님' },
-        { label: '판단 불가', value: '판단 불가' },
       ],
     },
   },
@@ -127,7 +125,6 @@ const rawSteps: Step[] = [
       choices: [
         { label: '소수', value: '소수' },
         { label: '합성수', value: '합성수' },
-        { label: '소수(小數)', value: '소수(小數)' },
         { label: '둘 다 아님', value: '둘 다 아님' },
       ],
     },
@@ -139,4 +136,4 @@ const rawSteps: Step[] = [
 
 export const steps: Step[] = rawSteps.map((s) => StepSchema.parse(s))
 
-export const quizStepIds: Set<number> = new Set([0, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+export const quizStepIds: Set<number> = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
