@@ -56,6 +56,8 @@ export function PrimeCompositeNeoCard({
     if (!solved) return
     setTitleAnswer({ prime: '소수', composite: '합성수' })
     setActiveBlank(null)
+    setFeedback(null)
+    setFeedbackType(null)
   }, [solved])
 
   const pairedSteps = primeSteps.map((prime, index) => ({
@@ -169,9 +171,11 @@ export function PrimeCompositeNeoCard({
         </div>
 
         <div className="px-3 pb-1">
-          <div className="text-center text-[13px] font-bold text-slide-muted">
-            빈칸을 클릭해 제목을 고르세요.
-          </div>
+          {!solved && (
+            <div className="text-center text-[13px] font-bold text-slide-muted">
+              빈칸을 클릭해 제목을 고르세요.
+            </div>
+          )}
           <ChoicePanel
             key={activeBlank ?? 'closed'}
             choices={choices}
@@ -179,7 +183,7 @@ export function PrimeCompositeNeoCard({
             onSelect={handleSelectChoice}
             disabled={solved}
           />
-          <QuizFeedback message={feedback} type={feedbackType} />
+          {!solved && <QuizFeedback message={feedback} type={feedbackType} />}
         </div>
 
         <div className="px-3 pb-3">
