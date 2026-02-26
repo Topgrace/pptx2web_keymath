@@ -11,6 +11,11 @@ export const steps: Step[] = [
     type: 'concept',
     cardVariant: 'white',
   },
+  {
+    id: 2,
+    type: 'concept',
+    cardVariant: 'white',
+  },
 ]
 
 export const quizStepIds = new Set<number>()
