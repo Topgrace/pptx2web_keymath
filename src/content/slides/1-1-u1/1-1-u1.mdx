@@ -1,0 +1,237 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { ConceptCard } from '@/components/cards/concept-card'
+import { NoteCard } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { SummaryCard } from '@/components/cards/summary-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { PrimeCompositeNeoCard } from '@/components/cards/prime-composite-neo-card'
+import { CompositeConfusionTable } from '@/components/content/composite-confusion-table'
+import { PrimeEtymologyMotion } from '@/components/content/prime-etymology-motion'
+import { CompositeEtymologyMotion } from '@/components/content/composite-etymology-motion'
+import { QuizArea } from '@/components/quiz'
+import { MathDisplay, MathInline } from '@/components/math'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: '1-1-u1-prime-composite',
+  title: '소수와 합성수',
+  subtitle: '중1 수학 · 소인수분해',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="오늘은 소수와 합성수를 구분하는 방법을 확실히 익혀볼 거야!"
+    topicTitle="소수와 합성수"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>약수가 1과 자기 자신뿐인 수를 {blank} 라고 한다.</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <PrimeCompositeNeoCard />
+</Step>
+
+<Step id={2}>
+  <ConceptCard
+    variant="white"
+    topContent={<PrimeEtymologyMotion className="mb-1" />}
+    formula={"\\text{(소수)} = 1 \\times \\text{(자기 자신)}"}
+    formulaSize="katex-formula"
+    sequenceDelays={{ formula: 2.3, children: 3.0 }}
+  >
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.7]">
+      예) <MathInline tex={"19 = 1 \\times 19"} />      
+    </div>
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>따라서 소수의 약수 개수는 항상 {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+<Step id={3}>
+  <ConceptCard
+    variant="default"
+    topContent={<CompositeEtymologyMotion className="mb-1" stepId={3} />}
+    formula={"12 = 1 \\times 12 = 2 \\times 6 = 3 \\times 4"}
+    formulaSize="katex-formula"
+    sequenceDelays={{ formula: 2.3, children: 3.0 }}
+  >
+    <MathDisplay
+      tex={"12\\text{의 약수는 }1,\\,2,\\,3,\\,4,\\,6,\\,12"}
+      sizeClass="katex-formula"
+      className="text-slide-gray py-0.5"
+    />
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.7]">
+      합성수는 소수들의 곱으로 분해할 수 있다.
+    </div>
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <>합성수의 약수 개수는 {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+<Step id={4}>
+  <NoteCard title="소수 예시">
+    <div className="text-[15px] font-bold text-slide-gray leading-[1.8]">
+      소수의 예: 2, 3, 5, 7, 11, 13, 17, 19 ...      
+    </div>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <>소수에서 2만 유일한 짝수이고, <br />나머지 소수는 모두 {blank}</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={5}>
+  <ConceptCard
+    variant="white"
+    formula={"\\text{합성수 예시: }4,6,8,9,10,12,\\dots"}
+    formulaSize="katex-formula"
+  >
+    <CompositeConfusionTable />
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <>119는 {blank}이다.</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+<Step id={6}>
+  <NoteCard title="1의 특수성">
+    <div className="text-[16px] font-extrabold text-slide-red text-center">
+      1은 소수도 아니고, 합성수도 아니에요.
+    </div>
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>1의 약수의 개수는 {blank}이다.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={7}>
+  <NoteCard variant="white" title="헷갈리기 쉬운 용어">
+    <div className="text-[15px] font-bold text-slide-gray leading-[1.8]">
+      소수(素數): prime number
+      <br />
+      소수(小數): decimal number
+      <br />
+      이름은 같아 보여도 뜻이 달라요.
+    </div>
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>0.5는 {blank} 에 해당해요.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={8}>
+  <PracticeCard title="연습 1" subtitle="수 분류하기">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-1.5">
+      49는 어떤 수일까요?
+    </div>
+    <div className="text-center text-sm font-bold text-slide-muted mb-2.5">
+      힌트: 49 = 7 × 7
+    </div>
+    {steps[8].quiz && (
+      <QuizArea
+        stepId={8}
+        quiz={steps[8].quiz}
+        renderBlank={(blank) => (
+          <>49는 {blank}</>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={9}>
+  <PracticeCard title="연습 2" subtitle="약수 개수로 판단하기">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      약수가 6개인 수는 소수일까요, 합성수일까요?
+    </div>
+    {steps[9].quiz && (
+      <QuizArea
+        stepId={9}
+        quiz={steps[9].quiz}
+        renderBlank={(blank) => (
+          <>정답은 {blank}</>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={10}>
+  <SummaryCard
+    title="핵심 정리"
+    cases={[
+      { tag: '소수', tagVariant: 'big', content: <>약수 2개 (1, 자기 자신)</> },
+      { tag: '합성수', tagVariant: 'small', content: <>약수 3개 이상</> },
+      { tag: '예외', tagVariant: 'equal', content: <>1은 소수도 합성수도 아님</> },
+    ]}
+  >
+    {steps[10].quiz && (
+      <QuizArea
+        stepId={10}
+        quiz={steps[10].quiz}
+        renderBlank={(blank) => (
+          <>약수가 1과 자기 자신뿐인 수는 {blank}</>
+        )}
+      />
+    )}
+  </SummaryCard>
+</Step>
+
+<Step id={11}>
+  <CompleteCard emoji="🎯" title="소수와 합성수 학습 완료!">
+    소수, 합성수, 예외(1)까지 정리했어요.
+    <br />
+    필요하면 위로 스크롤해서 다시 풀어보세요!
+  </CompleteCard>
+</Step>
+
+</SlideContent>

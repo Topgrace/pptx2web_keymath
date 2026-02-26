@@ -2,15 +2,6 @@ import { motion, type Variants } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.7,
-    },
-  },
-}
-
 const defaultItemVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
   visible: {
@@ -50,14 +41,53 @@ const blurItemVariants: Variants = {
 
 export type RevealVariant = 'default' | 'scale' | 'blur'
 
-function getVariants(variant: RevealVariant): Variants {
-  switch (variant) {
-    case 'scale':
-      return scaleItemVariants
-    case 'blur':
-      return blurItemVariants
-    default:
-      return defaultItemVariants
+function withDelay(base: Variants, delay = 0): Variants {
+  if (!delay) return base
+
+  const visible = base.visible
+  if (!visible || typeof visible === 'string') return base
+
+  const visibleState = visible as Record<string, unknown>
+  const baseTransition = (visibleState.transition as Record<string, unknown> | undefined) ?? {}
+  const mergedDelay =
+    (typeof baseTransition.delay === 'number' ? baseTransition.delay : 0) + delay
+
+  return {
+    ...base,
+    visible: {
+      ...visibleState,
+      transition: {
+        ...baseTransition,
+        delay: mergedDelay,
+      },
+    },
+  }
+}
+
+function getVariants(variant: RevealVariant, delay = 0): Variants {
+  const base = (() => {
+    switch (variant) {
+      case 'scale':
+        return scaleItemVariants
+      case 'blur':
+        return blurItemVariants
+      default:
+        return defaultItemVariants
+    }
+  })()
+
+  return withDelay(base, delay)
+}
+
+function getContainerVariants(staggerChildren: number, delayChildren: number): Variants {
+  return {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren,
+        delayChildren,
+      },
+    },
   }
 }
 
@@ -65,11 +95,17 @@ export function StaggerReveal({
   children,
   className,
   enabled = true,
+  staggerChildren = 0.7,
+  delayChildren = 0,
 }: {
   children: ReactNode
   className?: string
   enabled?: boolean
+  staggerChildren?: number
+  delayChildren?: number
 }) {
+  const containerVariants = getContainerVariants(staggerChildren, delayChildren)
+
   return (
     <motion.div
       className={cn(className)}
@@ -86,13 +122,15 @@ export function StaggerItem({
   children,
   variant = 'default',
   className,
+  delay = 0,
 }: {
   children: ReactNode
   variant?: RevealVariant
   className?: string
+  delay?: number
 }) {
   return (
-    <motion.div className={cn(className)} variants={getVariants(variant)}>
+    <motion.div className={cn(className)} variants={getVariants(variant, delay)}>
       {children}
     </motion.div>
   )

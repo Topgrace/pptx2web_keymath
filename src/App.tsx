@@ -12,6 +12,7 @@ const Page_2_1_u9 = lazy(() => import('@/pages/2-1-u9'))
 const Page_2_1_u10 = lazy(() => import('@/pages/2-1-u10'))
 const Page_2_1_u11 = lazy(() => import('@/pages/2-1-u11'))
 const Page_1_1_ch1_intro = lazy(() => import('@/pages/1-1-ch1-intro'))
+const Page_1_1_u1 = lazy(() => import('@/pages/1-1-u1'))
 
 
 function Loading() {
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/unit10" element={<Page_2_1_u10 />} />
         <Route path="/unit11" element={<Page_2_1_u11 />} />
         <Route path="/ch1-intro" element={<Page_1_1_ch1_intro />} />
+        <Route path="/1-1-u1" element={<Page_1_1_u1 />} />
 
         {/* Catch-all redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />
