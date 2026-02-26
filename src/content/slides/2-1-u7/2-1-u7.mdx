@@ -1,0 +1,541 @@
+{/* ── Imports ── */}
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { ConceptCard } from '@/components/cards/concept-card'
+import { LawCard } from '@/components/cards/law-card'
+import { NoteCard, NoteExample } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { SolutionSteps, SolutionLine, SolutionArrow } from '@/components/content/solution-steps'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: 'unit7-polynomial',
+  title: '다항식의 덧셈과 뺄셈',
+  subtitle: '중2 수학 · 단원2',
+}
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 0 — 인트로                                  */}
+{/* ──────────────────────────────────────────────── */}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="다항식의 덧셈과 뺄셈을 배워보자~"
+    topicTitle="다항식의 덧셈과 뺄셈"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>문자의 종류와 차수가 같은 항을 {blank} (이)라 해요</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 1 — 동류항 개념                              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={1}>
+  <ConceptCard
+    variant="white"
+    formula={"\\text{동류항} = \\text{문자의 종류와 차수가 같은 항}"}
+    formulaSize="katex-formula"
+    description="덧셈과 뺄셈은 같은 종류의 항끼리만 계산!"
+  >
+    <div className="mt-3 space-y-2 text-sm">
+      <div className="p-2.5 px-3.5 bg-slide-warning-bg rounded-[10px] text-center font-bold text-slide-brown">
+        📝 같은 종류의 항이 되려면 문자의 종류와 차수가 같아야 해~
+      </div>
+    </div>
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <>동류항이 되려면 문자의 종류와 {blank} 가 같아야 해요</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 2 — 동류항 판별 예시                         */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={2}>
+  <ConceptCard
+    variant="default"
+    formula={"\\text{동류항 판별하기}"}
+    formulaSize="katex-formula"
+  >
+    <div className="space-y-3 mt-2">
+      <div className="bg-white rounded-[14px] border-l-4 border-red-400 py-3 px-4">
+        <div className="text-sm font-extrabold text-red-500 mb-1.5">❌ 동류항 아님</div>
+        <div className="katex-inline text-center space-y-1">
+          <div><MathInline tex={"a \\text{ 와 } 2b"} /> — 문자가 달라서</div>
+          <div><MathInline tex={"5x^2 \\text{ 와 } y^2"} /> — 문자가 달라서</div>
+        </div>
+      </div>
+      <div className="bg-white rounded-[14px] border-l-4 border-emerald-500 py-3 px-4">
+        <div className="text-sm font-extrabold text-emerald-600 mb-1.5">✅ 동류항 맞음</div>
+        <div className="katex-inline text-center space-y-1">
+          <div><MathInline tex={"5x^2 \\text{ 와 } 4x^2"} /> — 문자와 차수가 같아서</div>
+          <div><MathInline tex={"a+2b \\text{ 와 } a-2b"} /> — 문자와 차수가 같아서</div>
+        </div>
+      </div>
+      <div className="bg-white rounded-[14px] border-l-4 border-red-400 py-3 px-4">
+        <div className="text-sm font-extrabold text-red-500 mb-1.5">❌ 동류항 아님</div>
+        <div className="katex-inline text-center">
+          <MathInline tex={"x^2 \\text{ 와 } x"} /> — 문자는 같지만 차수가 달라서
+        </div>
+      </div>
+    </div>
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"a"} /> 와 <MathInline tex={"2b"} /> 는? {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 3 — 동류항의 계산                            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={3}>
+  <ConceptCard
+    variant="default"
+    formula={"\\color{#D85A3A}{4x^2} + \\color{#00AAEE}{5x^2} = \\color{#2E7D32}{9x^2}"}
+    formulaSize="katex-law"
+  >
+    <div className="mt-3 space-y-2">
+      <div className="p-2.5 px-3.5 bg-emerald-50 rounded-[10px] text-center text-sm font-bold" style={{color: '#149273'}}>
+        💡 동류항끼리 계수만 더하면 돼!
+      </div>
+      <div className="katex-inline text-center">
+        <MathInline tex={"4x^2 - 5x^2 = -x^2"} />
+      </div>
+    </div>
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"4x^2 + 5x^2 ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 4 — 일차식과 이차식                          */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={4}>
+  <NoteCard title="📚 일차식과 이차식">
+    <div className="space-y-3">
+      <div className="flex items-center gap-2.5 p-2.5 bg-blue-50 rounded-[10px]">
+        <span className="text-2xl">1️⃣</span>
+        <div>
+          <span className="text-base font-extrabold text-slide-formula">일차식</span>
+          <span className="text-sm text-slide-gray ml-1">— 한 문자에 대해 차수가 1인 다항식</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-2.5 p-2.5 bg-pink-50 rounded-[10px]">
+        <span className="text-2xl">2️⃣</span>
+        <div>
+          <span className="text-base font-extrabold" style={{color: '#EE3B96'}}>이차식</span>
+          <span className="text-sm text-slide-gray ml-1">— 한 문자에 대해 차수가 2인 다항식</span>
+        </div>
+      </div>
+    </div>
+    <NoteExample>
+      <div className="space-y-1">
+        <div>일차식 예: <MathInline tex={"x+1,\\; -5a"} /></div>
+        <div>이차식 예: <MathInline tex={"a^2+1,\\; 2x^2+1"} /></div>
+      </div>
+    </NoteExample>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <>이차식은 한 문자에 대해 차수가 {blank} 인 다항식이에요</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 5 — 동류항 찾기 연습                         */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={5}>
+  <PracticeCard title="📝 동류항 찾기 연습">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"5x+y+3+4x-2y"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      위 식에서 x의 동류항을 찾아보세요
+    </div>
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <>x의 동류항은 {blank}</>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 6 — 다항식의 덧셈                            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={6}>
+  <LawCard
+    title="다항식의 덧셈"
+    formula={"(a^2+2a-5)+(4a^2-a+2)"}
+    hint="💡 항이 많아도 동류항끼리 계산하기!"
+  >
+    <SolutionSteps>
+      <SolutionLine label="괄호 풀기">
+        <MathInline tex={"a^2+2a-5+4a^2-a+2"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine label="동류항끼리 모으기">
+        <MathInline tex={"(a^2+4a^2)+(2a-a)+(-5+2)"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine>
+        <MathInline tex={"= 5a^2+a-3"} />
+      </SolutionLine>
+    </SolutionSteps>
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(a^2+2a-5)+(4a^2-a+2) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 7 — 세로셈 덧셈                             */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={7}>
+  <ConceptCard
+    variant="default"
+    formula={"\\text{세로셈으로 덧셈}"}
+    formulaSize="katex-formula"
+    description="세로셈도 가능해~"
+  >
+    <div className="mt-3 bg-white rounded-[14px] py-3 px-4 text-center">
+      <div className="font-mono text-base space-y-1">
+        <div className="text-right pr-8"><MathInline tex={"a^2+2a-5"} /></div>
+        <div className="text-left pl-4 font-extrabold text-slide-formula">+ <span className="ml-2"><MathInline tex={"4a^2-a+2"} /></span></div>
+        <div className="border-t border-slide-accent my-2"></div>
+        <div className="text-right pr-8 font-extrabold text-slide-brown"><MathInline tex={"5a^2+a-3"} /></div>
+      </div>
+    </div>
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 8 — 다항식의 뺄셈                            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={8}>
+  <LawCard
+    title="다항식의 뺄셈"
+    formula={"(2a-3b+7)-(3a-b)"}
+    hint="💡 뺄셈은 부호를 조심해야 해!"
+  >
+    <SolutionSteps>
+      <SolutionLine label="괄호 풀기 (부호 바꾸기!)">
+        <MathInline tex={"2a-3b+7-3a+b"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine label="동류항끼리 모으기">
+        <MathInline tex={"(2a-3a)+(-3b+b)+7"} />
+      </SolutionLine>
+      <SolutionArrow />
+      <SolutionLine>
+        <MathInline tex={"= -a-2b+7"} />
+      </SolutionLine>
+    </SolutionSteps>
+    {steps[8].quiz && (
+      <QuizArea
+        stepId={8}
+        quiz={steps[8].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(2a-3b+7)-(3a-b) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </LawCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 9 — 괄호 앞 - 부호 분배법칙                   */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={9}>
+  <NoteCard title="⚠️ 괄호 앞에 − 부호가 있을 때">
+    <div className="text-lg font-extrabold text-gray-700 leading-[1.7]">
+      괄호 앞에 <strong className="text-slide-red">−</strong> 가 있으면<br />
+      <strong className="text-slide-red">−1</strong>이 곱해진 것으로 생각!
+    </div>
+    <NoteExample>
+      <div className="space-y-1">
+        <div><MathInline tex={"-(3a-b)"} /></div>
+        <div><MathInline tex={"= -1 \\times (3a-b)"} /></div>
+        <div><MathInline tex={"= -3a+b"} /></div>
+      </div>
+    </NoteExample>
+    <div className="mt-2 p-2.5 px-3.5 bg-slide-warning-bg rounded-[10px] text-center text-sm text-slide-brown font-bold">
+      💡 분배법칙으로 괄호를 풀면 모든 항의 부호가 바뀌어!
+    </div>
+    {steps[9].quiz && (
+      <QuizArea
+        stepId={9}
+        quiz={steps[9].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"-(3a-b) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 10 — 세로셈 뺄셈                            */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={10}>
+  <ConceptCard
+    variant="default"
+    formula={"\\text{세로셈으로 뺄셈}"}
+    formulaSize="katex-formula"
+    description="세로셈도 가능해~"
+  >
+    <div className="mt-3 bg-white rounded-[14px] py-3 px-4 text-center">
+      <div className="font-mono text-base space-y-1">
+        <div className="text-right pr-8"><MathInline tex={"2a-3b+7"} /></div>
+        <div className="text-left pl-4 font-extrabold text-slide-red">− <span className="ml-2"><MathInline tex={"3a-\\;\\;b"} /></span></div>
+        <div className="border-t border-slide-accent my-2"></div>
+        <div className="text-right pr-8 font-extrabold text-slide-brown"><MathInline tex={"-a-2b+7"} /></div>
+      </div>
+    </div>
+    <div className="mt-2 p-2.5 px-3.5 bg-slide-warning-bg rounded-[10px] text-center text-sm text-slide-brown font-bold">
+      💡 빼는 다항식의 부호를 바꿔서 더하기!
+    </div>
+  </ConceptCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 11 — 연습 (1) (a+3b-10)-(5a-b)             */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={11}>
+  <PracticeCard title="📝 뺄셈 연습 (1)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"(a+3b-10)-(5a-b)"} />
+    </div>
+    {steps[11].quiz && (
+      <QuizArea
+        stepId={11}
+        quiz={steps[11].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(a+3b-10)-(5a-b) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 12 — 연습 (2) (-4x²+2x-1)-(-x²+3)         */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={12}>
+  <PracticeCard title="📝 뺄셈 연습 (2)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"(-4x^2+2x-1)-(-x^2+3)"} />
+    </div>
+    {steps[12].quiz && (
+      <QuizArea
+        stepId={12}
+        quiz={steps[12].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(-4x^2+2x-1)-(-x^2+3) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 13 — 세로셈 덧셈 연습 (3)                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={13}>
+  <PracticeCard title="📝 세로셈 덧셈 (3)">
+    <div className="mt-1 bg-white rounded-[14px] py-3 px-4 text-center mb-3">
+      <div className="font-mono text-base space-y-1">
+        <div className="text-right pr-6"><MathInline tex={"9a+\\;\\;b-8"} /></div>
+        <div className="text-left pl-3 font-extrabold text-slide-formula">+ <span className="ml-1"><MathInline tex={"\\;a+4b-2"} /></span></div>
+        <div className="border-t border-slide-accent my-2"></div>
+      </div>
+    </div>
+    {steps[13].quiz && (
+      <QuizArea
+        stepId={13}
+        quiz={steps[13].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(9a+b-8)+(a+4b-2) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 14 — 세로셈 뺄셈 연습 (4)                    */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={14}>
+  <PracticeCard title="📝 세로셈 뺄셈 (4)">
+    <div className="mt-1 bg-white rounded-[14px] py-3 px-4 text-center mb-3">
+      <div className="font-mono text-base space-y-1">
+        <div className="text-right pr-6"><MathInline tex={"5a-\\;\\;b+6"} /></div>
+        <div className="text-left pl-3 font-extrabold text-slide-red">− <span className="ml-1"><MathInline tex={"3a+10b+2"} /></span></div>
+        <div className="border-t border-slide-accent my-2"></div>
+      </div>
+    </div>
+    {steps[14].quiz && (
+      <QuizArea
+        stepId={14}
+        quiz={steps[14].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"(5a-b+6)-(3a+10b+2) ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 15 — 동류항 정리 연습 (5)                     */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={15}>
+  <PracticeCard title="📝 동류항 정리 (5)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"x^2+2x+3+5x^2-7x"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      동류항끼리 모아서 정리하세요
+    </div>
+    {steps[15].quiz && (
+      <QuizArea
+        stepId={15}
+        quiz={steps[15].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"x^2+2x+3+5x^2-7x ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 16 — 동류항 정리 연습 (6)                     */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={16}>
+  <PracticeCard title="📝 동류항 정리 (6)">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"3a^2-13-2a+7a^2+1"} />
+    </div>
+    <div className="text-center text-sm text-slide-muted mb-3">
+      동류항끼리 모아서 정리하세요
+    </div>
+    {steps[16].quiz && (
+      <QuizArea
+        stepId={16}
+        quiz={steps[16].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"3a^2-13-2a+7a^2+1 ="} /> {blank}
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+{/* ──────────────────────────────────────────────── */}
+{/* Step 17 — 완료 카드                              */}
+{/* ──────────────────────────────────────────────── */}
+
+<Step id={17}>
+  <CompleteCard
+    emoji="🎉"
+    title="다항식의 덧셈과 뺄셈 학습 완료!"
+  >
+    <div className="text-left inline-block">
+      다항식의 덧셈과 뺄셈을<br />모두 배웠어요!<br /><br />
+      ✅ 동류항의 개념<br />
+      ✅ 일차식·이차식 구분<br />
+      ✅ 다항식의 덧셈 (괄호 풀기 → 동류항 정리)<br />
+      ✅ 다항식의 뺄셈 (부호 바꿔서 더하기)<br />
+      ✅ 세로셈<br /><br />
+    </div>
+    모든 퀴즈를 맞혔어요! 대단해요! 👏<br /><br />
+    위로 스크롤해서 다시 복습할 수 있어요!
+  </CompleteCard>
+</Step>
+
+</SlideContent>

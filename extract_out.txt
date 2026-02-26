@@ -1,0 +1,546 @@
+Starting extraction...
+Imported pptx successfully.
+Loaded presentation with 60 slides.
+
+========================================
+SLIDE 27
+========================================
+    Group sub-shape (type TEXT_BOX (17)): 다항식의 덧셈과 뺄셈
+  Shape 2 (type TEXT_BOX (17)): 개념핵심
+
+========================================
+SLIDE 28
+========================================
+  Shape 1 (type TEXT_BOX (17)): 끼리만 계산!
+  Shape 2 (type TEXT_BOX (17)): 동류항
+  Shape 3 (type TEXT_BOX (17)): 동류항
+  Shape 5 (type TEXT_BOX (17)): 덧셈과 뺄셈은
+  Shape 8 (type TEXT_BOX (17)): 같은
+  Shape 9 (type TEXT_BOX (17)): 종류의
+  Shape 10 (type TEXT_BOX (17)): 항
+  Shape 11 (type TEXT_BOX (17)): 같은 종류의 항이 되려면 문자의 종류와 차수가 같아야 해~
+  Shape 13 (type TEXT_BOX (17)): a
+  Shape 14 (type TEXT_BOX (17)): 2b
+  Shape 15 (type TEXT_BOX (17)): y
+  Shape 16 (type TEXT_BOX (17)): 문자가 달라서
+  Shape 17 (type TEXT_BOX (17)): 동류항 아님
+  Shape 18 (type TEXT_BOX (17)): 동류항 아님
+  Shape 25 (type TEXT_BOX (17)): 문자와 차수가 같아서
+  Shape 26 (type TEXT_BOX (17)): 동류항 맞음
+  Shape 27 (type TEXT_BOX (17)): 동류항 맞음
+  Shape 28 (type TEXT_BOX (17)): 문자는 같지만 차수가 달라서
+  Shape 29 (type TEXT_BOX (17)): 동류항 아님
+  Shape 30 (type TEXT_BOX (17)): 동류항 아님
+  Shape 31 (type TEXT_BOX (17)): a+2b
+  Shape 32 (type TEXT_BOX (17)): a-2b
+    Group sub-shape (type TEXT_BOX (17)): 5x
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 4x
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): y
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 4x`+5x`
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 4x`-5x`
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): y-y
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): y+y
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 45 (type TEXT_BOX (17)): =
+  Shape 46 (type TEXT_BOX (17)): =
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 9x
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): -x
+
+========================================
+SLIDE 29
+========================================
+  Shape 2 (type TEXT_BOX (17)): 1학년 때는
+일차식의 덧셈과 뺄셈에
+대해 다루었는데, 
+이제는 이차식의 
+덧셈과 뺄셈에 대해서 
+다룰 거야.
+  Shape 3 (type AUTO_SHAPE (1)): 일차식
+  Shape 4 (type TEXT_BOX (17)): 한 문자에 대해 차수가 1인 다항식
+  Shape 5 (type AUTO_SHAPE (1)): 이차식
+  Shape 6 (type TEXT_BOX (17)): 한 문자에 대해 차수가 2인 다항식
+  Shape 7 (type AUTO_SHAPE (1)): 예
+  Shape 8 (type TEXT_BOX (17)): x+1,
+  Shape 9 (type TEXT_BOX (17)): -5a,
+  Shape 10 (type AUTO_SHAPE (1)): 예
+  Shape 11 (type TEXT_BOX (17)): 분모에 문자가 있으면
+다항식이 아니야~
+    Group sub-shape (type TEXT_BOX (17)): a`+1,
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 2x`+1,
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 1
+x
+    Group sub-shape (type TEXT_BOX (17)): 1
+x
+    Group sub-shape (type TEXT_BOX (17)): 2
+
+========================================
+SLIDE 30
+========================================
+  Shape 1 (type TEXT_BOX (17)): 다음 다항식에서 동류항을 찾아 선으로 이으시오.
+  Shape 2 (type TEXT_BOX (17)): 42쪽
+  Shape 3 (type TEXT_BOX (17)): (1)
+  Shape 4 (type TEXT_BOX (17)): 5x+y+3+4x-2y
+    Group sub-shape (type TEXT_BOX (17)): (2)
+    Group sub-shape (type TEXT_BOX (17)): -x-3-y+6y+7
+    Group sub-shape (type TEXT_BOX (17)): (3)
+    Group sub-shape (type TEXT_BOX (17)): x2+2x+3+5x2-7x
+    Group sub-shape (type TEXT_BOX (17)): (4)
+    Group sub-shape (type TEXT_BOX (17)): 3a2-13-2a+7a2+1
+    Group sub-shape (type TEXT_BOX (17)): (5)
+    Group sub-shape (type TEXT_BOX (17)): 5a+b-2a+12+  a
+
+========================================
+SLIDE 31
+========================================
+  Shape 8 (type TEXT_BOX (17)): 다항식의
+덧셈
+  Shape 9 (type TEXT_BOX (17)): 항이 많아도
+동류항끼리
+계산하기
+    Group sub-shape (type TEXT_BOX (17)): a`+2a-5
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): (
+    Group sub-shape (type TEXT_BOX (17)): )
+    Group sub-shape (type TEXT_BOX (17)): 4a`-a+2
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): (
+    Group sub-shape (type TEXT_BOX (17)): )
+  Shape 15 (type TEXT_BOX (17)): 괄호
+풀기
+  Shape 16 (type TEXT_BOX (17)): 동류항끼리
+모으기
+  Shape 17 (type TEXT_BOX (17)): +
+    Group sub-shape (type TEXT_BOX (17)): a`+2a-5
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 21 (type TEXT_BOX (17)): =
+    Group sub-shape (type TEXT_BOX (17)): +4a`-a+2
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 23 (type TEXT_BOX (17)): =
+    Group sub-shape (type TEXT_BOX (17)): 5a`+a-3
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 25 (type TEXT_BOX (17)): =
+  Shape 26 (type TEXT_BOX (17)): +2a-a
+  Shape 27 (type TEXT_BOX (17)): -5+2
+    Group sub-shape (type TEXT_BOX (17)): a`+4a
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 2
+
+========================================
+SLIDE 32
+========================================
+    Group sub-shape (type TEXT_BOX (17)): `a +2a`-5
+    Group sub-shape (type TEXT_BOX (17)): 2
+    Group sub-shape (type TEXT_BOX (17)): 4a -a `+2
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 7 (type TEXT_BOX (17)): +
+    Group sub-shape (type TEXT_BOX (17)): 5a
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 9 (type TEXT_BOX (17)): -3
+  Shape 10 (type TEXT_BOX (17)): +a
+  Shape 12 (type TEXT_BOX (17)): 세로셈도
+가능해~
+
+========================================
+SLIDE 33
+========================================
+  Shape 8 (type TEXT_BOX (17)): 다항식의
+뺄셈
+  Shape 9 (type TEXT_BOX (17)): 뺄셈은
+부호를 조심
+해야 해!
+    Group sub-shape (type TEXT_BOX (17)): 2a-3b+7
+    Group sub-shape (type TEXT_BOX (17)): (
+    Group sub-shape (type TEXT_BOX (17)): )
+    Group sub-shape (type TEXT_BOX (17)): 3a-b
+    Group sub-shape (type TEXT_BOX (17)): (
+    Group sub-shape (type TEXT_BOX (17)): )
+  Shape 15 (type TEXT_BOX (17)): -
+  Shape 18 (type TEXT_BOX (17)): =
+  Shape 19 (type TEXT_BOX (17)): -a-2b+7
+  Shape 20 (type TEXT_BOX (17)): =
+  Shape 21 (type TEXT_BOX (17)): -3a
+  Shape 22 (type TEXT_BOX (17)): +b
+  Shape 23 (type TEXT_BOX (17)): 2a-3b+7
+  Shape 25 (type AUTO_SHAPE (1)): 예
+    Group sub-shape (type TEXT_BOX (17)): 괄호 앞에 부호     가 있으면
+    이 곱해진 것으로 생각하고
+분배법칙으로 괄호 풀기
+  Shape 27 (type TEXT_BOX (17)): -(3a-b)
+  Shape 28 (type TEXT_BOX (17)): =-1\(3a-b)
+  Shape 29 (type TEXT_BOX (17)): =-3a+b
+    Group sub-shape (type TEXT_BOX (17)): =
+    Group sub-shape (type TEXT_BOX (17)): \
+
+========================================
+SLIDE 34
+========================================
+  Shape 1 (type TEXT_BOX (17)): `2a`-3b+7
+  Shape 2 (type TEXT_BOX (17)): 3a`-b
+  Shape 5 (type TEXT_BOX (17)): -
+  Shape 9 (type TEXT_BOX (17)): +
+  Shape 10 (type TEXT_BOX (17)): -a
+  Shape 11 (type TEXT_BOX (17)): +7
+  Shape 12 (type TEXT_BOX (17)): -2b
+  Shape 13 (type TEXT_BOX (17)): `2a-3b+7
+  Shape 14 (type TEXT_BOX (17)): -3a+ b
+  Shape 18 (type TEXT_BOX (17)): 세로셈도
+가능해~
+
+========================================
+SLIDE 35
+========================================
+  Shape 1 (type TEXT_BOX (17)): 다항식의 뺄셈 과정이다.      안에 알맞은 부호를 쓰고 계산하시오.
+  Shape 2 (type TEXT_BOX (17)): 43쪽
+  Shape 3 (type TEXT_BOX (17)): (1)
+  Shape 4 (type TEXT_BOX (17)): (a+3b-10)-(5a-b)
+=a+3b-10   `5a   `b
+=
+    Group sub-shape (type TEXT_BOX (17)): (2)
+    Group sub-shape (type TEXT_BOX (17)): (-4x2+2x-1)-(-x2+3)
+=-4x2+2x-1   `x2    3
+=
+
+========================================
+SLIDE 36
+========================================
+  Shape 1 (type TEXT_BOX (17)): 다음을 계산하시오.
+  Shape 2 (type TEXT_BOX (17)): 43쪽
+    Group sub-shape (type TEXT_BOX (17)): (3)
+    Group sub-shape (type TEXT_BOX (17)): 9a+ b-8
+ a+4b-2
+    Group sub-shape (type TEXT_BOX (17)): +
+    Group sub-shape (type TEXT_BOX (17)): (4)
+    Group sub-shape (type TEXT_BOX (17)): 5a-  b+6
+3a+10b+2
+    Group sub-shape (type TEXT_BOX (17)): -
+
+========================================
+SLIDE 37
+========================================
+    Group sub-shape (type TEXT_BOX (17)): 분수 모양의 식 계산 (1)
+  Shape 2 (type TEXT_BOX (17)): 개념핵심
+
+========================================
+SLIDE 38
+========================================
+  Shape 2 (type TEXT_BOX (17)): 1
+  Shape 5 (type TEXT_BOX (17)): 2
+  Shape 6 (type TEXT_BOX (17)): +
+  Shape 7 (type TEXT_BOX (17)): 분모가 같은
+분수의 덧셈은?
+  Shape 9 (type TEXT_BOX (17)): =
+  Shape 12 (type TEXT_BOX (17)): 3
+  Shape 13 (type TEXT_BOX (17)): 분모는 그대로
+분자만 계산!
+
+========================================
+SLIDE 39
+========================================
+  Shape 0 (type TEXT_BOX (17)): 분모가
+다르면?
+  Shape 2 (type TEXT_BOX (17)): ?
+  Shape 3 (type TEXT_BOX (17)): ?
+
+========================================
+SLIDE 40
+========================================
+  Shape 0 (type TEXT_BOX (17)): 분
+  Shape 1 (type TEXT_BOX (17)): 모가
+  Shape 2 (type TEXT_BOX (17)): 통
+  Shape 3 (type TEXT_BOX (17)): 하게
+  Shape 6 (type TEXT_BOX (17)): 분
+  Shape 7 (type TEXT_BOX (17)): 통
+  Shape 8 (type TEXT_BOX (17)): 해야지~
+  Shape 10 (type TEXT_BOX (17)): 분수 모양의 식도
+분모가 같아야 덧셈, 뺄셈을 할 수 있어!
+
+========================================
+SLIDE 41
+========================================
+  Shape 4 (type TEXT_BOX (17)): x-y
+  Shape 5 (type TEXT_BOX (17)): 3x-y
+  Shape 6 (type TEXT_BOX (17)): 3
+  Shape 7 (type TEXT_BOX (17)): 2
+  Shape 8 (type TEXT_BOX (17)): -
+  Shape 11 (type TEXT_BOX (17)): (x-y)
+  Shape 12 (type TEXT_BOX (17)): (3x-y)
+  Shape 13 (type TEXT_BOX (17)): 3
+  Shape 14 (type TEXT_BOX (17)): 2
+  Shape 15 (type TEXT_BOX (17)): -
+  Shape 18 (type TEXT_BOX (17)): \2
+  Shape 19 (type TEXT_BOX (17)): \2
+  Shape 20 (type TEXT_BOX (17)): \3
+  Shape 21 (type TEXT_BOX (17)): \3
+  Shape 22 (type TEXT_BOX (17)): 분모의
+최소공배수인
+6으로 통분
+  Shape 25 (type TEXT_BOX (17)): -
+  Shape 26 (type TEXT_BOX (17)): -
+  Shape 27 (type TEXT_BOX (17)): 2
+  Shape 28 (type TEXT_BOX (17)): (x-y)
+  Shape 30 (type TEXT_BOX (17)): 6
+  Shape 31 (type TEXT_BOX (17)): 3
+  Shape 32 (type TEXT_BOX (17)): (3x-y)
+  Shape 33 (type TEXT_BOX (17)): 6
+  Shape 36 (type TEXT_BOX (17)): 분수를
+하나로 합쳐서 쓰기
+  Shape 37 (type TEXT_BOX (17)): 2
+  Shape 38 (type TEXT_BOX (17)): (x-y)
+  Shape 39 (type TEXT_BOX (17)): 3
+  Shape 40 (type TEXT_BOX (17)): (3x-y)
+  Shape 41 (type TEXT_BOX (17)): 6
+  Shape 43 (type TEXT_BOX (17)): =
+  Shape 44 (type TEXT_BOX (17)): =
+  Shape 45 (type TEXT_BOX (17)): =
+  Shape 46 (type TEXT_BOX (17)): =
+  Shape 47 (type TEXT_BOX (17)): 6
+  Shape 48 (type TEXT_BOX (17)): -7x+y
+  Shape 50 (type TEXT_BOX (17)): =
+  Shape 51 (type TEXT_BOX (17)): 6
+  Shape 52 (type TEXT_BOX (17)): 7
+  Shape 54 (type TEXT_BOX (17)): 6
+  Shape 55 (type TEXT_BOX (17)): 1
+  Shape 57 (type TEXT_BOX (17)): x
+  Shape 58 (type TEXT_BOX (17)): y
+  Shape 59 (type TEXT_BOX (17)): -
+  Shape 60 (type TEXT_BOX (17)): )
+  Shape 61 (type TEXT_BOX (17)): (
+  Shape 62 (type TEXT_BOX (17)): A
+  Shape 63 (type TEXT_BOX (17)): C
+  Shape 64 (type TEXT_BOX (17)): B
+  Shape 65 (type TEXT_BOX (17)): B
+  Shape 66 (type TEXT_BOX (17)): A
+  Shape 67 (type TEXT_BOX (17)): C
+  Shape 68 (type TEXT_BOX (17)): B
+  Shape 69 (type TEXT_BOX (17)): B
+  Shape 70 (type TEXT_BOX (17)): =
+  Shape 71 (type TEXT_BOX (17)): =
+  Shape 72 (type TEXT_BOX (17)): +
+  Shape 73 (type TEXT_BOX (17)): -
+  Shape 74 (type TEXT_BOX (17)): +
+  Shape 75 (type TEXT_BOX (17)): -
+  Shape 76 (type TEXT_BOX (17)): A
+  Shape 77 (type TEXT_BOX (17)): C
+  Shape 78 (type TEXT_BOX (17)): B
+  Shape 79 (type TEXT_BOX (17)): A
+  Shape 80 (type TEXT_BOX (17)): C
+  Shape 81 (type TEXT_BOX (17)): B
+  Shape 89 (type AUTO_SHAPE (1)): 원리
+  Shape 90 (type TEXT_BOX (17)): +
+
+========================================
+SLIDE 42
+========================================
+  Shape 1 (type TEXT_BOX (17)): 다음 식의 분모를 [ ] 안의 수가 되도록 바꾸어 나타내시오.
+  Shape 2 (type TEXT_BOX (17)): 46쪽
+    Group sub-shape (type TEXT_BOX (17)): (1)
+    Group sub-shape (type TEXT_BOX (17)): [6]
+    Group sub-shape (type TEXT_BOX (17)): (2)
+    Group sub-shape (type TEXT_BOX (17)): [10]
+    Group sub-shape (type TEXT_BOX (17)): (3)
+    Group sub-shape (type TEXT_BOX (17)): [14]
+    Group sub-shape (type TEXT_BOX (17)): (4)
+    Group sub-shape (type TEXT_BOX (17)): 3x-5
+    Group sub-shape (type TEXT_BOX (17)): [3]
+
+========================================
+SLIDE 43
+========================================
+    Group sub-shape (type TEXT_BOX (17)): (단항식) × (다항식)
+  Shape 2 (type TEXT_BOX (17)): 개념핵심
+
+========================================
+SLIDE 44
+========================================
+  Shape 0 (type TEXT_BOX (17)): 분배법칙
+    Group sub-shape (type TEXT_BOX (17)): 단항식
+  Shape 2 (type TEXT_BOX (17)): 전개하여 얻은
+다항식
+    Group sub-shape (type TEXT_BOX (17)): 다항식
+  Shape 4 (type TEXT_BOX (17)): 과
+  Shape 5 (type TEXT_BOX (17)): 의 곱은
+  Shape 6 (type TEXT_BOX (17)): 으로!
+  Shape 7 (type TEXT_BOX (17)): 분배법칙으로 
+괄호를 푸는 것
+  Shape 8 (type TEXT_BOX (17)): 2a
+  Shape 9 (type TEXT_BOX (17)): (4a+b)
+  Shape 12 (type TEXT_BOX (17)): 2a\4a
+  Shape 13 (type TEXT_BOX (17)): 2a\b
+    Group sub-shape (type TEXT_BOX (17)): 전개
+  Shape 15 (type TEXT_BOX (17)): 전개식
+  Shape 16 (type TEXT_BOX (17)): +
+  Shape 17 (type TEXT_BOX (17)): =
+    Group sub-shape (type TEXT_BOX (17)): 8a
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 21 (type TEXT_BOX (17)): 2ab
+
+========================================
+SLIDE 45
+========================================
+    Group sub-shape (type TEXT_BOX (17)): (다항식)×(단항식)도 똑같이
+분배법칙을 이용하여 전개!
+  Shape 1 (type TEXT_BOX (17)): (4a+b)
+  Shape 2 (type TEXT_BOX (17)): 2a
+  Shape 3 (type TEXT_BOX (17)): \
+  Shape 4 (type TEXT_BOX (17)): =
+    Group sub-shape (type TEXT_BOX (17)): 8a
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 6 (type TEXT_BOX (17)): 2ab
+  Shape 7 (type TEXT_BOX (17)): +
+  Shape 8 (type TEXT_BOX (17)): (4a+b)
+  Shape 9 (type TEXT_BOX (17)): (-2a)
+  Shape 10 (type TEXT_BOX (17)): \
+  Shape 11 (type TEXT_BOX (17)): =
+    Group sub-shape (type TEXT_BOX (17)): -8a
+    Group sub-shape (type TEXT_BOX (17)): 2
+  Shape 13 (type TEXT_BOX (17)): 2ab
+  Shape 14 (type TEXT_BOX (17)): -
+
+========================================
+SLIDE 46
+========================================
+  Shape 1 (type TEXT_BOX (17)): 분배법칙으로 전개하고, 전개식을 구하시오.
+  Shape 2 (type TEXT_BOX (17)): 50쪽
+  Shape 3 (type TEXT_BOX (17)): (1)
+  Shape 4 (type TEXT_BOX (17)): 4x ( 6x + 3y )=
+  Shape 7 (type TEXT_BOX (17)): 4x\
+  Shape 10 (type TEXT_BOX (17)): 4x\
+    Group sub-shape (type TEXT_BOX (17)): (2)
+    Group sub-shape (type TEXT_BOX (17)): -a ( ab + 2b )=
+    Group sub-shape (type TEXT_BOX (17)): (-a)\
+    Group sub-shape (type TEXT_BOX (17)): (-a)\
+
+========================================
+SLIDE 47
+========================================
+  Shape 1 (type TEXT_BOX (17)): 분배법칙으로 전개하고, 전개식을 구하시오.
+  Shape 2 (type TEXT_BOX (17)): 50쪽
+  Shape 3 (type TEXT_BOX (17)): (3)
+  Shape 4 (type TEXT_BOX (17)): ( 7x - 3 ) \ 2x=
+  Shape 7 (type TEXT_BOX (17)): -3\
+  Shape 10 (type TEXT_BOX (17)): 7x\
+
+========================================
+SLIDE 48
+========================================
+    Group sub-shape (type TEXT_BOX (17)): (다항식) ÷ (단항식)
+  Shape 2 (type TEXT_BOX (17)): 개념핵심
+
+========================================
+SLIDE 49
+========================================
+  Shape 5 (type TEXT_BOX (17)): 2x
+  Shape 6 (type TEXT_BOX (17)): (8xy+6x)
+  Shape 7 (type TEXT_BOX (17)): ÷
+  Shape 8 (type TEXT_BOX (17)): 분수 꼴로
+바꾸거나
+  Shape 9 (type TEXT_BOX (17)): 곱셈으로
+바꾸거나
+  Shape 18 (type TEXT_BOX (17)): (8xy+6x)
+  Shape 19 (type TEXT_BOX (17)): 8xy+6x
+  Shape 20 (type TEXT_BOX (17)): 2x
+  Shape 21 (type TEXT_BOX (17)): 1
+  Shape 22 (type TEXT_BOX (17)): \
+  Shape 23 (type TEXT_BOX (17)): =
+  Shape 24 (type TEXT_BOX (17)): =
+  Shape 25 (type TEXT_BOX (17)): =
+  Shape 26 (type TEXT_BOX (17)): =
+  Shape 27 (type TEXT_BOX (17)): =e
+  Shape 28 (type TEXT_BOX (17)): 8xy
+  Shape 29 (type TEXT_BOX (17)): 6x
+  Shape 31 (type TEXT_BOX (17)): 2x
+  Shape 32 (type TEXT_BOX (17)): 1
+  Shape 33 (type TEXT_BOX (17)): \
+  Shape 35 (type TEXT_BOX (17)): 2x
+  Shape 36 (type TEXT_BOX (17)): 1
+  Shape 37 (type TEXT_BOX (17)): \
+  Shape 39 (type TEXT_BOX (17)): +
+  Shape 41 (type TEXT_BOX (17)): 2x
+  Shape 42 (type TEXT_BOX (17)): 4y+3
+  Shape 43 (type TEXT_BOX (17)): 4y+3
+  Shape 44 (type TEXT_BOX (17)): 8xy
+  Shape 45 (type TEXT_BOX (17)): +
+  Shape 46 (type TEXT_BOX (17)): 2x
+  Shape 49 (type TEXT_BOX (17)): 6x
+  Shape 50 (type TEXT_BOX (17)): 2x
+  Shape 51 (type TEXT_BOX (17)): 4
+  Shape 52 (type TEXT_BOX (17)): 3
+  Shape 53 (type TEXT_BOX (17)): 4
+  Shape 54 (type TEXT_BOX (17)): 3
+  Shape 75 (type TEXT_BOX (17)): =
+
+========================================
+SLIDE 50
+========================================
+  Shape 11 (type TEXT_BOX (17)): (8xy+6x)
+  Shape 12 (type TEXT_BOX (17)): 8xy+6x
+  Shape 13 (type TEXT_BOX (17)): 2x
+  Shape 14 (type TEXT_BOX (17)): 1
+  Shape 15 (type TEXT_BOX (17)): \
+  Shape 16 (type TEXT_BOX (17)): =
+  Shape 17 (type TEXT_BOX (17)): =
+  Shape 18 (type TEXT_BOX (17)): =
+  Shape 19 (type TEXT_BOX (17)): =
+  Shape 20 (type TEXT_BOX (17)): =e
+  Shape 21 (type TEXT_BOX (17)): 8xy
+  Shape 22 (type TEXT_BOX (17)): 6x
+  Shape 24 (type TEXT_BOX (17)): 2x
+  Shape 25 (type TEXT_BOX (17)): 1
+  Shape 26 (type TEXT_BOX (17)): \
+  Shape 28 (type TEXT_BOX (17)): 2x
+  Shape 29 (type TEXT_BOX (17)): 1
+  Shape 30 (type TEXT_BOX (17)): \
+  Shape 32 (type TEXT_BOX (17)): +
+  Shape 34 (type TEXT_BOX (17)): 2x
+  Shape 35 (type TEXT_BOX (17)): 4y+3
+  Shape 36 (type TEXT_BOX (17)): 4y+3
+  Shape 37 (type TEXT_BOX (17)): 8xy
+  Shape 38 (type TEXT_BOX (17)): +
+  Shape 39 (type TEXT_BOX (17)): 2x
+  Shape 42 (type TEXT_BOX (17)): 6x
+  Shape 43 (type TEXT_BOX (17)): 2x
+  Shape 44 (type TEXT_BOX (17)): 4
+  Shape 45 (type TEXT_BOX (17)): 3
+  Shape 46 (type TEXT_BOX (17)): 4
+  Shape 47 (type TEXT_BOX (17)): 3
+  Shape 68 (type TEXT_BOX (17)): =
+  Shape 69 (type TEXT_BOX (17)): x
+  Shape 70 (type TEXT_BOX (17)): 2
+  Shape 71 (type TEXT_BOX (17)): 2
+  Shape 73 (type TEXT_BOX (17)): (
+  Shape 74 (type TEXT_BOX (17)): )
+  Shape 75 (type TEXT_BOX (17)): +
+  Shape 76 (type TEXT_BOX (17)): 3x
+  Shape 77 (type TEXT_BOX (17)): 5
+    Group sub-shape (type TEXT_BOX (17)): ÷
+    Group sub-shape (type TEXT_BOX (17)): 3x
+  Shape 80 (type TEXT_BOX (17)): x
+  Shape 81 (type TEXT_BOX (17)): 2
+  Shape 82 (type TEXT_BOX (17)): 2
+  Shape 84 (type TEXT_BOX (17)): (
+  Shape 85 (type TEXT_BOX (17)): )
+  Shape 86 (type TEXT_BOX (17)): +
+  Shape 87 (type TEXT_BOX (17)): 3x
+  Shape 88 (type TEXT_BOX (17)): 5
+    Group sub-shape (type TEXT_BOX (17)): \
+    Group sub-shape (type TEXT_BOX (17)): 3x
+    Group sub-shape (type TEXT_BOX (17)): 1
+  Shape 91 (type TEXT_BOX (17)): =
+  Shape 94 (type TEXT_BOX (17)): 어떤 방법으로 계산해도
+결과는 같지만
+(분수 꼴)÷(단항식)은
+곱셈으로 바꿔서 계산!
+
+Finished extraction.

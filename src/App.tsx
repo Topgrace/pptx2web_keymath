@@ -4,14 +4,14 @@ import { lazy, Suspense } from 'react'
 import HomePage from '@/pages/HomePage';
 import SemesterPage from '@/pages/SemesterPage';
 
-const Unit5Page = lazy(() => import('@/pages/Unit5Page'))
-const Unit6Page = lazy(() => import('@/pages/Unit6Page'))
-const Unit7Page = lazy(() => import('@/pages/Unit7Page'))
-const Unit8Page = lazy(() => import('@/pages/Unit8Page'))
-const Unit9Page = lazy(() => import('@/pages/Unit9Page'))
-const Unit10Page = lazy(() => import('@/pages/Unit10Page'))
-const Unit11Page = lazy(() => import('@/pages/Unit11Page'))
-const Unit1Ch1IntroPage = lazy(() => import('@/pages/Unit1Ch1IntroPage'))
+const Page_2_1_u5 = lazy(() => import('@/pages/2-1-u5'))
+const Page_2_1_u6 = lazy(() => import('@/pages/2-1-u6'))
+const Page_2_1_u7 = lazy(() => import('@/pages/2-1-u7'))
+const Page_2_1_u8 = lazy(() => import('@/pages/2-1-u8'))
+const Page_2_1_u9 = lazy(() => import('@/pages/2-1-u9'))
+const Page_2_1_u10 = lazy(() => import('@/pages/2-1-u10'))
+const Page_2_1_u11 = lazy(() => import('@/pages/2-1-u11'))
+const Page_1_1_ch1_intro = lazy(() => import('@/pages/1-1-ch1-intro'))
 
 
 function Loading() {
@@ -33,14 +33,14 @@ export default function App() {
         <Route path="/semester/:id" element={<SemesterPage />} />
 
         {/* Interactive Unit Routes */}
-        <Route path="/unit5" element={<Unit5Page />} />
-        <Route path="/unit6" element={<Unit6Page />} />
-        <Route path="/unit7" element={<Unit7Page />} />
-        <Route path="/unit8" element={<Unit8Page />} />
-        <Route path="/unit9" element={<Unit9Page />} />
-        <Route path="/unit10" element={<Unit10Page />} />
-        <Route path="/unit11" element={<Unit11Page />} />
-        <Route path="/ch1-intro" element={<Unit1Ch1IntroPage />} />
+        <Route path="/unit5" element={<Page_2_1_u5 />} />
+        <Route path="/unit6" element={<Page_2_1_u6 />} />
+        <Route path="/unit7" element={<Page_2_1_u7 />} />
+        <Route path="/unit8" element={<Page_2_1_u8 />} />
+        <Route path="/unit9" element={<Page_2_1_u9 />} />
+        <Route path="/unit10" element={<Page_2_1_u10 />} />
+        <Route path="/unit11" element={<Page_2_1_u11 />} />
+        <Route path="/ch1-intro" element={<Page_1_1_ch1_intro />} />
 
         {/* Catch-all redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />
