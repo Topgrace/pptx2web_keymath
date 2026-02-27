@@ -6,6 +6,7 @@ import { PracticeCard } from '@/components/cards/practice-card'
 import { SummaryCard } from '@/components/cards/summary-card'
 import { CompleteCard } from '@/components/cards/complete-card'
 import { PrimeCompositeNeoCard } from '@/components/cards/prime-composite-neo-card'
+import { EratosthenesSieveCard } from '@/components/cards/eratosthenes-sieve-card'
 import { CompositeConfusionTable } from '@/components/content/composite-confusion-table'
 import { PrimeEtymologyMotion } from '@/components/content/prime-etymology-motion'
 import { CompositeEtymologyMotion } from '@/components/content/composite-etymology-motion'
@@ -227,6 +228,10 @@ export const meta = {
 </Step>
 
 <Step id={11}>
+  <EratosthenesSieveCard stepId={11} />
+</Step>
+
+<Step id={12}>
   <CompleteCard emoji="🎯" title="소수와 합성수 학습 완료!">
     소수, 합성수, 예외(1)까지 정리했어요.
     <br />
