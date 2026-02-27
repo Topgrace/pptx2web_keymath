@@ -133,7 +133,10 @@ const rawSteps: Step[] = [
     id: 11, type: 'practice', cardVariant: 'white',
   },
   {
-    id: 12, type: 'complete', cardVariant: 'default',
+    id: 12, type: 'concept', cardVariant: 'white',
+  },
+  {
+    id: 13, type: 'complete', cardVariant: 'default',
   },
 ]
 

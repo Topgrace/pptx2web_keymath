@@ -3,7 +3,7 @@ import type { SlideConfig } from '@/schemas/slide'
 export const slideConfig: SlideConfig = {
   slug: '1-1-u1-prime-composite',
   title: '1단원 - 소수와 합성수',
-  totalSteps: 13,
+  totalSteps: 14,
   themeColors: {
     background: '#B9DDF2',
     cardDefault: '#F8F8F8',
