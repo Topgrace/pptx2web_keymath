@@ -32,7 +32,7 @@ export const semesters: SemesterData[] = [
         units: [
           { id: '1-1-ch1-intro', title: '대단원 인트로', status: 'unlocked', path: '/ch1-intro' },
           { id: '1-1-u1', title: '1. 소수와 합성수', status: 'unlocked', path: '/1-1-u1' },
-          { id: '1-1-u2', title: '2. 거듭제곱', status: 'locked' },
+          { id: '1-1-u2', title: '2. 거듭제곱', status: 'unlocked', path: '/1-1-u2' },
           { id: '1-1-u3', title: '3. 소인수분해', status: 'locked' },
           { id: '1-1-u4', title: '4. 제곱인 수 만들기', status: 'locked' },
           { id: '1-1-u5', title: '5. 약수와 약수의 개수 구하기', status: 'locked' },

@@ -1,0 +1,276 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { ConceptCard } from '@/components/cards/concept-card'
+import { NoteCard } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { SummaryCard } from '@/components/cards/summary-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { StepCard } from '@/components/cards/step-card'
+import { ExponentAnatomyMotion } from '@/components/content/exponent-anatomy-motion'
+import { QuizArea } from '@/components/quiz'
+import { MathDisplay, MathInline } from '@/components/math'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: '1-1-u2-exponent',
+  title: '거듭제곱',
+  subtitle: '중1 수학 · 소인수분해',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="같은 수나 문자를 여러 번 곱할 때, 더 간단한 표현으로 바꿔볼 거야!"
+    topicTitle="거듭제곱"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>같은 수를 여러 번 곱한 것을 {blank} 이라고 한다.</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <ConceptCard
+    variant="white"
+    formula={"2+2+2 = 2 \\times 3"}
+    formulaSize="katex-formula"
+    description="반복된 덧셈은 곱셈으로 간단히 쓸 수 있어요."
+  >
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"2+2+2+2 = 2 \\times"} /> {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+<Step id={2}>
+  <ConceptCard
+    variant="white"
+    formula={"2 \\times 2 \\times 2 = 2^3"}
+    formulaSize="katex-formula"
+    description="반복된 곱셈은 거듭제곱으로 나타낼 수 있어요."
+  >
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>
+            <MathInline tex={"2 \\times 2 \\times 2 \\times 2 = 2"} />
+            {blank}
+          </>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+<Step id={3}>
+  <StepCard>
+    <ExponentAnatomyMotion stepId={3} />
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"a^n"} />의 의미는 <MathInline tex={"a"} />를 {blank} 것이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={4}>
+  <ConceptCard
+    variant="white"
+    formula={"3^4 = 3 \\times 3 \\times 3 \\times 3"}
+    formulaSize="katex-formula"
+    description="Step 3의 의미를 실제 식에 적용해 볼까요?"
+  >
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mt-1">
+      <MathInline tex={"x^3 = x \\times x \\times x"} />
+      <br />
+      <MathInline tex={"10^2 = 10 \\times 10"} />
+    </div>
+  </ConceptCard>
+</Step>
+
+<Step id={5}>
+  <NoteCard title="읽기 규칙">
+    <div className="text-[15px] font-bold text-slide-gray leading-[1.9]">
+      <MathInline tex={"2^2"} /> : 2의 제곱
+      <br />
+      <MathInline tex={"2^3"} /> : 2의 세제곱
+      <br />
+      <MathInline tex={"2^4"} /> : 2의 네제곱
+    </div>
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"2^3"} />의 읽기는 {blank}</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={6}>
+  <ConceptCard
+    variant="white"
+    formula={"5 \\times 3 \\times 5 \\times 3 \\times 5 \\times 5 = 3^2 \\times 5^4"}
+    formulaSize="katex-formula"
+    description="같은 밑끼리 모아 거듭제곱으로 쓰고, 밑이 작은 것부터 씁니다."
+  >
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>올바르게 나타낸 식은 {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+<Step id={7}>
+  <PracticeCard title="연습 1" subtitle="거듭제곱 꼴로 나타내기">
+    <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"4 \\times 2 \\times 4 \\times 2 \\times 4"} />
+    </div>
+    <div className="text-center text-sm font-bold text-slide-muted mb-2.5">
+      같은 밑을 모아서 써 보세요.
+    </div>
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>정답: {blank}</>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={8}>
+  <NoteCard title="규칙 ② 지수 1은 생략">
+    <div className="text-[15px] font-bold text-slide-gray leading-[1.9]">
+      <MathInline tex={"2^1 = 2"} />
+      <br />
+      <MathInline tex={"a^1 = a"} />
+    </div>
+    {steps[8].quiz && (
+      <QuizArea
+        stepId={8}
+        quiz={steps[8].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"x^1"} /> = {blank}</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={9}>
+  <NoteCard variant="white" title="규칙 ③ 1의 거듭제곱">
+    <div className="text-[15px] font-bold text-slide-gray leading-[1.9]">
+      <MathInline tex={"1^2 = 1,\\;1^3 = 1,\\;1^4 = 1,\\;\\cdots"} />
+    </div>
+    {steps[9].quiz && (
+      <QuizArea
+        stepId={9}
+        quiz={steps[9].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"1^{100}"} /> = {blank}</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={10}>
+  <ConceptCard
+    variant="white"
+    formula={"\\left(\\frac{2}{3}\\right)^2 = \\frac{4}{9}"}
+    formulaSize="katex-formula"
+    description="밑이 분수일 때는 괄호를 사용해 밑 전체를 묶어 나타냅니다."
+  >
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mb-2">
+      <MathInline tex={"\\frac{2^2}{3} = \\frac{4}{3},\\quad \\frac{2}{3^2} = \\frac{2}{9}"} />
+    </div>
+    {steps[10].quiz && (
+      <QuizArea
+        stepId={10}
+        quiz={steps[10].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"\\left(\\frac{2}{3}\\right)^2"} /> = {blank}</>
+        )}
+      />
+    )}
+  </ConceptCard>
+</Step>
+
+<Step id={11}>
+  <PracticeCard title="연습 2" subtitle="분수 밑을 거듭제곱으로">
+    <div className="text-center text-base font-extrabold text-slide-gray mb-2">
+      <MathInline tex={"\\left(\\frac{a}{b}\\right) \\times \\left(\\frac{a}{b}\\right) \\times \\left(\\frac{a}{b}\\right)"} />
+    </div>
+    {steps[11].quiz && (
+      <QuizArea
+        stepId={11}
+        quiz={steps[11].quiz}
+        renderBlank={(blank) => (
+          <>거듭제곱 꼴: {blank}</>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={12}>
+  <SummaryCard
+    title="핵심 정리"
+    cases={[
+      { tag: '①', tagVariant: 'big', content: <>같은 수/문자를 여러 번 곱한 것을 거듭제곱으로 쓴다.</> },
+      { tag: '②', tagVariant: 'small', content: <>같은 밑은 지수로 모으고, 밑이 작은 것부터 쓴다.</> },
+      { tag: '③', tagVariant: 'equal', content: <>지수가 1이면 지수는 생략한다.</> },
+      { tag: '④', tagVariant: 'big', content: <>분수 밑은 괄호로 묶어 나타낸다.</> },
+    ]}
+  >
+    {steps[12].quiz && (
+      <QuizArea
+        stepId={12}
+        quiz={steps[12].quiz}
+        renderBlank={(blank) => (
+          <>지수가 1이면 지수는 {blank}</>
+        )}
+      />
+    )}
+  </SummaryCard>
+</Step>
+
+<Step id={13}>
+  <CompleteCard emoji="🎯" title="거듭제곱 학습 완료!">
+    거듭제곱의 뜻, 밑과 지수, 읽는 법과
+    <br />
+    네 가지 표현 규칙까지 모두 정리했어요.
+  </CompleteCard>
+</Step>
+
+</SlideContent>
