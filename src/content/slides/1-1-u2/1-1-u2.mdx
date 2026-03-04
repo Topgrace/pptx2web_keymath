@@ -105,24 +105,34 @@ export const meta = {
     <div className="text-base font-extrabold text-slide-brown mb-2.5">
       읽기 규칙
     </div>
-    <div className="text-[15px] font-bold text-slide-gray leading-[1.9]">
-      <MathInline tex={"2^2"} /> : 2의 제곱
-      <br />
-      <MathInline tex={"2"} />
-      <sup className="align-super">
-        <span className="bg-[#ffe65c] px-1 rounded-[4px]">3</span>
-      </sup>
-      {" : 2의 "}
-      <span className="bg-[#ffe65c] px-1 rounded-[4px]">세</span>
-      제곱
-      <br />
-      <MathInline tex={"2"} />
-      <sup className="align-super">
-        <span className="bg-[#ffe65c] px-1 rounded-[4px]">4</span>
-      </sup>
-      {" : 2의 "}
-      <span className="bg-[#ffe65c] px-1 rounded-[4px]">네</span>
-      제곱
+    <div className="text-[15px] font-bold text-slide-gray">
+      <div className="space-y-1.5">
+        <div className="leading-none whitespace-nowrap">
+          <MathInline tex={"2^2"} /> : 2의 제곱
+        </div>
+        <div className="leading-none whitespace-nowrap">
+          <span className="inline-flex items-baseline">
+            <MathInline tex={"2"} />
+            <sup className="align-super">
+              <span className="bg-[#ffe65c] px-1 rounded-[4px]">3</span>
+            </sup>
+            <span>{" : 2의\u00A0"}</span>
+            <span className="bg-[#ffe65c] px-1 rounded-[4px]">세</span>
+            <span>제곱</span>
+          </span>
+        </div>
+        <div className="leading-none whitespace-nowrap">
+          <span className="inline-flex items-baseline">
+            <MathInline tex={"2"} />
+            <sup className="align-super">
+              <span className="bg-[#ffe65c] px-1 rounded-[4px]">4</span>
+            </sup>
+            <span>{" : 2의\u00A0"}</span>
+            <span className="bg-[#ffe65c] px-1 rounded-[4px]">네</span>
+            <span>제곱</span>
+          </span>
+        </div>
+      </div>
     </div>
     {steps[5].quiz && (
       <QuizArea
