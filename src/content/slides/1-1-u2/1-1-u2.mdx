@@ -8,6 +8,7 @@ import { CompleteCard } from '@/components/cards/complete-card'
 import { StepCard } from '@/components/cards/step-card'
 import { ExponentAnatomyMotion } from '@/components/content/exponent-anatomy-motion'
 import { ExponentFillPracticeQuiz } from '@/components/content/exponent-fill-practice-quiz'
+import { ExponentGroupingOrderMotion } from '@/components/content/exponent-grouping-order-motion'
 import { QuizArea } from '@/components/quiz'
 import { MathDisplay, MathInline } from '@/components/math'
 import { steps } from './steps-data'
@@ -147,22 +148,25 @@ export const meta = {
 </Step>
 
 <Step id={6}>
-  <ConceptCard
-    variant="white"
-    formula={"5 \\times 3 \\times 5 \\times 3 \\times 5 \\times 5 = 3^2 \\times 5^4"}
-    formulaSize="katex-formula"
-    description="같은 밑끼리 모아 거듭제곱으로 쓰고, 밑이 작은 것부터 씁니다."
-  >
+  <StepCard variant="white">
+    <ExponentGroupingOrderMotion />
+    <div className="mt-3 text-center text-sm font-bold text-slide-muted">
+      {'<, > 버튼으로 앞뒤 단계를 재생해 보세요.'}
+    </div>
     {steps[6].quiz && (
       <QuizArea
         stepId={6}
         quiz={steps[6].quiz}
         renderBlank={(blank) => (
-          <>올바르게 나타낸 식은 {blank}</>
+          <>
+            <MathInline tex={"7 \\times 2 \\times 7 \\times 2 ="} />
+            {' '}
+            {blank}
+          </>
         )}
       />
     )}
-  </ConceptCard>
+  </StepCard>
 </Step>
 
 <Step id={7}>

@@ -74,27 +74,26 @@ const rawSteps: Step[] = [
   {
     id: 6, type: 'concept', cardVariant: 'white',
     quiz: {
-      answer: '3^2횞5^4',
-      answerLatex: '3^2 \\times 5^4',
+      answer: '2^2*7^2',
+      answerLatex: '2^2 \\times 7^2',
       blankType: 'normal',
       choices: [
-        { label: '$5^2 \\times 3^4$', value: '5^2횞3^4', latex: '5^2 \\times 3^4' },
-        { label: '$3^2 \\times 5^4$', value: '3^2횞5^4', latex: '3^2 \\times 5^4' },
-        { label: '$3^4 \\times 5^2$', value: '3^4횞5^2', latex: '3^4 \\times 5^2' },
-        { label: '$5^4 \\times 3^2$', value: '5^4횞3^2', latex: '5^4 \\times 3^2' },
+        { label: '$2^2 \\times 7^2$', value: '2^2*7^2', latex: '2^2 \\times 7^2' },        
+        { label: '$2^7 \\times 7^2$', value: '2^7*7^2', latex: '2^7 \\times 7^2' },
+        { label: '$2^2 \\times 7^4$', value: '2^2*7^4', latex: '2^2 \\times 7^4' },
       ],
     },
   },
   {
     id: 7, type: 'practice', cardVariant: 'white',
     quiz: {
-      answer: '2^2횞4^3',
+      answer: '2^2*4^3',
       answerLatex: '2^2 \\times 4^3',
       blankType: 'normal',
       choices: [
-        { label: '$2^2 \\times 4^3$', value: '2^2횞4^3', latex: '2^2 \\times 4^3' },
-        { label: '$2^3 \\times 4^2$', value: '2^3횞4^2', latex: '2^3 \\times 4^2' },
-        { label: '$8^2 \\times 2^3$', value: '8^2횞2^3', latex: '8^2 \\times 2^3' },
+        { label: '$2^2 \\times 4^3$', value: '2^2*4^3', latex: '2^2 \\times 4^3' },
+        { label: '$2^3 \\times 4^2$', value: '2^3*4^2', latex: '2^3 \\times 4^2' },
+        { label: '$8^2 \\times 2^3$', value: '8^2*2^3', latex: '8^2 \\times 2^3' },
         { label: '$2^5$', value: '2^5', latex: '2^5' },
       ],
     },
