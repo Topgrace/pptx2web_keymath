@@ -174,5 +174,8 @@ const rawSteps: Step[] = [
 export const steps: Step[] = rawSteps.map((s) => StepSchema.parse(s))
 
 export const quizStepIds: Set<number> = new Set(
-  steps.filter((s) => s.quiz).map((s) => s.id),
+  [
+    ...steps.filter((s) => s.quiz).map((s) => s.id),
+    4,
+  ],
 )

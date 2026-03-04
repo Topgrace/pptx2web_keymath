@@ -7,6 +7,7 @@ import { SummaryCard } from '@/components/cards/summary-card'
 import { CompleteCard } from '@/components/cards/complete-card'
 import { StepCard } from '@/components/cards/step-card'
 import { ExponentAnatomyMotion } from '@/components/content/exponent-anatomy-motion'
+import { ExponentFillPracticeQuiz } from '@/components/content/exponent-fill-practice-quiz'
 import { QuizArea } from '@/components/quiz'
 import { MathDisplay, MathInline } from '@/components/math'
 import { steps } from './steps-data'
@@ -94,28 +95,34 @@ export const meta = {
 </Step>
 
 <Step id={4}>
-  <ConceptCard
-    variant="white"
-    formula={"3^4 = 3 \\times 3 \\times 3 \\times 3"}
-    formulaSize="katex-formula"
-    description="Step 3의 의미를 실제 식에 적용해 볼까요?"
-  >
-    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mt-1">
-      <MathInline tex={"x^3 = x \\times x \\times x"} />
-      <br />
-      <MathInline tex={"10^2 = 10 \\times 10"} />
-    </div>
-  </ConceptCard>
+  <StepCard variant="white">
+    <ExponentFillPracticeQuiz stepId={4} />
+  </StepCard>
 </Step>
 
 <Step id={5}>
-  <NoteCard title="읽기 규칙">
+  <StepCard>
+    <div className="text-base font-extrabold text-slide-brown mb-2.5">
+      읽기 규칙
+    </div>
     <div className="text-[15px] font-bold text-slide-gray leading-[1.9]">
       <MathInline tex={"2^2"} /> : 2의 제곱
       <br />
-      <MathInline tex={"2^3"} /> : 2의 세제곱
+      <MathInline tex={"2"} />
+      <sup className="align-super">
+        <span className="bg-[#ffe65c] px-1 rounded-[4px]">3</span>
+      </sup>
+      {" : 2의 "}
+      <span className="bg-[#ffe65c] px-1 rounded-[4px]">세</span>
+      제곱
       <br />
-      <MathInline tex={"2^4"} /> : 2의 네제곱
+      <MathInline tex={"2"} />
+      <sup className="align-super">
+        <span className="bg-[#ffe65c] px-1 rounded-[4px]">4</span>
+      </sup>
+      {" : 2의 "}
+      <span className="bg-[#ffe65c] px-1 rounded-[4px]">네</span>
+      제곱
     </div>
     {steps[5].quiz && (
       <QuizArea
@@ -126,7 +133,7 @@ export const meta = {
         )}
       />
     )}
-  </NoteCard>
+  </StepCard>
 </Step>
 
 <Step id={6}>
