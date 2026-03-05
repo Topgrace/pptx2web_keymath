@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChoicePanel, QuizFeedback } from '@/components/quiz'
 import { useSlideProgress } from '@/hooks/use-slide-progress'
@@ -82,12 +82,14 @@ function NumberSlot({
   solved,
   locked,
   underline,
+  highlight,
   onClick,
 }: {
   value: string | null
   solved: boolean
   locked: boolean
   underline: boolean
+  highlight?: boolean
   onClick: () => void
 }) {
   return (
@@ -98,7 +100,13 @@ function NumberSlot({
       )}
     >
       {solved && value ? (
-        <span className="text-[36px] font-black leading-none text-[#2a2a2a]">{value}</span>
+        highlight ? (
+          <div className="h-[40px] min-w-[28px] px-1 rounded-sm bg-[#f7c5d7] text-center text-[32px] font-black leading-[40px] text-[#2a2a2a]">
+            {value}
+          </div>
+        ) : (
+          <span className="text-[36px] font-black leading-none text-[#2a2a2a]">{value}</span>
+        )
       ) : locked ? (
         <span className="text-[22px] font-black leading-none text-[#9ea6b3]">...</span>
       ) : (
@@ -115,9 +123,22 @@ function NumberSlot({
   )
 }
 
-export function PrimeDivisionReviewFillQuiz({ stepId = 1 }: { stepId?: number }) {
-  const { markSolved, advanceStep, currentStep, totalSteps, isSolved } = useSlideProgress()
+export function PrimeDivisionReviewFillQuiz({
+  stepId = 1,
+  onComplete,
+}: {
+  stepId?: number
+  onComplete?: () => void
+}) {
+  const { isSolved } = useSlideProgress()
   const globallySolved = isSolved(stepId)
+
+  useEffect(() => {
+    if (globallySolved) {
+      const t = setTimeout(() => onComplete?.(), 300)
+      return () => clearTimeout(t)
+    }
+  }, [globallySolved]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const [solvedAnswers, setSolvedAnswers] = useState<Partial<Record<ReviewItemId, string>>>({})
   const [activeItemId, setActiveItemId] = useState<ReviewItemId | null>(null)
@@ -164,16 +185,8 @@ export function PrimeDivisionReviewFillQuiz({ stepId = 1 }: { stepId?: number })
 
       const nextSolvedCount = Object.keys(nextSolvedAnswers).length
       if (nextSolvedCount === REVIEW_ITEMS.length) {
-        setFeedback('정답! 36의 소인수분해 나누기 과정을 완성했어요.')
-        setFeedbackType('success')
         setActiveItemId(null)
-        markSolved(stepId)
-
-        setTimeout(() => {
-          if (currentStep === stepId && currentStep < totalSteps - 1) {
-            advanceStep()
-          }
-        }, 1200)
+        setTimeout(() => onComplete?.(), 400)
       } else {
         const nextItem = REVIEW_ITEMS[nextSolvedCount]
         setActiveItemId(nextItem.id)
@@ -234,6 +247,7 @@ export function PrimeDivisionReviewFillQuiz({ stepId = 1 }: { stepId?: number })
             solved={isItemSolved('to3')}
             locked={isItemLocked(2, 'to3')}
             underline={REVIEW_ITEMS[2].underline}
+            highlight
             onClick={() => handleOpenItem(REVIEW_ITEMS[2], 2)}
           />
         </div>
