@@ -7,14 +7,14 @@ import { useSlideProgress } from '@/hooks/use-slide-progress'
 import type { Quiz } from '@/schemas/step'
 
 const FINAL_QUIZ: Quiz = {
-  answer: '2^3 \\times 3',
-  answerLatex: '2^3 \\times 3',
+  answer: '2^2 \\times 3^2',
+  answerLatex: '2^2 \\times 3^2',
   blankType: 'normal',
   choices: [
-    { label: '2³ × 3',  value: '2^3 \\times 3',   latex: '2^3 \\times 3'   },
-    { label: '2² × 3',  value: '2^2 \\times 3',   latex: '2^2 \\times 3'   },
-    { label: '2 × 3²',  value: '2 \\times 3^2',   latex: '2 \\times 3^2'   },
     { label: '2² × 3²', value: '2^2 \\times 3^2', latex: '2^2 \\times 3^2' },
+    { label: '2³ × 3',  value: '2^3 \\times 3',   latex: '2^3 \\times 3'   },
+    { label: '2 × 3²',  value: '2 \\times 3^2',   latex: '2 \\times 3^2'   },
+    { label: '2² × 3',  value: '2^2 \\times 3',   latex: '2^2 \\times 3'   },
   ],
 }
 
@@ -68,7 +68,7 @@ export function FactorTreeStep3Activity({
           <QuizArea
             stepId={stepId}
             quiz={FINAL_QUIZ}
-            renderBlank={(blank) => <>24를 소인수분해하면 {blank}</>}
+            renderBlank={(blank) => <>36을 소인수분해하면 {blank}</>}
           />
         </motion.div>
       ) : null}

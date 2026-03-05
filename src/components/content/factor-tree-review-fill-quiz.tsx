@@ -20,7 +20,7 @@ const REVIEW_ITEMS: ReviewItem[] = [
       { label: '3', value: '3' },
       { label: '4', value: '4' },
       { label: '6', value: '6' },
-      { label: '8', value: '8' },
+      { label: '9', value: '9' },
     ],
   },
   {
@@ -229,7 +229,7 @@ export function FactorTreeReviewFillQuiz({
   return (
     <div className="mt-4">
       <div className="mb-2 text-center text-[14px] font-bold text-[#445063]">
-        24를 두 수의 곱으로 가르며 빈칸을 순서대로 채워 보자.
+        36을 두 수의 곱으로 가르며 빈칸을 순서대로 채워 보자.
       </div>
 
       <div className="mx-auto rounded-lg bg-[#f1f1f1] px-3 py-3">
@@ -261,17 +261,17 @@ export function FactorTreeReviewFillQuiz({
             </motion.g>
           ) : null}
 
-          {/* Root: 24 */}
+          {/* Root: 36 */}
           <text x="10" y="186" className="fill-[#2a2a2a] text-[52px] font-black">
-            24
+            36
           </text>
 
-          {/* Node: 6 (always shown) */}
+          {/* Node: 9 (always shown) */}
           <text x="124" y="111" className="fill-[#2a2a2a] text-[52px] font-black">
-            6
+            9
           </text>
 
-          {/* Fixed prime: 2 at top-left leaf of 6 (always shown) */}
+          {/* Fixed prime: 3 at top-left leaf of 9 (always shown) */}
           <circle cx={300} cy={45} r={31} fill="#f8d3df" stroke="#ffffff" strokeWidth={4} />
           <text
             x={300}
@@ -279,7 +279,7 @@ export function FactorTreeReviewFillQuiz({
             textAnchor="middle"
             className="fill-[#2a2a2a] text-[40px] font-black"
           >
-            2
+            3
           </text>
 
           {/* Fixed prime: 2 at bottom-right leaf of 4 (shown after child4 solved) */}
