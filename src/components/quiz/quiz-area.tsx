@@ -43,6 +43,7 @@ export function QuizArea({
       solvedAnswer={solvedAnswer}
       blankType={quiz.blankType}
       isLatex={!!quiz.answerLatex}
+      solvedLatexFontSize={quiz.answerLatexFontSize}
     />
   )
 

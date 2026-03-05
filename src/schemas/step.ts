@@ -11,6 +11,7 @@ export const ChoiceSchema = z.object({
 export const QuizSchema = z.object({
   answer: z.string(),
   answerLatex: z.string().optional(),
+  answerLatexFontSize: z.string().optional(),
   blankType: BlankTypeSchema.default('normal'),
   choices: z.array(ChoiceSchema),
   questionLabel: z.string().optional(),

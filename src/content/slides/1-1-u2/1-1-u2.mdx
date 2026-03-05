@@ -171,7 +171,7 @@ export const meta = {
 <Step id={7}>
   <PracticeCard title="연습 1" subtitle="거듭제곱 꼴로 나타내기">
     <div className="text-center text-lg font-extrabold text-slide-gray mb-2">
-      <MathInline tex={"4 \\times 2 \\times 4 \\times 2 \\times 4"} />
+      <MathInline tex={"7 \\times 3 \\times 7 \\times 3 \\times 7"} />
     </div>
     <div className="text-center text-sm font-bold text-slide-muted mb-2.5">
       거듭제곱 꼴로 나타내면?
@@ -233,7 +233,7 @@ export const meta = {
 <Step id={10}>
   <ConceptCard
     variant="white"
-    formula={"\\left(\\frac{2}{3}\\right)^2 = \\frac{4}{9}"}
+    formula={"\\left(\\frac{2}{3}\\right)^2 = \\frac{2}{3} \\times \\frac{2}{3} = \\frac{4}{9}"}
     formulaSize="katex-formula"
     description="밑이 분수일 때는 괄호를 사용해 밑 전체를 묶어 나타냅니다."
   >
@@ -245,7 +245,7 @@ export const meta = {
         stepId={10}
         quiz={steps[10].quiz}
         renderBlank={(blank) => (
-          <><MathInline  katexFontSize="1.8em" tex={"\\left(\\frac{2}{3}\\right)^2"} /> = {blank}</>
+          <><MathInline  katexFontSize="1.8em" tex={"\\left(\\frac{3}{5}\\right)^2"} /> = {blank}</>
         )}
       />
     )}
@@ -255,7 +255,7 @@ export const meta = {
 <Step id={11}>
   <PracticeCard title="연습 2" subtitle="분수 밑을 거듭제곱으로">
     <div className="text-center text-base font-extrabold text-slide-gray mb-2">
-      <MathInline tex={"\\left(\\frac{a}{b}\\right) \\times \\left(\\frac{a}{b}\\right) \\times \\left(\\frac{a}{b}\\right)"} />
+      <MathInline katexFontSize="1.8em" tex={"\\left(\\frac{a}{b}\\right) \\times \\left(\\frac{a}{b}\\right) \\times \\left(\\frac{a}{b}\\right)"} />
     </div>
     {steps[11].quiz && (
       <QuizArea
@@ -284,7 +284,14 @@ export const meta = {
         stepId={12}
         quiz={steps[12].quiz}
         renderBlank={(blank) => (
-          <>지수가 1이면 지수는 {blank}</>
+          <>
+            <MathInline
+              katexFontSize="1.6em"
+              tex={"2 \\times 2 \\times \\left(\\frac{3}{5}\\right) \\times \\left(\\frac{3}{5}\\right) \\newline="}
+            />
+            {' '}
+            {blank}
+          </>
         )}
       />
     )}

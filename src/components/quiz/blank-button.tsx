@@ -11,6 +11,7 @@ export function BlankButton({
   solvedAnswer,
   blankType = 'normal',
   isLatex = false,
+  solvedLatexFontSize,
 }: {
   onClick: () => void
   solved: boolean
@@ -18,6 +19,7 @@ export function BlankButton({
   blankType?: BlankType
   /** true일 때만 KaTeX 렌더링, false면 일반 텍스트(주변 폰트 유지) */
   isLatex?: boolean
+  solvedLatexFontSize?: string
 }) {
   const ref = useRef<HTMLButtonElement>(null)
 
@@ -26,6 +28,14 @@ export function BlankButton({
       if (isLatex) {
         try {
           katex.render(solvedAnswer, ref.current, { throwOnError: false })
+          const katexEl = ref.current.querySelector('.katex') as HTMLElement | null
+          if (katexEl) {
+            if (solvedLatexFontSize) {
+              katexEl.style.setProperty('font-size', solvedLatexFontSize, 'important')
+            } else {
+              katexEl.style.removeProperty('font-size')
+            }
+          }
         } catch {
           ref.current.textContent = solvedAnswer
         }
@@ -33,7 +43,7 @@ export function BlankButton({
         ref.current.textContent = solvedAnswer
       }
     }
-  }, [solved, solvedAnswer, isLatex])
+  }, [solved, solvedAnswer, isLatex, solvedLatexFontSize])
 
   const isExp = blankType === 'exponent'
 

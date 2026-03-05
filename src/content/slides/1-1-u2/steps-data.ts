@@ -87,14 +87,13 @@ const rawSteps: Step[] = [
   {
     id: 7, type: 'practice', cardVariant: 'white',
     quiz: {
-      answer: '2^2*4^3',
-      answerLatex: '2^2 \\times 4^3',
+      answer: '3^2*7^3',
+      answerLatex: '3^2 \\times 7^3',
       blankType: 'normal',
       choices: [
-        { label: '$2^2 \\times 4^3$', value: '2^2*4^3', latex: '2^2 \\times 4^3' },
-        { label: '$2^3 \\times 4^2$', value: '2^3*4^2', latex: '2^3 \\times 4^2' },
-        { label: '$8^2 \\times 2^3$', value: '8^2*2^3', latex: '8^2 \\times 2^3' },
-        { label: '$2^5$', value: '2^5', latex: '2^5' },
+        { label: '$3^2 \\times 7^3$', value: '3^2*7^3', latex: '3^2 \\times 7^3' },
+        { label: '$3^3 \\times 7^2$', value: '3^3*7^2', latex: '3^3 \\times 7^2' },
+        { label: '$3^7 \\times 2^3$', value: '3^7*2^3', latex: '3^7 \\times 2^3' },
       ],
     },
   },
@@ -128,14 +127,14 @@ const rawSteps: Step[] = [
   {
     id: 10, type: 'concept', cardVariant: 'white',
     quiz: {
-      answer: '4/9',
-      answerLatex: '\\frac{4}{9}',
+      answer: '9/25',
+      answerLatex: '\\frac{9}{25}',
+      answerLatexFontSize: '1.8em',
       blankType: 'normal',
       choices: [
-        { label: '$\\frac{2}{9}$', value: '2/9', latex: '\\frac{2}{9}' },
-        { label: '$\\frac{4}{9}$', value: '4/9', latex: '\\frac{4}{9}' },
-        { label: '$\\frac{4}{3}$', value: '4/3', latex: '\\frac{4}{3}' },
-        { label: '$\\frac{2}{3}$', value: '2/3', latex: '\\frac{2}{3}' },
+        { label: '$\\frac{3}{5}$', value: '3/5', latex: '\\frac{3}{5}' },
+        { label: '$\\frac{9}{25}$', value: '9/25', latex: '\\frac{9}{25}' },
+        { label: '$\\frac{9}{5}$', value: '9/5', latex: '\\frac{9}{5}' },
       ],
     },
   },
@@ -144,6 +143,7 @@ const rawSteps: Step[] = [
     quiz: {
       answer: '(a/b)^3',
       answerLatex: '\\left(\\frac{a}{b}\\right)^3',
+      answerLatexFontSize: '1.8em',
       blankType: 'normal',
       choices: [
         { label: '$\\left(\\frac{a}{b}\\right)^2$', value: '(a/b)^2', latex: '\\left(\\frac{a}{b}\\right)^2' },
@@ -156,13 +156,15 @@ const rawSteps: Step[] = [
   {
     id: 12, type: 'summary', cardVariant: 'white',
     quiz: {
-      answer: '생략한다',
+      answer: '2^2*(3/5)^2',
+      answerLatex: '2^2 \\times \\left(\\frac{3}{5}\\right)^2',
+      answerLatexFontSize: '1.6em',
       blankType: 'normal',
       choices: [
-        { label: '계속 쓴다', value: '계속 쓴다' },
-        { label: '생략한다', value: '생략한다' },
-        { label: '0으로 바꾼다', value: '0으로 바꾼다' },
-        { label: '2로 바꾼다', value: '2로 바꾼다' },
+        { label: '$2^2 \\times \\left(\\frac{3}{5}\\right)^2$', value: '2^2*(3/5)^2', latex: '2^2 \\times \\left(\\frac{3}{5}\\right)^2' },
+        { label: '$2^2 \\times \\frac{3}{5^2}$', value: '2^2*3/5^2', latex: '2^2 \\times \\frac{3}{5^2}' },
+        { label: '$2^3 \\times \\left(\\frac{3}{5}\\right)^2$', value: '2^3*(3/5)^2', latex: '2^3 \\times \\left(\\frac{3}{5}\\right)^2' },
+        { label: '$2^2 \\times \\left(\\frac{3}{5}\\right)^3$', value: '2^2*(3/5)^3', latex: '2^2 \\times \\left(\\frac{3}{5}\\right)^3' },
       ],
     },
   },
