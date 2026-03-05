@@ -73,114 +73,77 @@ export const meta = {
 </Step>
 
 <Step id={4}>
-  <NoteCard title="방법 1 결과 정리">
-    <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
-      <MathInline katexFontSize="1.8em" tex={"24 = 2 \\times 2 \\times 2 \\times 3 = 2^3 \\times 3"} />
+  <StepCard variant="white">
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mb-3">
+      소인수분해한 결과는 반드시<br /><span className="font-extrabold text-[#2d67a8]">소수들만의 곱</span>으로 써야 한다.
     </div>
+
+    <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-2 py-2">
+      <div className="flex items-start gap-1">
+        <span className="shrink-0 rounded bg-[#2d67a8] px-1.5 py-0.5 text-[11px] font-bold text-white">예</span>
+        <div className="text-[13px] font-bold text-slide-gray leading-[2]">
+          <MathInline tex={"60 = 2 \\times 2 \\times 3 \\times 5 = 2^2 \\times 15"} />
+          <span className="ml-1 font-extrabold text-red-500">(✕)</span>
+          <br />
+          <span className="ml-5"><MathInline tex={"="} /></span> <MathInline tex={"2^2 \\times 3 \\times 5"} />
+          <span className="ml-1 font-extrabold text-blue-600">(○)</span>
+        </div>
+      </div>
+    </div>
+
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mb-3">
+      소인수분해한 결과에서 밑이 <span className="rounded bg-yellow-200 px-1 font-extrabold text-[#2d67a8]">소인수</span> 이다.
+    </div>
+
+    <div className="mx-auto rounded-lg bg-[#f5f5f5] px-2 py-2 mb-2">
+      <div className="flex items-start gap-1">
+        <span className="shrink-0 rounded bg-[#2d67a8] px-1.5 py-0.5 text-[11px] font-bold text-white">예</span>
+        <div className="text-[15px] font-bold text-slide-gray leading-[2]">
+          <MathInline tex={"60 = {\\color{red}2}^2 \\times {\\color{red}3} \\times {\\color{red}5}"} /> 이므로 60의 소인수는 <span className="font-extrabold text-red-500">2, 3, 5</span>이다.
+        </div>
+      </div>
+    </div>
+
     {steps[4].quiz && (
       <QuizArea
         stepId={4}
         quiz={steps[4].quiz}
         renderBlank={(blank) => (
-          <><MathInline tex={"24 = 2^3 \\times"} /> {blank}</>
-        )}
-      />
-    )}
-  </NoteCard>
-</Step>
-
-<Step id={5}>
-  <StepCard variant="white">
-    <PrimeFactorTreeMotion />
-    {steps[5].quiz && (
-      <QuizArea
-        stepId={5}
-        quiz={steps[5].quiz}
-        renderBlank={(blank) => (
-          <>인수 트리 가지 끝의 소수는 모두 {blank}개이다.</>
+          <>60의 소인수의 개수는 {blank}개이다.</>
         )}
       />
     )}
   </StepCard>
 </Step>
 
-<Step id={6}>
-  <NoteCard title="방법 2 결과 정리">
-    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mb-1">
-      방법 2도 가지 끝의 소수를 곱하면
-    </div>
-    <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
-      <MathInline katexFontSize="1.8em" tex={"24 = 2 \\times 3 \\times 2 \\times 2 = 2^3 \\times 3"} />
-    </div>
-    {steps[6].quiz && (
-      <QuizArea
-        stepId={6}
-        quiz={steps[6].quiz}
-        renderBlank={(blank) => (
-          <>방법 1과 방법 2의 소인수분해 결과는 {blank}.</>
-        )}
-      />
-    )}
-  </NoteCard>
-</Step>
-
-<Step id={7}>
+<Step id={5}>
   <SummaryCard
-    title="핵심 정리"
+    title="소인수분해 핵심 정리"
     cases={[
-      { tag: '공통', tagVariant: 'equal', content: <>자연수를 소수들의 곱으로 나타낸다.</> },
+      { tag: '목표', tagVariant: 'equal', content: <>자연수를 소수들의 곱으로 나타낸다.</> },
       { tag: '방법 1', tagVariant: 'big', content: <>작은 소수부터 차례로 나눈다.</> },
       { tag: '방법 2', tagVariant: 'small', content: <>두 수의 곱으로 계속 가른다.</> },
     ]}
   >
-    {steps[7].quiz && (
+    {steps[5].quiz && (
       <QuizArea
-        stepId={7}
-        quiz={steps[7].quiz}
+        stepId={5}
+        quiz={steps[5].quiz}
         renderBlank={(blank) => (
-          <>소인수분해는 {blank} 진행한다.</>
+          <>소인수분해는 {blank}으로 <br />나타나야 한다.</>
         )}
       />
     )}
   </SummaryCard>
 </Step>
 
-<Step id={8}>
-  <NoteCard title="Coming soon · 추가 설명">
-    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.8]">
-      뒤 원고를 받으면 이 구간에
-      <br />
-      소인수분해 추가 설명이 이어집니다.
-    </div>
-  </NoteCard>
-</Step>
-
-<Step id={9}>
-  <PracticeCard title="Coming soon · 연습" subtitle="연습 문제 섹션 예정">
-    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.8]">
-      뒤 원고 수령 후 연습 문제를
-      <br />
-      실제 퀴즈 형태로 교체합니다.
-    </div>
-  </PracticeCard>
-</Step>
-
-<Step id={10}>
-  <SummaryCard
-    title="Coming soon · 마무리 정리"
-    cases={[
-      { tag: '예정 1', tagVariant: 'big', content: <>추가 개념 정리</> },
-      { tag: '예정 2', tagVariant: 'small', content: <>추가 확인 문제</> },
-      { tag: '예정 3', tagVariant: 'equal', content: <>최종 요약 업데이트</> },
-    ]}
-  />
-</Step>
-
-<Step id={11}>
-  <CompleteCard emoji="✅" title="소인수분해(1차 공개분) 완료!">
-    시작 원고 기반 핵심 내용을 먼저 공개했어요.
+<Step id={6}>
+  <CompleteCard emoji="🎉" title="소인수분해 완료!">
+    소수로 나누기와 두 수의 곱으로 가르기,
     <br />
-    다음 원고가 도착하면 이어서 확장됩니다.
+    두 가지 방법으로 소인수분해를 익혔어요.
+    <br />
+    결과는 반드시 소수들만의 곱! 잊지 마세요.
   </CompleteCard>
 </Step>
 
