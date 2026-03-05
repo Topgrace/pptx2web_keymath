@@ -39,16 +39,20 @@ export function CharacterStagger({
       initial="hidden"
       animate={enabled ? 'visible' : 'hidden'}
     >
-      {[...text].map((char, i) => (
-        <motion.span
-          key={i}
-          className="inline-block"
-          variants={charVariants}
-          style={{ whiteSpace: char === ' ' ? 'pre' : undefined }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
+      {[...text].map((char, i) =>
+        char === '\n' ? (
+          <br key={i} />
+        ) : (
+          <motion.span
+            key={i}
+            className="inline-block"
+            variants={charVariants}
+            style={{ whiteSpace: char === ' ' ? 'pre' : undefined }}
+          >
+            {char === ' ' ? '\u00A0' : char}
+          </motion.span>
+        )
+      )}
     </motion.span>
   )
 }

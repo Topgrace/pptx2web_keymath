@@ -34,19 +34,6 @@ export function EvenExponentMotion({
         ▶ 제곱인 수는~
       </motion.div>
 
-      {/* Example: 36 = 2² × 3² */}
-      <motion.div
-        className="flex items-center justify-center gap-1 text-[18px] font-extrabold text-slide-gray mb-4"
-        initial={{ opacity: 0, y: 8 }}
-        animate={enabled ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-        transition={{ duration: 0.4, delay: 0.2, ease: EASE }}
-      >
-        <MathInline katexFontSize="1.6em" tex={'36 = 2'} />
-        <ExponentHighlight enabled={enabled} delay={0.55} value="2" />
-        <MathInline katexFontSize="1.6em" tex={'\\times \\, 3'} />
-        <ExponentHighlight enabled={enabled} delay={0.7} value="2" />
-      </motion.div>
-
       {/* Key insight */}
       <motion.div
         className="text-center mb-4"
@@ -77,15 +64,30 @@ export function EvenExponentMotion({
         </span>
       </motion.div>
 
-      {/* Annotation arrows to exponents */}
+      {/* Example: 36 = 2² × 3² */}
       <motion.div
-        className="flex items-center justify-center gap-6 text-[12px] font-bold text-slide-green"
-        initial={{ opacity: 0 }}
-        animate={enabled ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.3, delay: 1.1 }}
+        className="flex items-center justify-center gap-1 text-[18px] font-extrabold text-slide-gray mb-3"
+        initial={{ opacity: 0, y: 8 }}
+        animate={enabled ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+        transition={{ duration: 0.4, delay: 0.2, ease: EASE }}
       >
-        <span>↑ 짝수</span>
-        <span>↑ 짝수</span>
+        <MathInline katexFontSize="1.6em" tex={'36 = 2'} />
+        <ExponentHighlight enabled={enabled} delay={0.55} value="2" />
+        <MathInline katexFontSize="1.6em" tex={'\\times \\, 3'} />
+        <ExponentHighlight enabled={enabled} delay={0.7} value="2" />
+      </motion.div>
+
+      {/* Example: 144 = 12² = 2⁴ × 3² */}
+      <motion.div
+        className="flex items-center justify-center gap-1 text-[18px] font-extrabold text-slide-gray mb-2"
+        initial={{ opacity: 0, y: 8 }}
+        animate={enabled ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+        transition={{ duration: 0.4, delay: 0.85, ease: EASE }}
+      >
+        <MathInline katexFontSize="1.6em" tex={'144 = 2'} />
+        <ExponentHighlight enabled={enabled} delay={1.2} value="4" />
+        <MathInline katexFontSize="1.6em" tex={'\\times \\, 3'} />
+        <ExponentHighlight enabled={enabled} delay={1.35} value="2" />
       </motion.div>
     </motion.div>
   )
