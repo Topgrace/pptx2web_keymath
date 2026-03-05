@@ -1,0 +1,209 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { StepCard } from '@/components/cards/step-card'
+import { NoteCard } from '@/components/cards/note-card'
+import { SummaryCard } from '@/components/cards/summary-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { PrimeDivisionLadderMotion } from '@/components/content/prime-division-ladder-motion'
+import { PrimeFactorTreeMotion } from '@/components/content/prime-factor-tree-motion'
+import { PrimeFactorizationTermMotion } from '@/components/content/prime-factorization-term-motion'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: '1-1-u3-prime-factorization',
+  title: '소인수분해',
+  subtitle: '중1 수학 · 소인수분해',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="자연수를 소수들의 곱으로 바꾸는 핵심 기술, 소인수분해를 시작해 보자!"
+    topicTitle="03. 소인수분해"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>자연수를 소수의 곱으로 나타내는 것을 {blank}라고 한다.</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <PrimeFactorizationTermMotion>
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <>소인수분해는 자연수를 {blank}의 곱으로 나타낸다.</>
+        )}
+      />
+    )}
+  </PrimeFactorizationTermMotion>
+</Step>
+
+<Step id={2}>
+  <StepCard variant="white">
+    <div className="mb-3 text-center text-base font-extrabold text-slide-brown">
+      소인수분해하는 방법
+    </div>
+    <div className="rounded-xl border-2 border-[#f0dc45] bg-[#fffdf2] p-3 mb-3">
+      <div className="mb-2 flex items-center gap-2">
+        <span className="rounded-md bg-[#2d67a8] px-2 py-1 text-xs font-extrabold text-white">방법 1</span>
+        <span className="text-sm font-bold text-slide-gray">소수로 나누기</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="rounded-md bg-[#2d67a8] px-2 py-1 text-xs font-extrabold text-white">방법 2</span>
+        <span className="text-sm font-bold text-slide-gray">두 수의 곱으로 가르기</span>
+      </div>
+    </div>
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>24를 소인수분해하는 대표 방법은 {blank} 있다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={3}>
+  <StepCard variant="white">
+    <PrimeDivisionLadderMotion />
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <>24 → 12 → 6 → 3 으로 내려가면 마지막 소수는 {blank}이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={4}>
+  <NoteCard title="방법 1 결과 정리">
+    <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
+      <MathInline katexFontSize="1.8em" tex={"24 = 2 \\times 2 \\times 2 \\times 3 = 2^3 \\times 3"} />
+    </div>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"24 = 2^3 \\times"} /> {blank}</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={5}>
+  <StepCard variant="white">
+    <PrimeFactorTreeMotion />
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <>인수 트리 가지 끝의 소수는 모두 {blank}개이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={6}>
+  <NoteCard title="방법 2 결과 정리">
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mb-1">
+      방법 2도 가지 끝의 소수를 곱하면
+    </div>
+    <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
+      <MathInline katexFontSize="1.8em" tex={"24 = 2 \\times 3 \\times 2 \\times 2 = 2^3 \\times 3"} />
+    </div>
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>방법 1과 방법 2의 소인수분해 결과는 {blank}.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={7}>
+  <SummaryCard
+    title="핵심 정리"
+    cases={[
+      { tag: '공통', tagVariant: 'equal', content: <>자연수를 소수들의 곱으로 나타낸다.</> },
+      { tag: '방법 1', tagVariant: 'big', content: <>작은 소수부터 차례로 나눈다.</> },
+      { tag: '방법 2', tagVariant: 'small', content: <>두 수의 곱으로 계속 가른다.</> },
+    ]}
+  >
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>소인수분해는 {blank} 진행한다.</>
+        )}
+      />
+    )}
+  </SummaryCard>
+</Step>
+
+<Step id={8}>
+  <NoteCard title="Coming soon · 추가 설명">
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.8]">
+      뒤 원고를 받으면 이 구간에
+      <br />
+      소인수분해 추가 설명이 이어집니다.
+    </div>
+  </NoteCard>
+</Step>
+
+<Step id={9}>
+  <PracticeCard title="Coming soon · 연습" subtitle="연습 문제 섹션 예정">
+    <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.8]">
+      뒤 원고 수령 후 연습 문제를
+      <br />
+      실제 퀴즈 형태로 교체합니다.
+    </div>
+  </PracticeCard>
+</Step>
+
+<Step id={10}>
+  <SummaryCard
+    title="Coming soon · 마무리 정리"
+    cases={[
+      { tag: '예정 1', tagVariant: 'big', content: <>추가 개념 정리</> },
+      { tag: '예정 2', tagVariant: 'small', content: <>추가 확인 문제</> },
+      { tag: '예정 3', tagVariant: 'equal', content: <>최종 요약 업데이트</> },
+    ]}
+  />
+</Step>
+
+<Step id={11}>
+  <CompleteCard emoji="✅" title="소인수분해(1차 공개분) 완료!">
+    시작 원고 기반 핵심 내용을 먼저 공개했어요.
+    <br />
+    다음 원고가 도착하면 이어서 확장됩니다.
+  </CompleteCard>
+</Step>
+
+</SlideContent>
