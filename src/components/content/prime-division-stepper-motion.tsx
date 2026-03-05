@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { MathInline } from '@/components/math'
@@ -10,6 +10,7 @@ const MARKER_HEIGHT_BY_PHASE = [0, 56, 100, 144, 144] as const
 
 interface PrimeDivisionStepperMotionProps {
   className?: string
+  onCompleteChange?: (isComplete: boolean) => void
 }
 
 function isRevealed(phase: number, showFrom: number) {
@@ -44,6 +45,7 @@ function RevealItem({
 
 export function PrimeDivisionStepperMotion({
   className,
+  onCompleteChange,
 }: PrimeDivisionStepperMotionProps) {
   const [phase, setPhase] = useState(PHASE_MIN)
 
@@ -57,6 +59,10 @@ export function PrimeDivisionStepperMotion({
 
   const prevDisabled = phase === PHASE_MIN
   const nextDisabled = phase === PHASE_MAX
+
+  useEffect(() => {
+    onCompleteChange?.(phase === PHASE_MAX)
+  }, [phase, onCompleteChange])
 
   return (
     <div className={cn('rounded-xl bg-[#fffef7] p-3', className)}>

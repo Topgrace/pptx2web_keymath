@@ -6,7 +6,7 @@ import { SummaryCard } from '@/components/cards/summary-card'
 import { PracticeCard } from '@/components/cards/practice-card'
 import { CompleteCard } from '@/components/cards/complete-card'
 import { PrimeDivisionLadderMotion } from '@/components/content/prime-division-ladder-motion'
-import { PrimeDivisionStepperMotion } from '@/components/content/prime-division-stepper-motion'
+import { PrimeDivisionStep2Activity } from '@/components/content/prime-division-step2-activity'
 import { PrimeFactorTreeMotion } from '@/components/content/prime-factor-tree-motion'
 import { PrimeFactorizationTermMotion } from '@/components/content/prime-factorization-term-motion'
 import { QuizArea } from '@/components/quiz'
@@ -58,16 +58,7 @@ export const meta = {
     <div className="mb-2 text-center text-base font-extrabold text-slide-gray">
       소인수분해 방법1
     </div>
-    <PrimeDivisionStepperMotion className="mb-3" />
-    {steps[2].quiz && (
-      <QuizArea
-        stepId={2}
-        quiz={steps[2].quiz}
-        renderBlank={(blank) => (
-          <>24를 소인수분해하는 대표 방법은 {blank} 있다.</>
-        )}
-      />
-    )}
+    <PrimeDivisionStep2Activity stepId={2} />
   </StepCard>
 </Step>
 
