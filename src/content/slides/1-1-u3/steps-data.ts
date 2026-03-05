@@ -22,13 +22,13 @@ const rawSteps: Step[] = [
     type: 'definition',
     cardVariant: 'default',
     quiz: {
-      answer: '소수',
+      answer: '2^2 \\times 3',
+      answerLatex: '2^2 \\times 3',
       blankType: 'normal',
       choices: [
-        { label: '소수', value: '소수' },
-        { label: '합성수', value: '합성수' },
-        { label: '자연수', value: '자연수' },
-        { label: '정수', value: '정수' },
+        { label: '2^2 × 3', value: '2^2 \\times 3', latex: '2^2 \\times 3' },
+        { label: '2 × 6', value: '2 \\times 6', latex: '2 \\times 6' },
+        { label: '3 × 4', value: '3 \\times 4', latex: '3 \\times 4' },
       ],
     },
   },
