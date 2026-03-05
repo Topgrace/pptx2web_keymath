@@ -15,6 +15,7 @@ const Page_1_1_ch1_intro = lazy(() => import('@/pages/1-1-ch1-intro'))
 const Page_1_1_u1 = lazy(() => import('@/pages/1-1-u1'))
 const Page_1_1_u2 = lazy(() => import('@/pages/1-1-u2'))
 const Page_1_1_u3 = lazy(() => import('@/pages/1-1-u3'))
+const Page_1_1_u4 = lazy(() => import('@/pages/1-1-u4'))
 
 
 function Loading() {
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/1-1-u1" element={<Page_1_1_u1 />} />
         <Route path="/1-1-u2" element={<Page_1_1_u2 />} />
         <Route path="/1-1-u3" element={<Page_1_1_u3 />} />
+        <Route path="/1-1-u4" element={<Page_1_1_u4 />} />
 
         {/* Catch-all redirect to Dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />

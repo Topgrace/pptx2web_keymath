@@ -1,0 +1,165 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { StepCard } from '@/components/cards/step-card'
+import { NoteCard, NoteExample } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { SummaryCard } from '@/components/cards/summary-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { PerfectSquareGridMotion } from '@/components/content/perfect-square-grid-motion'
+import { EvenExponentMotion } from '@/components/content/even-exponent-motion'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { steps } from './steps-data'
+
+export const meta = {
+  slug: '1-1-u4-perfect-square',
+  title: '제곱인 수 만들기',
+  subtitle: '중1 수학 · 소인수분해',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg="/images/shape_2.png"
+    speechText="자연수를 제곱하면 특별한 수가 나와! 이 수들의 비밀을 함께 알아보자!"
+    topicTitle="04. 제곱인 수 만들기"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>자연수를 제곱하여 만든 수를 {blank}라고 한다.</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <StepCard variant="white">
+    <PerfectSquareGridMotion stepId={1} />
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"7^2"} /> = {blank}</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={2}>
+  <StepCard variant="white">
+    <EvenExponentMotion stepId={2} />
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>제곱인 수를 소인수분해하면 모든 지수가 {blank}이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={3}>
+  <NoteCard title="예제 1: 36은 제곱인 수">
+    <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
+      <MathInline katexFontSize="1.8em" tex={"36 = 6^2"} />
+    </div>
+    <NoteExample>
+      <MathInline katexFontSize="1.8em" tex={"36 = 2^2 \\times 3^2"} />
+      <div className="text-sm font-bold text-slide-green mt-1">
+        지수가 모두 짝수(2, 2) → 제곱인 수!
+      </div>
+    </NoteExample>
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"36 = 2^2 \\times 3^2"} />에서 2의 지수는 {blank}이다.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={4}>
+  <NoteCard title="예제 2: 144는 제곱인 수">
+    <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
+      <MathInline katexFontSize="1.8em" tex={"144 = 12^2"} />
+    </div>
+    <NoteExample>
+      <MathInline katexFontSize="1.8em" tex={"144 = 2^4 \\times 3^2"} />
+      <div className="text-sm font-bold text-slide-green mt-1">
+        지수가 모두 짝수(4, 2) → 제곱인 수!
+      </div>
+    </NoteExample>
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"144 = 2^4 \\times 3^2"} />에서 2의 지수는 {blank}이다.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={5}>
+  <PracticeCard title="확인 문제" subtitle="제곱인 수 판별">
+    <div className="text-center text-[17px] font-extrabold text-slide-gray mb-2">
+      <MathInline katexFontSize="1.8em" tex={"400 = 2^4 \\times 5^2"} />
+    </div>
+    <div className="text-center text-sm font-bold text-slide-gray mb-2">
+      지수: 4(짝수), 2(짝수)
+    </div>
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <>400은 {blank}.</>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={6}>
+  <SummaryCard
+    title="핵심 정리"
+    cases={[
+      { tag: '정의', tagVariant: 'big', content: <>자연수를 제곱하여 만든 수가 제곱인 수이다.</> },
+      { tag: '판별법', tagVariant: 'small', content: <>소인수분해했을 때 모든 지수가 짝수이면 제곱인 수!</> },
+      { tag: '예시', tagVariant: 'equal', content: <><MathInline tex={"1, 4, 9, 16, 25, 36, \\cdots"} /></> },
+    ]}
+  >
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>제곱인 수의 소인수분해에서 모든 지수는 {blank}이다.</>
+        )}
+      />
+    )}
+  </SummaryCard>
+</Step>
+
+<Step id={7}>
+  <CompleteCard emoji="✅" title="제곱인 수 만들기 학습 완료!">
+    제곱인 수의 뜻과 소인수분해를 이용한
+    <br />
+    판별법까지 모두 정리했어요.
+  </CompleteCard>
+</Step>
+
+</SlideContent>

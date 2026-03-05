@@ -34,7 +34,7 @@ export const semesters: SemesterData[] = [
           { id: '1-1-u1', title: '1. 소수와 합성수', status: 'unlocked', path: '/1-1-u1' },
           { id: '1-1-u2', title: '2. 거듭제곱', status: 'unlocked', path: '/1-1-u2' },
           { id: '1-1-u3', title: '3. 소인수분해', status: 'unlocked', path: '/1-1-u3' },
-          { id: '1-1-u4', title: '4. 제곱인 수 만들기', status: 'locked' },
+          { id: '1-1-u4', title: '4. 제곱인 수 만들기', status: 'unlocked', path: '/1-1-u4' },
           { id: '1-1-u5', title: '5. 약수와 약수의 개수 구하기', status: 'locked' },
           { id: '1-1-u6', title: '6. 공약수와 최대공약수', status: 'locked' },
           { id: '1-1-u7', title: '7. 공배수와 최소공배수', status: 'locked' },

@@ -7,6 +7,7 @@ import { PracticeCard } from '@/components/cards/practice-card'
 import { CompleteCard } from '@/components/cards/complete-card'
 import { PrimeDivisionLadderMotion } from '@/components/content/prime-division-ladder-motion'
 import { PrimeDivisionStep2Activity } from '@/components/content/prime-division-step2-activity'
+import { FactorTreeStep3Activity } from '@/components/content/factor-tree-step3-activity'
 import { PrimeFactorTreeMotion } from '@/components/content/prime-factor-tree-motion'
 import { PrimeFactorizationTermMotion } from '@/components/content/prime-factorization-term-motion'
 import { QuizArea } from '@/components/quiz'
@@ -56,7 +57,7 @@ export const meta = {
 <Step id={2}>
   <StepCard variant="white">
     <div className="mb-2 text-center text-base font-extrabold text-slide-gray">
-      소인수분해 방법1(소수로 나누기)
+      <span className="rounded-md bg-[#2d67a8] px-2 py-1 text-xs font-extrabold text-white">소인수분해 방법1</span>(소수로 나누기)
     </div>
     <PrimeDivisionStep2Activity stepId={2} />
   </StepCard>
@@ -64,16 +65,10 @@ export const meta = {
 
 <Step id={3}>
   <StepCard variant="white">
-    <PrimeDivisionLadderMotion />
-    {steps[3].quiz && (
-      <QuizArea
-        stepId={3}
-        quiz={steps[3].quiz}
-        renderBlank={(blank) => (
-          <>24 → 12 → 6 → 3 으로 내려가면 마지막 소수는 {blank}이다.</>
-        )}
-      />
-    )}
+    <div className="mb-2 text-center text-base font-extrabold text-slide-gray">
+      <span className="rounded-md bg-[#2d67a8] px-2 py-1 text-xs font-extrabold text-white">소인수분해 방법2</span>(두 수의 곱으로 가르기)
+    </div>
+    <FactorTreeStep3Activity stepId={3} />
   </StepCard>
 </Step>
 
