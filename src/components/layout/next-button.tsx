@@ -1,17 +1,69 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSlideProgress } from '@/hooks/use-slide-progress'
 import { cn } from '@/lib/utils'
+import { semesters } from '@/data/curriculum'
+
+interface NextUnitAction {
+  path: string
+  title: string
+}
+
+interface UnitRouteMeta {
+  nextUnit?: NextUnitAction
+}
+
+interface OrderedUnit {
+  path?: string
+  title: string
+}
+
+const INTRO_ALIAS_PATH = '/1-1-ch1-intro'
+const INTRO_CANONICAL_PATH = '/ch1-intro'
+
+function normalizeUnitPath(path: string): string {
+  const normalized = path.replace(/\/+$/, '') || '/'
+  if (normalized === INTRO_ALIAS_PATH) return INTRO_CANONICAL_PATH
+  return normalized
+}
+
+const orderedUnits: OrderedUnit[] = semesters.flatMap((semester) =>
+  semester.chapters.flatMap((chapter) =>
+    chapter.units.map((unit) => ({
+      path: unit.path,
+      title: unit.title,
+    })),
+  ),
+)
+
+const unitRouteMetaByPath = new Map<string, UnitRouteMeta>()
+
+for (let index = 0; index < orderedUnits.length; index += 1) {
+  const current = orderedUnits[index]
+  if (!current.path) continue
+
+  const next = orderedUnits[index + 1]
+  const nextUnit =
+    next?.path
+      ? {
+          path: normalizeUnitPath(next.path),
+          title: next.title,
+        }
+      : undefined
+
+  unitRouteMetaByPath.set(normalizeUnitPath(current.path), { nextUnit })
+}
 
 export function NextButton() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { currentStep, totalSteps, nextButtonState, advanceStep, quizStepIds } = useSlideProgress()
 
-  const normalizedPath = pathname.replace(/\/+$/, '') || '/'
-  const isCh1Intro =
-    normalizedPath === '/ch1-intro' || normalizedPath === '/1-1-ch1-intro'
-  const showCh1CompletionActions = nextButtonState === 'done' && isCh1Intro
+  const normalizedPath = normalizeUnitPath(pathname)
+  const routeMeta = unitRouteMetaByPath.get(normalizedPath)
+  const nextUnit = routeMeta?.nextUnit
+
+  const showCompletionActions = nextButtonState === 'done' && !!nextUnit
   const isActionStep = quizStepIds.has(currentStep)
   const shouldHideNextButton = isActionStep && nextButtonState !== 'done'
 
@@ -37,14 +89,14 @@ export function NextButton() {
   }
 
   const getIcon = () => {
-    if (nextButtonState === 'done') return '↺'
+    if (nextButtonState === 'done') return '↻'
     if (nextButtonState === 'locked') return '🔒'
-    return '➜'
+    return '→'
   }
 
   return (
     <div className="fixed bottom-0 left-0 w-full p-4 bg-gradient-to-t from-slide-bg via-slide-bg/80 to-transparent z-[999] flex justify-center">
-      {showCh1CompletionActions ? (
+      {showCompletionActions && nextUnit ? (
         <div className="w-full max-w-[640px] flex gap-3">
           <motion.button
             onClick={scrollToTop}
@@ -58,11 +110,11 @@ export function NextButton() {
             )}
           >
             <span>처음으로</span>
-            <span className="text-xl">↺</span>
+            <span className="text-xl">↻</span>
           </motion.button>
 
           <motion.button
-            onClick={() => navigate('/1-1-u1')}
+            onClick={() => navigate(nextUnit.path)}
             whileTap={{ scale: 0.97 }}
             className={cn(
               'flex-1 py-4 border-none rounded-[14px]',
@@ -72,8 +124,8 @@ export function NextButton() {
               'bg-slide-brown text-white shadow-[0_4px_16px_rgba(122,76,20,0.3)]',
             )}
           >
-            <span>다음: 소수와 합성수</span>
-            <span className="text-xl">➜</span>
+            <span>{`다음: ${nextUnit.title}`}</span>
+            <span className="text-xl">→</span>
           </motion.button>
         </div>
       ) : (
