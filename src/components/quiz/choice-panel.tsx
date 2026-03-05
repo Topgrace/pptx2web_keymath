@@ -66,6 +66,11 @@ export function ChoicePanel({
   const [wrongIdx, setWrongIdx] = useState<number | null>(null)
   const [correctIdx, setCorrectIdx] = useState<number | null>(null)
 
+  useEffect(() => {
+    setWrongIdx(null)
+    setCorrectIdx(null)
+  }, [isOpen, choices])
+
   const handleClick = (value: string, idx: number) => {
     if (disabled) return
     const isCorrect = onSelect(value)

@@ -25,17 +25,27 @@ export function MathDisplay({
 export function MathInline({
   tex,
   className,
+  katexFontSize,
 }: {
   tex: string
   className?: string
+  katexFontSize?: string
 }) {
   const ref = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     if (ref.current) {
       katex.render(tex, ref.current, { throwOnError: false, displayMode: false })
+      const katexEl = ref.current.querySelector('.katex') as HTMLElement | null
+      if (katexEl) {
+        if (katexFontSize) {
+          katexEl.style.fontSize = katexFontSize
+        } else {
+          katexEl.style.removeProperty('font-size')
+        }
+      }
     }
-  }, [tex])
+  }, [tex, katexFontSize])
 
   return <span ref={ref} className={cn('katex-inline', className)} />
 }

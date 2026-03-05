@@ -102,6 +102,7 @@ const rawSteps: Step[] = [
     id: 8, type: 'note', cardVariant: 'default',
     quiz: {
       answer: 'x',
+      answerLatex: 'x',
       blankType: 'normal',
       choices: [
         { label: '$x$', value: 'x', latex: 'x' },

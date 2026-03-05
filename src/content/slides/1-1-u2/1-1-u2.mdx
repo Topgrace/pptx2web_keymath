@@ -1,7 +1,6 @@
 import { Step, SlideContent } from '@/components/mdx/step-wrapper'
 import { IntroCard } from '@/components/cards/intro-card'
 import { ConceptCard } from '@/components/cards/concept-card'
-import { NoteCard } from '@/components/cards/note-card'
 import { PracticeCard } from '@/components/cards/practice-card'
 import { SummaryCard } from '@/components/cards/summary-card'
 import { CompleteCard } from '@/components/cards/complete-card'
@@ -175,7 +174,7 @@ export const meta = {
       <MathInline tex={"4 \\times 2 \\times 4 \\times 2 \\times 4"} />
     </div>
     <div className="text-center text-sm font-bold text-slide-muted mb-2.5">
-      같은 밑을 모아서 써 보세요.
+      거듭제곱 꼴로 나타내면?
     </div>
     {steps[7].quiz && (
       <QuizArea
@@ -190,7 +189,10 @@ export const meta = {
 </Step>
 
 <Step id={8}>
-  <NoteCard title="규칙 ② 지수 1은 생략">
+  <StepCard variant="white">
+    <div className="text-base font-extrabold text-slide-brown mb-2.5">
+      지수 1은 생략
+    </div>
     <div className="text-[15px] font-bold text-slide-gray leading-[1.9]">
       <MathInline tex={"2^1 = 2"} />
       <br />
@@ -205,11 +207,14 @@ export const meta = {
         )}
       />
     )}
-  </NoteCard>
+  </StepCard>
 </Step>
 
 <Step id={9}>
-  <NoteCard variant="white" title="규칙 ③ 1의 거듭제곱">
+  <StepCard variant="white">
+    <div className="text-base font-extrabold text-slide-brown mb-2.5">
+      1의 거듭제곱
+    </div>
     <div className="text-[15px] font-bold text-slide-gray leading-[1.9]">
       <MathInline tex={"1^2 = 1,\\;1^3 = 1,\\;1^4 = 1,\\;\\cdots"} />
     </div>
@@ -222,7 +227,7 @@ export const meta = {
         )}
       />
     )}
-  </NoteCard>
+  </StepCard>
 </Step>
 
 <Step id={10}>
@@ -233,14 +238,14 @@ export const meta = {
     description="밑이 분수일 때는 괄호를 사용해 밑 전체를 묶어 나타냅니다."
   >
     <div className="text-center text-[15px] font-bold text-slide-gray leading-[1.9] mb-2">
-      <MathInline tex={"\\frac{2^2}{3} = \\frac{4}{3},\\quad \\frac{2}{3^2} = \\frac{2}{9}"} />
+      <MathInline katexFontSize="1.8em" tex={"\\frac{2^2}{3} = \\frac{4}{3},\\quad \\frac{2}{3^2} = \\frac{2}{9}"} />
     </div>
     {steps[10].quiz && (
       <QuizArea
         stepId={10}
         quiz={steps[10].quiz}
         renderBlank={(blank) => (
-          <><MathInline tex={"\\left(\\frac{2}{3}\\right)^2"} /> = {blank}</>
+          <><MathInline  katexFontSize="1.8em" tex={"\\left(\\frac{2}{3}\\right)^2"} /> = {blank}</>
         )}
       />
     )}

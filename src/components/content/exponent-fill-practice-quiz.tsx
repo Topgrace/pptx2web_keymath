@@ -18,7 +18,6 @@ const QUIZ_ITEMS: BlankQuizItem[] = [
   {
     id: 'exp-3-4',
     answer: '4',
-    answerLatex: '4',
     blankType: 'exponent',
     choices: [
       { label: '$2$', value: '2', latex: '2' },
