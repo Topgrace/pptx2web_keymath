@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
+import { Hand } from 'lucide-react'
 import { StepCard } from '@/components/cards/step-card'
 import { cn } from '@/lib/utils'
 
@@ -50,7 +51,7 @@ export function PrimeFactorizationTermMotion({
                 aria-expanded={showFactorTooltip}
                 aria-label="인수와 약수 설명 보기"
               >
-                *
+                <Hand size={10} strokeWidth={2.4} />
               </button>
               {showFactorTooltip ? (
                 <div className="absolute left-1/2 top-full z-10 mt-2 w-[210px] -translate-x-1/2 rounded-md bg-[#263446] px-2.5 py-2 text-left text-[11px] font-medium leading-snug text-white shadow-[0_6px_14px_rgba(0,0,0,0.2)]">
