@@ -54,8 +54,8 @@ export function PrimeFactorizationTermMotion({
               </button>
               {showFactorTooltip ? (
                 <div className="absolute left-1/2 top-full z-10 mt-2 w-[210px] -translate-x-1/2 rounded-md bg-[#263446] px-2.5 py-2 text-left text-[11px] font-medium leading-snug text-white shadow-[0_6px_14px_rgba(0,0,0,0.2)]">
-                  약수(divisor)와 인수(factor)는 의미가 같습니다. 약수는 나눗셈에서, 인수는 곱셈에서
-                  나온 용어일 뿐 같은 의미라고 생각해도 무방합니다.
+                  약수(divisor)와 인수(factor)는 의미가 같다. 약수는 나눗셈에서, 인수는 곱셈에서
+                  나온 용어일 뿐 같은 의미라고 생각해도 무방하다.
                 </div>
               ) : null}
             </div>
@@ -72,12 +72,17 @@ export function PrimeFactorizationTermMotion({
             transition={{ duration: 0.35, delay: 0.58 }}
           >
             <div className="text-base font-black text-[#232323]">분해</div>
-            <div className="text-xs font-bold text-[#e25555]">자연수를 쪼개어</div>
+            <div className="text-xs font-bold text-[#e25555]">여기서는 자연수를 쪼개어</div>
             <div className="mt-1 text-xs font-bold text-[#e25555]">곱의 꼴로 나타내기</div>
           </motion.div>
         </div>
 
-        <div className="mt-4 text-center text-[#232323]">
+        <motion.div
+          className="mt-4 text-center text-[#232323]"
+          initial={{ opacity: 0, y: 8 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{ duration: 0.35, delay: 1.05 }}
+        >
           <div className="text-[28px] font-black leading-[1.2]">
             <span className="relative inline-block">
               소인수분해
@@ -92,10 +97,18 @@ export function PrimeFactorizationTermMotion({
           <div className="mt-2 text-[18px] font-serif font-semibold leading-[1.35]">
             자연수를 소인수의 곱으로 나타내는 것
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {children}
+      {children ? (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.35, delay: 1.65 }}
+        >
+          {children}
+        </motion.div>
+      ) : null}
     </StepCard>
   )
 }
