@@ -1,0 +1,227 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { StepCard } from '@/components/cards/step-card'
+import { NoteCard } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { SummaryCard } from '@/components/cards/summary-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { DivisorDefinitionMotion } from '@/components/content/divisor-definition-motion'
+import { DivisorCountSingleMotion } from '@/components/content/divisor-count-single-motion'
+import { DivisorProductTableMotion } from '@/components/content/divisor-product-table-motion'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { steps } from './steps-data'
+import shape2Character from '@/assets/images/shape_2.png'
+
+export const meta = {
+  slug: '1-1-u5-divisor-count',
+  title: '약수와 약수의 개수 구하기',
+  subtitle: '중1 수학 · 소인수분해',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg={shape2Character}
+    speechText="수를 분해하면 모든 약수를 쉽게 찾을 수 있어! 약수의 개수 구하는 공식도 알아보자!"
+    topicTitle={"05. 약수와 약수의\n개수 구하기"}
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>나누어떨어지게 하는 수를 {blank}라고 한다.</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <StepCard variant="white">
+    <DivisorDefinitionMotion stepId={1} />
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlank={(blank) => (
+          <>20의 약수의 개수는 {blank}개이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={2}>
+  <StepCard variant="white">
+    <DivisorCountSingleMotion stepId={2} />
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"2^4"} />의 약수의 개수는 {blank}개이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={3}>
+  <NoteCard>
+    <div className="text-center text-base font-extrabold text-slide-gray leading-[1.9] mb-3">
+      <MathInline tex={"a^n"} />으로 소인수분해되었을 때
+    </div>
+
+    <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-3 py-3">
+      <div className="text-center text-[14px] font-bold text-slide-gray leading-[2]">
+        <MathInline tex={"a^n"} />의 약수:
+        <br />
+        <MathInline tex={"1, \\, a, \\, a^2, \\, \\cdots, \\, a^{n-1}, \\, a^n"} />
+        <br />
+        <span className="text-[12px] text-[#555A66]">→ 총 (n+1)개</span>
+      </div>
+    </div>
+
+    <div className="mx-auto rounded-lg bg-[#1F4F8A] px-4 py-3 text-center">
+      <span className="text-[16px] font-extrabold text-white">
+        <MathInline katexFontSize="1.3em" tex={"a^n"} /> 의 약수의 개수 ={' '}
+        <span className="text-[#ffe65c] text-[18px]">(n+1)개</span>
+      </span>
+    </div>
+
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"a^n"} />의 약수의 개수는 {blank}개이다.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={4}>
+  <StepCard variant="white">
+    <DivisorProductTableMotion stepId={4} />
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"2^4 \\times 3^2"} />의 약수의 개수는 {blank}개이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={5}>
+  <NoteCard>
+    <div className="text-center text-base font-extrabold text-slide-gray leading-[1.9] mb-3">
+      <MathInline tex={"a^m \\times b^n"} />으로 소인수분해되었을 때
+    </div>
+
+    <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-3 py-3">
+      <div className="text-center text-[14px] font-bold text-slide-gray leading-[2]">
+        <MathInline tex={"a^m"} />의 약수: <span className="text-[#1F4F8A] font-extrabold">(m+1)</span>개
+        <br />
+        <MathInline tex={"b^n"} />의 약수: <span className="text-[#E25555] font-extrabold">(n+1)</span>개
+        <br />
+        <span className="text-[12px] text-[#555A66]">→ 각각에서 하나씩 뽑아 곱!</span>
+      </div>
+    </div>
+
+    <div className="mx-auto rounded-lg bg-[#1F4F8A] px-4 py-3 text-center">
+      <span className="text-[15px] font-extrabold text-white">
+        약수의 개수 ={' '}
+        <span className="text-[#ffe65c] text-[17px]">(m+1)×(n+1)개</span>
+      </span>
+    </div>
+
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"a^m \\times b^n"} />의 약수의 개수는 {blank}개이다.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={6}>
+  <PracticeCard title="확인 문제" subtitle="세 소인수의 경우로 확장">
+    <div className="text-center text-[15px] font-extrabold text-slide-gray leading-[1.9] mb-3">
+      <MathInline katexFontSize="1.5em" tex={"a^{\\ell} \\times b^m \\times c^n"} />
+      <br />
+      <span className="text-[13px] font-bold text-[#555A66]">으로 소인수분해되었을 때</span>
+    </div>
+
+    <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-3 py-3">
+      <div className="text-center text-[13px] font-bold text-slide-gray leading-[2]">
+        약수의 개수 = <span className="text-[#ffe65c] bg-[#1F4F8A] rounded px-2 py-0.5 font-extrabold">(ℓ+1)×(m+1)×(n+1)개</span>
+      </div>
+    </div>
+
+    <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-3 py-3">
+      <div className="flex items-start gap-1">
+        <span className="shrink-0 rounded bg-[#2d67a8] px-1.5 py-0.5 text-[11px] font-bold text-white">문제</span>
+        <div className="text-[14px] font-bold text-slide-gray leading-[2]">
+          <MathInline tex={"2^3 \\times 3^1 \\times 5^1"} /> 의 약수의 개수는?
+          <br />
+          <span className="text-[12px] text-[#555A66]">
+            (3+1)×(1+1)×(1+1) = 4×2×2
+          </span>
+        </div>
+      </div>
+    </div>
+
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"2^3 \\times 3 \\times 5"} />의 약수의 개수는 {blank}개이다.</>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={7}>
+  <SummaryCard
+    title="약수의 개수 핵심 정리"
+    cases={[
+      { tag: '약수', tagVariant: 'equal', content: <>나누어떨어지게 하는 수</> },
+      { tag: 'aⁿ', tagVariant: 'big', content: <>약수의 개수 = <span className="font-extrabold text-[#1F4F8A]">(n+1)</span>개</> },
+      { tag: 'a^m×b^n', tagVariant: 'small', content: <>약수의 개수 = <span className="font-extrabold text-[#1F4F8A]">(m+1)×(n+1)</span>개</> },
+    ]}
+  >
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <><MathInline tex={"a^n"} />의 약수의 개수는 {blank}개이다.</>
+        )}
+      />
+    )}
+  </SummaryCard>
+</Step>
+
+<Step id={8}>
+  <CompleteCard emoji="🎯" title="약수의 개수 구하기 완료!">
+    약수의 정의와 소인수분해를 이용한
+    <br />
+    약수 개수 공식까지 모두 정리했어요.
+    <br />
+    지수에 1을 더해서 곱하기! 잊지 마세요.
+  </CompleteCard>
+</Step>
+
+</SlideContent>
