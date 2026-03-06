@@ -92,6 +92,16 @@ const rawSteps: Step[] = [
   },
   {
     id: 6,
+    type: 'practice',
+    cardVariant: 'white',
+    quiz: {
+      answer: 'interactive',
+      blankType: 'normal',
+      choices: [],
+    },
+  },
+  {
+    id: 7,
     type: 'summary',
     cardVariant: 'white',
     quiz: {
@@ -106,7 +116,7 @@ const rawSteps: Step[] = [
     },
   },
   {
-    id: 7,
+    id: 8,
     type: 'complete',
     cardVariant: 'default',
   },

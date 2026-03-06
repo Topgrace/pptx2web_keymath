@@ -1,12 +1,15 @@
 import { Step, SlideContent } from '@/components/mdx/step-wrapper'
 import { IntroCard } from '@/components/cards/intro-card'
 import { StepCard } from '@/components/cards/step-card'
-import { NoteCard, NoteExample } from '@/components/cards/note-card'
 import { PracticeCard } from '@/components/cards/practice-card'
 import { SummaryCard } from '@/components/cards/summary-card'
 import { CompleteCard } from '@/components/cards/complete-card'
 import { PerfectSquareGridMotion } from '@/components/content/perfect-square-grid-motion'
 import { EvenExponentMotion } from '@/components/content/even-exponent-motion'
+import { PerfectSquareKeywordQuiz } from '@/components/content/perfect-square-keyword-quiz'
+import { PerfectSquareExponentPairQuiz } from '@/components/content/perfect-square-exponent-pair-quiz'
+import { PerfectSquareMultiplierGuide } from '@/components/content/perfect-square-multiplier-guide'
+import { SolvedSquareExplanation } from '@/components/content/solved-square-explanation'
 import { QuizArea } from '@/components/quiz'
 import { MathInline } from '@/components/math'
 import { steps } from './steps-data'
@@ -55,106 +58,106 @@ export const meta = {
 <Step id={2}>
   <StepCard variant="white">
     <EvenExponentMotion stepId={2} />
-    {steps[2].quiz && (
-      <QuizArea
-        stepId={2}
-        quiz={steps[2].quiz}
-        renderBlank={(blank) => (
-          <>제곱인 수를 소인수분해하면 모든 지수가 {blank}이다.</>
-        )}
-      />
-    )}
+    <PerfectSquareKeywordQuiz stepId={2} />
   </StepCard>
 </Step>
 
 <Step id={3}>
-  <NoteCard title="예제 1: 36은 제곱인 수">
+  <StepCard variant="white">
+    <div className="text-base font-extrabold text-slide-brown mb-3">
+      36은 6을 제곱한 수(제곱인 수)
+    </div>
     <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
       <MathInline katexFontSize="1.8em" tex={"36 = 6^2"} />
     </div>
-    <NoteExample>
-      <MathInline katexFontSize="1.8em" tex={"36 = 2^2 \\times 3^2"} />
-      <div className="text-sm font-bold text-slide-green mt-1">
-        지수가 모두 짝수(2, 2) → 제곱인 수!
+    <div className="mt-3 text-center text-xl font-extrabold text-slide-gray">
+      <MathInline katexFontSize="1.8em" tex={"36 = 2^{\\color{#7A4C14}{2}} \\times 3^{\\color{#7A4C14}{2}}"} />
+      <div className="text-sm font-bold text-slide-brown mt-1">
+        지수가 모두 짝수(2, 2)!
       </div>
-    </NoteExample>
-    {steps[3].quiz && (
-      <QuizArea
-        stepId={3}
-        quiz={steps[3].quiz}
-        renderBlank={(blank) => (
-          <><MathInline tex={"36 = 2^2 \\times 3^2"} />에서 2의 지수는 {blank}이다.</>
-        )}
-      />
-    )}
-  </NoteCard>
+    </div>
+    <PerfectSquareExponentPairQuiz stepId={3} />
+  </StepCard>
 </Step>
 
 <Step id={4}>
-  <NoteCard title="예제 2: 144는 제곱인 수">
+  <StepCard variant="white">
+    <div className="text-base font-extrabold text-slide-brown mb-3">
+      144는 12를 제곱한 수(제곱인 수)
+    </div>
     <div className="text-center text-[17px] font-extrabold text-slide-gray leading-[1.9] mb-2">
       <MathInline katexFontSize="1.8em" tex={"144 = 12^2"} />
     </div>
-    <NoteExample>
-      <MathInline katexFontSize="1.8em" tex={"144 = 2^4 \\times 3^2"} />
-      <div className="text-sm font-bold text-slide-green mt-1">
-        지수가 모두 짝수(4, 2) → 제곱인 수!
+    <div className="mt-3 text-center text-xl font-extrabold text-slide-gray">
+      <MathInline katexFontSize="1.8em" tex={"144 = 2^{\\color{#7A4C14}{4}} \\times 3^{\\color{#7A4C14}{2}}"} />
+      <div className="text-sm font-bold text-slide-brown mt-1">
+        지수가 모두 짝수(4, 2)!
       </div>
-    </NoteExample>
-    {steps[4].quiz && (
-      <QuizArea
-        stepId={4}
-        quiz={steps[4].quiz}
-        renderBlank={(blank) => (
-          <><MathInline tex={"144 = 2^4 \\times 3^2"} />에서 2의 지수는 {blank}이다.</>
-        )}
-      />
-    )}
-  </NoteCard>
+    </div>
+    <PerfectSquareExponentPairQuiz
+      stepId={4}
+      equationTex={"144 = 2^4 \\times 3^2"}
+      firstBase="2"
+      secondBase="3"
+      firstAnswer="4"
+      secondAnswer="2"
+    />
+  </StepCard>
 </Step>
 
 <Step id={5}>
   <PracticeCard title="확인 문제" subtitle="제곱인 수 판별">
     <div className="text-center text-[17px] font-extrabold text-slide-gray mb-2">
-      <MathInline katexFontSize="1.8em" tex={"400 = 2^4 \\times 5^2"} />
+      <MathInline katexFontSize="1.8em" tex={"164025 = 3^8 \\times 5^2"} />
     </div>
     <div className="text-center text-sm font-bold text-slide-gray mb-2">
-      지수: 4(짝수), 2(짝수)
+      지수: 8(짝수), 2(짝수)
     </div>
     {steps[5].quiz && (
       <QuizArea
         stepId={5}
         quiz={steps[5].quiz}
         renderBlank={(blank) => (
-          <>400은 {blank}.</>
+          <>164025는 {blank}.</>
         )}
       />
     )}
+    <SolvedSquareExplanation
+      stepId={5}
+      text="실제로 164025 ="
+      equationTex={"(405)^2"}
+    />
   </PracticeCard>
 </Step>
 
 <Step id={6}>
+  <PracticeCard title="자주 나오는 문제" subtitle="제곱수가 되게 만들기">
+    <PerfectSquareMultiplierGuide stepId={6} />
+  </PracticeCard>
+</Step>
+
+<Step id={7}>
   <SummaryCard
     title="핵심 정리"
     cases={[
       { tag: '정의', tagVariant: 'big', content: <>자연수를 제곱하여 만든 수가 제곱인 수이다.</> },
       { tag: '판별법', tagVariant: 'small', content: <>소인수분해했을 때 모든 지수가 짝수이면 제곱인 수!</> },
-      { tag: '예시', tagVariant: 'equal', content: <><MathInline tex={"1, 4, 9, 16, 25, 36, \\cdots"} /></> },
+      { tag: '제곱인 수', tagVariant: 'equal', content: <><MathInline tex={"1, 4, 9, 16, 25, 36, \\cdots"} /></> },
     ]}
   >
-    {steps[6].quiz && (
+    {steps[7].quiz && (
       <QuizArea
-        stepId={6}
-        quiz={steps[6].quiz}
+        stepId={7}
+        quiz={steps[7].quiz}
         renderBlank={(blank) => (
-          <>제곱인 수의 소인수분해에서 모든 지수는 {blank}이다.</>
+          <>제곱인 수를 소인수분해하면 모든 지수는 {blank}이다.</>
         )}
       />
     )}
   </SummaryCard>
 </Step>
 
-<Step id={7}>
+<Step id={8}>
   <CompleteCard emoji="✅" title="제곱인 수 만들기 학습 완료!">
     제곱인 수의 뜻과 소인수분해를 이용한
     <br />

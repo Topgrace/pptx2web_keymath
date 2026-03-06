@@ -22,7 +22,7 @@ export function CompleteCard({
       </div>
 
       {/* Gradient title */}
-      <div className="text-2xl font-extrabold text-slide-brown mb-2">
+      <div className="text-2xl font-extrabold text-slide-brown mb-2 whitespace-pre-line">
         <GradientText>{title}</GradientText>
       </div>
 
