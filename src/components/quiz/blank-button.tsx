@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { loadKatex } from '@/lib/katex-loader'
 import type { BlankType } from '@/schemas/step'
-import 'katex/dist/katex.min.css'
-import katex from 'katex'
 import { useRef, useEffect } from 'react'
 
 export function BlankButton({
@@ -24,24 +23,39 @@ export function BlankButton({
   const ref = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (solved && solvedAnswer && ref.current) {
-      if (isLatex) {
-        try {
-          katex.render(solvedAnswer, ref.current, { throwOnError: false })
-          const katexEl = ref.current.querySelector('.katex') as HTMLElement | null
-          if (katexEl) {
-            if (solvedLatexFontSize) {
-              katexEl.style.setProperty('font-size', solvedLatexFontSize, 'important')
-            } else {
-              katexEl.style.removeProperty('font-size')
-            }
+    const target = ref.current
+
+    if (!solved || !solvedAnswer || !target) return
+
+    if (!isLatex) {
+      target.textContent = solvedAnswer
+      return
+    }
+
+    let cancelled = false
+
+    void loadKatex()
+      .then((katex) => {
+        if (cancelled || !target.isConnected) return
+
+        katex.render(solvedAnswer, target, { throwOnError: false })
+
+        const katexEl = target.querySelector('.katex') as HTMLElement | null
+        if (katexEl) {
+          if (solvedLatexFontSize) {
+            katexEl.style.setProperty('font-size', solvedLatexFontSize, 'important')
+          } else {
+            katexEl.style.removeProperty('font-size')
           }
-        } catch {
-          ref.current.textContent = solvedAnswer
         }
-      } else {
-        ref.current.textContent = solvedAnswer
-      }
+      })
+      .catch(() => {
+        if (cancelled || !target.isConnected) return
+        target.textContent = solvedAnswer
+      })
+
+    return () => {
+      cancelled = true
     }
   }, [solved, solvedAnswer, isLatex, solvedLatexFontSize])
 

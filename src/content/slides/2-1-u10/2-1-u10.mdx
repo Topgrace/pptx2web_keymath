@@ -10,6 +10,7 @@ import { QuizArea } from '@/components/quiz'
 import { MathInline } from '@/components/math'
 import { SolutionSteps, SolutionLine, SolutionArrow } from '@/components/content/solution-steps'
 import { steps } from './steps-data'
+import shape2Character from '@/assets/images/shape_2.png'
 
 export const meta = {
   slug: 'unit10-division',
@@ -25,7 +26,7 @@ export const meta = {
 
 <Step id={0}>
   <IntroCard
-    characterImg="/images/shape_2.png"
+    characterImg={shape2Character}
     speechText="다항식을 단항식으로 나누는 걸 배워보자~"
     topicTitle="(다항식) ÷ (단항식)"
   >

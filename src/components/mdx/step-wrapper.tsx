@@ -2,12 +2,6 @@ import React, { useEffect, type ReactNode } from 'react'
 import { useSlideProgress } from '@/hooks/use-slide-progress'
 import { StepDivider } from '@/components/cards/step-card'
 
-/**
- * MDX용 Step 래퍼.
- * - useSlideProgress()에서 currentStep을 읽어 visible 판정
- * - 첫 번째 card child에 visible prop 자동 주입 (cloneElement)
- * - 마지막 step이 아니면 StepDivider 자동 추가
- */
 export function Step({
   id,
   children,
@@ -18,7 +12,10 @@ export function Step({
   const { currentStep, totalSteps } = useSlideProgress()
   const visible = id <= currentStep
 
-  // Card 컴포넌트에 visible prop 주입
+  if (!visible) {
+    return null
+  }
+
   const enhanced = React.Children.map(children, (child) => {
     if (React.isValidElement(child) && typeof child.type !== 'string') {
       return React.cloneElement(child as React.ReactElement<Record<string, unknown>>, { visible })
@@ -34,9 +31,6 @@ export function Step({
   )
 }
 
-/**
- * MDX 전체를 감싸는 래퍼. 자동 스크롤 처리.
- */
 export function SlideContent({ children }: { children: ReactNode }) {
   const { currentStep } = useSlideProgress()
 

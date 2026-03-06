@@ -1,6 +1,8 @@
 ﻿import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSlideProgress } from '@/hooks/use-slide-progress'
+import { normalizeUnitPath, preloadUnitRoute } from '@/lib/unit-route-loaders'
 import { cn } from '@/lib/utils'
 import { semesters } from '@/data/curriculum'
 
@@ -16,15 +18,6 @@ interface UnitRouteMeta {
 interface OrderedUnit {
   path?: string
   title: string
-}
-
-const INTRO_ALIAS_PATH = '/1-1-ch1-intro'
-const INTRO_CANONICAL_PATH = '/ch1-intro'
-
-function normalizeUnitPath(path: string): string {
-  const normalized = path.replace(/\/+$/, '') || '/'
-  if (normalized === INTRO_ALIAS_PATH) return INTRO_CANONICAL_PATH
-  return normalized
 }
 
 const orderedUnits: OrderedUnit[] = semesters.flatMap((semester) =>
@@ -62,6 +55,22 @@ export function NextButton() {
   const normalizedPath = normalizeUnitPath(pathname)
   const routeMeta = unitRouteMetaByPath.get(normalizedPath)
   const nextUnit = routeMeta?.nextUnit
+
+  useEffect(() => {
+    if (!nextUnit || typeof window === 'undefined') return
+
+    const preloadNextUnit = () => {
+      void preloadUnitRoute(nextUnit.path)
+    }
+
+    if ('requestIdleCallback' in window) {
+      const idleHandle = window.requestIdleCallback(preloadNextUnit, { timeout: 1500 })
+      return () => window.cancelIdleCallback(idleHandle)
+    }
+
+    const timeoutHandle = setTimeout(preloadNextUnit, 300)
+    return () => clearTimeout(timeoutHandle)
+  }, [nextUnit])
 
   const showCompletionActions = nextButtonState === 'done' && !!nextUnit
   const isActionStep = quizStepIds.has(currentStep)

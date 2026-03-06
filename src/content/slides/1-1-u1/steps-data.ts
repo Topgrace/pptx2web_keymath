@@ -1,7 +1,6 @@
 import type { Step } from '@/schemas/step'
-import { StepSchema } from '@/schemas/step'
 
-const rawSteps: Step[] = [
+const rawSteps = [
   {
     id: 0, type: 'intro', cardVariant: 'default',
     quiz: {
@@ -138,8 +137,8 @@ const rawSteps: Step[] = [
   {
     id: 13, type: 'complete', cardVariant: 'default',
   },
-]
+] satisfies Step[]
 
-export const steps: Step[] = rawSteps.map((s) => StepSchema.parse(s))
+export const steps = rawSteps
 
 export const quizStepIds: Set<number> = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])

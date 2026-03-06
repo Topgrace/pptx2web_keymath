@@ -2,6 +2,7 @@ import type { UnitNode } from '@/data/curriculum'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
+import { preloadUnitRoute } from '@/lib/unit-route-loaders'
 
 interface CourseNodeProps {
     unit: UnitNode
@@ -18,6 +19,12 @@ export function CourseNode({ unit, index }: CourseNodeProps) {
     const handleUnitClick = () => {
         if (!isLocked && unit.path) {
             navigate(unit.path)
+        }
+    }
+
+    const handlePrefetch = () => {
+        if (!isLocked && unit.path) {
+            void preloadUnitRoute(unit.path)
         }
     }
 
@@ -49,6 +56,9 @@ export function CourseNode({ unit, index }: CourseNodeProps) {
             {/* Main Interactive Button Card */}
             <button
                 onClick={handleUnitClick}
+                onPointerEnter={handlePrefetch}
+                onFocus={handlePrefetch}
+                onTouchStart={handlePrefetch}
                 disabled={isLocked}
                 className={cn(
                     "w-full bg-card-light dark:bg-card-dark rounded-xl p-4 transition-all flex items-center justify-between group outline-none focus-visible:ring-2 focus-visible:ring-dashboard-primary",

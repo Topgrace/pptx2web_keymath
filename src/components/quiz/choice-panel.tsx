@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { loadKatex } from '@/lib/katex-loader'
 import type { Choice } from '@/schemas/step'
 import { useState, useRef, useEffect } from 'react'
-import katex from 'katex'
 
 function ChoiceButton({
   choice,
@@ -16,12 +16,24 @@ function ChoiceButton({
   const ref = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (ref.current && choice.latex) {
-      try {
-        katex.render(choice.latex, ref.current, { throwOnError: false })
-      } catch {
-        ref.current.textContent = choice.label
-      }
+    const target = ref.current
+
+    if (!target || !choice.latex) return
+
+    let cancelled = false
+
+    void loadKatex()
+      .then((katex) => {
+        if (cancelled || !target.isConnected) return
+        katex.render(choice.latex!, target, { throwOnError: false })
+      })
+      .catch(() => {
+        if (cancelled || !target.isConnected) return
+        target.textContent = choice.label
+      })
+
+    return () => {
+      cancelled = true
     }
   }, [choice.latex, choice.label])
 

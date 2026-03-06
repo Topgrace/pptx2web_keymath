@@ -4,8 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prepare:katex-css": "node scripts/generate-katex-css.mjs",
+    "predev": "npm run prepare:katex-css",
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "validate:slides": "node --experimental-strip-types scripts/validate-slide-data.mjs",
+    "build": "npm run prepare:katex-css && npm run validate:slides && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -25,3 +25,6 @@ dist-ssr
 netlify
 backup
 dist.zip
+
+# Generated KaTeX fonts (copied from node_modules by prepare:katex-css)
+src/styles/fonts

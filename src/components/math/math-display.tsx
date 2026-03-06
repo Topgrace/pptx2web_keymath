@@ -1,5 +1,5 @@
-import katex from 'katex'
 import { useRef, useEffect } from 'react'
+import { loadKatex } from '@/lib/katex-loader'
 import { cn } from '@/lib/utils'
 
 export function MathDisplay({
@@ -14,8 +14,24 @@ export function MathDisplay({
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (ref.current) {
-      katex.render(tex, ref.current, { throwOnError: false, displayMode: true })
+    const target = ref.current
+
+    if (!target) return
+
+    let cancelled = false
+
+    void loadKatex()
+      .then((katex) => {
+        if (cancelled || !target.isConnected) return
+        katex.render(tex, target, { throwOnError: false, displayMode: true })
+      })
+      .catch(() => {
+        if (cancelled || !target.isConnected) return
+        target.textContent = tex
+      })
+
+    return () => {
+      cancelled = true
     }
   }, [tex])
 
@@ -34,16 +50,34 @@ export function MathInline({
   const ref = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    if (ref.current) {
-      katex.render(tex, ref.current, { throwOnError: false, displayMode: false })
-      const katexEl = ref.current.querySelector('.katex') as HTMLElement | null
-      if (katexEl) {
-        if (katexFontSize) {
-          katexEl.style.fontSize = katexFontSize
-        } else {
-          katexEl.style.removeProperty('font-size')
+    const target = ref.current
+
+    if (!target) return
+
+    let cancelled = false
+
+    void loadKatex()
+      .then((katex) => {
+        if (cancelled || !target.isConnected) return
+
+        katex.render(tex, target, { throwOnError: false, displayMode: false })
+        const katexEl = target.querySelector('.katex') as HTMLElement | null
+
+        if (katexEl) {
+          if (katexFontSize) {
+            katexEl.style.fontSize = katexFontSize
+          } else {
+            katexEl.style.removeProperty('font-size')
+          }
         }
-      }
+      })
+      .catch(() => {
+        if (cancelled || !target.isConnected) return
+        target.textContent = tex
+      })
+
+    return () => {
+      cancelled = true
     }
   }, [tex, katexFontSize])
 

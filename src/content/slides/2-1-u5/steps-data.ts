@@ -1,7 +1,6 @@
 import type { Step } from '@/schemas/step'
-import { StepSchema } from '@/schemas/step'
 
-const rawSteps: Step[] = [
+const rawSteps = [
   {
     id: 0, type: 'intro', cardVariant: 'default',
     quiz: {
@@ -267,10 +266,10 @@ const rawSteps: Step[] = [
   {
     id: 20, type: 'complete', cardVariant: 'default',
   },
-]
+] satisfies Step[]
 
 // Validate all steps against the Zod schema
-export const steps: Step[] = rawSteps.map((s) => StepSchema.parse(s))
+export const steps = rawSteps
 
 // Collect step IDs that have quizzes
 export const quizStepIds: Set<number> = new Set(
