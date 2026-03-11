@@ -19,6 +19,44 @@ const rawSteps = [
     id: 1,
     type: 'concept',
     cardVariant: 'white',
+    quiz: {
+      kind: 'multi',
+      items: [
+        {
+          id: 'multiples',
+          answer: '3의 배수이자 7의 배수',
+          blankType: 'normal',
+          choices: [
+            { label: '3의 배수이자 7의 배수', value: '3의 배수이자 7의 배수' },
+            { label: '3의 약수이자 7의 약수', value: '3의 약수이자 7의 약수' },
+            { label: '3과 7의 공배수', value: '3과 7의 공배수' },
+            { label: '3과 7의 공약수', value: '3과 7의 공약수' },
+          ],
+        },
+        {
+          id: 'divisors',
+          answer: '3, 7',
+          blankType: 'normal',
+          choices: [
+            { label: '3, 7', value: '3, 7' },
+            { label: '1, 21', value: '1, 21' },
+            { label: '3, 21', value: '3, 21' },
+            { label: '7, 21', value: '7, 21' },
+          ],
+        },
+        {
+          id: 'target',
+          answer: '21',
+          blankType: 'normal',
+          choices: [
+            { label: '14', value: '14' },
+            { label: '21', value: '21' },
+            { label: '28', value: '28' },
+            { label: '35', value: '35' },
+          ],
+        },
+      ],
+    },
   },
   {
     id: 2,
