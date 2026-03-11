@@ -12,7 +12,6 @@ const rawSteps = [
         { label: '약수', value: '약수' },
         { label: '배수', value: '배수' },
         { label: '소수', value: '소수' },
-        { label: '인수', value: '인수' },
       ],
     },
   },
