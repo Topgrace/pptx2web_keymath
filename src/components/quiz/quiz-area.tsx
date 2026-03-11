@@ -12,6 +12,10 @@ interface QuizAreaProps {
   renderBlank?: (blank: ReactNode) => ReactNode
   /** Multi blank renderer for inline placement by blank id. */
   renderBlanks?: (blank: (id: string) => ReactNode) => ReactNode
+  /** Optional content shown after solving before auto-advancing. */
+  completionContent?: ReactNode
+  /** Auto-advance delay when completionContent is shown. */
+  completionAdvanceDelayMs?: number
 }
 
 export const QuizArea = ({
@@ -20,6 +24,8 @@ export const QuizArea = ({
   questionContent,
   renderBlank,
   renderBlanks,
+  completionContent,
+  completionAdvanceDelayMs,
 }: QuizAreaProps) => {
   if (quiz.kind === 'multi') {
     return (
@@ -27,6 +33,8 @@ export const QuizArea = ({
         stepId={stepId}
         quiz={quiz}
         renderBlanks={renderBlanks}
+        completionContent={completionContent}
+        completionAdvanceDelayMs={completionAdvanceDelayMs}
       />
     )
   }
@@ -37,6 +45,8 @@ export const QuizArea = ({
       quiz={quiz}
       questionContent={questionContent}
       renderBlank={renderBlank}
+      completionContent={completionContent}
+      completionAdvanceDelayMs={completionAdvanceDelayMs}
     />
   )
 }

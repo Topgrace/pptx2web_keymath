@@ -53,7 +53,8 @@ export function DivisorProductTableMotion({
         animate={enabled ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.3, delay: 0.15 }}
       >
-        각 묶음에서 한 개씩 뽑아서 곱!
+        <MathInline tex={'2^4'} />의 약수와 <MathInline tex={'3^2'} />의 약수의 곱이{' '}
+        <MathInline tex={'144'} />의 약수!
       </motion.div>
 
       {/* Multiplication table */}

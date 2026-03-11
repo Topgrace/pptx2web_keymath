@@ -1,4 +1,4 @@
-import { useMemo, type ReactNode } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import type { MultiQuiz } from '@/schemas/step'
 import { useMultiBlankQuiz } from '@/hooks/use-quiz'
@@ -11,15 +11,20 @@ interface MultiBlankQuizAreaProps {
   stepId: number
   quiz: MultiQuiz
   renderBlanks?: (blank: (id: string) => ReactNode) => ReactNode
+  completionContent?: ReactNode
+  completionAdvanceDelayMs?: number
 }
 
 export const MultiBlankQuizArea = ({
   stepId,
   quiz,
   renderBlanks,
+  completionContent,
+  completionAdvanceDelayMs,
 }: MultiBlankQuizAreaProps) => {
   const { markSolved, advanceStep, currentStep, totalSteps, isSolved } = useSlideProgress()
   const solved = isSolved(stepId)
+  const [showCompletionContent, setShowCompletionContent] = useState(false)
 
   const itemsById = useMemo(
     () => Object.fromEntries(quiz.items.map((item) => [item.id, item])),
@@ -46,11 +51,14 @@ export const MultiBlankQuizArea = ({
     const result = checkAnswer(value)
     if (result.isCorrect && result.isComplete) {
       markSolved(stepId)
+      if (completionContent) {
+        setShowCompletionContent(true)
+      }
       setTimeout(() => {
         if (currentStep < totalSteps - 1) {
           advanceStep()
         }
-      }, 1200)
+      }, completionContent ? (completionAdvanceDelayMs ?? 2200) : 1200)
     }
     return result.isCorrect
   }
@@ -99,6 +107,17 @@ export const MultiBlankQuizArea = ({
       />
 
       <QuizFeedback message={feedback} type={feedbackType} />
+
+      {showCompletionContent && completionContent && (
+        <motion.div
+          className="mt-3"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          {completionContent}
+        </motion.div>
+      )}
     </motion.div>
   )
 }

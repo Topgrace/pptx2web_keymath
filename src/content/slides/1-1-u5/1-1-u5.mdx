@@ -10,6 +10,7 @@ import { DivisorCountSingleMotion } from '@/components/content/divisor-count-sin
 import { DivisorProductTableMotion } from '@/components/content/divisor-product-table-motion'
 import { QuizArea } from '@/components/quiz'
 import { MathInline } from '@/components/math'
+import { motion } from 'framer-motion'
 import { steps } from './steps-data'
 import shape2Character from '@/assets/images/shape_2.png'
 
@@ -24,7 +25,7 @@ export const meta = {
 <Step id={0}>
   <IntroCard
     characterImg={shape2Character}
-    speechText="수를 분해하면 모든 약수를 쉽게 찾을 수 있어! 약수의 개수 구하는 공식도 알아보자!"
+    speechText="소인수분해를 활용하면 모든 약수를 쉽게 찾을 수 있어! 약수의 개수 구하는 공식도 알아보자!"
     topicTitle={"05. 약수와 약수의\n개수 구하기"}
   >
     {steps[0].quiz && (
@@ -46,19 +47,26 @@ export const meta = {
       예시를 보고 빈칸을 순서대로 채워 보자.
     </div>
     {steps[1].quiz && (
-      <QuizArea
-        stepId={1}
-        quiz={steps[1].quiz}
-        renderBlanks={(blank) => (
-          <>
-            <MathInline tex={'21 = 3 \\times 7'} />
-            <br />
-            <>21은 {blank('multiples')}</>
-            <br />
-            <>{blank('divisors')}은 {blank('target')}의 약수</>
-          </>
-        )}
-      />
+      <motion.div
+        className="overflow-hidden"
+        initial={{ opacity: 0, y: 10, height: 0 }}
+        animate={{ opacity: 1, y: 0, height: 'auto' }}
+        transition={{ duration: 0.35, delay: 1.2 }}
+      >
+        <QuizArea
+          stepId={1}
+          quiz={steps[1].quiz}
+          renderBlanks={(blank) => (
+            <>
+              <MathInline tex={'21 = 3 \\times 7'} />
+              <br />
+              <>21은 {blank('multiples')}</>
+              <br />
+              <>{blank('divisors')}은 {blank('target')}의 약수</>
+            </>
+          )}
+        />
+      </motion.div>
     )}
   </StepCard>
 </Step>
@@ -72,37 +80,94 @@ export const meta = {
     </div>
     <DivisorCountSingleMotion stepId={2} />
     {steps[2].quiz && (
-      <QuizArea
-        stepId={2}
-        quiz={steps[2].quiz}
-        renderBlank={(blank) => (
-          <><MathInline tex={"2^4"} />의 약수의 개수는 {blank}개이다.</>
-        )}
-      />
+      <motion.div
+        className="overflow-hidden"
+        initial={{ opacity: 0, y: 10, height: 0 }}
+        animate={{ opacity: 1, y: 0, height: 'auto' }}
+        transition={{ duration: 0.35, delay: 2.5 }}
+      >
+        <QuizArea
+          stepId={2}
+          quiz={steps[2].quiz}
+          renderBlank={(blank) => (
+            <><MathInline tex={"2^5(=32)"} />의 약수의 개수는 {blank}개이다.</>
+          )}
+        />
+      </motion.div>
     )}
   </StepCard>
 </Step>
 
 <Step id={3}>
-  <NoteCard>
+  <StepCard>
     <div className="text-center text-base font-extrabold text-slide-gray leading-[1.9] mb-3">
-      <MathInline tex={"a^n"} />으로 소인수분해되었을 때
+      <MathInline tex={"a^n"} />으로 소인수분해되었을 때<br/>
+      (<MathInline tex={"a"} />는 <span className="text-[#E25555]">소수</span>, <MathInline tex={"n"} />은 양의 정수)
     </div>
 
     <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-3 py-3">
-      <div className="text-center text-[14px] font-bold text-slide-gray leading-[2]">
-        <MathInline tex={"a^n"} />의 약수:
+      <div className="text-center text-[14px] font-bold text-slide-gray leading-relaxed">
+        <MathInline tex={"a^n"} />의 약수는
         <br />
-        <MathInline tex={"1, \\, a, \\, a^2, \\, \\cdots, \\, a^{n-1}, \\, a^n"} />
-        <br />
-        <span className="text-[12px] text-[#555A66]">→ 총 (n+1)개</span>
+        <div className="mt-1 flex justify-center">
+          <div className="inline-grid grid-cols-6 items-end gap-x-2 gap-y-1.5">
+            <span className="text-slide-gray">
+              <MathInline tex={"1,"} />
+            </span>
+            <span className="text-slide-gray">
+              <MathInline tex={"a,"} />
+            </span>
+            <span className="text-slide-gray">
+              <MathInline tex={"a^2,"} />
+            </span>
+            <span className="text-slide-gray">
+              <MathInline tex={"\\cdots,"} />
+            </span>
+            <span className="text-slide-gray">
+              <MathInline tex={"a^{n-1},"} />
+            </span>
+            <span className="text-slide-gray">
+              <MathInline tex={"a^n"} />
+            </span>
+
+            <div className="col-span-1 flex flex-col items-center gap-1 pt-0.5">
+              <div className="h-[3px] w-full rounded-full bg-[#1F4F8A]/45" />
+              <span className="text-[11px] font-extrabold text-[#1F4F8A]/80">1개</span>
+            </div>
+            <div className="col-span-5 flex flex-col items-center gap-1 pt-0.5">
+              <div className="h-[3px] w-full rounded-full bg-[#1F4F8A]/45" />
+              <span className="text-[11px] font-extrabold text-[#1F4F8A]/80">
+                <MathInline katexFontSize="0.95em" tex={"n"} />개
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-1 text-[12px] text-[#555A66]">
+          → 총 <span className="font-extrabold text-[#1F4F8A]">(<MathInline tex={"n"} />+1)</span>개
+        </div>
       </div>
     </div>
 
     <div className="mx-auto rounded-lg bg-[#1F4F8A] px-4 py-3 text-center">
-      <span className="text-[16px] font-extrabold text-white">
-        <MathInline katexFontSize="1.3em" tex={"a^n"} /> 의 약수의 개수 ={' '}
-        <span className="text-[#ffe65c] text-[18px]">(n+1)개</span>
+      <span className="font-extrabold text-white">
+        <span className="inline-flex items-baseline whitespace-nowrap text-[15px] sm:text-[16px]">
+          <span className="inline-flex items-baseline align-baseline">
+            <MathInline katexFontSize="1.3em" tex={"a"} />
+            <sup className="-ml-[1px] -translate-y-[0.22em] text-[0.72em] font-extrabold leading-none text-[#ffe65c]">
+              <MathInline katexFontSize="1em" tex={"n"} />
+            </sup>
+          </span>
+          <span>의 약수의 개수</span>
+        </span>
+        <br />
+        <span className="inline-flex items-center text-[18px]">
+          <span className="text-white">=</span>
+          <span className="text-white">(</span>
+          <span className="text-[#ffe65c]">
+            <MathInline katexFontSize="1em" tex={"n"} />
+          </span>
+          <span className="text-white">+1)개</span>
+        </span>
       </span>
     </div>
 
@@ -110,33 +175,52 @@ export const meta = {
       <QuizArea
         stepId={3}
         quiz={steps[3].quiz}
-        renderBlank={(blank) => (
-          <><MathInline tex={"a^n"} />의 약수의 개수는 {blank}개이다.</>
+        completionAdvanceDelayMs={2600}
+        completionContent={(
+          <div className="mx-auto max-w-[320px] rounded-xl border border-[#E25555]/15 bg-[#fff4f1] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#A34735]">
+            <MathInline tex={"4^2"} />은 소인수분해꼴이 아니므로{' '}
+            <span className="text-[#E25555]">2+1=3개</span>라고 하면 안 된다!
+          </div>
         )}
-      />
-    )}
-  </NoteCard>
-</Step>
-
-<Step id={4}>
-  <StepCard variant="white">
-    <DivisorProductTableMotion stepId={4} />
-    {steps[4].quiz && (
-      <QuizArea
-        stepId={4}
-        quiz={steps[4].quiz}
-        renderBlank={(blank) => (
-          <><MathInline tex={"2^4 \\times 3^2"} />의 약수의 개수는 {blank}개이다.</>
+        renderBlanks={(blank) => (
+          <>
+            <><MathInline tex={"17^8"} />의 약수의 개수는 {blank('prime-power-count')}개이다.</>
+            <br />
+            <><MathInline tex={"4^2"} />의 약수의 개수는 {blank('non-prime-power-count')}개이다.</>
+          </>
         )}
       />
     )}
   </StepCard>
 </Step>
 
+<Step id={4}>
+  <StepCard variant="white">
+    <DivisorProductTableMotion stepId={4} />
+    {steps[4].quiz && (
+      <motion.div
+        className="overflow-hidden"
+        initial={{ opacity: 0, y: 10, height: 0 }}
+        animate={{ opacity: 1, y: 0, height: 'auto' }}
+        transition={{ duration: 0.35, delay: 2 }}
+      >
+        <QuizArea
+          stepId={4}
+          quiz={steps[4].quiz}
+          renderBlank={(blank) => (
+            <><MathInline tex={"5^3 \\times 7^4"} />의 약수의 개수는 {blank}개이다.</>
+          )}
+        />
+      </motion.div>
+    )}
+  </StepCard>
+</Step>
+
 <Step id={5}>
-  <NoteCard>
+  <StepCard>
     <div className="text-center text-base font-extrabold text-slide-gray leading-[1.9] mb-3">
       <MathInline tex={"a^m \\times b^n"} />으로 소인수분해되었을 때
+      <MathInline tex={"a^m \\times b^n"} />의 약수
     </div>
 
     <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-3 py-3">
@@ -145,14 +229,46 @@ export const meta = {
         <br />
         <MathInline tex={"b^n"} />의 약수: <span className="text-[#E25555] font-extrabold">(n+1)</span>개
         <br />
-        <span className="text-[12px] text-[#555A66]">→ 각각에서 하나씩 뽑아 곱!</span>
+        <span className="text-[12px] text-[#555A66]">→ 각각에서 하나씩 뽑아 곱한 것이 약수!</span>
       </div>
     </div>
 
     <div className="mx-auto rounded-lg bg-[#1F4F8A] px-4 py-3 text-center">
-      <span className="text-[15px] font-extrabold text-white">
-        약수의 개수 ={' '}
-        <span className="text-[#ffe65c] text-[17px]">(m+1)×(n+1)개</span>
+      <span className="font-extrabold text-white">
+        <span className="inline-flex items-baseline whitespace-nowrap text-[14px] sm:text-[15px]">
+          <span className="inline-flex items-baseline align-baseline">
+            <MathInline katexFontSize="1.2em" tex={"a"} />
+            <sup className="-ml-[1px] -translate-y-[0.22em] text-[0.72em] font-extrabold leading-none text-[#8fd0ff]">
+              <MathInline katexFontSize="1em" tex={"m"} />
+            </sup>
+          </span>
+          <span className="mx-1">
+            <MathInline katexFontSize="1.15em" tex={"\\times"} />
+          </span>
+          <span className="inline-flex items-baseline align-baseline">
+            <MathInline katexFontSize="1.2em" tex={"b"} />
+            <sup className="-ml-[1px] -translate-y-[0.22em] text-[0.72em] font-extrabold leading-none text-[#ffb0a2]">
+              <MathInline katexFontSize="1em" tex={"n"} />
+            </sup>
+          </span>
+          <span>의 약수의 개수</span>
+          <span className="ml-1 text-[12px] text-white/80">
+            (<MathInline katexFontSize="1em" tex={"a"} />, <MathInline katexFontSize="1em" tex={"b"} />는 소수)
+          </span>
+        </span>
+        <br />
+        <span className="inline-flex items-center text-[17px]">
+          <span className="text-white">=</span>
+          <span className="text-white">(</span>
+          <span className="text-[#8fd0ff]">
+            <MathInline katexFontSize="1em" tex={"m"} />
+          </span>
+          <span className="text-white">+1)×(</span>
+          <span className="text-[#ffb0a2]">
+            <MathInline katexFontSize="1em" tex={"n"} />
+          </span>
+          <span className="text-white">+1)개</span>
+        </span>
       </span>
     </div>
 
@@ -161,24 +277,28 @@ export const meta = {
         stepId={5}
         quiz={steps[5].quiz}
         renderBlank={(blank) => (
-          <><MathInline tex={"a^m \\times b^n"} />의 약수의 개수는 {blank}개이다.</>
+          <><MathInline tex={"3^p \\times 7^q"} />의 약수의 개수는 {blank}개이다.</>
         )}
       />
     )}
-  </NoteCard>
+  </StepCard>
 </Step>
 
 <Step id={6}>
-  <PracticeCard title="확인 문제" subtitle="세 소인수의 경우로 확장">
+  <PracticeCard title="확장" subtitle="세 소인수의 경우로 확장">
     <div className="text-center text-[15px] font-extrabold text-slide-gray leading-[1.9] mb-3">
       <MathInline katexFontSize="1.5em" tex={"a^{\\ell} \\times b^m \\times c^n"} />
       <br />
       <span className="text-[13px] font-bold text-[#555A66]">으로 소인수분해되었을 때</span>
+      <br />
+      <span className="text-[12px] font-bold text-[#555A66]">
+        (<MathInline katexFontSize="1em" tex={"a"} />, <MathInline katexFontSize="1em" tex={"b"} />, <MathInline katexFontSize="1em" tex={"c"} />는 <span className="text-[#E25555]">소수</span>)
+      </span>
     </div>
 
     <div className="mx-auto mb-3 rounded-lg bg-[#f5f5f5] px-3 py-3">
       <div className="text-center text-[13px] font-bold text-slide-gray leading-[2]">
-        약수의 개수 = <span className="text-[#ffe65c] bg-[#1F4F8A] rounded px-2 py-0.5 font-extrabold">(ℓ+1)×(m+1)×(n+1)개</span>
+        약수의 개수<br/> = <span className="font-extrabold"><MathInline tex={"(\\ell+1)\\times(m+1)\\times(n+1)"} />개</span>
       </div>
     </div>
 
@@ -189,7 +309,7 @@ export const meta = {
           <MathInline tex={"2^3 \\times 3^1 \\times 5^1"} /> 의 약수의 개수는?
           <br />
           <span className="text-[12px] text-[#555A66]">
-            (3+1)×(1+1)×(1+1) = 4×2×2
+            <MathInline tex={"(3+1)\\times(1+1)\\times(1+1)=16"} />
           </span>
         </div>
       </div>
@@ -200,7 +320,7 @@ export const meta = {
         stepId={6}
         quiz={steps[6].quiz}
         renderBlank={(blank) => (
-          <><MathInline tex={"2^3 \\times 3 \\times 5"} />의 약수의 개수는 {blank}개이다.</>
+          <><MathInline tex={"3^3 \\times 5^2 \\times 7^3"} />의 약수의 개수는 {blank}개이다.</>
         )}
       />
     )}
@@ -210,10 +330,43 @@ export const meta = {
 <Step id={7}>
   <SummaryCard
     title="약수의 개수 핵심 정리"
+    layout="stack-below-tag"
     cases={[
       { tag: '약수', tagVariant: 'equal', content: <>나누어떨어지게 하는 수</> },
-      { tag: 'aⁿ', tagVariant: 'big', content: <>약수의 개수 = <span className="font-extrabold text-[#1F4F8A]">(n+1)</span>개</> },
-      { tag: 'a^m×b^n', tagVariant: 'small', content: <>약수의 개수 = <span className="font-extrabold text-[#1F4F8A]">(m+1)×(n+1)</span>개</> },
+      {
+        tag: (
+          <>
+            <MathInline tex={"a^n"} />
+            <span className="ml-1">(<MathInline katexFontSize="1em" tex={"a"} />는 소수)</span>
+          </>
+        ),
+        tagVariant: 'big',
+        content: (
+          <>
+            <span className="block">약수의 개수</span>
+            <span className="mt-0.5 block">
+              = <span className="font-extrabold text-[#1F4F8A]"><MathInline tex={"(n+1)"} /></span>개
+            </span>
+          </>
+        ),
+      },
+      {
+        tag: (
+          <>
+            <MathInline tex={"a^m \\times b^n"} />
+            <span className="ml-1">(<MathInline katexFontSize="1em" tex={"a"} />, <MathInline katexFontSize="1em" tex={"b"} />는 소수)</span>
+          </>
+        ),
+        tagVariant: 'small',
+        content: (
+          <>
+            <span className="block">약수의 개수</span>
+            <span className="mt-0.5 block">
+              = <span className="font-extrabold text-[#1F4F8A]"><MathInline tex={"(m+1)\\times(n+1)"} /></span>개
+            </span>
+          </>
+        ),
+      },
     ]}
   >
     {steps[7].quiz && (
@@ -221,7 +374,16 @@ export const meta = {
         stepId={7}
         quiz={steps[7].quiz}
         renderBlank={(blank) => (
-          <><MathInline tex={"a^n"} />의 약수의 개수는 {blank}개이다.</>
+          <div className="inline-flex flex-wrap items-baseline justify-center gap-x-1 gap-y-2">
+            <span className="relative inline-block pr-4">
+              <MathInline tex={"5"} />
+              <span className="absolute left-[0.58em] -top-[0.52em]">
+                {blank}
+              </span>
+            </span>
+            <MathInline tex={"\\times 11^5"} />
+            <span>의 약수의 개수는 48개이다.</span>
+          </div>
         )}
       />
     )}
@@ -234,7 +396,7 @@ export const meta = {
     <br />
     약수 개수 공식까지 모두 정리했어요.
     <br />
-    지수에 1을 더해서 곱하기! 잊지 마세요.
+    소인수분해를 완성하고 <br/>지수에 1을 더해서 곱하기! 잊지 마세요.
   </CompleteCard>
 </Step>
 
