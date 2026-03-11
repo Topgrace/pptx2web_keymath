@@ -29,7 +29,6 @@ const rawSteps = [
           choices: [
             { label: '3의 배수이자 7의 배수', value: '3의 배수이자 7의 배수' },
             { label: '3의 약수이자 7의 약수', value: '3의 약수이자 7의 약수' },
-            { label: '3과 7의 공배수', value: '3과 7의 공배수' },
             { label: '3과 7의 공약수', value: '3과 7의 공약수' },
           ],
         },
@@ -63,7 +62,7 @@ const rawSteps = [
     type: 'concept',
     cardVariant: 'white',
     quiz: {
-      answer: '5',
+      answer: '6',
       blankType: 'normal',
       choices: [
         { label: '4', value: '4' },
@@ -78,13 +77,30 @@ const rawSteps = [
     type: 'note',
     cardVariant: 'default',
     quiz: {
-      answer: '(n+1)',
-      blankType: 'normal',
-      choices: [
-        { label: 'n', value: 'n' },
-        { label: '(n+1)', value: '(n+1)' },
-        { label: '(n-1)', value: '(n-1)' },
-        { label: '2n', value: '2n' },
+      kind: 'multi',
+      items: [
+        {
+          id: 'prime-power-count',
+          answer: '9',
+          blankType: 'normal',
+          choices: [
+            { label: '7', value: '7' },
+            { label: '8', value: '8' },
+            { label: '9', value: '9' },
+            { label: '10', value: '10' },
+          ],
+        },
+        {
+          id: 'non-prime-power-count',
+          answer: '5',
+          blankType: 'normal',
+          choices: [
+            { label: '3', value: '3' },
+            { label: '4', value: '4' },
+            { label: '5', value: '5' },
+            { label: '6', value: '6' },
+          ],
+        },
       ],
     },
   },
@@ -93,7 +109,7 @@ const rawSteps = [
     type: 'concept',
     cardVariant: 'white',
     quiz: {
-      answer: '15',
+      answer: '20',
       blankType: 'normal',
       choices: [
         { label: '10', value: '10' },
@@ -108,13 +124,14 @@ const rawSteps = [
     type: 'note',
     cardVariant: 'default',
     quiz: {
-      answer: '(m+1)×(n+1)',
+      answer: '(p+1)×(q+1)',
+      answerLatex: '(p+1)\\times(q+1)',
       blankType: 'normal',
       choices: [
-        { label: 'm×n', value: 'm×n' },
-        { label: '(m+1)×(n+1)', value: '(m+1)×(n+1)' },
-        { label: '(m+n)', value: '(m+n)' },
-        { label: 'm×n+1', value: 'm×n+1' },
+        { label: 'p×q', value: 'p×q', latex: 'p\\times q' },
+        { label: '(p+1)×(q+1)', value: '(p+1)×(q+1)', latex: '(p+1)\\times(q+1)' },
+        { label: '(p+q)', value: '(p+q)', latex: '(p+q)' },
+        { label: 'p×q+1', value: 'p×q+1', latex: 'p\\times q+1' },
       ],
     },
   },
@@ -123,13 +140,13 @@ const rawSteps = [
     type: 'practice',
     cardVariant: 'white',
     quiz: {
-      answer: '24',
+      answer: '48',
       blankType: 'normal',
       choices: [
-        { label: '18', value: '18' },
-        { label: '20', value: '20' },
         { label: '24', value: '24' },
-        { label: '30', value: '30' },
+        { label: '36', value: '36' },
+        { label: '48', value: '48' },
+        { label: '64', value: '64' },
       ],
     },
   },
@@ -138,13 +155,13 @@ const rawSteps = [
     type: 'summary',
     cardVariant: 'white',
     quiz: {
-      answer: '(n+1)',
-      blankType: 'normal',
+      answer: '7',
+      blankType: 'exponent',
       choices: [
-        { label: 'n', value: 'n' },
-        { label: '(n+1)', value: '(n+1)' },
-        { label: '(n-1)', value: '(n-1)' },
-        { label: '2n', value: '2n' },
+        { label: '5', value: '5' },
+        { label: '6', value: '6' },
+        { label: '7', value: '7' },
+        { label: '8', value: '8' },
       ],
     },
   },

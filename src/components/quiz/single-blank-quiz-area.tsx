@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import type { SingleQuiz } from '@/schemas/step'
 import { useQuiz } from '@/hooks/use-quiz'
@@ -12,6 +12,8 @@ interface SingleBlankQuizAreaProps {
   quiz: SingleQuiz
   questionContent?: ReactNode
   renderBlank?: (blank: ReactNode) => ReactNode
+  completionContent?: ReactNode
+  completionAdvanceDelayMs?: number
 }
 
 export const SingleBlankQuizArea = ({
@@ -19,19 +21,25 @@ export const SingleBlankQuizArea = ({
   quiz,
   questionContent,
   renderBlank,
+  completionContent,
+  completionAdvanceDelayMs,
 }: SingleBlankQuizAreaProps) => {
   const { markSolved, advanceStep, currentStep, totalSteps } = useSlideProgress()
   const { isOpen, isSolved, feedback, feedbackType, toggleOpen, checkAnswer, solvedAnswer } = useQuiz(quiz)
+  const [showCompletionContent, setShowCompletionContent] = useState(false)
 
   const handleSelect = (value: string): boolean => {
     const correct = checkAnswer(value)
     if (correct) {
       markSolved(stepId)
+      if (completionContent) {
+        setShowCompletionContent(true)
+      }
       setTimeout(() => {
         if (currentStep < totalSteps - 1) {
           advanceStep()
         }
-      }, 1200)
+      }, completionContent ? (completionAdvanceDelayMs ?? 2200) : 1200)
     }
     return correct
   }
@@ -74,6 +82,17 @@ export const SingleBlankQuizArea = ({
       />
 
       <QuizFeedback message={feedback} type={feedbackType} />
+
+      {showCompletionContent && completionContent && (
+        <motion.div
+          className="mt-3"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          {completionContent}
+        </motion.div>
+      )}
     </motion.div>
   )
 }
