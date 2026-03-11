@@ -1,0 +1,259 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { StepCard } from '@/components/cards/step-card'
+import { NoteCard } from '@/components/cards/note-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { SummaryCard } from '@/components/cards/summary-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { GcdPrimeFactorizationMotion } from '@/components/content/gcd-prime-factorization-motion'
+import { GcdDivisionTableMotion } from '@/components/content/gcd-division-table-motion'
+import { QuizArea } from '@/components/quiz'
+import { MathInline } from '@/components/math'
+import { steps } from './steps-data'
+import shape2Character from '@/assets/images/shape_2.png'
+
+export const meta = {
+  slug: '1-1-u6-common-divisor-gcd',
+  title: '공약수와 최대공약수',
+  subtitle: '중1 수학 · 소인수분해',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg={shape2Character}
+    speechText="최대공약수만 알면 공약수도 한 번에 찾을 수 있어! 공약수와 최대공약수를 구하는 두 가지 방법을 배워 보자."
+    topicTitle={"06. 공약수와\n최대공약수"}
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>두 수의 공통인 약수를 {blank}라 한다.</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <StepCard variant="white">
+    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
+      공약수는
+      <br />
+      두 수에 공통으로 들어 있는 약수
+    </div>
+
+    <div className="grid gap-3">
+      <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[15px] font-bold leading-[1.8] text-slide-gray">
+        12의 약수:
+        <span className="ml-2 font-extrabold text-[#1F4F8A]">1, 2, 3, 4, 6, 12</span>
+      </div>
+      <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[15px] font-bold leading-[1.8] text-slide-gray">
+        18의 약수:
+        <span className="ml-2 font-extrabold text-[#1F4F8A]">1, 2, 3, 6, 9, 18</span>
+      </div>
+      <div className="rounded-xl bg-[#FFF4B8] px-4 py-3 text-center text-[16px] font-extrabold leading-[1.8] text-[#6F5500]">
+        겹치는 수인 <span className="text-[#1F4F8A]">1, 2, 3, 6</span>이 공약수
+      </div>
+    </div>
+
+    {steps[1].quiz && (
+      <QuizArea
+        stepId={1}
+        quiz={steps[1].quiz}
+        renderBlanks={(blank) => (
+          <>
+            <>12와 18에 공통으로 들어 있는 약수를 {blank('term')}라 하고</>
+            <br />
+            <>12와 18의 공약수는 {blank('values')}이다.</>
+          </>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={2}>
+  <NoteCard title="최대공약수만 알면 공약수를 구할 수 있다!">
+    <div className="rounded-xl bg-[#EEF6FF] px-4 py-3 text-center text-[17px] font-extrabold leading-[1.8] text-[#1F4F8A]">
+      공약수는 최대공약수의 약수이다.
+    </div>
+
+    <div className="mt-3 rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[14px] font-bold leading-[1.8] text-slide-gray">
+      예를 들어 <span className="font-extrabold text-[#E25555]">A, B의 최대공약수가 8</span>이면
+      <br />
+      공약수는 <span className="font-extrabold text-[#1F4F8A]">1, 2, 4, 8</span>이다.
+    </div>
+
+    {steps[2].quiz && (
+      <QuizArea
+        stepId={2}
+        quiz={steps[2].quiz}
+        renderBlank={(blank) => (
+          <>A, B의 최대공약수가 8이면 A, B의 공약수는 8의 {blank}이다.</>
+        )}
+      />
+    )}
+  </NoteCard>
+</Step>
+
+<Step id={3}>
+  <StepCard variant="white">
+    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
+      최대공약수를 구하는 방법
+    </div>
+
+    <div className="grid gap-3 md:grid-cols-2">
+      <div className="rounded-xl border-2 border-[#F0DC45] bg-[#FFFDF2] px-4 py-3">
+        <div className="mb-2 inline-flex rounded-md bg-[#2D67A8] px-2 py-1 text-xs font-extrabold text-white">
+          방법 1
+        </div>
+        <div className="text-[15px] font-extrabold text-[#1F4F8A]">소인수분해 이용하기</div>
+        <div className="mt-2 text-[13px] font-bold leading-[1.7] text-slide-gray">
+          각각 소인수분해한 뒤
+          <br />
+          공통 소인수만 골라 곱한다.
+        </div>
+      </div>
+
+      <div className="rounded-xl border-2 border-[#F0DC45] bg-[#FFFDF2] px-4 py-3">
+        <div className="mb-2 inline-flex rounded-md bg-[#2D67A8] px-2 py-1 text-xs font-extrabold text-white">
+          방법 2
+        </div>
+        <div className="text-[15px] font-extrabold text-[#1F4F8A]">나눗셈 이용하기</div>
+        <div className="mt-2 text-[13px] font-bold leading-[1.7] text-slide-gray">
+          공약수로 계속 나눈 뒤
+          <br />
+          나눈 수를 모두 곱한다.
+        </div>
+      </div>
+    </div>
+
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlank={(blank) => (
+          <>공통 소인수의 지수가 다르면 더 {blank}을 택해 곱한다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={4}>
+  <StepCard variant="white">
+    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
+      <span className="rounded-md bg-[#2D67A8] px-2 py-1 text-xs font-extrabold text-white">방법 1</span>
+      <span className="ml-2">소인수분해 이용하기</span>
+    </div>
+
+    <GcdPrimeFactorizationMotion />
+
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlank={(blank) => (
+          <>24, 30, 60의 최대공약수는 {blank}이다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={5}>
+  <PracticeCard title="보강" subtitle="소인수분해로 한 번 더 확인">
+    <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
+      <MathInline tex={'18 = 2 \\times 3^2'} />
+      <br />
+      <MathInline tex={'24 = 2^3 \\times 3'} />
+    </div>
+
+    <div className="mt-3 rounded-xl bg-[#EEF6FF] px-4 py-3 text-center text-[13px] font-bold leading-[1.8] text-[#555A66]">
+      공통 소인수는 <span className="font-extrabold text-[#1F4F8A]">2, 3</span>이므로
+      <br />
+      최대공약수는 <span className="font-extrabold text-[#E25555]">6</span>이 된다.
+    </div>
+
+    {steps[5].quiz && (
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        completionContent={(
+          <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
+            공약수는 최대공약수 6의 약수이므로
+            <br />
+            1, 2, 3, 6이다.
+          </div>
+        )}
+        renderBlanks={(blank) => (
+          <>
+            <>18과 24의 최대공약수는 {blank('gcd')}이고</>
+            <br />
+            <>공약수는 {blank('common-divisors')}이다.</>
+          </>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={6}>
+  <StepCard variant="white">
+    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
+      <span className="rounded-md bg-[#2D67A8] px-2 py-1 text-xs font-extrabold text-white">방법 2</span>
+      <span className="ml-2">나눗셈 이용하기</span>
+    </div>
+
+    <GcdDivisionTableMotion />
+
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlank={(blank) => (
+          <>4, 5, 10의 공약수는 {blank}뿐이므로 나누기를 멈춘다.</>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={7}>
+  <SummaryCard
+    title="공약수와 최대공약수 핵심 정리"
+    layout="stack-below-tag"
+    cases={[
+      { tag: '공약수', tagVariant: 'equal', content: <>두 수에 공통인 약수</> },
+      { tag: '최대공약수', tagVariant: 'big', content: <>공약수 중에서 가장 큰 수</> },
+      { tag: '핵심 성질', tagVariant: 'small', content: <>공약수는 최대공약수의 약수</> },
+      { tag: '서로소', tagVariant: 'equal', content: <>최대공약수가 1인 두 자연수, 예: 3과 4</> },
+    ]}
+  >
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlank={(blank) => (
+          <>최대공약수가 1인 두 자연수를 {blank}라 한다.</>
+        )}
+      />
+    )}
+  </SummaryCard>
+</Step>
+
+<Step id={8}>
+  <CompleteCard emoji="🧩" title="공약수와 최대공약수 완료!">
+    공약수의 뜻, 최대공약수의 성질,
+    <br />
+    그리고 두 가지 구하는 방법까지 모두 정리했어요.
+    <br />
+    최대공약수를 알면 공약수도 바로 찾을 수 있다는 점을 기억하세요.
+  </CompleteCard>
+</Step>
+
+</SlideContent>

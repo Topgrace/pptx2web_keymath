@@ -1,0 +1,16 @@
+import SlidePage from '@/pages/SlidePage'
+import { slideConfig } from '@/content/slides/1-1-u7/config'
+import { quizStepIds } from '@/content/slides/1-1-u7/steps-data'
+import MdxContent from '@/content/slides/1-1-u7/1-1-u7.mdx'
+
+export default function Page_1_1_u7() {
+  return (
+    <div style={{ backgroundColor: '#B9DDF2', minHeight: '100vh' }}>
+      <SlidePage
+        Content={MdxContent}
+        totalSteps={slideConfig.totalSteps}
+        quizStepIds={quizStepIds}
+      />
+    </div>
+  )
+}
