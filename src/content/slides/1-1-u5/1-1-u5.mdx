@@ -6,6 +6,7 @@ import { PracticeCard } from '@/components/cards/practice-card'
 import { SummaryCard } from '@/components/cards/summary-card'
 import { CompleteCard } from '@/components/cards/complete-card'
 import { DivisorDefinitionMotion } from '@/components/content/divisor-definition-motion'
+import { DivisorDefinitionMultiBlankQuiz } from '@/components/content/divisor-definition-multi-blank-quiz'
 import { DivisorCountSingleMotion } from '@/components/content/divisor-count-single-motion'
 import { DivisorProductTableMotion } from '@/components/content/divisor-product-table-motion'
 import { QuizArea } from '@/components/quiz'
@@ -42,20 +43,17 @@ export const meta = {
 <Step id={1}>
   <StepCard variant="white">
     <DivisorDefinitionMotion stepId={1} />
-    {steps[1].quiz && (
-      <QuizArea
-        stepId={1}
-        quiz={steps[1].quiz}
-        renderBlank={(blank) => (
-          <>20의 약수의 개수는 {blank}개이다.</>
-        )}
-      />
-    )}
+    <DivisorDefinitionMultiBlankQuiz stepId={1} />
   </StepCard>
 </Step>
 
 <Step id={2}>
   <StepCard variant="white">
+    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
+      소인수분해를 이용한 약수와
+      <br />
+      약수 개수 구하기
+    </div>
     <DivisorCountSingleMotion stepId={2} />
     {steps[2].quiz && (
       <QuizArea
