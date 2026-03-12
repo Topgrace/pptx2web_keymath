@@ -2,7 +2,7 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
 import { MathInline } from '@/components/math'
 import { cn } from '@/lib/utils'
 
-type PrimeStep = 0 | 1 | 2 | 3
+type PrimeStep = 0 | 1 | 2 | 3 | 4 | 5
 
 interface GcdPrimeFactorizationMotionProps {
   className?: string
@@ -54,11 +54,11 @@ const resultChips = [
 ] as const
 
 function isHighlightedChip(chip: FactorChipData, step: PrimeStep) {
-  return step >= 2 && chip.highlight
+  return step >= 4 && chip.highlight
 }
 
 function isDimmedChip(chip: FactorChipData, step: PrimeStep) {
-  return step >= 2 && !chip.highlight
+  return step >= 4 && !chip.highlight
 }
 
 function FactorChip({
@@ -109,7 +109,7 @@ function ResultTray({ step }: { step: PrimeStep }) {
 
       <div className="flex min-h-[84px] flex-col justify-center rounded-[22px] border border-dashed border-[#9CC7FF] bg-white/75 px-4 py-4">
         <div className="flex flex-wrap items-center justify-center gap-2">
-          {step < 3 ? (
+          {step < 5 ? (
             <>
               <span className="rounded-full bg-[#d9ecff] px-3 py-1 text-[12px] font-black text-[#4A78A8]">
                 아직 조립 전
@@ -142,7 +142,7 @@ function ResultTray({ step }: { step: PrimeStep }) {
       </div>
 
       <AnimatePresence initial={false}>
-        {step >= 3 ? (
+        {step >= 5 ? (
           <motion.div
             key="gcd-finale"
             initial={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -186,7 +186,7 @@ function ResultTray({ step }: { step: PrimeStep }) {
 
 export function GcdPrimeFactorizationMotion({
   className,
-  step = 3,
+  step = 5,
 }: GcdPrimeFactorizationMotionProps) {
   return (
     <LayoutGroup>
@@ -196,46 +196,10 @@ export function GcdPrimeFactorizationMotion({
           className,
         )}
       >
-        <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <div className="text-[11px] font-black uppercase tracking-[0.26em] text-[#7E6A00]">
-              Prime Factory
-            </div>
-            <div className="mt-1 text-[15px] font-extrabold text-[#1F4F8A]">
-              소인수 블록을 보고 공통 재료만 골라 보자
-            </div>
-          </div>
-          <div className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-black text-[#876A00] shadow-sm">
-            {step === 0 && '준비 중'}
-            {step === 1 && '분해 확인'}
-            {step === 2 && '공통 소인수 스캔'}
-            {step === 3 && '최대공약수 조립'}
-          </div>
-        </div>
-
-        <motion.div
-          className="rounded-2xl bg-white/80 px-4 py-3 text-center text-[14px] font-bold leading-[1.8] text-[#5A667C] shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
-          animate={{
-            borderColor: step >= 2 ? '#F0DC45' : '#dbe8f5',
-            backgroundColor: step >= 2 ? 'rgba(255,248,207,0.88)' : 'rgba(255,255,255,0.8)',
-          }}
-          transition={{ duration: 0.24 }}
-        >
-          {step === 0 && '버튼을 눌러 24, 30, 60을 소인수 블록으로 분해해 보세요.'}
-          {step === 1 && '세 수를 소인수 블록으로 나란히 펼쳤어요. 이제 겹치는 재료를 찾아보세요.'}
-          {step === 2 && '공통 소인수는 2와 3이고, 지수가 다르면 더 작은 것을 선택해요.'}
-          {step === 3 && '선택한 재료 2와 3이 정답칸으로 이동해 최대공약수 6이 완성됩니다.'}
-        </motion.div>
-
-        <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
-          <div className="rounded-[26px] bg-white/75 p-4 shadow-[0_12px_32px_rgba(31,79,138,0.08)]">
-            <div className="mb-3 text-[12px] font-black uppercase tracking-[0.24em] text-[#6C88AD]">
-              Number Breakdown
-            </div>
-
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
             <div className="space-y-3">
               {factorizationRows.map((row, rowIndex) => {
-                const rowsVisible = step >= 1
+                const rowsVisible = step >= rowIndex + 1
                 return (
                   <motion.div
                     key={row.value}
@@ -255,7 +219,7 @@ export function GcdPrimeFactorizationMotion({
                       <div className="flex flex-1 flex-wrap items-center gap-2">
                         {rowsVisible ? (
                           row.chips.map((chip, chipIndex) => {
-                            const movedToTray = step >= 3 && row.value === 30 && chip.selected
+                            const movedToTray = step >= 5 && row.value === 30 && chip.selected
                             const highlight = isHighlightedChip(chip, step)
                             const dimmed = isDimmedChip(chip, step)
 
@@ -299,51 +263,44 @@ export function GcdPrimeFactorizationMotion({
                   </motion.div>
                 )
               })}
-            </div>
-
             <motion.div
-              className="mt-4 rounded-2xl border border-[#D8E7F7] bg-[#F6FBFF] px-4 py-3"
+              className="flex min-h-[52px] flex-wrap items-center gap-2 px-1 py-1"
               animate={{
-                opacity: step >= 2 ? 1 : 0.72,
-                y: step >= 2 ? 0 : 4,
+                opacity: step >= 4 ? 1 : 0.72,
+                y: step >= 4 ? 0 : 4,
               }}
               transition={{ duration: 0.24 }}
             >
-              <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[#6C88AD]">
-                Scan Result
-              </div>
-              <div className="mt-2 flex flex-wrap items-center gap-2">
-                {step < 2 ? (
-                  <span className="text-[13px] font-bold text-[#6F7D93]">
-                    공통 소인수를 찾으면 선택 카드가 여기 나타납니다.
-                  </span>
-                ) : (
-                  <>
-                    {step < 3 ? (
-                      <>
-                        <FactorChip
-                          chip={{ base: '2' }}
-                          layoutId="pick-2"
-                          className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
-                        />
-                        <span className="text-[18px] font-black text-[#90A4BF]">×</span>
-                        <FactorChip
-                          chip={{ base: '3' }}
-                          layoutId="pick-3"
-                          className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
-                        />
-                      </>
-                    ) : (
-                      <span className="text-[13px] font-bold text-[#5D7392]">
-                        선택 카드가 결과 트레이로 이동했어요.
-                      </span>
-                    )}
-                    <span className="rounded-full bg-[#EEF6FF] px-3 py-1 text-[12px] font-black text-[#3C679A]">
-                      작은 지수 선택
+              {step < 4 ? (
+                <span className="text-[13px] font-bold text-[#6F7D93]">
+                  공통 소인수를 찾으면 여기에 표시됩니다.
+                </span>
+              ) : (
+                <>
+                  {step < 5 ? (
+                    <>
+                      <FactorChip
+                        chip={{ base: '2' }}
+                        layoutId="pick-2"
+                        className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
+                      />
+                      <span className="text-[18px] font-black text-[#90A4BF]">×</span>
+                      <FactorChip
+                        chip={{ base: '3' }}
+                        layoutId="pick-3"
+                        className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
+                      />
+                    </>
+                  ) : (
+                    <span className="text-[13px] font-bold text-[#5D7392]">
+                      선택 카드가 결과 트레이로 이동했어요.
                     </span>
-                  </>
-                )}
-              </div>
+                  )}
+                  <span className="rounded-full bg-[#EEF6FF] px-3 py-1 text-[12px] font-black text-[#3C679A]">
+                    작은 지수 선택
+                  </span>
+                </>
+              )}
             </motion.div>
           </div>
 
