@@ -5,7 +5,8 @@ import { NoteCard } from '@/components/cards/note-card'
 import { PracticeCard } from '@/components/cards/practice-card'
 import { SummaryCard } from '@/components/cards/summary-card'
 import { CompleteCard } from '@/components/cards/complete-card'
-import { GcdPrimeFactorizationMotion } from '@/components/content/gcd-prime-factorization-motion'
+import { StaggerReveal, StaggerItem, EmojiBounce } from '@/components/animations'
+import { InteractiveGcdShowcase } from '@/components/content/interactive-gcd-showcase'
 import { GcdDivisionTableMotion } from '@/components/content/gcd-division-table-motion'
 import { QuizArea } from '@/components/quiz'
 import { MathInline } from '@/components/math'
@@ -31,7 +32,7 @@ export const meta = {
         stepId={0}
         quiz={steps[0].quiz}
         renderBlank={(blank) => (
-          <>두 수의 공통인 약수를 {blank}라 한다.</>
+          <>여러 수의 공통인 약수를 {blank}라 한다.</>
         )}
       />
     )}
@@ -145,13 +146,37 @@ export const meta = {
 </Step>
 
 <Step id={4}>
-  <StepCard variant="white">
-    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
-      <span className="rounded-md bg-[#2D67A8] px-2 py-1 text-xs font-extrabold text-white">방법 1</span>
-      <span className="ml-2">소인수분해 이용하기</span>
-    </div>
+  <StepCard variant="white" className="mx-3 px-4 py-6 shadow-none sm:mx-4 sm:px-6 sm:py-7">
+    <StaggerReveal staggerChildren={0.16}>
+      <StaggerItem>
+        <div className="text-center">
+          <h3 className="text-[21px] font-black leading-tight text-[#1F3F68] sm:text-[24px]">
+            최대공약수 구하기!
+          </h3>
+        </div>
+      </StaggerItem>
 
-    <GcdPrimeFactorizationMotion />
+      <StaggerItem className="mt-5 sm:mt-6">
+        <InteractiveGcdShowcase />
+      </StaggerItem>
+
+      <StaggerItem className="mt-5 sm:mt-6">
+        <div className="rounded-[20px] bg-[#F4F9FF] p-4 sm:rounded-[24px] sm:p-5">
+          <div className="mb-3 flex items-center gap-2 text-[16px] font-black text-[#1F4F8A]">
+            <EmojiBounce>💡</EmojiBounce>
+            핵심 기억하기
+          </div>
+          <ul className="space-y-2 text-[14px] font-bold leading-[1.8] text-[#5F6D82]">
+            <li>
+              <b className="text-[#1F4F8A]">소인수분해:</b> 공통 소인수 중에서 <b>지수가 가장 작은 것</b>만 골라 곱해요.
+            </li>
+            <li>
+              <b className="text-[#1F4F8A]">나눗셈:</b> 몫들의 공약수가 1뿐이 될 때까지 나누고, <b>왼쪽의 수</b>만 곱해요.
+            </li>
+          </ul>
+        </div>
+      </StaggerItem>
+    </StaggerReveal>
 
     {steps[4].quiz && (
       <QuizArea
