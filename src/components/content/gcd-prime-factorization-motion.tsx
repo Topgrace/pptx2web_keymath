@@ -196,7 +196,7 @@ export function GcdPrimeFactorizationMotion({
           className,
         )}
       >
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
+        <div className="flex flex-col gap-4">
             <div className="space-y-3">
               {factorizationRows.map((row, rowIndex) => {
                 const rowsVisible = step >= rowIndex + 1
