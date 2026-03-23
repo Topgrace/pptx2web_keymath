@@ -60,6 +60,7 @@ export function BlankButton({
   }, [solved, solvedAnswer, isLatex, solvedLatexFontSize])
 
   const isExp = blankType === 'exponent'
+  const isSquare = blankType === 'square'
 
   return (
     <motion.button
@@ -71,13 +72,15 @@ export function BlankButton({
         'transition-all duration-300 font-[inherit]',
         isExp
           ? 'blank-exp min-w-[24px] h-[20px] px-[4px] py-0 text-[11px] leading-[18px] border-[1.5px] border-dashed rounded-[5px] align-super gap-[1px]'
+          : isSquare
+            ? 'h-[42px] min-w-[42px] px-2 py-1 text-[18px] border-[2px] border-dashed rounded-[10px] align-middle gap-1'
           : 'min-w-[80px] px-3.5 py-1.5 text-[17px] border-[2.5px] border-dashed rounded-[10px] align-middle gap-1',
         solved
           ? 'border-solid border-slide-green text-slide-green bg-slide-green/5 cursor-default'
           : 'bg-white border-slide-accent text-slide-accent',
       )}
     >
-      {!solved && <span className={isExp ? 'text-[11px] leading-none' : 'text-xl'}>❓</span>}
+      {!solved && <span className={isExp ? 'text-[11px] leading-none' : isSquare ? 'text-base' : 'text-xl'}>❓</span>}
     </motion.button>
   )
 }

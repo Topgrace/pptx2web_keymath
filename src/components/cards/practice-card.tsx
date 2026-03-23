@@ -2,18 +2,21 @@ import type { ReactNode } from 'react'
 import { StepCard } from './step-card'
 import { StaggerReveal, StaggerItem } from '@/components/animations'
 import type { CardVariant } from '@/schemas/step'
+import { cn } from '@/lib/utils'
 
 export function PracticeCard({
   visible,
   variant = 'white',
   title,
   subtitle,
+  subtitleClassName,
   children,
 }: {
   visible: boolean
   variant?: CardVariant
   title?: string
   subtitle?: string
+  subtitleClassName?: string
   children: ReactNode
 }) {
   return (
@@ -28,7 +31,7 @@ export function PracticeCard({
         )}
         {subtitle && (
           <StaggerItem>
-            <div className="text-center text-[13px] text-slide-muted mb-4">
+            <div className={cn('text-center text-[13px] text-slide-muted mb-4', subtitleClassName)}>
               {subtitle}
             </div>
           </StaggerItem>

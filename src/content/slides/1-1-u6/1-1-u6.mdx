@@ -191,43 +191,124 @@ export const meta = {
 </Step>
 
 <Step id={5}>
-  <PracticeCard title="보강" subtitle="소인수분해로 한 번 더 확인">
-    <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
-      <MathInline tex={'18 = 2 \\times 3^2'} />
-      <br />
-      <MathInline tex={'24 = 2^3 \\times 3'} />
+    <PracticeCard
+      title="연습"
+      subtitle="36, 24의 최대공약수 구하기"
+      subtitleClassName="mb-3 text-[16px] font-extrabold text-[#1F4F8A]"
+    >
+      <div className="mb-4 text-center text-[13px] text-slide-muted">
+        소인수분해 이용하기
+      </div>
+
+      {steps[5].quiz && (
+        <QuizArea
+          stepId={5}
+          quiz={steps[5].quiz}
+          completionContent={(
+            <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
+              공약수는 최대공약수 12의 약수이므로
+              <br />
+              1, 2, 3, 4, 6, 12이다.
+            </div>
+          )}
+          renderBlanks={(blank) => (
+            <div className="space-y-3">
+              <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
+                <MathInline tex={'36 ='} /> {blank('factorization-36')}
+                <br />
+                <MathInline tex={'24 ='} /> {blank('factorization-24')}
+              </div>
+
+              <div className="rounded-xl bg-[#EEF6FF] px-4 py-3 text-center text-[13px] font-bold leading-[1.8] text-[#555A66]">
+                36과 24의 최대공약수는 {blank('gcd')}이고
+                <br />
+                공약수는 {blank('common-divisors')}이다.
+              </div>
+            </div>
+          )}
+        />
+      )}
+  </PracticeCard>
+</Step>
+
+<Step id={6}>
+  <PracticeCard
+    title="연습"
+    subtitle="60, 90의 최대공약수 구하기"
+    subtitleClassName="mb-3 text-[16px] font-extrabold text-[#1F4F8A]"
+  >
+    <div className="mb-4 text-center text-[13px] text-slide-muted">
+      나눗셈 이용하기
     </div>
 
-    <div className="mt-3 rounded-xl bg-[#EEF6FF] px-4 py-3 text-center text-[13px] font-bold leading-[1.8] text-[#555A66]">
-      공통 소인수는 <span className="font-extrabold text-[#1F4F8A]">2, 3</span>이므로
-      <br />
-      최대공약수는 <span className="font-extrabold text-[#E25555]">6</span>이 된다.
-    </div>
-
-    {steps[5].quiz && (
+    {steps[6].quiz && (
       <QuizArea
-        stepId={5}
-        quiz={steps[5].quiz}
+        stepId={6}
+        quiz={steps[6].quiz}
         completionContent={(
           <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
-            공약수는 최대공약수 6의 약수이므로
+            공약수는 최대공약수 30의 약수이므로
             <br />
-            1, 2, 3, 6이다.
+            1, 2, 3, 5, 6, 10, 15, 30이다.
           </div>
         )}
         renderBlanks={(blank) => (
-          <>
-            <>18과 24의 최대공약수는 {blank('gcd')}이고</>
-            <br />
-            <>공약수는 {blank('common-divisors')}이다.</>
-          </>
+          <div className="space-y-3">
+            <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
+              <div className="mx-auto flex w-fit flex-col gap-y-2 text-center text-[31px] font-black leading-none text-[#2A2A2A]">
+                <div className="relative grid grid-cols-[44px_18px_72px_72px] items-center pb-1">
+                  <div className="flex justify-center">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FFE65C] text-[24px] text-[#8A5A00]">
+                      2
+                    </span>
+                  </div>
+                  <div className="text-[28px]">)</div>
+                  <div>60</div>
+                  <div>90</div>
+                  <div className="pointer-events-none absolute bottom-[8px] left-[47px] right-0 border-b-2 border-[#666666]" />
+                </div>
+
+                <div className="relative grid grid-cols-[44px_18px_72px_72px] items-center pb-1">
+                  <div className="flex justify-center">
+                    <span className="inline-flex h-[42px] min-w-[42px] items-center justify-center rounded-full bg-[#FFD95E] px-2 text-[20px] font-black text-[#8A5B00] shadow-[inset_0_-2px_0_rgba(255,255,255,0.5)]">
+                      3
+                    </span>
+                  </div>
+                  <div className="text-[28px]">)</div>
+                  <div className="flex justify-center">{blank('q30')}</div>
+                  <div className="flex justify-center">{blank('q45')}</div>
+                  <div className="pointer-events-none absolute bottom-[8px] left-[47px] right-0 border-b-2 border-[#666666]" />
+                </div>
+
+                <div className="grid grid-cols-[44px_18px_72px_72px] items-center">
+                  <div className="flex justify-center">{blank('divisor-5')}</div>
+                  <div className="text-[28px]">)</div>
+                  <div className="flex justify-center">{blank('q10')}</div>
+                  <div className="flex justify-center">{blank('q15')}</div>
+                </div>
+
+                <div className="grid grid-cols-[44px_18px_72px_72px] items-center pt-1">
+                  <div />
+                  <div />
+                  <div className="flex justify-center">{blank('final-2')}</div>
+                  <div className="flex justify-center">{blank('final-3')}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl bg-[#EEF6FF] px-4 py-3 text-center text-[13px] font-bold leading-[1.8] text-[#555A66]">
+              60과 90의 최대공약수는 {blank('gcd')}이고
+              <br />
+              공약수는 {blank('common-divisors')}이다.
+            </div>
+          </div>
         )}
       />
     )}
   </PracticeCard>
 </Step>
 
-<Step id={6}>
+<Step id={7}>
   <StepCard variant="white">
     <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
       <span className="rounded-md bg-[#2D67A8] px-2 py-1 text-xs font-extrabold text-white">방법 2</span>
@@ -236,10 +317,10 @@ export const meta = {
 
     <GcdDivisionTableMotion />
 
-    {steps[6].quiz && (
+    {steps[7].quiz && (
       <QuizArea
-        stepId={6}
-        quiz={steps[6].quiz}
+        stepId={7}
+        quiz={steps[7].quiz}
         renderBlank={(blank) => (
           <>4, 5, 10의 공약수는 {blank}뿐이므로 나누기를 멈춘다.</>
         )}
@@ -248,7 +329,7 @@ export const meta = {
   </StepCard>
 </Step>
 
-<Step id={7}>
+<Step id={8}>
   <SummaryCard
     title="공약수와 최대공약수 핵심 정리"
     layout="stack-below-tag"
@@ -259,10 +340,10 @@ export const meta = {
       { tag: '서로소', tagVariant: 'equal', content: <>최대공약수가 1인 두 자연수, 예: 3과 4</> },
     ]}
   >
-    {steps[7].quiz && (
+    {steps[8].quiz && (
       <QuizArea
-        stepId={7}
-        quiz={steps[7].quiz}
+        stepId={8}
+        quiz={steps[8].quiz}
         renderBlank={(blank) => (
           <>최대공약수가 1인 두 자연수를 {blank}라 한다.</>
         )}
@@ -271,7 +352,7 @@ export const meta = {
   </SummaryCard>
 </Step>
 
-<Step id={8}>
+<Step id={9}>
   <CompleteCard emoji="🧩" title="공약수와 최대공약수 완료!">
     공약수의 뜻, 최대공약수의 성질,
     <br />

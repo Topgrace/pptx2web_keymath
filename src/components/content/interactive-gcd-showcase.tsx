@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Play, RotateCcw } from 'lucide-react'
-import { GcdDivisionTableMotion } from '@/components/content/gcd-division-table-motion'
+import { GcdDivisionTableMotion, type DivisionStep } from '@/components/content/gcd-division-table-motion'
 import { GcdPrimeFactorizationMotion } from '@/components/content/gcd-prime-factorization-motion'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 type MethodTab = 'prime' | 'division'
 type PrimeStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 type PrimeStage = 0 | 1 | 2 | 3
+type DivisionStage = 0 | 1 | 2 | 3
 
 interface InteractiveGcdShowcaseProps {
   className?: string
@@ -37,7 +38,25 @@ const stepBadgeLabels: Record<PrimeStage, string> = {
   3: '조립',
 }
 
+const divisionStepLabels: Record<DivisionStep, string> = {
+  0: '나눗셈 준비',
+  1: '2로 나누기',
+  2: '2로 나누기',
+  3: '3으로 나누기',
+  4: '3으로 나누기',
+  5: '멈춤 판단',
+  6: '다시 보기',
+}
+
+const divisionStepBadgeLabels: Record<DivisionStage, string> = {
+  0: '준비',
+  1: '나누기',
+  2: '판단',
+  3: '정답',
+}
+
 const primeStages: PrimeStage[] = [0, 1, 2, 3]
+const divisionStages: DivisionStage[] = [0, 1, 2, 3]
 const tabSpring = {
   type: 'spring',
   stiffness: 320,
@@ -58,11 +77,25 @@ function getPrimeStage(step: PrimeStep): PrimeStage {
   return 3
 }
 
+function getDivisionStage(step: DivisionStep): DivisionStage {
+  if (step === 0) {
+    return 0
+  }
+  if (step <= 4) {
+    return 1
+  }
+  if (step === 5) {
+    return 2
+  }
+  return 3
+}
+
 export function InteractiveGcdShowcase({
   className,
 }: InteractiveGcdShowcaseProps) {
   const [activeMethod, setActiveMethod] = useState<MethodTab>('prime')
   const [primeStep, setPrimeStep] = useState<PrimeStep>(0)
+  const [divisionStep, setDivisionStep] = useState<DivisionStep>(0)
   const [hoveredTab, setHoveredTab] = useState<MethodTab | null>(null)
   const prefersReducedMotion = useReducedMotion()
 
@@ -83,7 +116,16 @@ export function InteractiveGcdShowcase({
     setPrimeStep((prev) => (prev === 7 ? 0 : (prev + 1) as PrimeStep))
   }
 
+  const moveDivisionPrev = () => {
+    setDivisionStep((prev) => Math.max(0, prev - 1) as DivisionStep)
+  }
+
+  const moveDivisionNext = () => {
+    setDivisionStep((prev) => (prev === 6 ? 0 : (prev + 1) as DivisionStep))
+  }
+
   const currentPrimeStage = getPrimeStage(primeStep)
+  const currentDivisionStage = getDivisionStage(divisionStep)
 
   return (
     <div
@@ -130,6 +172,7 @@ export function InteractiveGcdShowcase({
                 onClick={() => {
                   setActiveMethod(tab.id)
                   setPrimeStep(0)
+                  setDivisionStep(0)
                 }}
                 onHoverStart={() => setHoveredTab(tab.id)}
                 onHoverEnd={() => setHoveredTab((current) => (current === tab.id ? null : current))}
@@ -276,19 +319,68 @@ export function InteractiveGcdShowcase({
           role="tabpanel"
           aria-labelledby="gcd-showcase-tab-division"
         >
-          <div className="mb-4 rounded-[22px] border border-[#D6E8FF] bg-[#F8FBFF] px-3 py-3.5 sm:px-4 sm:py-4">
-            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#7A95B5]">
-              Compare Method
+          <div className="mb-4 flex flex-col gap-3 rounded-[22px] border border-[#D6E8FF] bg-[#F8FBFF] px-3 py-3 sm:px-4">
+            <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+              <div className="shrink-0 text-[11px] font-black uppercase tracking-[0.22em] text-[#7A95B5]">
+                Progress
+              </div>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                {divisionStages.map((stageNumber) => {
+                  const active = currentDivisionStage === stageNumber
+                  const completed = currentDivisionStage > stageNumber
+                  return (
+                    <div
+                      key={stageNumber}
+                      className={cn(
+                        'shrink-0 rounded-full px-2.5 py-1 text-[11px] font-black transition sm:px-3 sm:text-[12px]',
+                        active && 'bg-[#1F4F8A] text-white',
+                        !active && completed && 'bg-[#DDF0FF] text-[#2D67A8]',
+                        !active && !completed && 'bg-white text-[#8A98AE]',
+                      )}
+                    >
+                      {divisionStepBadgeLabels[stageNumber]}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-            <div className="mt-2 text-[15px] font-black text-[#1F4F8A] sm:text-[16px]">
-              나눗셈 방법은 공약수로 계속 나누고, 왼쪽에 남은 수만 곱해 최대공약수를 찾습니다.
-            </div>
-            <div className="mt-2 text-[12px] font-bold leading-[1.65] text-[#687791] sm:text-[13px] sm:leading-[1.7]">
-              이번 쇼케이스에서는 비교용으로 기존 나눗셈 모션을 그대로 보여 줍니다. 아래 카드와 소인수분해 탭을 번갈아 보며 두 방법의 공통점을 비교해 보세요.
+
+            <div className="flex items-center justify-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={moveDivisionPrev}
+                disabled={divisionStep === 0}
+                className={cn(
+                  'rounded-full border-2 border-[#A8C5E2] bg-[#F6FBFF] px-3 font-black text-[#47688E] sm:px-4',
+                  'shadow-[0_6px_0_#334155,0_12px_18px_rgba(15,23,42,0.16)] transition-[transform,box-shadow,background-color] duration-150 ease-out',
+                  'hover:bg-[#F0F7FF] hover:translate-y-[2px] hover:shadow-[0_4px_0_#334155,0_8px_12px_rgba(15,23,42,0.14)]',
+                  'active:translate-y-[6px] active:shadow-[0_0_0_#334155,inset_0_4px_8px_rgba(15,23,42,0.12)]',
+                  'disabled:translate-y-0 disabled:border-[#D3E2F1] disabled:bg-[#F7FBFF] disabled:text-[#9AA8BC] disabled:shadow-[0_4px_0_#94A3B8,0_8px_12px_rgba(148,163,184,0.16)]',
+                )}
+              >
+                <Play size={14} className="rotate-180" />
+                이전
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                onClick={moveDivisionNext}
+                className={cn(
+                  'rounded-full border-2 border-[#163D69] bg-[#F6FBFF] px-3.5 font-black text-[#1F4F8A] sm:px-5',
+                  'shadow-[0_6px_0_#334155,0_12px_18px_rgba(15,23,42,0.16)] transition-[transform,box-shadow,background-color] duration-150 ease-out',
+                  'hover:bg-[#F0F7FF] hover:translate-y-[2px] hover:shadow-[0_4px_0_#334155,0_8px_12px_rgba(15,23,42,0.14)]',
+                  'active:translate-y-[6px] active:shadow-[0_0_0_#334155,inset_0_4px_8px_rgba(15,23,42,0.12)]',
+                )}
+              >
+                {divisionStep === 6 ? <RotateCcw size={16} /> : <Play size={15} fill="currentColor" />}
+                {divisionStepLabels[divisionStep]}
+              </Button>
             </div>
           </div>
 
-          <GcdDivisionTableMotion />
+          <GcdDivisionTableMotion step={divisionStep} />
         </section>
       )}
     </div>
