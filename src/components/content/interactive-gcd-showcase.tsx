@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 type MethodTab = 'prime' | 'division'
-type PrimeStep = 0 | 1 | 2 | 3 | 4 | 5
+type PrimeStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 type PrimeStage = 0 | 1 | 2 | 3
 
 interface InteractiveGcdShowcaseProps {
@@ -24,8 +24,10 @@ const stepLabels: Record<PrimeStep, string> = {
   1: '소인수분해',
   2: '소인수분해',
   3: '소인수분해',
-  4: '최대공약수 조립',
-  5: '다시 보기',
+  4: '공통 소인수',
+  5: '2의 지수 선택',
+  6: '3의 지수 선택',
+  7: '다시 보기',
 }
 
 const stepBadgeLabels: Record<PrimeStage, string> = {
@@ -50,7 +52,7 @@ function getPrimeStage(step: PrimeStep): PrimeStage {
   if (step <= 3) {
     return 1
   }
-  if (step === 4) {
+  if (step <= 6) {
     return 2
   }
   return 3
@@ -78,7 +80,7 @@ export function InteractiveGcdShowcase({
   }
 
   const moveNext = () => {
-    setPrimeStep((prev) => (prev === 5 ? 0 : (prev + 1) as PrimeStep))
+    setPrimeStep((prev) => (prev === 7 ? 0 : (prev + 1) as PrimeStep))
   }
 
   const currentPrimeStage = getPrimeStage(primeStep)
@@ -260,7 +262,7 @@ export function InteractiveGcdShowcase({
                   'active:translate-y-[6px] active:shadow-[0_0_0_#334155,inset_0_4px_8px_rgba(15,23,42,0.12)]',
                 )}
               >
-                {primeStep === 5 ? <RotateCcw size={16} /> : <Play size={15} fill="currentColor" />}
+                {primeStep === 7 ? <RotateCcw size={16} /> : <Play size={15} fill="currentColor" />}
                 {stepLabels[primeStep]}
               </Button>
             </div>
