@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { MathInline } from '@/components/math'
-import { useSlideProgress } from '@/hooks/use-slide-progress'
+import { useStepVisibility } from '@/hooks/use-step-visibility'
 import { cn } from '@/lib/utils'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -14,8 +14,7 @@ export function DivisorDefinitionMotion({
   className,
   stepId = 1,
 }: DivisorDefinitionMotionProps) {
-  const { currentStep } = useSlideProgress()
-  const enabled = currentStep >= stepId
+  const enabled = useStepVisibility(stepId)
 
   return (
     <motion.div

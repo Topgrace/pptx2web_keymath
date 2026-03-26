@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Play, RotateCcw } from 'lucide-react'
@@ -13,6 +14,7 @@ type DivisionStage = 0 | 1 | 2 | 3
 
 interface InteractiveGcdShowcaseProps {
   className?: string
+  completionContent?: ReactNode
 }
 
 const methodTabs: Array<{ id: MethodTab; label: string; subtitle: string }> = [
@@ -92,10 +94,13 @@ function getDivisionStage(step: DivisionStep): DivisionStage {
 
 export function InteractiveGcdShowcase({
   className,
+  completionContent,
 }: InteractiveGcdShowcaseProps) {
   const [activeMethod, setActiveMethod] = useState<MethodTab>('prime')
   const [primeStep, setPrimeStep] = useState<PrimeStep>(0)
   const [divisionStep, setDivisionStep] = useState<DivisionStep>(0)
+  const [hasCompletedPrime, setHasCompletedPrime] = useState(false)
+  const [hasCompletedDivision, setHasCompletedDivision] = useState(false)
   const [hoveredTab, setHoveredTab] = useState<MethodTab | null>(null)
   const prefersReducedMotion = useReducedMotion()
 
@@ -113,7 +118,13 @@ export function InteractiveGcdShowcase({
   }
 
   const moveNext = () => {
-    setPrimeStep((prev) => (prev === 7 ? 0 : (prev + 1) as PrimeStep))
+    setPrimeStep((prev) => {
+      if (prev === 6) {
+        setHasCompletedPrime(true)
+        return 7
+      }
+      return (prev === 7 ? 0 : prev + 1) as PrimeStep
+    })
   }
 
   const moveDivisionPrev = () => {
@@ -121,11 +132,18 @@ export function InteractiveGcdShowcase({
   }
 
   const moveDivisionNext = () => {
-    setDivisionStep((prev) => (prev === 6 ? 0 : (prev + 1) as DivisionStep))
+    setDivisionStep((prev) => {
+      if (prev === 5) {
+        setHasCompletedDivision(true)
+        return 6
+      }
+      return (prev === 6 ? 0 : prev + 1) as DivisionStep
+    })
   }
 
   const currentPrimeStage = getPrimeStage(primeStep)
   const currentDivisionStage = getDivisionStage(divisionStep)
+  const shouldShowDivisionHint = hasCompletedPrime && !hasCompletedDivision
 
   return (
     <div
@@ -153,6 +171,7 @@ export function InteractiveGcdShowcase({
           {methodTabs.map((tab) => {
             const isActive = tab.id === activeMethod
             const isHovered = hoveredTab === tab.id
+            const showTabHint = tab.id === 'division' && shouldShowDivisionHint
             const buttonY = isActive ? tabDepth : isHovered ? hoverPressDepth : 0
             const shadowStep = isActive ? 0 : isHovered ? 4 : 8
             const shadowBlur = isActive ? 0 : isHovered ? 12 : 18
@@ -171,8 +190,6 @@ export function InteractiveGcdShowcase({
                 initial={false}
                 onClick={() => {
                   setActiveMethod(tab.id)
-                  setPrimeStep(0)
-                  setDivisionStep(0)
                 }}
                 onHoverStart={() => setHoveredTab(tab.id)}
                 onHoverEnd={() => setHoveredTab((current) => (current === tab.id ? null : current))}
@@ -216,6 +233,19 @@ export function InteractiveGcdShowcase({
                   >
                     {tab.label}
                   </motion.div>
+                  {showTabHint && (
+                    <motion.div
+                      initial={prefersReducedMotion ? false : { opacity: 0.7, scale: 0.96 }}
+                      animate={prefersReducedMotion ? { opacity: 1 } : { opacity: [0.8, 1, 0.8], scale: [0.97, 1.03, 0.97] }}
+                      transition={prefersReducedMotion ? { duration: 0.2 } : { duration: 1.35, repeat: Infinity, ease: 'easeInOut' }}
+                      className={cn(
+                        'inline-flex w-fit items-center rounded-full px-2 py-0.5 text-[10px] font-black sm:text-[11px]',
+                        isActive ? 'bg-[#DCEEFF] text-[#1F4F8A]' : 'bg-[#FFE65C] text-[#7A5200]',
+                      )}
+                    >
+                      눌러 보기
+                    </motion.div>
+                  )}
                   <motion.div
                     initial={false}
                     animate={{
@@ -242,6 +272,16 @@ export function InteractiveGcdShowcase({
             )
           })}
         </nav>
+        {shouldShowDivisionHint && (
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.24, ease: 'easeOut' }}
+            className="mt-[-6px] rounded-2xl border border-[#FFE08A] bg-[#FFF8D8] px-4 py-2 text-center text-[12px] font-black leading-[1.6] text-[#7A5200] sm:text-[13px]"
+          >
+            소인수분해를 끝까지 봤어요. 이제 <span className="text-[#1F4F8A]">나눗셈 탭</span>을 눌러 이어서 보세요.
+          </motion.div>
+        )}
       </div>
 
       {activeMethod === 'prime' ? (
@@ -382,6 +422,47 @@ export function InteractiveGcdShowcase({
 
           <GcdDivisionTableMotion step={divisionStep} />
         </section>
+      )}
+
+      {hasCompletedDivision && (
+        <>
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.28, ease: 'easeOut' }}
+            className="mt-5 rounded-[20px] bg-[#F4F9FF] p-4 sm:mt-6 sm:rounded-[24px] sm:p-5"
+          >
+            <div className="mb-3 flex items-center gap-2 text-[16px] font-black text-[#1F4F8A]">
+              <motion.span
+                animate={prefersReducedMotion ? { y: 0 } : { y: [0, -3, 0] }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+                className="inline-flex"
+              >
+                💡
+              </motion.span>
+              핵심 기억하기
+            </div>
+            <ul className="space-y-2 text-[14px] font-bold leading-[1.8] text-[#5F6D82]">
+              <li>
+                <b className="text-[#1F4F8A]">소인수분해:</b> 공통 소인수 중에서 <b>지수가 가장 작은 것</b>만 골라 곱해요.
+              </li>
+              <li>
+                <b className="text-[#1F4F8A]">나눗셈:</b> 몫들의 공약수가 1뿐이 될 때까지 나누고, <b>왼쪽의 수</b>만 곱해요.
+              </li>
+            </ul>
+          </motion.div>
+
+          {completionContent && (
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.32, ease: 'easeOut', delay: prefersReducedMotion ? 0 : 0.08 }}
+              className="mt-5 sm:mt-6"
+            >
+              {completionContent}
+            </motion.div>
+          )}
+        </>
       )}
     </div>
   )

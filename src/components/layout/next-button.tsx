@@ -12,6 +12,7 @@ interface NextUnitAction {
 }
 
 interface UnitRouteMeta {
+  prevUnit?: NextUnitAction
   nextUnit?: NextUnitAction
 }
 
@@ -35,7 +36,15 @@ for (let index = 0; index < orderedUnits.length; index += 1) {
   const current = orderedUnits[index]
   if (!current.path) continue
 
+  const prev = orderedUnits[index - 1]
   const next = orderedUnits[index + 1]
+  const prevUnit =
+    prev?.path
+      ? {
+          path: normalizeUnitPath(prev.path),
+          title: prev.title,
+        }
+      : undefined
   const nextUnit =
     next?.path
       ? {
@@ -44,16 +53,17 @@ for (let index = 0; index < orderedUnits.length; index += 1) {
         }
       : undefined
 
-  unitRouteMetaByPath.set(normalizeUnitPath(current.path), { nextUnit })
+  unitRouteMetaByPath.set(normalizeUnitPath(current.path), { prevUnit, nextUnit })
 }
 
 export function NextButton() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { currentStep, totalSteps, nextButtonState, advanceStep, quizStepIds } = useSlideProgress()
+  const { currentStep, totalSteps, nextButtonState, advanceStep, quizStepIds, showAllSteps } = useSlideProgress()
 
   const normalizedPath = normalizeUnitPath(pathname)
   const routeMeta = unitRouteMetaByPath.get(normalizedPath)
+  const prevUnit = routeMeta?.prevUnit
   const nextUnit = routeMeta?.nextUnit
 
   useEffect(() => {
@@ -72,9 +82,10 @@ export function NextButton() {
     return () => clearTimeout(timeoutHandle)
   }, [nextUnit])
 
-  const showCompletionActions = nextButtonState === 'done' && !!nextUnit
+  const showCompletionActions =
+    (nextButtonState === 'done' || showAllSteps) && (!!prevUnit || !!nextUnit)
   const isActionStep = quizStepIds.has(currentStep)
-  const shouldHideNextButton = isActionStep && nextButtonState !== 'done'
+  const shouldHideNextButton = !showAllSteps && isActionStep && nextButtonState !== 'done'
 
   if (shouldHideNextButton) return null
 
@@ -104,60 +115,96 @@ export function NextButton() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 w-full p-4 bg-gradient-to-t from-slide-bg via-slide-bg/80 to-transparent z-[999] flex justify-center">
-      {showCompletionActions && nextUnit ? (
-        <div className="w-full max-w-[640px] flex gap-3">
-          <motion.button
-            onClick={scrollToTop}
-            whileTap={{ scale: 0.97 }}
-            className={cn(
-              'flex-1 py-4 border-none rounded-[14px]',
-              'text-base sm:text-lg font-extrabold font-[inherit] cursor-pointer',
-              'flex items-center justify-center gap-2',
-              'transition-colors duration-300',
-              'bg-slide-green text-white shadow-[0_4px_16px_rgba(46,125,50,0.3)]',
-            )}
-          >
-            <span>처음으로</span>
-            <span className="text-xl">↻</span>
-          </motion.button>
+    <>
+      {showCompletionActions ? (
+        <div className="mt-5 flex w-full gap-3 pb-10 sm:mt-6">
+          {prevUnit ? (
+            <motion.button
+              onClick={() => navigate(prevUnit.path)}
+              whileTap={{ scale: 0.97 }}
+              className={cn(
+                'flex-1 py-4 border-none rounded-[14px]',
+                'text-base sm:text-lg font-extrabold font-[inherit] cursor-pointer',
+                'flex items-center justify-center gap-2',
+                'transition-colors duration-300',
+                'bg-slide-green text-white shadow-[0_4px_16px_rgba(46,125,50,0.3)]',
+              )}
+            >
+              <span className="text-xl">←</span>
+              <span>{`이전: ${prevUnit.title}`}</span>
+            </motion.button>
+          ) : (
+            <motion.button
+              onClick={scrollToTop}
+              whileTap={{ scale: 0.97 }}
+              className={cn(
+                'flex-1 py-4 border-none rounded-[14px]',
+                'text-base sm:text-lg font-extrabold font-[inherit] cursor-pointer',
+                'flex items-center justify-center gap-2',
+                'transition-colors duration-300',
+                'bg-slide-green text-white shadow-[0_4px_16px_rgba(46,125,50,0.3)]',
+              )}
+            >
+              <span>처음으로</span>
+              <span className="text-xl">↻</span>
+            </motion.button>
+          )}
 
-          <motion.button
-            onClick={() => navigate(nextUnit.path)}
-            whileTap={{ scale: 0.97 }}
-            className={cn(
-              'flex-1 py-4 border-none rounded-[14px]',
-              'text-base sm:text-lg font-extrabold font-[inherit] cursor-pointer',
-              'flex items-center justify-center gap-2',
-              'transition-colors duration-300',
-              'bg-slide-brown text-white shadow-[0_4px_16px_rgba(122,76,20,0.3)]',
-            )}
-          >
-            <span>{`다음: ${nextUnit.title}`}</span>
-            <span className="text-xl">→</span>
-          </motion.button>
+          {nextUnit ? (
+            <motion.button
+              onClick={() => navigate(nextUnit.path)}
+              whileTap={{ scale: 0.97 }}
+              className={cn(
+                'flex-1 py-4 border-none rounded-[14px]',
+                'text-base sm:text-lg font-extrabold font-[inherit] cursor-pointer',
+                'flex items-center justify-center gap-2',
+                'transition-colors duration-300',
+                'bg-slide-brown text-white shadow-[0_4px_16px_rgba(122,76,20,0.3)]',
+              )}
+            >
+              <span>{`다음: ${nextUnit.title}`}</span>
+              <span className="text-xl">→</span>
+            </motion.button>
+          ) : (
+            <motion.button
+              onClick={scrollToTop}
+              whileTap={{ scale: 0.97 }}
+              className={cn(
+                'flex-1 py-4 border-none rounded-[14px]',
+                'text-base sm:text-lg font-extrabold font-[inherit] cursor-pointer',
+                'flex items-center justify-center gap-2',
+                'transition-colors duration-300',
+                'bg-slide-brown text-white shadow-[0_4px_16px_rgba(122,76,20,0.3)]',
+              )}
+            >
+              <span>처음으로</span>
+              <span className="text-xl">↻</span>
+            </motion.button>
+          )}
         </div>
       ) : (
-        <motion.button
-          onClick={handlePrimaryClick}
-          whileTap={{ scale: 0.97 }}
-          className={cn(
-            'max-w-[448px] w-full py-4 border-none rounded-[14px]',
-            'text-lg font-extrabold font-[inherit] cursor-pointer',
-            'flex items-center justify-center gap-2',
-            'transition-colors duration-300',
-            nextButtonState === 'done' &&
-              'bg-slide-green text-white shadow-[0_4px_16px_rgba(46,125,50,0.3)]',
-            nextButtonState === 'locked' &&
-              'bg-gray-400 text-white shadow-[0_4px_16px_rgba(0,0,0,0.1)] pointer-events-none',
-            nextButtonState === 'unlocked' &&
-              'bg-slide-brown text-white shadow-[0_4px_16px_rgba(122,76,20,0.3)]',
-          )}
-        >
-          <span>{getText()}</span>
-          <span className="text-xl">{getIcon()}</span>
-        </motion.button>
+        <div className="fixed bottom-0 left-0 z-[999] flex w-full justify-center bg-gradient-to-t from-slide-bg via-slide-bg/80 to-transparent p-4">
+          <motion.button
+            onClick={handlePrimaryClick}
+            whileTap={{ scale: 0.97 }}
+            className={cn(
+              'max-w-[448px] w-full py-4 border-none rounded-[14px]',
+              'text-lg font-extrabold font-[inherit] cursor-pointer',
+              'flex items-center justify-center gap-2',
+              'transition-colors duration-300',
+              nextButtonState === 'done' &&
+                'bg-slide-green text-white shadow-[0_4px_16px_rgba(46,125,50,0.3)]',
+              nextButtonState === 'locked' &&
+                'bg-gray-400 text-white shadow-[0_4px_16px_rgba(0,0,0,0.1)] pointer-events-none',
+              nextButtonState === 'unlocked' &&
+                'bg-slide-brown text-white shadow-[0_4px_16px_rgba(122,76,20,0.3)]',
+            )}
+          >
+            <span>{getText()}</span>
+            <span className="text-xl">{getIcon()}</span>
+          </motion.button>
+        </div>
       )}
-    </div>
+    </>
   )
 }

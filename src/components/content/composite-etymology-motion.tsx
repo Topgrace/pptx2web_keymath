@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { useSlideProgress } from '@/hooks/use-slide-progress'
+import { useStepVisibility } from '@/hooks/use-step-visibility'
 
 interface CompositeEtymologyMotionProps {
   className?: string
@@ -11,8 +11,7 @@ export function CompositeEtymologyMotion({
   className,
   stepId = 3,
 }: CompositeEtymologyMotionProps) {
-  const { currentStep } = useSlideProgress()
-  const enabled = currentStep >= stepId
+  const enabled = useStepVisibility(stepId)
 
   return (
     <motion.div

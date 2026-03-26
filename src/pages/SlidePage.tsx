@@ -20,8 +20,8 @@ export default function SlidePage({
       <SlideContainer>
         <StepViewToggle />
         <Content />
+        <NextButton />
       </SlideContainer>
-      <NextButton />
     </SlideProgressProvider>
   )
 }
