@@ -33,6 +33,7 @@ export const MultiBlankQuizArea = ({
 
   const {
     activeItem,
+    activeBlankId,
     feedback,
     feedbackType,
     solvedAnswers,
@@ -81,6 +82,7 @@ export const MultiBlankQuizArea = ({
         onClick={() => toggleBlank(blankId)}
         solved={solved || Boolean(solvedAnswer)}
         solvedAnswer={solvedAnswer}
+        active={activeBlankId === blankId}
         blankType={item.blankType}
         isLatex={Boolean(item.answerLatex)}
         solvedLatexFontSize={item.answerLatexFontSize}

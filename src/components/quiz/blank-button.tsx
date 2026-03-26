@@ -8,6 +8,7 @@ export function BlankButton({
   onClick,
   solved,
   solvedAnswer,
+  active = false,
   blankType = 'normal',
   isLatex = false,
   solvedLatexFontSize,
@@ -15,6 +16,7 @@ export function BlankButton({
   onClick: () => void
   solved: boolean
   solvedAnswer: string | null
+  active?: boolean
   blankType?: BlankType
   /** true일 때만 KaTeX 렌더링, false면 일반 텍스트(주변 폰트 유지) */
   isLatex?: boolean
@@ -77,7 +79,9 @@ export function BlankButton({
           : 'min-w-[80px] px-3.5 py-1.5 text-[17px] border-[2.5px] border-dashed rounded-[10px] align-middle gap-1',
         solved
           ? 'border-solid border-slide-green text-slide-green bg-slide-green/5 cursor-default'
-          : 'bg-white border-slide-accent text-slide-accent',
+          : active
+            ? 'bg-slide-accent/10 border-slide-accent text-slide-accent ring-2 ring-slide-accent/25'
+            : 'bg-white border-slide-accent text-slide-accent',
       )}
     >
       {!solved && <span className={isExp ? 'text-[11px] leading-none' : isSquare ? 'text-base' : 'text-xl'}>❓</span>}

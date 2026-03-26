@@ -89,11 +89,6 @@ export const useMultiBlankQuiz = (
     return localSolvedAnswers
   }, [isStepSolved, localSolvedAnswers, quiz])
 
-  const nextBlankId = useMemo(() => {
-    if (!quiz || isStepSolved) return null
-    return quiz.items.find((item) => !localSolvedAnswers[item.id])?.id ?? null
-  }, [isStepSolved, localSolvedAnswers, quiz])
-
   const activeItem = useMemo(() => {
     if (!quiz || isStepSolved || !activeBlankId) return null
     return quiz.items.find((item) => item.id === activeBlankId) ?? null
@@ -103,13 +98,12 @@ export const useMultiBlankQuiz = (
     (blankId: string) => {
       if (!quiz || isStepSolved) return
       if (solvedAnswers[blankId]) return
-      if (blankId !== nextBlankId && blankId !== activeBlankId) return
 
       setActiveBlankId((prev) => (prev === blankId ? null : blankId))
       setFeedback(null)
       setFeedbackType(null)
     },
-    [activeBlankId, isStepSolved, nextBlankId, quiz, solvedAnswers],
+    [isStepSolved, quiz, solvedAnswers],
   )
 
   const checkAnswer = useCallback(
@@ -138,7 +132,7 @@ export const useMultiBlankQuiz = (
       setFeedbackType(null)
 
       const nextItem = quiz.items.find((item) => !nextSolvedAnswers[item.id]) ?? null
-      setActiveBlankId(nextItem?.id ?? null)
+      setActiveBlankId(null)
 
       return {
         isCorrect: true,

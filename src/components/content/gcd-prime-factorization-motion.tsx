@@ -223,8 +223,7 @@ export function GcdPrimeFactorizationMotion({
                   ) : null}
                   {step === 7 ? (
                     <span className="rounded-full bg-[#EEF6FF] px-3 py-1 text-[12px] font-black text-[#3C679A]">
-                      공통인 소인수의 조립
-                    </span>
+                      공약수의 곱                    </span>
                   ) : null}
                 </>
               )}

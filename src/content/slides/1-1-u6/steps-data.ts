@@ -83,13 +83,13 @@ const rawSteps = [
     type: 'concept',
     cardVariant: 'white',
     quiz: {
-      answer: '6',
+      answer: '5^3',
+      answerLatex: '5^3',
       blankType: 'normal',
       choices: [
-        { label: '3', value: '3' },
-        { label: '5', value: '5' },
-        { label: '6', value: '6' },
-        { label: '12', value: '12' },
+        { label: '5³', value: '5^3', latex: '5^3' },
+        { label: '5⁵', value: '5^5', latex: '5^5' },
+        { label: '5⁷', value: '5^7', latex: '5^7' },
       ],
     },
   },
