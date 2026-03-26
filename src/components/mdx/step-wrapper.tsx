@@ -9,8 +9,8 @@ export function Step({
   id: number
   children: ReactNode
 }) {
-  const { currentStep, totalSteps } = useSlideProgress()
-  const visible = id <= currentStep
+  const { currentStep, totalSteps, showAllSteps } = useSlideProgress()
+  const visible = showAllSteps || id <= currentStep
 
   if (!visible) {
     return null
@@ -32,15 +32,19 @@ export function Step({
 }
 
 export function SlideContent({ children }: { children: ReactNode }) {
-  const { currentStep } = useSlideProgress()
+  const { currentStep, showAllSteps } = useSlideProgress()
 
   useEffect(() => {
+    if (showAllSteps) {
+      return undefined
+    }
+
     const timer = setTimeout(() => {
       const el = document.getElementById(`step-${currentStep}`)
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }, 150)
     return () => clearTimeout(timer)
-  }, [currentStep])
+  }, [currentStep, showAllSteps])
 
   return <>{children}</>
 }

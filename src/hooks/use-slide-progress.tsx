@@ -11,12 +11,14 @@ interface SlideState {
   currentStep: number
   solvedQuizzes: Set<number>
   totalSteps: number
+  showAllSteps: boolean
 }
 
 type SlideAction =
   | { type: 'ADVANCE_STEP' }
   | { type: 'SHOW_STEP'; step: number }
   | { type: 'MARK_SOLVED'; stepId: number }
+  | { type: 'TOGGLE_ALL_STEPS' }
   | { type: 'RESET' }
 
 function slideReducer(state: SlideState, action: SlideAction): SlideState {
@@ -31,8 +33,15 @@ function slideReducer(state: SlideState, action: SlideAction): SlideState {
       next.add(action.stepId)
       return { ...state, solvedQuizzes: next }
     }
+    case 'TOGGLE_ALL_STEPS':
+      return { ...state, showAllSteps: !state.showAllSteps }
     case 'RESET':
-      return { currentStep: 0, solvedQuizzes: new Set(), totalSteps: state.totalSteps }
+      return {
+        currentStep: 0,
+        solvedQuizzes: new Set(),
+        totalSteps: state.totalSteps,
+        showAllSteps: false,
+      }
     default:
       return state
   }
@@ -42,11 +51,13 @@ interface SlideProgressContextValue {
   currentStep: number
   solvedQuizzes: Set<number>
   totalSteps: number
+  showAllSteps: boolean
   progressPercent: number
   isComplete: boolean
   advanceStep: () => void
   showStep: (step: number) => void
   markSolved: (stepId: number) => void
+  toggleAllStepsView: () => void
   reset: () => void
   isSolved: (stepId: number) => boolean
   nextButtonState: 'locked' | 'unlocked' | 'done'
@@ -69,11 +80,13 @@ export function SlideProgressProvider({
     currentStep: 0,
     solvedQuizzes: new Set<number>(),
     totalSteps,
+    showAllSteps: false,
   })
 
   const advanceStep = useCallback(() => dispatch({ type: 'ADVANCE_STEP' }), [])
   const showStep = useCallback((step: number) => dispatch({ type: 'SHOW_STEP', step }), [])
   const markSolved = useCallback((stepId: number) => dispatch({ type: 'MARK_SOLVED', stepId }), [])
+  const toggleAllStepsView = useCallback(() => dispatch({ type: 'TOGGLE_ALL_STEPS' }), [])
   const reset = useCallback(() => dispatch({ type: 'RESET' }), [])
   const isSolved = useCallback((stepId: number) => state.solvedQuizzes.has(stepId), [state.solvedQuizzes])
 
@@ -98,17 +111,31 @@ export function SlideProgressProvider({
       currentStep: state.currentStep,
       solvedQuizzes: state.solvedQuizzes,
       totalSteps: state.totalSteps,
+      showAllSteps: state.showAllSteps,
       progressPercent,
       isComplete,
       advanceStep,
       showStep,
       markSolved,
+      toggleAllStepsView,
       reset,
       isSolved,
       nextButtonState,
       quizStepIds,
     }),
-    [state, progressPercent, isComplete, advanceStep, showStep, markSolved, reset, isSolved, nextButtonState, quizStepIds],
+    [
+      state,
+      progressPercent,
+      isComplete,
+      advanceStep,
+      showStep,
+      markSolved,
+      toggleAllStepsView,
+      reset,
+      isSolved,
+      nextButtonState,
+      quizStepIds,
+    ],
   )
 
   return (
