@@ -3,7 +3,7 @@ import type { SlideConfig } from '@/schemas/slide'
 export const slideConfig: SlideConfig = {
   slug: '1-1-u6-common-divisor-gcd',
   title: '1단원 - 공약수와 최대공약수',
-  totalSteps: 8,
+  totalSteps: 9,
   themeColors: {
     background: '#B9DDF2',
     cardDefault: '#F8F8F8',

@@ -136,6 +136,41 @@ export const meta = {
 </Step>
 
 <Step id={4}>
+  <StepCard variant="white">
+    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
+      서로소
+    </div>
+
+    <div className="rounded-xl bg-[#EEF6FF] px-4 py-3 text-center text-[16px] font-extrabold leading-[1.8] text-[#1F4F8A]">
+      최대공약수가 1인 두 자연수를 서로소라 한다.
+    </div>
+
+    <div className="mt-3 grid gap-3 sm:grid-cols-2">
+      <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[14px] font-bold leading-[1.8] text-slide-gray">
+        예:
+        <span className="ml-2 font-extrabold text-[#1F4F8A]">3과 4</span>
+        <br />
+        최대공약수는 1 뿐이므로 3과 4는<span className="font-extrabold text-[#E25555]"> 서로소</span>이다.
+      </div>
+    </div>
+
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlanks={(blank) => (
+          <>
+            <>18과 27은 서로소가 {blank('pair-18-27')}</>
+            <br />
+            <>16과 21은 서로소가 {blank('pair-16-21')}</>
+          </>
+        )}
+      />
+    )}
+  </StepCard>
+</Step>
+
+<Step id={5}>
     <PracticeCard
       title="연습"
       subtitle="36, 24의 최대공약수 구하기"
@@ -145,10 +180,10 @@ export const meta = {
         소인수분해 이용하기
       </div>
 
-      {steps[4].quiz && (
+      {steps[5].quiz && (
         <QuizArea
-          stepId={4}
-          quiz={steps[4].quiz}
+          stepId={5}
+          quiz={steps[5].quiz}
           completionContent={(
             <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
               공약수는 최대공약수 12의 약수이므로
@@ -176,7 +211,7 @@ export const meta = {
   </PracticeCard>
 </Step>
 
-<Step id={5}>
+<Step id={6}>
   <PracticeCard
     title="연습"
     subtitle="60, 90의 최대공약수 구하기"
@@ -186,10 +221,10 @@ export const meta = {
       나눗셈 이용하기
     </div>
 
-    {steps[5].quiz && (
+    {steps[6].quiz && (
       <QuizArea
-        stepId={5}
-        quiz={steps[5].quiz}
+        stepId={6}
+        quiz={steps[6].quiz}
         completionContent={(
           <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
             공약수는 최대공약수 30의 약수이므로
@@ -254,7 +289,7 @@ export const meta = {
   </PracticeCard>
 </Step>
 
-<Step id={6}>
+<Step id={7}>
   <SummaryCard
     title="공약수와 최대공약수 핵심 정리"
     layout="stack-below-tag"
@@ -266,10 +301,10 @@ export const meta = {
       { tag: '서로소', tagVariant: 'equal', content: <>최대공약수가 1인 두 자연수, <br />예: 3과 4는 서로소</> },
     ]}
   >
-    {steps[6].quiz && (
+    {steps[7].quiz && (
       <QuizArea
-        stepId={6}
-        quiz={steps[6].quiz}
+        stepId={7}
+        quiz={steps[7].quiz}
         renderBlank={(blank) => (
           <>18, 24, 30의 최대공약수는 {blank}이다.</>
         )}
@@ -278,7 +313,7 @@ export const meta = {
   </SummaryCard>
 </Step>
 
-<Step id={7}>
+<Step id={8}>
   <CompleteCard emoji="🧩" title="공약수와 최대공약수 완료!">
     공약수의 뜻, 최대공약수의 성질,
     <br />
