@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
-import { MathInline } from '@/components/math'
 import { cn } from '@/lib/utils'
 
-export type LcmDivisionStep = 0 | 1 | 2 | 3 | 4 | 5 | 6
+export type LcmDivisionStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 interface LcmDivisionTableMotionProps {
   className?: string
@@ -22,13 +21,14 @@ const stepDescriptions: Record<LcmDivisionStep, string> = {
   2: '36을 3으로 나누면 12가 된다.',
   3: '45를 3으로 나누면 15가 되어 첫 번째 나눗셈이 끝난다.',
   4: '이제 6, 12, 15를 다시 3으로 나누면 2, 4, 5가 된다.',
-  5: '2와 4는 2로 나누고 5는 그대로 내려서 마지막 몫 1, 2, 5를 만든다.',
-  6: '왼쪽의 수와 마지막 몫을 모두 곱한 값 180이 최소공배수이다.',
+  5: '세 수(2, 4, 5)를 동시에 나누지 못하고 두 수만 나누어도 나눗셈은 진행한다.',
+  6: '2와 4는 2로 나누고 5는 그대로 내려서 마지막 몫 1, 2, 5를 만든다.',
+  7: '왼쪽의 수와 마지막 몫을 모두 곱한 값 180이 최소공배수이다.',
 }
 
 export function LcmDivisionTableMotion({
   className,
-  step = 6,
+  step = 7,
 }: LcmDivisionTableMotionProps) {
   return (
     <div
@@ -48,7 +48,7 @@ export function LcmDivisionTableMotion({
               rowIndex === 0 ? true
               : rowIndex === 1 ? step >= 1
               : rowIndex === 2 ? step >= 4
-              : step >= 5
+              : step >= 6
 
             const showBracket =
               rowIndex === 0 ? true
@@ -105,7 +105,7 @@ export function LcmDivisionTableMotion({
                         ? step >= valueIndex + 1
                         : rowIndex === 2
                           ? step >= 4
-                          : step >= 5
+                          : step >= 6
 
                   return (
                     <div
@@ -113,7 +113,8 @@ export function LcmDivisionTableMotion({
                       className={cn(
                         'transition-opacity',
                         (!rowVisible || !valueVisible) && 'invisible',
-                        rowIndex === 2 && value === '5' && 'rounded-full bg-[#F9D0DD]',
+                        rowIndex === 3 && step >= 6 && 'rounded-full bg-[#FFE65C] text-[#8A5A00]',
+                        rowIndex === 2 && value === '5' && step >= 5 && 'rounded-full bg-[#F9D0DD]',
                       )}
                     >
                       {value}
@@ -137,14 +138,25 @@ export function LcmDivisionTableMotion({
         </motion.div>
       ) : null}
 
-      {step >= 6 ? (
+      {step >= 7 ? (
         <motion.div
           className="mt-3 rounded-xl bg-[#1F4F8A] px-4 py-3 text-center text-[16px] font-extrabold text-white"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          최소공배수 = <MathInline tex={'3 \\times 3 \\times 2 \\times 1 \\times 2 \\times 5 = 180'} className="align-middle text-white" />
+          <span className="block">최소공배수 =</span>
+          <div className="mt-2 flex flex-nowrap items-center justify-center gap-1 overflow-x-visible">
+            {['3', '3', '2', '1', '2', '5'].map((value, index) => (
+              <div key={`${value}-${index}`} className="flex items-center gap-1">
+                <span className="flex h-7 min-w-[28px] items-center justify-center rounded-full bg-[#FFE65C] px-2 text-[16px] font-black text-[#8A5A00] sm:h-9 sm:min-w-[36px] sm:px-3 sm:text-[20px]">
+                  {value}
+                </span>
+                {index < 5 ? <span className="text-[14px] font-black text-white/85 sm:text-[18px]">×</span> : null}
+              </div>
+            ))}
+          </div>
+          <span className="mt-2 block">= 180</span>
         </motion.div>
       ) : null}
     </div>

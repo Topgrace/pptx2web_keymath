@@ -90,7 +90,7 @@ export const meta = {
     <div className="mt-3 rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[14px] font-bold leading-[1.8] text-slide-gray">
       예를 들어 <span className="font-extrabold text-[#E25555]">A, B의 최소공배수가 8</span>이면
       <br />
-      공배수는 <span className="font-extrabold text-[#1F4F8A]">8, 16, 24, 32, ... (8의 배수)</span>이다.
+      공배수는 <span className="font-extrabold text-[#E25555]">8, 16, 24, 32, ... (8의 배수)</span>이다.
     </div>
 
     {steps[2].quiz && (
@@ -136,41 +136,6 @@ export const meta = {
 </Step>
 
 <Step id={4}>
-  <StepCard variant="white">
-    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
-      배수 관계
-    </div>
-
-    <div className="rounded-xl bg-[#EEF6FF] px-4 py-3 text-center text-[16px] font-extrabold leading-[1.8] text-[#1F4F8A]">
-      한 수가 다른 수의 배수이면 두 수의 최소공배수는 큰 수이다.
-    </div>
-
-    <div className="mt-3 grid gap-3 sm:grid-cols-2">
-      <div className="rounded-xl bg-[#F8F8F8] px-4 py-3 text-center text-[14px] font-bold leading-[1.8] text-slide-gray">
-        예:
-        <span className="ml-2 font-extrabold text-[#1F4F8A]">6과 18</span>
-        <br />
-        18은 6의 배수이므로 최소공배수는 <span className="font-extrabold text-[#E25555]">18</span>이다.
-      </div>
-    </div>
-
-    {steps[4].quiz && (
-      <QuizArea
-        stepId={4}
-        quiz={steps[4].quiz}
-        renderBlanks={(blank) => (
-          <>
-            <>6과 18의 최소공배수는 18이 {blank('pair-6-18')}</>
-            <br />
-            <>8과 12의 최소공배수는 12가 {blank('pair-8-12')}</>
-          </>
-        )}
-      />
-    )}
-  </StepCard>
-</Step>
-
-<Step id={5}>
   <PracticeCard
     title="연습"
     subtitle="36, 24의 최소공배수 구하기"
@@ -180,10 +145,10 @@ export const meta = {
       소인수분해 이용하기
     </div>
 
-    {steps[5].quiz && (
+    {steps[4].quiz && (
       <QuizArea
-        stepId={5}
-        quiz={steps[5].quiz}
+        stepId={4}
+        quiz={steps[4].quiz}
         completionContent={(
           <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
             공배수는 최소공배수 72의 배수이므로
@@ -211,7 +176,7 @@ export const meta = {
   </PracticeCard>
 </Step>
 
-<Step id={6}>
+<Step id={5}>
   <PracticeCard
     title="연습"
     subtitle="60, 90의 최소공배수 구하기"
@@ -221,10 +186,10 @@ export const meta = {
       나눗셈 이용하기
     </div>
 
-    {steps[6].quiz && (
+    {steps[5].quiz && (
       <QuizArea
-        stepId={6}
-        quiz={steps[6].quiz}
+        stepId={5}
+        quiz={steps[5].quiz}
         completionContent={(
           <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
             공배수는 최소공배수 180의 배수이므로
@@ -289,7 +254,7 @@ export const meta = {
   </PracticeCard>
 </Step>
 
-<Step id={7}>
+<Step id={6}>
   <SummaryCard
     title="공배수와 최소공배수 핵심 정리"
     layout="stack-below-tag"
@@ -298,13 +263,12 @@ export const meta = {
       { tag: '최소공배수', tagVariant: 'big', content: <>공배수 중에서 가장 작은 수</> },
       { tag: '핵심 성질', tagVariant: 'small', content: <>공배수는 최소공배수의 배수</> },
       { tag: '최소공배수 구하기', tagVariant: 'small', content: <>소인수분해와 나눗셈방법 연습하기</> },
-      { tag: '배수 관계', tagVariant: 'equal', content: <>한 수가 다른 수의 배수이면 <br />최소공배수는 큰 수</> },
     ]}
   >
-    {steps[7].quiz && (
+    {steps[6].quiz && (
       <QuizArea
-        stepId={7}
-        quiz={steps[7].quiz}
+        stepId={6}
+        quiz={steps[6].quiz}
         renderBlank={(blank) => (
           <>18, 24, 30의 최소공배수는 {blank}이다.</>
         )}
@@ -313,7 +277,7 @@ export const meta = {
   </SummaryCard>
 </Step>
 
-<Step id={8}>
+<Step id={7}>
   <CompleteCard emoji="🔁" title="공배수와 최소공배수 완료!">
     공배수의 뜻, 최소공배수의 성질,
     <br />

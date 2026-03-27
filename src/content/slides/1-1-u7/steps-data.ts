@@ -95,34 +95,6 @@ const rawSteps = [
   },
   {
     id: 4,
-    type: 'concept',
-    cardVariant: 'white',
-    quiz: {
-      kind: 'multi',
-      items: [
-        {
-          id: 'pair-6-18',
-          answer: '맞다.',
-          blankType: 'normal',
-          choices: [
-            { label: '맞다.', value: '맞다.' },
-            { label: '아니다.', value: '아니다.' },
-          ],
-        },
-        {
-          id: 'pair-8-12',
-          answer: '아니다.',
-          blankType: 'normal',
-          choices: [
-            { label: '맞다.', value: '맞다.' },
-            { label: '아니다.', value: '아니다.' },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    id: 5,
     type: 'practice',
     cardVariant: 'white',
     quiz: {
@@ -179,7 +151,7 @@ const rawSteps = [
     },
   },
   {
-    id: 6,
+    id: 5,
     type: 'practice',
     cardVariant: 'white',
     quiz: {
@@ -288,7 +260,7 @@ const rawSteps = [
     },
   },
   {
-    id: 7,
+    id: 6,
     type: 'summary',
     cardVariant: 'white',
     quiz: {
@@ -303,7 +275,7 @@ const rawSteps = [
     },
   },
   {
-    id: 8,
+    id: 7,
     type: 'complete',
     cardVariant: 'default',
   },

@@ -2,7 +2,7 @@ import { LayoutGroup, motion } from 'framer-motion'
 import { MathInline } from '@/components/math'
 import { cn } from '@/lib/utils'
 
-export type LcmPrimeStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+export type LcmPrimeStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 interface LcmPrimeFactorizationMotionProps {
   className?: string
@@ -84,10 +84,7 @@ export function LcmPrimeFactorizationMotion({
           'rounded-[28px] border-2 border-[#F0DC45] bg-[linear-gradient(180deg,#fffef7_0%,#fff7d8_100%)] p-4 md:p-5',
           className,
         )}
-      >
-        <div className="mb-3 text-center text-sm font-extrabold text-[#1F4F8A]">
-          공통 소인수와 공통이 아닌 소인수를 모두 곱한다.
-        </div>
+      >     
 
         <div className="space-y-3">
           {factorizationRows.map((row, rowIndex) => {
@@ -120,7 +117,7 @@ export function LcmPrimeFactorizationMotion({
                     {rowVisible ? (
                       row.chips.map((chip, chipIndex) => {
                         const highlight = step >= 4 && chip.highlight
-                        const selected = step >= 7 && chip.selected
+                         const selected = step >= 6 && chip.selected
 
                         return (
                           <motion.div
@@ -185,52 +182,60 @@ export function LcmPrimeFactorizationMotion({
                   <span className="rounded-full bg-[#FFF7D6] px-3 py-1.5 text-[13px] font-black text-[#7A5600] shadow-[0_8px_18px_rgba(240,196,25,0.18)]">
                     같은 소인수끼리 세로로 정렬해 보자.
                   </span>
-                  {step >= 5 ? (
+                  {step >= 4 ? (
                     <span className="text-[13px] font-bold text-[#5D7392]">
-                      필요한 소인수는{' '}
-                      <MathInline tex={'2,\\ 3,\\ 5'} className="align-middle text-[#5D7392]" />
-                      이다.
+                      <span className="underline decoration-[#F0C419] decoration-[3px] underline-offset-[5px]">
+                        세 수의 공배수가 되려면 세 수의 모든 소인수를 포함해야 한다.
+                      </span>
                     </span>
                   ) : null}
-                  {step >= 6 ? (
+                  {step >= 5 ? (
                     <span className="text-[13px] font-bold text-[#5D7392]">
                       2의 지수는{' '}
-                      <MathInline
-                        tex={'2^1,\\ 2^2 \\text{ 중 가장 큰 } 2^2'}
-                        className="align-middle text-[#5D7392]"
-                      />
+                      <MathInline tex={'2^1,\\ 2^2'} className="align-middle text-[#5D7392]" />
+                      {' '}중 가장 큰{' '}
+                      <MathInline tex={'2^2'} className="align-middle text-[#5D7392]" />
                       를 고른다.
                     </span>
                   ) : null}
-                  {step >= 7 ? (
-                    <span className="text-[13px] font-bold text-[#5D7392]">
-                      3의 지수는 가장 큰{' '}
-                      <MathInline tex={'3^2'} className="align-middle text-[#5D7392]" />
-                      를 택하고, 공통이 아닌{' '}
-                      <MathInline tex={'5'} className="align-middle text-[#5D7392]" />
-                      도 함께 곱한다.
+                  {step >= 6 ? (
+                    <span className="flex flex-col gap-1 text-[13px] font-bold text-[#5D7392]">
+                      <span>
+                        3의 지수는 가장 큰{' '}
+                        <MathInline tex={'3^2'} className="align-middle text-[#5D7392]" />
+                        를 택한다.
+                      </span>
+                      <span>
+                        5의 지수는 (가장 큰){' '}
+                        <MathInline tex={'5^1'} className="align-middle text-[#5D7392]" />
+                        을 택한다.
+                      </span>
                     </span>
                   ) : null}
                 </motion.div>
 
-                {step === 8 ? (
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-[13px] font-black text-[#5D7392]">(최소공배수) =</span>
-                    <FactorChip
-                      chip={{ base: '2', exponent: '2' }}
-                      className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
-                    />
-                    <span className="text-[18px] font-black text-[#90A4BF]">×</span>
-                    <FactorChip
-                      chip={{ base: '3', exponent: '2' }}
-                      className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
-                    />
-                    <span className="text-[18px] font-black text-[#90A4BF]">×</span>
-                    <FactorChip
-                      chip={{ base: '5' }}
-                      className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
-                    />
-                    <span className="text-[13px] font-black text-[#5D7392]">= 180</span>
+                {step === 7 ? (
+                  <div className="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-2 sm:flex sm:flex-wrap sm:items-center sm:gap-2">
+                    <span className="text-[13px] font-black text-[#5D7392]">(최소공배수)</span>
+                    <div className="flex min-w-0 items-center gap-2">
+                      <span className="text-[13px] font-black text-[#5D7392]">=</span>
+                      <FactorChip
+                        chip={{ base: '2', exponent: '2' }}
+                        className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
+                      />
+                      <span className="text-[18px] font-black text-[#90A4BF]">×</span>
+                      <FactorChip
+                        chip={{ base: '3', exponent: '2' }}
+                        className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
+                      />
+                      <span className="text-[18px] font-black text-[#90A4BF]">×</span>
+                      <FactorChip
+                        chip={{ base: '5' }}
+                        className="border-[#F0C419] bg-[linear-gradient(135deg,#fffce8_0%,#ffe07d_100%)] text-[#805800]"
+                      />
+                      <span className="hidden text-[13px] font-black text-[#5D7392] sm:inline">= 180</span>
+                    </div>
+                    <span className="col-start-2 text-[13px] font-black text-[#5D7392] sm:hidden">= 180</span>
                   </div>
                 ) : null}
               </>

@@ -26,10 +26,10 @@ const stepLabels: Record<PrimeStep, string> = {
   0: '소인수분해',
   1: '소인수분해',
   2: '소인수분해',
-  3: '소인수분해',
-  4: '공통 소인수',
-  5: '2의 지수 선택',
-  6: '3의 지수 선택',
+  3: '공통 소인수',
+  4: '2의 지수 선택',
+  5: '3의 지수 선택',
+  6: '최대공약수',
   7: '다시 보기',
 }
 
@@ -143,7 +143,7 @@ export function InteractiveGcdShowcase({
 
   const currentPrimeStage = getPrimeStage(primeStep)
   const currentDivisionStage = getDivisionStage(divisionStep)
-  const shouldShowDivisionHint = hasCompletedPrime && !hasCompletedDivision
+  const shouldShowDivisionHint = activeMethod === 'prime' && hasCompletedPrime && !hasCompletedDivision
 
   return (
     <div
@@ -171,7 +171,6 @@ export function InteractiveGcdShowcase({
           {methodTabs.map((tab) => {
             const isActive = tab.id === activeMethod
             const isHovered = hoveredTab === tab.id
-            const showTabHint = tab.id === 'division' && shouldShowDivisionHint
             const buttonY = isActive ? tabDepth : isHovered ? hoverPressDepth : 0
             const shadowStep = isActive ? 0 : isHovered ? 4 : 8
             const shadowBlur = isActive ? 0 : isHovered ? 12 : 18
@@ -233,19 +232,6 @@ export function InteractiveGcdShowcase({
                   >
                     {tab.label}
                   </motion.div>
-                  {showTabHint && (
-                    <motion.div
-                      initial={prefersReducedMotion ? false : { opacity: 0.7, scale: 0.96 }}
-                      animate={prefersReducedMotion ? { opacity: 1 } : { opacity: [0.8, 1, 0.8], scale: [0.97, 1.03, 0.97] }}
-                      transition={prefersReducedMotion ? { duration: 0.2 } : { duration: 1.35, repeat: Infinity, ease: 'easeInOut' }}
-                      className={cn(
-                        'inline-flex w-fit items-center rounded-full px-2 py-0.5 text-[10px] font-black sm:text-[11px]',
-                        isActive ? 'bg-[#DCEEFF] text-[#1F4F8A]' : 'bg-[#FFE65C] text-[#7A5200]',
-                      )}
-                    >
-                      눌러 보기
-                    </motion.div>
-                  )}
                   <motion.div
                     initial={false}
                     animate={{
@@ -272,18 +258,7 @@ export function InteractiveGcdShowcase({
             )
           })}
         </nav>
-        {shouldShowDivisionHint && (
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.24, ease: 'easeOut' }}
-            className="mt-[-6px] rounded-2xl border border-[#FFE08A] bg-[#FFF8D8] px-4 py-2 text-center text-[12px] font-black leading-[1.6] text-[#7A5200] sm:text-[13px]"
-          >
-            소인수분해를 끝까지 봤어요. 이제 <span className="text-[#1F4F8A]">나눗셈 탭</span>을 눌러 이어서 보세요.
-          </motion.div>
-        )}
       </div>
-
       {activeMethod === 'prime' ? (
         <section
           id="gcd-showcase-panel-prime"
@@ -463,6 +438,17 @@ export function InteractiveGcdShowcase({
             </motion.div>
           )}
         </>
+      )}
+
+      {shouldShowDivisionHint && (
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.24, ease: 'easeOut' }}
+          className="mt-5 rounded-[18px] border border-[#F0C419] bg-[linear-gradient(180deg,#fffef7_0%,#fff3c7_100%)] px-4 py-3 text-center text-[13px] font-black leading-[1.7] text-[#9A6300] sm:mt-6"
+        >
+          나눗셈 탭을 눌러 다른 방법도 확인하세요.
+        </motion.div>
       )}
     </div>
   )
