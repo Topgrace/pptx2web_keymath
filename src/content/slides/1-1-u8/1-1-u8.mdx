@@ -1,13 +1,10 @@
 import { Step, SlideContent } from '@/components/mdx/step-wrapper'
 import { IntroCard } from '@/components/cards/intro-card'
 import { StepCard } from '@/components/cards/step-card'
-import { NoteCard } from '@/components/cards/note-card'
 import { PracticeCard } from '@/components/cards/practice-card'
 import { SummaryCard } from '@/components/cards/summary-card'
 import { CompleteCard } from '@/components/cards/complete-card'
-import { LawCard } from '@/components/cards/law-card'
 import { GcdLcmRelationSetupMotion } from '@/components/content/gcd-lcm-relation-setup-motion'
-import { SolutionSteps, SolutionLine, SolutionArrow } from '@/components/content/solution-steps'
 import { QuizArea } from '@/components/quiz'
 import { MathInline } from '@/components/math'
 import { steps } from './steps-data'
@@ -32,7 +29,7 @@ export const meta = {
         stepId={0}
         quiz={steps[0].quiz}
         renderBlank={(blank) => (
-          <>두 수의 곱은 최대공약수와 {blank}의 곱이다.</>
+          <>결론부터 말하자면<br/>두 수의 곱은 최대공약수와 {blank}의 곱이다.</>
         )}
       />
     )}
@@ -41,20 +38,67 @@ export const meta = {
 
 <Step id={1}>
   <StepCard variant="white">
-    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
-      관계식 미리보기
-      <br />
-      최대공약수를 <span className="text-[#E25555]">G</span>라고 두자
+    <div className="mb-3 text-center text-[15px] font-bold leading-[1.7] text-slide-gray">
+      최대공약수는 영어로{" "}<br />
+      <span className="text-[#E25555] font-extrabold">G</span>reatest(가장 큰){" "}<br />
+      <span className=" font-extrabold">C</span>ommon(공통의){" "}<br />
+      <span className=" font-extrabold">D</span>ivisor(약수)로{" "}<br />
+      첫글자 <span className="text-[#E25555] font-extrabold">G</span>를 따서 표시한다.
     </div>
 
-    <GcdLcmRelationSetupMotion />
+    <div className="mb-4 text-center text-[15px] font-bold leading-[1.7] text-slide-gray">
+      최소공배수는 영어로{" "}<br />
+      <span className="text-[#E25555] font-extrabold">L</span>east(가장 작은){" "}<br />
+      <span className="font-extrabold">C</span>ommon(공통의){" "}<br />
+      <span className="font-extrabold">M</span>ultiple(배수)로{" "}<br />
+      첫글자 <span className="text-[#E25555] font-extrabold">L</span>을 따서 표시한다.
+    </div>
 
     {steps[1].quiz && (
       <QuizArea
         stepId={1}
         quiz={steps[1].quiz}
-        renderBlank={(blank) => (
-          <>A와 B를 G로 나눈 몫 a, b는 {blank}이다.</>
+        renderBlanks={(blank, solvedAnswers) => (
+          <div className="mt-4 space-y-4">
+            <div className="rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-4">
+              <div className="mb-3 text-center text-[14px] font-extrabold leading-[1.6] text-[#1F4F8A]">
+                14와 21의 최대공약수가 7이면
+              </div>
+
+              <div className="mx-auto flex w-fit flex-col gap-y-2 text-center text-[31px] font-black leading-none text-[#2A2A2A]">
+                <div className="relative grid grid-cols-[44px_18px_72px_72px] items-center pb-1">
+                  <div className="flex justify-center">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FFE65C] text-[24px] text-[#8A5A00]">
+                      7
+                    </span>
+                  </div>
+                  <div className="text-[28px]">)</div>
+                  <div>14</div>
+                  <div>21</div>
+                  <div className="pointer-events-none absolute bottom-[10px] left-[48px] right-0 border-b-2 border-[#666666]" />
+                </div>
+
+                <div className="grid grid-cols-[44px_18px_72px_72px] items-center -mt-2">
+                  <div />
+                  <div />
+                  <div className="flex justify-center">{blank('q14')}</div>
+                  <div className="flex justify-center">{blank('q21')}</div>
+                </div>
+              </div>
+
+              <div className="mt-3 text-center text-[15px] font-bold leading-[1.8] text-slide-gray">
+                14와 21의 최소공배수는 {blank('lcm')}이다.
+              </div>
+
+            </div>
+
+            {solvedAnswers.q14 && solvedAnswers.q21 && solvedAnswers.lcm && (
+              <GcdLcmRelationSetupMotion
+                renderBlank={blank}
+                solvedAnswers={solvedAnswers}
+              />
+            )}
+          </div>
         )}
       />
     )}
@@ -62,164 +106,32 @@ export const meta = {
 </Step>
 
 <Step id={2}>
-  <NoteCard title="알 수 있는 사실 ①">
-    <div className="grid gap-3 md:grid-cols-2">
-      <div className="rounded-xl bg-white px-4 py-3 text-center text-[16px] font-extrabold leading-[1.9] text-slide-gray">
-        <MathInline tex={'A \\div G = a'} />
-        <br />
-        <span className="text-[#E25555]">
-          <MathInline tex={'A = G \\times a'} />
-        </span>
-      </div>
-      <div className="rounded-xl bg-white px-4 py-3 text-center text-[16px] font-extrabold leading-[1.9] text-slide-gray">
-        <MathInline tex={'B \\div G = b'} />
-        <br />
-        <span className="text-[#E25555]">
-          <MathInline tex={'B = G \\times b'} />
-        </span>
-      </div>
+  <PracticeCard title="활용형 예시" subtitle="관계식을 이용해 모르는 값을 찾아 보자">
+    <div className="rounded-xl bg-[#F8F8F8] px-4 py-4 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
+      두 자연수 <span className="font-extrabold text-[#E25555]">A</span>와 <span className="font-extrabold text-[#E25555]">70</span>의
+      <br />
+      최대공약수가 <span className="font-extrabold text-[#E25555]">14</span>이고
+      <br />
+      최소공배수가 <span className="font-extrabold text-[#E25555]">210</span>일 때
+      <br />
+      <MathInline tex={'A\\times 70 = 210\\times 14'} />
+      <br />
+      따라서 <MathInline tex={'A = (210\\times 14) \\div 70 = 42'} />
     </div>
 
     {steps[2].quiz && (
       <QuizArea
         stepId={2}
         quiz={steps[2].quiz}
-        renderBlanks={(blank) => (
-          <>
-            <><MathInline tex={'A ='} /> {blank('a-form')}</>
-            <br />
-            <><MathInline tex={'B ='} /> {blank('b-form')}</>
-          </>
+        renderBlank={(blank) => (
+          <>두 자연수 A와 70의 최대공약수가 14이고 최소공배수가 210일 때, A는 {blank}이다.</>
         )}
       />
     )}
-  </NoteCard>
+  </PracticeCard>
 </Step>
 
 <Step id={3}>
-  <StepCard variant="white">
-    <div className="mb-3 text-center text-[18px] font-extrabold leading-[1.5] text-slide-gray">
-      알 수 있는 사실 ②
-    </div>
-
-    <div className="rounded-xl bg-[#F8F8F8] px-4 py-4 text-center text-[15px] font-bold leading-[1.8] text-slide-gray">
-      a와 b는 <span className="font-extrabold text-[#E25555]">서로소</span>이므로
-      <br />
-      a와 b의 최소공배수는 <span className="font-extrabold text-[#1F4F8A]">a×b</span>이다.
-      <br />
-      따라서 A와 B의 최소공배수는
-      <br />
-      공통 부분 G에 남은 부분 a, b를 모두 곱한
-      <br />
-      <span className="inline-block rounded-lg bg-[#1F4F8A] px-3 py-2 text-white">
-        <MathInline tex={'L = G \\times a \\times b'} />
-      </span>
-    </div>
-
-    {steps[3].quiz && (
-      <QuizArea
-        stepId={3}
-        quiz={steps[3].quiz}
-        renderBlank={(blank) => (
-          <>최소공배수를 L이라고 하면 <MathInline tex={'L ='} /> {blank} 이다.</>
-        )}
-      />
-    )}
-  </StepCard>
-</Step>
-
-<Step id={4}>
-  <LawCard
-    title="관계식 도출"
-    formula={'A \\times B = L \\times G'}
-    hint="A와 B를 G로 나타내고, L = G×a×b 를 이용하면 된다."
-  >
-    <div className="rounded-xl bg-[#F8F8F8] px-4 py-4">
-      <SolutionSteps>
-        <SolutionLine label="A, B를 G로 표현">
-          <MathInline tex={'A \\times B = (G \\times a) \\times (G \\times b)'} />
-        </SolutionLine>
-        <SolutionArrow />
-        <SolutionLine label="묶어서 정리">
-          <MathInline tex={'= G \\times a \\times b \\times G'} />
-        </SolutionLine>
-        <SolutionArrow />
-        <SolutionLine label="L 대입">
-          <MathInline tex={'= L \\times G'} />
-        </SolutionLine>
-      </SolutionSteps>
-    </div>
-
-    {steps[4].quiz && (
-      <QuizArea
-        stepId={4}
-        quiz={steps[4].quiz}
-        renderBlank={(blank) => (
-          <>두 수의 곱은 {blank} 이다.</>
-        )}
-      />
-    )}
-  </LawCard>
-</Step>
-
-<Step id={5}>
-  <PracticeCard title="확인형 예시" subtitle="12와 18로 관계식을 확인해 보자">
-    <div className="rounded-xl bg-[#F8F8F8] px-4 py-4 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
-      최대공약수 <MathInline tex={'G = 6'} />
-      <br />
-      <MathInline tex={'12 = 6 \\times 2, \\quad 18 = 6 \\times 3'} />
-      <br />
-      a와 b는 서로소이므로
-      <br />
-      <MathInline tex={'L = 6 \\times 2 \\times 3 = 36'} />
-    </div>
-
-    {steps[5].quiz && (
-      <QuizArea
-        stepId={5}
-        quiz={steps[5].quiz}
-        completionContent={(
-          <div className="mx-auto max-w-[320px] rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-3 text-center text-[13px] font-extrabold leading-relaxed text-[#1F4F8A]">
-            <MathInline tex={'12 \\times 18 = 216'} />
-            <br />
-            <MathInline tex={'6 \\times 36 = 216'} />
-            <br />
-            정말로 <MathInline tex={'A \\times B = L \\times G'} /> 가 성립한다.
-          </div>
-        )}
-        renderBlank={(blank) => (
-          <>12와 18의 최소공배수는 {blank}이다.</>
-        )}
-      />
-    )}
-  </PracticeCard>
-</Step>
-
-<Step id={6}>
-  <PracticeCard title="활용형 예시" subtitle="관계식을 이용해 모르는 값을 찾아 보자">
-    <div className="rounded-xl bg-[#F8F8F8] px-4 py-4 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
-      두 수의 곱이 <span className="font-extrabold text-[#E25555]">180</span>이고
-      <br />
-      최대공약수가 <span className="font-extrabold text-[#E25555]">6</span>일 때
-      <br />
-      <MathInline tex={'180 = L \\times 6'} />
-      <br />
-      따라서 <MathInline tex={'L = 180 \\div 6 = 30'} />
-    </div>
-
-    {steps[6].quiz && (
-      <QuizArea
-        stepId={6}
-        quiz={steps[6].quiz}
-        renderBlank={(blank) => (
-          <>두 수의 곱이 180이고 최대공약수가 6이면 최소공배수는 {blank}이다.</>
-        )}
-      />
-    )}
-  </PracticeCard>
-</Step>
-
-<Step id={7}>
   <SummaryCard
     title="최대공약수와 최소공배수의 관계 핵심 정리"
     layout="stack-below-tag"
@@ -230,10 +142,10 @@ export const meta = {
       { tag: '활용', tagVariant: 'equal', content: <>곱과 최대공약수 또는 최소공배수 중 둘을 알면 나머지 하나를 구할 수 있다</> },
     ]}
   >
-    {steps[7].quiz && (
+    {steps[3].quiz && (
       <QuizArea
-        stepId={7}
-        quiz={steps[7].quiz}
+        stepId={3}
+        quiz={steps[3].quiz}
         renderBlank={(blank) => (
           <>두 수의 곱은 {blank} 이다.</>
         )}
@@ -242,7 +154,7 @@ export const meta = {
   </SummaryCard>
 </Step>
 
-<Step id={8}>
+<Step id={4}>
   <CompleteCard emoji="🧠" title="최대공약수와 최소공배수의 관계 완료!">
     이제 두 수의 곱을 보면
     <br />

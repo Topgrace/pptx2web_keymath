@@ -10,7 +10,10 @@ import { QuizFeedback } from './quiz-feedback'
 interface MultiBlankQuizAreaProps {
   stepId: number
   quiz: MultiQuiz
-  renderBlanks?: (blank: (id: string) => ReactNode) => ReactNode
+  renderBlanks?: (
+    blank: (id: string) => ReactNode,
+    solvedAnswers: Record<string, string>,
+  ) => ReactNode
   completionContent?: ReactNode
   completionAdvanceDelayMs?: number
 }
@@ -98,7 +101,7 @@ export const MultiBlankQuizArea = ({
       transition={{ duration: 0.5, delay: 0.3 }}
     >
       <div className="katex-inline mb-3.5 text-center text-[17px] font-extrabold leading-[1.8] text-gray-700">
-        {renderBlanks(renderBlank)}
+        {renderBlanks(renderBlank, solvedAnswers)}
       </div>
 
       <ChoicePanel

@@ -11,7 +11,10 @@ interface QuizAreaProps {
   /** Single blank renderer for custom inline placement. */
   renderBlank?: (blank: ReactNode) => ReactNode
   /** Multi blank renderer for inline placement by blank id. */
-  renderBlanks?: (blank: (id: string) => ReactNode) => ReactNode
+  renderBlanks?: (
+    blank: (id: string) => ReactNode,
+    solvedAnswers: Record<string, string>,
+  ) => ReactNode
   /** Optional content shown after solving before auto-advancing. */
   completionContent?: ReactNode
   /** Auto-advance delay when completionContent is shown. */

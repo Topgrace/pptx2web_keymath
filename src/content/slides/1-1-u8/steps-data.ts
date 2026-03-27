@@ -21,114 +21,107 @@ const rawSteps = [
     type: 'concept',
     cardVariant: 'white',
     quiz: {
-      answer: '서로소',
-      blankType: 'normal',
-      choices: [
-        { label: '서로소', value: '서로소' },
-        { label: '공배수', value: '공배수' },
-        { label: '공약수', value: '공약수' },
-        { label: '배수', value: '배수' },
+      kind: 'multi',
+      items: [
+        {
+          id: 'q14',
+          answer: '2',
+          blankType: 'square',
+          choices: [
+            { label: '1', value: '1' },
+            { label: '2', value: '2' },
+            { label: '3', value: '3' },
+            { label: '7', value: '7' },
+          ],
+        },
+        {
+          id: 'q21',
+          answer: '3',
+          blankType: 'square',
+          choices: [
+            { label: '1', value: '1' },
+            { label: '2', value: '2' },
+            { label: '3', value: '3' },
+            { label: '7', value: '7' },
+          ],
+        },
+        {
+          id: 'lcm',
+          answer: '7×2×3',
+          blankType: 'normal',
+          choices: [
+            { label: '7×2', value: '7×2' },
+            { label: '7×3', value: '7×3' },
+            { label: '7×2×3', value: '7×2×3' },
+            { label: '2×3', value: '2×3' },
+          ],
+        },
+        {
+          id: 'b',
+          answer: 'b',
+          answerLatex: 'b',
+          blankType: 'square',
+          choices: [
+            { label: '$a$', value: 'a', latex: 'a' },
+            { label: '$b$', value: 'b', latex: 'b' },
+            { label: '$G$', value: 'G', latex: 'G' },
+            { label: '$L$', value: 'L', latex: 'L' },
+          ],
+        },
+        {
+          id: 'L',
+          answer: 'L',
+          answerLatex: 'L',
+          blankType: 'square',
+          choices: [
+            { label: '$a$', value: 'a', latex: 'a' },
+            { label: '$b$', value: 'b', latex: 'b' },
+            { label: '$G$', value: 'G', latex: 'G' },
+            { label: '$L$', value: 'L', latex: 'L' },
+          ],
+        },
+        {
+          id: 'gcdWord',
+          answer: '최대공약수',
+          blankType: 'normal',
+          choices: [
+            { label: '최대공약수', value: '최대공약수' },
+            { label: '최소공배수', value: '최소공배수' },
+            { label: '공약수', value: '공약수' },
+            { label: '공배수', value: '공배수' },
+          ],
+        },
+        {
+          id: 'productWord',
+          answer: '곱',
+          blankType: 'normal',
+          choices: [
+            { label: '합', value: '합' },
+            { label: '차', value: '차' },
+            { label: '몫', value: '몫' },
+            { label: '곱', value: '곱' },
+          ],
+        },
       ],
     },
   },
   {
     id: 2,
-    type: 'note',
-    cardVariant: 'default',
+    type: 'practice',
+    cardVariant: 'white',
     quiz: {
-      kind: 'multi',
-      items: [
-        {
-          id: 'a-form',
-          answer: 'G*a',
-          answerLatex: 'G\\times a',
-          blankType: 'normal',
-          choices: [
-            { label: '$G \\times a$', value: 'G*a', latex: 'G\\times a' },
-            { label: '$G+a$', value: 'G+a', latex: 'G+a' },
-            { label: '$a \\times b$', value: 'a*b', latex: 'a\\times b' },
-            { label: '$G \\times b$', value: 'G*b', latex: 'G\\times b' },
-          ],
-        },
-        {
-          id: 'b-form',
-          answer: 'G*b',
-          answerLatex: 'G\\times b',
-          blankType: 'normal',
-          choices: [
-            { label: '$G \\times a$', value: 'G*a', latex: 'G\\times a' },
-            { label: '$G+b$', value: 'G+b', latex: 'G+b' },
-            { label: '$a \\times b$', value: 'a*b', latex: 'a\\times b' },
-            { label: '$G \\times b$', value: 'G*b', latex: 'G\\times b' },
-          ],
-        },
+      answer: '42',
+      blankType: 'normal',
+      choices: [
+        { label: '28', value: '28' },
+        { label: '35', value: '35' },
+        { label: '42', value: '42' },
+        { label: '56', value: '56' },
       ],
     },
   },
   {
     id: 3,
-    type: 'concept',
-    cardVariant: 'white',
-    quiz: {
-      answer: 'G*a*b',
-      answerLatex: 'G\\times a\\times b',
-      blankType: 'normal',
-      choices: [
-        { label: '$G \\times a$', value: 'G*a', latex: 'G\\times a' },
-        { label: '$G \\times b$', value: 'G*b', latex: 'G\\times b' },
-        { label: '$G \\times a \\times b$', value: 'G*a*b', latex: 'G\\times a\\times b' },
-        { label: '$a \\times b$', value: 'a*b', latex: 'a\\times b' },
-      ],
-    },
-  },
-  {
-    id: 4,
-    type: 'law',
-    cardVariant: 'default',
-    quiz: {
-      answer: 'L*G',
-      answerLatex: 'L\\times G',
-      blankType: 'normal',
-      choices: [
-        { label: '$G \\times a$', value: 'G*a', latex: 'G\\times a' },
-        { label: '$G \\times a \\times b$', value: 'G*a*b', latex: 'G\\times a\\times b' },
-        { label: '$L \\times G$', value: 'L*G', latex: 'L\\times G' },
-        { label: '$a \\times b$', value: 'a*b', latex: 'a\\times b' },
-      ],
-    },
-  },
-  {
-    id: 5,
-    type: 'practice',
-    cardVariant: 'white',
-    quiz: {
-      answer: '36',
-      blankType: 'normal',
-      choices: [
-        { label: '18', value: '18' },
-        { label: '24', value: '24' },
-        { label: '30', value: '30' },
-        { label: '36', value: '36' },
-      ],
-    },
-  },
-  {
-    id: 6,
-    type: 'practice',
-    cardVariant: 'white',
-    quiz: {
-      answer: '30',
-      blankType: 'normal',
-      choices: [
-        { label: '24', value: '24' },
-        { label: '30', value: '30' },
-        { label: '36', value: '36' },
-        { label: '60', value: '60' },
-      ],
-    },
-  },
-  {
-    id: 7,
     type: 'summary',
     cardVariant: 'white',
     quiz: {
@@ -144,7 +137,7 @@ const rawSteps = [
     },
   },
   {
-    id: 8,
+    id: 4,
     type: 'complete',
     cardVariant: 'default',
   },
