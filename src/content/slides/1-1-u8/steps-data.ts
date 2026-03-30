@@ -110,13 +110,41 @@ const rawSteps = [
     type: 'practice',
     cardVariant: 'white',
     quiz: {
-      answer: '42',
-      blankType: 'normal',
-      choices: [
-        { label: '28', value: '28' },
-        { label: '35', value: '35' },
-        { label: '42', value: '42' },
-        { label: '56', value: '56' },
+      kind: 'multi',
+      items: [
+        {
+          id: 'num70',
+          answer: '70',
+          blankType: 'square',
+          choices: [
+            { label: '14', value: '14' },
+            { label: '35', value: '35' },
+            { label: '70', value: '70' },
+            { label: '210', value: '210' },
+          ],
+        },
+        {
+          id: 'gcd14',
+          answer: '14',
+          blankType: 'square',
+          choices: [
+            { label: '7', value: '7' },
+            { label: '10', value: '10' },
+            { label: '14', value: '14' },
+            { label: '21', value: '21' },
+          ],
+        },
+        {
+          id: 'answer42',
+          answer: '42',
+          blankType: 'square',
+          choices: [
+            { label: '28', value: '28' },
+            { label: '35', value: '35' },
+            { label: '42', value: '42' },
+            { label: '56', value: '56' },
+          ],
+        },
       ],
     },
   },
@@ -125,14 +153,13 @@ const rawSteps = [
     type: 'summary',
     cardVariant: 'white',
     quiz: {
-      answer: 'L*G',
-      answerLatex: 'L\\times G',
+      answer: '294',
       blankType: 'normal',
       choices: [
-        { label: '$L \\times G$', value: 'L*G', latex: 'L\\times G' },
-        { label: '$G \\times a$', value: 'G*a', latex: 'G\\times a' },
-        { label: '$G \\times a \\times b$', value: 'G*a*b', latex: 'G\\times a\\times b' },
-        { label: '$a \\times b$', value: 'a*b', latex: 'a\\times b' },
+        { label: '42', value: '42' },
+        { label: '84', value: '84' },
+        { label: '294', value: '294' },
+        { label: '588', value: '588' },
       ],
     },
   },

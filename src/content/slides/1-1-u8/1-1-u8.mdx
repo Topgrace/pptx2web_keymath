@@ -62,7 +62,7 @@ export const meta = {
           <div className="mt-4 space-y-4">
             <div className="rounded-xl border border-[#1F4F8A]/10 bg-[#F7FBFF] px-4 py-4">
               <div className="mb-3 text-center text-[14px] font-extrabold leading-[1.6] text-[#1F4F8A]">
-                14와 21의 최대공약수가 7이면
+                14와 21의 최대공약수는 7이고
               </div>
 
               <div className="mx-auto flex w-fit flex-col gap-y-2 text-center text-[31px] font-black leading-none text-[#2A2A2A]">
@@ -107,24 +107,30 @@ export const meta = {
 
 <Step id={2}>
   <PracticeCard title="활용형 예시" subtitle="관계식을 이용해 모르는 값을 찾아 보자">
-    <div className="rounded-xl bg-[#F8F8F8] px-4 py-4 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
-      두 자연수 <span className="font-extrabold text-[#E25555]">A</span>와 <span className="font-extrabold text-[#E25555]">70</span>의
-      <br />
-      최대공약수가 <span className="font-extrabold text-[#E25555]">14</span>이고
-      <br />
-      최소공배수가 <span className="font-extrabold text-[#E25555]">210</span>일 때
-      <br />
-      <MathInline tex={'A\\times 70 = 210\\times 14'} />
-      <br />
-      따라서 <MathInline tex={'A = (210\\times 14) \\div 70 = 42'} />
-    </div>
-
     {steps[2].quiz && (
       <QuizArea
         stepId={2}
         quiz={steps[2].quiz}
-        renderBlank={(blank) => (
-          <>두 자연수 A와 70의 최대공약수가 14이고 최소공배수가 210일 때, A는 {blank}이다.</>
+        renderBlanks={(blank) => (
+          <div className="rounded-xl bg-[#F8F8F8] px-4 py-4 text-center text-[15px] font-bold leading-[1.9] text-slide-gray">
+            두 자연수 <span className="font-extrabold text-[#E25555]">A</span>와 <span className="font-extrabold text-[#E25555]">70</span>의
+            <br />
+            최대공약수가 <span className="font-extrabold">14</span>이고
+            <br />
+            최소공배수가 <span className="font-extrabold">210</span>일 때
+            <br />
+            <span className="inline-flex flex-wrap items-center justify-center gap-1 align-middle text-[18px] font-extrabold text-[#2A2A2A]">
+              <span>A×</span>
+              {blank('num70')}
+              <span>= 210×</span>
+              {blank('gcd14')}
+            </span>
+            <br />
+            <span className="inline-flex flex-wrap items-center justify-center gap-1 align-middle text-[18px] font-extrabold text-[#2A2A2A]">
+              <span>따라서 A =</span>
+              {blank('answer42')}
+            </span>
+          </div>
         )}
       />
     )}
@@ -136,10 +142,20 @@ export const meta = {
     title="최대공약수와 최소공배수의 관계 핵심 정리"
     layout="stack-below-tag"
     cases={[
-      { tag: '관계 설정', tagVariant: 'equal', content: <>A=G×a, B=G×b 이고 a, b는 서로소</> },
-      { tag: '최소공배수', tagVariant: 'big', content: <>L = G×a×b</> },
-      { tag: '최종 관계식', tagVariant: 'small', content: <>A×B = L×G</> },
-      { tag: '활용', tagVariant: 'equal', content: <>곱과 최대공약수 또는 최소공배수 중 둘을 알면 나머지 하나를 구할 수 있다</> },
+      {
+        tag: '최종 관계식',
+        tagVariant: 'big',
+        content: (
+          <div className="py-2 text-center">
+            <div className="mb-3 text-[14px] font-bold leading-[1.6] text-slide-gray">
+              두 자연수 A,B의 최대공약수를 G, 최소공배수를 L이라 하면
+            </div>
+            <div className="whitespace-nowrap text-[24px] font-black leading-none text-[#1F3F68] sm:text-[32px]">
+              <MathInline tex={'A\\times B = L\\times G'} />
+            </div>
+          </div>
+        ),
+      },
     ]}
   >
     {steps[3].quiz && (
@@ -147,7 +163,7 @@ export const meta = {
         stepId={3}
         quiz={steps[3].quiz}
         renderBlank={(blank) => (
-          <>두 수의 곱은 {blank} 이다.</>
+          <>두 수 14와 21의 최대공약수와 최소공배수의 곱은 {blank}이다.</>
         )}
       />
     )}
@@ -160,7 +176,7 @@ export const meta = {
     <br />
     최대공약수와 최소공배수를 함께 연결해서 생각할 수 있어요.
     <br />
-    <MathInline tex={'A \\times B = L \\times G'} /> 를 꼭 기억하세요.
+    <MathInline tex={'A \\times B = L \\times G'} /> 
   </CompleteCard>
 </Step>
 
