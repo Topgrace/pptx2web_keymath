@@ -1,0 +1,56 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { ChapterIntroNeoCard } from '@/components/cards/chapter-intro-neo-card'
+import { StepCard } from '@/components/cards/step-card'
+import { NegativeTemperatureStage } from '@/components/content/negative-temperature-stage'
+import { NegativeElevatorStage } from '@/components/content/negative-elevator-stage'
+import { NegativeWalletStage } from '@/components/content/negative-wallet-stage'
+import { NegativeTugOfWarStage } from '@/components/content/negative-tugofwar-stage'
+import { NegativeNumberLineOutro } from '@/components/content/negative-numberline-outro'
+
+export const meta = {
+  slug: 'unit1-ch2-intro',
+  title: 'II. 정수와 유리수',
+  subtitle: '대단원 인트로',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <ChapterIntroNeoCard
+    chapterNum="II"
+    chapterTitle="정수와 유리수"
+    speechText="정수와 유리수라는 새로운 수에 대해 배우고, 어떻게 계산하는지 살펴보자"
+  />
+</Step>
+
+<Step id={1}>
+  <StepCard variant="white" className="overflow-visible">
+    <NegativeTemperatureStage />
+  </StepCard>
+</Step>
+
+<Step id={2}>
+  <StepCard variant="white" className="overflow-visible">
+    <NegativeElevatorStage />
+  </StepCard>
+</Step>
+
+<Step id={3}>
+  <StepCard variant="white" className="overflow-visible">
+    <NegativeWalletStage />
+  </StepCard>
+</Step>
+
+<Step id={4}>
+  <StepCard variant="white" className="overflow-visible">
+    <NegativeTugOfWarStage />
+  </StepCard>
+</Step>
+
+<Step id={5}>
+  <StepCard variant="white" className="overflow-visible">
+    <NegativeNumberLineOutro />
+  </StepCard>
+</Step>
+
+</SlideContent>

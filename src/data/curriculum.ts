@@ -45,7 +45,7 @@ export const semesters: SemesterData[] = [
         id: '1-1-ch2',
         title: 'II. 정수와 유리수',
         units: [
-          { id: '1-1-ch2-intro', title: '대단원 인트로', status: 'locked' },
+          { id: '1-1-ch2-intro', title: '대단원 인트로', status: 'unlocked', path: '/1-1-ch2-intro' },
           { id: '1-1-u9', title: '9. 정수와 유리수', status: 'locked' },
           { id: '1-1-u10', title: '10. 수직선 위에 수 나타내기', status: 'locked' },
           { id: '1-1-u11', title: '11. 절댓값과 크기 비교', status: 'locked' },

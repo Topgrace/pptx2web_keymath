@@ -98,11 +98,11 @@ export function SlideProgressProvider({
   const isComplete = state.currentStep >= state.totalSteps - 1
 
   const nextButtonState = useMemo((): 'locked' | 'unlocked' | 'done' => {
-    if (isComplete) return 'done'
     // If current step has a quiz that isn't solved, lock
     if (quizStepIds.has(state.currentStep) && !state.solvedQuizzes.has(state.currentStep)) {
       return 'locked'
     }
+    if (isComplete) return 'done'
     return 'unlocked'
   }, [isComplete, quizStepIds, state.currentStep, state.solvedQuizzes])
 

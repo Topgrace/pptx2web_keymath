@@ -33,6 +33,7 @@ export const unitRouteLoaders = {
   '/1-1-u6': () => import('@/pages/1-1-u6'),
   '/1-1-u7': () => import('@/pages/1-1-u7'),
   '/1-1-u8': () => import('@/pages/1-1-u8'),
+  '/1-1-ch2-intro': () => import('@/pages/1-1-ch2-intro'),
 } satisfies Record<string, UnitRouteLoader>
 
 export const unitPageRoutes = [
@@ -52,6 +53,7 @@ export const unitPageRoutes = [
   { path: '/1-1-u6', loader: unitRouteLoaders['/1-1-u6'] },
   { path: '/1-1-u7', loader: unitRouteLoaders['/1-1-u7'] },
   { path: '/1-1-u8', loader: unitRouteLoaders['/1-1-u8'] },
+  { path: '/1-1-ch2-intro', loader: unitRouteLoaders['/1-1-ch2-intro'] },
 ] as const
 
 const preloadedUnitPaths = new Set<string>()

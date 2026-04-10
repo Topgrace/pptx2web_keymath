@@ -104,7 +104,7 @@ export function NextButton() {
 
   const getText = () => {
     if (nextButtonState === 'done') return '처음으로'
-    if (nextButtonState === 'locked') return '퀴즈를 클릭하여 채워봅시다'
+    if (nextButtonState === 'locked') return '현재 활동을 완료해 봅시다'
     return `다음 (${currentStep + 1}/${totalSteps - 1})`
   }
 
