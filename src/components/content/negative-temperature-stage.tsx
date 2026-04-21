@@ -1,23 +1,82 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
+} from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { CheckCircle2, Thermometer } from 'lucide-react'
 import { useSlideProgress } from '@/hooks/use-slide-progress'
-import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-const MIN_TEMPERATURE = -40
+const MIN_TEMPERATURE = -30
 const MAX_TEMPERATURE = 40
-const START_TEMPERATURE = 20
-const STEP_AMOUNT = 5
-const TARGET_TEMPERATURE = -40
 const AUTO_ADVANCE_DELAY_MS = 1000
+const TEMPERATURE_MARKS = Array.from(
+  { length: MAX_TEMPERATURE - MIN_TEMPERATURE + 1 },
+  (_, index) => MIN_TEMPERATURE + index,
+)
+const CITY_ORDER = ['seoul', 'moscow'] as const
+
+type CityKey = (typeof CITY_ORDER)[number]
+type TemperatureState = Record<CityKey, number>
+
+const CITY_CONFIG: Record<
+  CityKey,
+  {
+    label: string
+    initialValue: number
+    targetValue: number
+    handleSide: 'left' | 'right'
+    handleClassName: string
+    handleTailClassName: string
+    fluidClassName: string
+  }
+> = {
+  seoul: {
+    label: '서울',
+    initialValue: 24,
+    targetValue: 20,
+    handleSide: 'left',
+    handleClassName: 'border-[#F5B7BE] bg-[#EF5A64] text-white',
+    handleTailClassName: 'bg-[#EF5A64]',
+    fluidClassName: 'bg-[linear-gradient(180deg,#FF8E97_0%,#EF5A64_100%)]',
+  },
+  moscow: {
+    label: '모스크바',
+    initialValue: 13,
+    targetValue: -10,
+    handleSide: 'right',
+    handleClassName: 'border-[#B8D3FF] bg-[#4E8EF7] text-white',
+    handleTailClassName: 'bg-[#4E8EF7]',
+    fluidClassName: 'bg-[linear-gradient(180deg,#8BC5FF_0%,#4E8EF7_100%)]',
+  },
+}
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))
 }
 
+function valueToPercent(value: number) {
+  return ((value - MIN_TEMPERATURE) / (MAX_TEMPERATURE - MIN_TEMPERATURE)) * 100
+}
+
+function valueToTopPercent(value: number) {
+  return 100 - valueToPercent(value)
+}
+
+function valueToTrackTop(value: number) {
+  return `${valueToTopPercent(value)}%`
+}
+
 function formatTemperature(value: number) {
-  return `${value > 0 ? '+' : ''}${value}℃`
+  return `${value}℃`
+}
+
+function formatAriaTemperature(value: number) {
+  return value < 0 ? `영하 ${Math.abs(value)}도` : `${value}도`
 }
 
 export function NegativeTemperatureStage({
@@ -27,9 +86,13 @@ export function NegativeTemperatureStage({
   className?: string
   stepId?: number
 }) {
-  const [temperature, setTemperature] = useState(START_TEMPERATURE)
-  const [missionCleared, setMissionCleared] = useState(false)
+  const [temperatures, setTemperatures] = useState<TemperatureState>({
+    seoul: CITY_CONFIG.seoul.initialValue,
+    moscow: CITY_CONFIG.moscow.initialValue,
+  })
+  const [activeCity, setActiveCity] = useState<CityKey | null>(null)
   const clearTimerRef = useRef<number | null>(null)
+  const scaleRef = useRef<HTMLDivElement | null>(null)
   const prefersReducedMotion = useReducedMotion()
   const {
     advanceStep,
@@ -41,13 +104,117 @@ export function NegativeTemperatureStage({
   } = useSlideProgress()
 
   const solved = isSolved(stepId)
-  const progress = ((temperature - MIN_TEMPERATURE) / (MAX_TEMPERATURE - MIN_TEMPERATURE)) * 100
+  const allTargetsMatched = CITY_ORDER.every(
+    (city) => temperatures[city] === CITY_CONFIG[city].targetValue,
+  )
+  const missionCleared = solved || allTargetsMatched
+
+  const setCityTemperature = useCallback(
+    (city: CityKey, nextValue: number) => {
+      if (solved) return
+
+      const snappedValue = clamp(Math.round(nextValue), MIN_TEMPERATURE, MAX_TEMPERATURE)
+      setTemperatures((prev) => {
+        if (prev[city] === snappedValue) return prev
+        return { ...prev, [city]: snappedValue }
+      })
+    },
+    [solved],
+  )
+
+  const getTemperatureFromClientY = useCallback((clientY: number) => {
+    const rect = scaleRef.current?.getBoundingClientRect()
+    if (!rect || rect.height <= 0) return null
+
+    const offsetY = clamp(clientY - rect.top, 0, rect.height)
+    const ratio = 1 - offsetY / rect.height
+    return MIN_TEMPERATURE + ratio * (MAX_TEMPERATURE - MIN_TEMPERATURE)
+  }, [])
+
+  const updateTemperatureFromClientY = useCallback(
+    (city: CityKey, clientY: number) => {
+      const nextValue = getTemperatureFromClientY(clientY)
+      if (nextValue === null) return
+      setCityTemperature(city, nextValue)
+    },
+    [getTemperatureFromClientY, setCityTemperature],
+  )
+
+  const handlePointerDown = useCallback(
+    (city: CityKey, event: ReactPointerEvent<HTMLButtonElement>) => {
+      if (missionCleared) return
+
+      event.preventDefault()
+      event.currentTarget.focus()
+      setActiveCity(city)
+      updateTemperatureFromClientY(city, event.clientY)
+    },
+    [missionCleared, updateTemperatureFromClientY],
+  )
+
+  const handleKeyDown = useCallback(
+    (city: CityKey, event: ReactKeyboardEvent<HTMLButtonElement>) => {
+      if (missionCleared) return
+
+      const currentValue = temperatures[city]
+
+      switch (event.key) {
+        case 'ArrowUp':
+        case 'ArrowRight':
+          event.preventDefault()
+          setCityTemperature(city, currentValue + 1)
+          return
+        case 'ArrowDown':
+        case 'ArrowLeft':
+          event.preventDefault()
+          setCityTemperature(city, currentValue - 1)
+          return
+        case 'PageUp':
+          event.preventDefault()
+          setCityTemperature(city, currentValue + 5)
+          return
+        case 'PageDown':
+          event.preventDefault()
+          setCityTemperature(city, currentValue - 5)
+          return
+        case 'Home':
+          event.preventDefault()
+          setCityTemperature(city, MIN_TEMPERATURE)
+          return
+        case 'End':
+          event.preventDefault()
+          setCityTemperature(city, MAX_TEMPERATURE)
+          return
+        default:
+          return
+      }
+    },
+    [missionCleared, setCityTemperature, temperatures],
+  )
 
   useEffect(() => {
-    if (temperature === TARGET_TEMPERATURE && !missionCleared) {
-      setMissionCleared(true)
+    if (!activeCity || missionCleared) return undefined
+
+    const handlePointerMove = (event: PointerEvent) => {
+      updateTemperatureFromClientY(activeCity, event.clientY)
     }
-  }, [missionCleared, temperature])
+
+    const stopDragging = () => {
+      setActiveCity(null)
+    }
+
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('pointerup', stopDragging)
+    window.addEventListener('pointercancel', stopDragging)
+    window.addEventListener('blur', stopDragging)
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerup', stopDragging)
+      window.removeEventListener('pointercancel', stopDragging)
+      window.removeEventListener('blur', stopDragging)
+    }
+  }, [activeCity, missionCleared, updateTemperatureFromClientY])
 
   useEffect(() => {
     if (!missionCleared || solved) return
@@ -78,260 +245,180 @@ export function NegativeTemperatureStage({
     }
   }, [])
 
-  const canIncrease = !missionCleared && temperature < MAX_TEMPERATURE
-  const canDecrease = !missionCleared && temperature > MIN_TEMPERATURE
-  const isBelowZero = temperature < 0
-
-  const reaction = useMemo(() => {
-    if (missionCleared) {
-      return {
-        badge: 'MISSION CLEAR',
-        badgeTone: 'bg-[#E7F8F0] text-[#23734E]',
-        cardTone: 'bg-[linear-gradient(180deg,#E5F7FF_0%,#C8ECFF_100%)]',
-        bearText: '시원해서 행복해요!',
-        body: '영하 40℃에 도달했어요. 0보다 낮은 온도를 나타내려면 음수가 꼭 필요해요.',
-        bearMood: '🐻‍❄️',
-        effect: '❄️❄️❄️',
-      }
-    }
-
-    if (temperature > 10) {
-      return {
-        badge: 'TOO HOT',
-        badgeTone: 'bg-[#FFF0E3] text-[#B55B16]',
-        cardTone: 'bg-[linear-gradient(180deg,#FFF1D7_0%,#FFD79C_100%)]',
-        bearText: '너무 더워요...',
-        body: '지금은 20℃라서 북극곰이 힘들어해요. 온도를 내려 시원하게 해 주세요.',
-        bearMood: '🥵',
-        effect: '☀️',
-      }
-    }
-
-    if (temperature >= 0) {
-      return {
-        badge: 'NEAR ZERO',
-        badgeTone: 'bg-[#F3F7FF] text-[#4567A0]',
-        cardTone: 'bg-[linear-gradient(180deg,#F4F8FF_0%,#E5EEFF_100%)]',
-        bearText: '조금 나아졌어요.',
-        body: '0℃는 기준점이에요. 이제 이보다 더 낮은 온도로 내려가 보세요.',
-        bearMood: '😮‍💨',
-        effect: '💧',
-      }
-    }
-
-    return {
-      badge: 'BELOW ZERO',
-      badgeTone: 'bg-[#EAF7FF] text-[#19649A]',
-      cardTone: 'bg-[linear-gradient(180deg,#E7F6FF_0%,#CFEFFF_100%)]',
-      bearText: '이제 시원해졌어요!',
-      body: '0보다 낮은 상태로 내려왔어요. 숫자는 -5, -10처럼 음수로 바뀌어요.',
-      bearMood: '🙂',
-      effect: '❄️',
-    }
-  }, [missionCleared, temperature])
-
   return (
-    <div className={cn('grid gap-5 lg:grid-cols-[0.92fr_1.08fr]', className)}>
-      <div className="flex flex-col justify-between">
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#E7F6FF] px-4 py-2 text-[12px] font-black tracking-[0.18em] text-[#26638E]">
-            <Thermometer size={16} />
-            POLAR BEAR MISSION
-          </div>
-
-          <h3 className="mt-4 text-[25px] font-black leading-[1.35] text-[#203245] sm:text-[30px]">
-            0도 아래를 나타낼
-            <br />
-            새로운 수가 필요해요
-          </h3>
-
-          <p className="mt-3 text-[15px] font-bold leading-[1.8] text-[#5A6B78]">
-            지금은 <span className="text-[#C96418]">20℃</span>라서 북극곰이 너무 더워해요.
-            <br />
-            온도를 내려서 <span className="text-[#1566A5]">영하 40℃</span>까지 도달하면
-            <br />
-            미션이 클리어됩니다.
-          </p>
+    <div className={cn('space-y-6', className)}>
+      <div className="space-y-3 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full bg-[#EEF5FF] px-4 py-2 text-[12px] font-black tracking-[0.18em] text-[#3563B1]">
+          <Thermometer size={16} />
+          TEMPERATURE MISSION
         </div>
 
-        <div className="mt-5 space-y-3">
-          <div className="rounded-[20px] bg-[#F5FBFF] px-4 py-4 text-[14px] font-bold leading-[1.75] text-[#4E6575]">
-            목표 온도:
-            <span className="ml-2 font-black text-[#1566A5]">{formatTemperature(TARGET_TEMPERATURE)}</span>
-            <br />
-            <span className="font-black text-[#1F4F8A]">0℃</span>를 지나 더 낮아질수록
-            <span className="ml-1 font-black text-[#1566A5]">음수</span>가 필요해져요.
-          </div>
+        <div>
+          <h3 className="text-[28px] font-black leading-[1.2] text-[#1F2C3B] sm:text-[34px]">
+            두 도시의 온도 비교
+          </h3>
+          <p className="mt-2 text-[15px] font-bold leading-[1.8] text-[#708092]">
+            온도계 바늘을 드래그하여 두 도시의 온도에 맞게 조정하세요         </p>
+        </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <Button
-              type="button"
-              onClick={() => setTemperature((prev) => clamp(prev + STEP_AMOUNT, MIN_TEMPERATURE, MAX_TEMPERATURE))}
-              disabled={!canIncrease}
-              className="rounded-2xl bg-[#F7A64A] py-6 text-[14px] font-black text-white hover:bg-[#EB9837] disabled:bg-[#F1C691]"
-            >
-              온도 올리기
-              <br />
-              (+5℃)
-            </Button>
-            <Button
-              type="button"
-              onClick={() => setTemperature((prev) => clamp(prev - STEP_AMOUNT, MIN_TEMPERATURE, MAX_TEMPERATURE))}
-              disabled={!canDecrease}
-              className="rounded-2xl bg-[#3C93D2] py-6 text-[14px] font-black text-white hover:bg-[#2F85C3] disabled:bg-[#93C7EA]"
-            >
-              온도 내리기
-              <br />
-              (-5℃)
-            </Button>
-          </div>
+        <div className="mx-auto max-w-[560px] rounded-[22px] border border-[#DAE5F1] bg-white/90 px-4 py-4 text-[15px] font-black leading-[1.8] text-[#314154] shadow-[0_16px_32px_rgba(15,23,42,0.06)]">
+          서울은 <span className="text-[#EF5A64]">20℃</span>이고, 모스크바는{' '}
+          <span className="text-[#4E8EF7]">영하 10℃</span>이다.
         </div>
       </div>
 
-      <div className="rounded-[28px] border-2 border-[#C5DDEC] bg-[#F8FCFF] p-4 sm:p-5">
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, ease: 'easeOut' }}
-          className={cn('rounded-[24px] px-5 py-5 text-center transition-colors duration-300', reaction.cardTone)}
-        >
-          <div className="flex items-center justify-center gap-2">
-            <div className={cn('rounded-full px-3 py-1 text-[12px] font-black tracking-[0.14em]', reaction.badgeTone)}>
-              {reaction.badge}
-            </div>
-            {missionCleared && (
-              <motion.div
-                initial={prefersReducedMotion ? false : { scale: 0.84, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.24, ease: 'easeOut' }}
-                className="flex items-center gap-1 rounded-full bg-white/80 px-3 py-1 text-[12px] font-black text-[#23734E]"
-              >
-                <CheckCircle2 size={14} />
-                NEXT STEP
-              </motion.div>
-            )}
-          </div>
-
-          <div
-            className={cn(
-              'mt-3 text-[38px] font-black leading-none sm:text-[52px]',
-              missionCleared ? 'text-[#1566A5]' : isBelowZero ? 'text-[#1A6EA8]' : 'text-[#C96418]',
-            )}
-          >
-            {formatTemperature(temperature)}
-          </div>
-
-          <div className="mt-2 text-[15px] font-black text-[#486273]">{reaction.bearText}</div>
-          <div className="mt-2 text-[14px] font-bold leading-[1.75] text-[#587182]">{reaction.body}</div>
-        </motion.div>
-
-        <div className="mt-5 grid items-center gap-4 sm:grid-cols-[92px_minmax(0,1fr)] sm:gap-6">
-          <div className="relative mx-auto h-[300px] w-[92px] shrink-0">
-            <div className="absolute left-1/2 top-2 h-[248px] w-8 -translate-x-1/2 rounded-full border-4 border-[#315872] bg-[#DDEAF2]">
-              <div
-                className={cn(
-                  'absolute bottom-0 left-0 right-0 rounded-full transition-colors duration-300',
-                  isBelowZero ? 'bg-[linear-gradient(180deg,#67C3FF_0%,#2D8DDD_100%)]' : 'bg-[linear-gradient(180deg,#FFB35A_0%,#E65353_100%)]',
-                )}
-                style={{ height: `${progress}%` }}
-              />
-
-              <motion.div
-                animate={{ bottom: `calc(${progress}% - 18px)` }}
-                transition={prefersReducedMotion ? { duration: 0.12 } : { type: 'spring', stiffness: 260, damping: 24 }}
-                className="absolute left-1/2 h-10 w-10 -translate-x-1/2 rounded-full border-4 border-white bg-[#1F4F8A] shadow-[0_4px_10px_rgba(0,0,0,0.18)]"
-              />
-            </div>
-
-            <div className="absolute bottom-0 left-1/2 h-16 w-16 -translate-x-1/2 rounded-full border-[6px] border-[#315872] bg-white" />
-
-            {[40, 20, 0, -20, -40].map((value) => {
-              const markerProgress = ((value - MIN_TEMPERATURE) / (MAX_TEMPERATURE - MIN_TEMPERATURE)) * 100
-              return (
-                <div
-                  key={value}
-                  className="absolute right-full mr-3 flex items-center gap-2"
-                  style={{ bottom: `calc(${markerProgress}% - 3px)` }}
-                >
-                  <div className="h-[2px] w-4 rounded-full bg-[#7A94A8]" />
-                  <div
-                    className={cn(
-                      'text-[13px] font-black',
-                      value === 0 ? 'text-[#1F4F8A]' : value < 0 ? 'text-[#1566A5]' : 'text-[#607181]',
-                    )}
-                  >
-                    {formatTemperature(value)}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          <div className="space-y-3">
-            <motion.div
-              animate={
-                missionCleared
-                  ? { scale: 1 }
-                  : temperature > 10
-                    ? { rotate: [0, -2, 2, -2, 0], y: [0, -2, 0, -2, 0] }
-                    : { scale: 1 }
-              }
-              transition={
-                missionCleared
-                  ? { duration: 0.2 }
-                  : temperature > 10 && !prefersReducedMotion
-                    ? { duration: 0.8, repeat: Infinity, ease: 'easeInOut' }
-                    : { duration: 0.2 }
-              }
-              className={cn(
-                'rounded-[24px] border-2 px-4 py-5 text-center',
-                missionCleared ? 'border-[#9FD3F0] bg-[#F3FBFF]' : 'border-[#D8E7F2] bg-white',
-              )}
-            >
-              <div className="text-[66px] leading-none">{reaction.bearMood}</div>
-              <div className="mt-3 text-[17px] font-black text-[#395164]">북극곰 상태</div>
-              <div className="mt-2 text-[14px] font-bold leading-[1.75] text-[#5B7180]">
-                {temperature > 10 && '지금은 너무 더워서 얼음이 필요해요.'}
-                {temperature <= 10 && temperature >= 0 && '조금 시원해졌지만 아직 0℃보다 위예요.'}
-                {temperature < 0 && !missionCleared && '0보다 낮은 온도로 내려왔어요. 이제 음수가 등장해요.'}
-                {missionCleared && '북극곰이 편안한 온도에 도착했어요.'}
+      <motion.div
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+        className={cn(
+          'rounded-[34px] border px-3 py-6 shadow-[0_28px_64px_rgba(15,23,42,0.08)] sm:px-5 sm:py-8',
+          missionCleared
+            ? 'border-[#CFE1FF] bg-[linear-gradient(180deg,#FAFCFF_0%,#EFF6FF_100%)]'
+            : 'border-[#E4EBF3] bg-[linear-gradient(180deg,#FBFDFF_0%,#F4F8FD_100%)]',
+        )}
+      >
+        <div className="mx-auto flex max-w-[220px] justify-center">
+          <div className="mx-auto">
+            <div className="relative h-[500px] w-[164px] select-none">
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 text-[22px] font-black tracking-[-0.03em] text-[#556476]">
+                ℃
               </div>
-              <div className="mt-3 text-[24px]">{reaction.effect}</div>
-            </motion.div>
 
-            <div className="rounded-[18px] border-2 border-dashed border-[#BCD8EA] bg-[#F3FAFF] px-4 py-3 text-[13px] font-black leading-[1.75] text-[#4B6778]">
-              <span className="text-[#1F4F8A]">0℃</span>는 기준점이에요.
-              <br />
-              그보다 낮아지면 숫자는
-              <span className="mx-1 text-[#1566A5]">-5, -10, -15...</span>
-              처럼 음수로 바뀝니다.
+              <div ref={scaleRef} className="absolute left-1/2 top-10 bottom-[76px] w-full -translate-x-1/2">
+                {TEMPERATURE_MARKS.map((value) => {
+                  const isMajor = value % 10 === 0
+                  return (
+                    <div
+                      key={value}
+                      className="absolute inset-x-0 -translate-y-1/2"
+                      style={{ top: valueToTrackTop(value) }}
+                    >
+                      <div className="absolute left-0 top-1/2 flex w-[66px] -translate-y-1/2 items-center justify-end gap-2">
+                        <span
+                          className={cn(
+                            'w-[26px] text-right text-[13px] font-black',
+                            isMajor ? 'opacity-100' : 'opacity-0',
+                            value === 0 ? 'text-[#2E4154]' : 'text-[#6B7C8E]',
+                          )}
+                        >
+                          {value}
+                        </span>
+                        <div
+                          className={cn(
+                            'rounded-full bg-[#D7DEE8]',
+                            isMajor ? 'h-[2px] w-5' : 'h-px w-2.5',
+                          )}
+                        />
+                      </div>
+                    </div>
+                  )
+                })}
+
+                <div className="absolute left-1/2 top-0 bottom-0 w-[38px] -translate-x-1/2 overflow-hidden rounded-full border-[3px] border-[#CFD8E4] bg-white shadow-[inset_0_0_0_8px_rgba(248,250,252,0.95)]">
+                  <div
+                    className={cn('absolute bottom-0 left-[8px] w-[8px] rounded-full', CITY_CONFIG.seoul.fluidClassName)}
+                    style={{ top: valueToTrackTop(temperatures.seoul) }}
+                  />
+                  <div
+                    className={cn('absolute bottom-0 right-[8px] w-[8px] rounded-full', CITY_CONFIG.moscow.fluidClassName)}
+                    style={{ top: valueToTrackTop(temperatures.moscow) }}
+                  />
+                </div>
+
+                {CITY_ORDER.map((city) => {
+                  const config = CITY_CONFIG[city]
+                  const value = temperatures[city]
+                  const isMatched = value === config.targetValue
+                  const isActive = activeCity === city
+
+                  return (
+                    <button
+                      key={city}
+                      type="button"
+                      role="slider"
+                      aria-label={`${config.label} 온도`}
+                      aria-orientation="vertical"
+                      aria-valuemin={MIN_TEMPERATURE}
+                      aria-valuemax={MAX_TEMPERATURE}
+                      aria-valuenow={value}
+                      aria-valuetext={`${config.label} ${formatAriaTemperature(value)}`}
+                      disabled={missionCleared}
+                      onPointerDown={(event) => handlePointerDown(city, event)}
+                      onKeyDown={(event) => handleKeyDown(city, event)}
+                      className={cn(
+                        'absolute z-20 flex -translate-y-1/2 items-center touch-none outline-none focus-visible:ring-4 focus-visible:ring-[#CBD7E6] focus-visible:ring-offset-2 focus-visible:ring-offset-white',
+                        config.handleSide === 'left'
+                          ? 'left-[-90px] flex-row sm:left-[-102px]'
+                          : 'right-[-54px] flex-row-reverse sm:right-[-66px]',
+                        missionCleared ? 'cursor-default' : 'cursor-grab active:cursor-grabbing',
+                      )}
+                      style={{ top: valueToTrackTop(value) }}
+                    >
+                      <span
+                        className={cn(
+                          'flex min-w-[88px] flex-col items-center justify-center rounded-[14px] border px-3 py-2 text-white shadow-[0_10px_22px_rgba(15,23,42,0.18)] transition-transform duration-150 sm:min-w-[96px]',
+                          config.handleClassName,
+                          isActive && !missionCleared && !prefersReducedMotion && 'scale-105',
+                          isMatched && 'ring-2 ring-white/70',
+                          missionCleared && 'opacity-75',
+                        )}
+                      >
+                        <span className="text-[11px] font-black leading-none opacity-90">
+                          {config.label}
+                        </span>
+                        <span className="mt-1 text-[15px] font-black leading-none">
+                          {formatTemperature(value)}
+                        </span>
+                      </span>
+                      <span
+                        className={cn(
+                          'h-[6px] w-[22px] rounded-full sm:w-[28px]',
+                          config.handleTailClassName,
+                          config.handleSide === 'left' ? '-ml-2' : '-mr-2',
+                        )}
+                      />
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          'h-[2px] w-[30px] rounded-full sm:w-[36px]',
+                          config.handleTailClassName,
+                          config.handleSide === 'left' ? '-ml-1' : '-mr-1',
+                        )}
+                      />
+                    </button>
+                  )
+                })}
+              </div>
+
+              <div className="absolute bottom-0 left-1/2 h-[72px] w-[72px] -translate-x-1/2 rounded-full border-[4px] border-[#CFD8E4] bg-white shadow-[0_12px_24px_rgba(15,23,42,0.08)]">
+                <div className="absolute inset-[8px] overflow-hidden rounded-full bg-[#F8FAFD]">
+                  <div className={cn('absolute inset-y-0 left-0 w-1/2', CITY_CONFIG.seoul.fluidClassName)} />
+                  <div className={cn('absolute inset-y-0 right-0 w-1/2', CITY_CONFIG.moscow.fluidClassName)} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div
           className={cn(
-            'mt-5 rounded-[18px] px-4 py-4 text-center text-[15px] font-black leading-[1.8]',
+            'mt-6 rounded-[22px] px-4 py-4 text-center text-[14px] font-black leading-[1.8] sm:text-[15px]',
             missionCleared
-              ? 'border-2 border-[#99D0EE] bg-[#EAF7FF] text-[#24597A]'
-              : 'border-2 border-[#B8D3E8] bg-[#F4F9FF] text-[#305C7B]',
+              ? 'border border-[#CFE1FF] bg-[#EEF5FF] text-[#315491]'
+              : 'border border-[#E0E8F1] bg-white/85 text-[#5F7082]',
           )}
         >
           {missionCleared ? (
-            <>
-              0보다 낮은 온도를 나타내기 위해
-              <br />
-              음수가 필요해요.
-            </>
+            <span className="inline-flex items-center gap-2">
+              <CheckCircle2 size={18} />
+              서울 20℃, 모스크바 영하 10℃를 모두 맞춰 미션을 완료했어요.
+            </span>
           ) : (
-            <>
-              온도를 더 내려서
-              <br />
-              영하 40℃ 미션을 클리어해 보세요.
-            </>
+            '핸들을 드래그하여 온도를 조절하세요. 방향키로도 1℃씩 조정할 수 있어요.'
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

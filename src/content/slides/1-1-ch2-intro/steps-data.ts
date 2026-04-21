@@ -11,26 +11,6 @@ export const steps: Step[] = [
     type: 'concept',
     cardVariant: 'white',
   },
-  {
-    id: 2,
-    type: 'concept',
-    cardVariant: 'white',
-  },
-  {
-    id: 3,
-    type: 'concept',
-    cardVariant: 'white',
-  },
-  {
-    id: 4,
-    type: 'concept',
-    cardVariant: 'white',
-  },
-  {
-    id: 5,
-    type: 'summary',
-    cardVariant: 'white',
-  },
 ]
 
-export const quizStepIds = new Set<number>([1, 2, 3, 4, 5])
+export const quizStepIds = new Set<number>([1])
