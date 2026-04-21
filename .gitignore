@@ -29,3 +29,6 @@ backup
 # Generated KaTeX fonts (copied from node_modules by prepare:katex-css)
 src/styles/fonts
 /중등학기 1-1 본문(1~200)학생용 인쇄용_1104.pdf
+# Added by code-review-graph
+.code-review-graph/
+old_pyfolder
