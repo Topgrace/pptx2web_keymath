@@ -7,9 +7,10 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { CheckCircle2, Thermometer } from 'lucide-react'
+import { Thermometer } from 'lucide-react'
 import { useSlideProgress } from '@/hooks/use-slide-progress'
 import { cn } from '@/lib/utils'
+import { TemperatureComparisonQuiz } from '@/components/content/temperature-comparison-quiz'
 
 const MIN_TEMPERATURE = -30
 const MAX_TEMPERATURE = 40
@@ -98,7 +99,6 @@ export function NegativeTemperatureStage({
     advanceStep,
     currentStep,
     isSolved,
-    markSolved,
     showAllSteps,
     totalSteps,
   } = useSlideProgress()
@@ -215,11 +215,6 @@ export function NegativeTemperatureStage({
       window.removeEventListener('blur', stopDragging)
     }
   }, [activeCity, missionCleared, updateTemperatureFromClientY])
-
-  useEffect(() => {
-    if (!missionCleared || solved) return
-    markSolved(stepId)
-  }, [markSolved, missionCleared, solved, stepId])
 
   useEffect(() => {
     if (!missionCleared) return undefined
@@ -410,10 +405,7 @@ export function NegativeTemperatureStage({
           )}
         >
           {missionCleared ? (
-            <span className="inline-flex items-center gap-2">
-              <CheckCircle2 size={18} />
-              서울 20℃, 모스크바 영하 10℃를 모두 맞춰 미션을 완료했어요.
-            </span>
+            <TemperatureComparisonQuiz stepId={1} />
           ) : (
             '핸들을 드래그하여 온도를 조절하세요. 방향키로도 1℃씩 조정할 수 있어요.'
           )}
