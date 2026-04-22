@@ -54,6 +54,8 @@ export function TemperatureComparisonQuiz({ stepId = 2 }: { stepId?: number }) {
 
   const handleToggleBlank = (itemId: QuizItemId) => {
     if (solved || solvedAnswers[itemId]) return
+    setFeedback(null)
+    setFeedbackType(null)
     setActiveItemId((prev) => (prev === itemId ? null : itemId))
   }
 
@@ -68,7 +70,7 @@ export function TemperatureComparisonQuiz({ stepId = 2 }: { stepId?: number }) {
 
       const nextUnsolvedItem = QUIZ_ITEMS.find((item) => !nextSolvedAnswers[item.id])
       if (nextUnsolvedItem) {
-        setActiveItemId(nextUnsolvedItem.id)
+        setActiveItemId(null)
       } else {
         setActiveItemId(null)
         markSolved(stepId)
@@ -99,6 +101,7 @@ export function TemperatureComparisonQuiz({ stepId = 2 }: { stepId?: number }) {
         onClick={() => handleToggleBlank(item.id)}
         solved={itemSolved}
         solvedAnswer={solvedAnswer}
+        active={activeItemId === item.id}
         blankType={item.blankType}
       />
     )
