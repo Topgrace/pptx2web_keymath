@@ -1,0 +1,49 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { QuizArea } from '@/components/quiz'
+import { IntegerOverviewStage } from '@/components/content/integer-overview-stage'
+import { steps } from './steps-data'
+import shape2Character from '@/assets/images/shape_2.png'
+
+export const meta = {
+  slug: '1-1-u9-integers-and-rational-numbers',
+  title: '정수와 유리수',
+  subtitle: '중1 수학 · 정수와 유리수',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg={shape2Character}
+    speechText="이번 시간에는 0보다 작은 수를 생각해 보고 수의 세계를 확장해볼거야"
+    topicTitle="09. 정수와 유리수"
+  >
+    <div className="mt-5 rounded-[18px] bg-white/90 px-5 py-4 text-left shadow-[0_6px_20px_rgba(0,0,0,0.06)]">
+      <div className="mb-2 text-center text-[14px] font-extrabold tracking-[0.08em] text-[#2E7D57]">
+        이번 시간에 배울 내용
+      </div>
+      <div className="space-y-2 text-[15px] font-bold leading-[1.8] text-slide-gray">
+        <div>1. 정수의 뜻 이해하기</div>
+        <div>2. 양의 정수, 0, 음의 정수 구분하기</div>
+        <div>3. 유리수와 정수의 관계 살펴보기</div>
+      </div>
+    </div>
+
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>양수의 반대말은 {blank}</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <IntegerOverviewStage />
+</Step>
+
+</SlideContent>
