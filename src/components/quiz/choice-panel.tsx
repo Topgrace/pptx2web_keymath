@@ -69,11 +69,13 @@ export function ChoicePanel({
   isOpen,
   onSelect,
   disabled,
+  className,
 }: {
   choices: Choice[]
   isOpen: boolean
   onSelect: (value: string) => boolean
   disabled: boolean
+  className?: string
 }) {
   const [wrongIdx, setWrongIdx] = useState<number | null>(null)
   const [correctIdx, setCorrectIdx] = useState<number | null>(null)
@@ -104,7 +106,7 @@ export function ChoicePanel({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="flex flex-wrap justify-center gap-2.5 mt-3.5"
+          className={cn('mt-3.5 flex flex-wrap justify-center gap-2.5', className)}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}

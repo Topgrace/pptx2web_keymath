@@ -332,26 +332,34 @@ export function IntegerOverviewStage({
             >
               <div className="flex items-center text-[#2F3338]">
                 <div className="text-[28px] font-black leading-none sm:text-[32px]">정수</div>
-                <div className="relative ml-6 pl-7 text-[20px] font-black leading-none sm:text-[24px]">
-                  <span className="absolute -left-6 top-1/2 h-[1.5px] w-6 -translate-y-1/2 bg-[#596270]" />
-                  <span className="absolute left-0 top-3 bottom-3 w-[1.5px] bg-[#596270]" />
+                <div className="relative ml-6 pl-8 text-[20px] font-black leading-none sm:text-[24px]">
+                  <svg
+                    className="absolute left-0 top-[6px] h-[92px] w-[18px]"
+                    viewBox="0 0 18 92"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M17 1 H1 V91 H17 M1 47 H15"
+                      fill="none"
+                      stroke="#596270"
+                      strokeWidth="1.8"
+                      strokeLinecap="square"
+                    />
+                  </svg>
 
                   <div className="flex flex-col items-start gap-4">
-                    <div className="relative">
-                      <span className="absolute -left-7 top-1/2 h-[1.5px] w-[15px] -translate-y-1/2 bg-[#596270]" />
+                    <div className="relative min-h-[24px] flex items-center">
                       양의 정수(=자연수)
                     </div>
-                    <div className="relative">
-                      <span className="absolute -left-7 top-1/2 h-[1.5px] w-[15px] -translate-y-1/2 bg-[#596270]" />
+                    <div className="relative min-h-[24px] flex items-center">
                       0
                     </div>
                     <div
                       className={cn(
-                        'relative transition-all duration-200',
+                        'relative min-h-[40px] flex items-center transition-all duration-200',
                         isTreeNegBlankOpen && 'relative z-10',
                       )}
                     >
-                      <span className="absolute -left-7 top-1/2 h-[1.5px] w-[15px] -translate-y-1/2 bg-[#596270]" />
                       <div
                         className={cn(
                           'inline-block align-middle',

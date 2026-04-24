@@ -1,7 +1,11 @@
 import { Step, SlideContent } from '@/components/mdx/step-wrapper'
 import { IntroCard } from '@/components/cards/intro-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { PracticeCard } from '@/components/cards/practice-card'
 import { QuizArea } from '@/components/quiz'
 import { IntegerOverviewStage } from '@/components/content/integer-overview-stage'
+import { RationalOverviewStage } from '@/components/content/rational-overview-stage'
+import { RationalInclusionSummaryStage } from '@/components/content/rational-inclusion-summary-stage'
 import { steps } from './steps-data'
 import shape2Character from '@/assets/images/shape_2.png'
 
@@ -43,7 +47,109 @@ export const meta = {
 </Step>
 
 <Step id={1}>
-  <IntegerOverviewStage />
+  <IntegerOverviewStage stepId={1} />
+</Step>
+
+<Step id={2}>
+  <RationalOverviewStage stepId={2} />
+</Step>
+
+<Step id={3}>
+  <RationalInclusionSummaryStage stepId={3} />
+</Step>
+
+<Step id={4}>
+  <PracticeCard title="분류 연습" subtitle="주어진 수들을 보고 알맞은 분류를 고르자">
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlanks={(blank) => (
+          <div className="space-y-3 text-left">
+            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
+              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(1)</div>
+              <div className="text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
+                +1, +2, +3, +4
+                <span className="ml-3 inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
+                  <span>(</span>
+                  {blank('q1')}
+                  <span>, 음의 정수)</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
+              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(2)</div>
+              <div className="text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
+                0
+                <span className="ml-3 inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
+                  <span>(</span>
+                  {blank('q2')}
+                  <span>, 정수)</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
+              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(3)</div>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
+                <span>-6/2, -10, -11, -12, -13</span>
+                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
+                  <span>(</span>
+                  {blank('q3')}
+                  <span>, 음의 정수)</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
+              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(4)</div>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
+                <span>+1/5, -3/2, -0.3</span>
+                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
+                  <span>(</span>
+                  {blank('q4')}
+                  <span>, 정수가 아닌 유리수)</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
+              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(5)</div>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
+                <span>+50, -1/4, -12</span>
+                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
+                  <span>(</span>
+                  {blank('q5')}
+                  <span>, 유리수)</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
+              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(6)</div>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
+                <span>+13, 6/5, 3.5</span>
+                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
+                  <span>(</span>
+                  {blank('q6')}
+                  <span>, 음의 유리수)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={5}>
+  <CompleteCard emoji="🎯" title="정수와 유리수 학습 완료!">
+    정수와 유리수의 관계를 이해했고,
+    <br />
+    이제 수직선과 분류 도식으로 수의 범위를 구분할 수 있어요.
+  </CompleteCard>
 </Step>
 
 </SlideContent>
