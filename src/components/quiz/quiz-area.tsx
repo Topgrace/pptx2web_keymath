@@ -14,6 +14,7 @@ interface QuizAreaProps {
   renderBlanks?: (
     blank: (id: string) => ReactNode,
     solvedAnswers: Record<string, string>,
+    meta: { recentCorrectBlankId: string | null },
   ) => ReactNode
   /** Optional content shown after solving before auto-advancing. */
   completionContent?: ReactNode

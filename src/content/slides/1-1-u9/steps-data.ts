@@ -98,6 +98,80 @@ const rawSteps = [
   },
   {
     id: 5,
+    type: 'concept',
+    cardVariant: 'white',
+  },
+  {
+    id: 6,
+    type: 'concept',
+    cardVariant: 'white',
+  },
+  {
+    id: 7,
+    type: 'practice',
+    cardVariant: 'white',
+    quiz: {
+      kind: 'multi',
+      items: [
+        {
+          id: 'q1',
+          answer: '-6 ℃',
+          blankType: 'normal',
+          choices: [
+            { label: '-6 ℃', value: '-6 ℃' },
+            { label: '+6 ℃', value: '+6 ℃' },
+          ],
+        },
+        {
+          id: 'q2',
+          answer: '+2년',
+          blankType: 'normal',
+          choices: [
+            { label: '+2년', value: '+2년' },
+            { label: '-2년', value: '-2년' },
+          ],
+        },
+        {
+          id: 'q3',
+          answer: '-4 kg',
+          blankType: 'normal',
+          choices: [
+            { label: '-4 kg', value: '-4 kg' },
+            { label: '+4 kg', value: '+4 kg' },
+          ],
+        },
+        {
+          id: 'q4',
+          answer: '+10 m',
+          blankType: 'normal',
+          choices: [
+            { label: '+10 m', value: '+10 m' },
+            { label: '-10 m', value: '-10 m' },
+          ],
+        },
+        {
+          id: 'q5',
+          answer: '+10점',
+          blankType: 'normal',
+          choices: [
+            { label: '+10점', value: '+10점' },
+            { label: '-10점', value: '-10점' },
+          ],
+        },
+        {
+          id: 'q6',
+          answer: '-200 m',
+          blankType: 'normal',
+          choices: [
+            { label: '-200 m', value: '-200 m' },
+            { label: '+200 m', value: '+200 m' },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: 8,
     type: 'complete',
     cardVariant: 'default',
   },
@@ -105,4 +179,4 @@ const rawSteps = [
 
 export const steps = rawSteps
 
-export const quizStepIds: Set<number> = new Set([0, 1, 2, 3, 4])
+export const quizStepIds: Set<number> = new Set([0, 1, 2, 3, 4, 5, 6, 7])

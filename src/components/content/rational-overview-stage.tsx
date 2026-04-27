@@ -17,7 +17,6 @@ const RATIONAL_NEG_CHOICES = [
 const INCLUSION_CHOICES = [
   { label: '정수', value: '정수' },
   { label: '유리수', value: '유리수' },
-  { label: '자연수', value: '자연수' },
   { label: '음의 유리수', value: '음의 유리수' },
 ] as const
 

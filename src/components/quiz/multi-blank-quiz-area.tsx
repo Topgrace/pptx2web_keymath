@@ -13,6 +13,7 @@ interface MultiBlankQuizAreaProps {
   renderBlanks?: (
     blank: (id: string) => ReactNode,
     solvedAnswers: Record<string, string>,
+    meta: { recentCorrectBlankId: string | null },
   ) => ReactNode
   completionContent?: ReactNode
   completionAdvanceDelayMs?: number
@@ -28,6 +29,7 @@ export const MultiBlankQuizArea = ({
   const { markSolved, advanceStep, currentStep, totalSteps, isSolved } = useSlideProgress()
   const solved = isSolved(stepId)
   const [showCompletionContent, setShowCompletionContent] = useState(false)
+  const [recentCorrectBlankId, setRecentCorrectBlankId] = useState<string | null>(null)
 
   const itemsById = useMemo(
     () => Object.fromEntries(quiz.items.map((item) => [item.id, item])),
@@ -52,7 +54,14 @@ export const MultiBlankQuizArea = ({
   }
 
   const handleSelect = (value: string): boolean => {
+    const selectedBlankId = activeBlankId
     const result = checkAnswer(value)
+    if (result.isCorrect && selectedBlankId) {
+      setRecentCorrectBlankId(selectedBlankId)
+      window.setTimeout(() => {
+        setRecentCorrectBlankId((current) => (current === selectedBlankId ? null : current))
+      }, 900)
+    }
     if (result.isCorrect && result.isComplete) {
       markSolved(stepId)
       if (completionContent) {
@@ -101,7 +110,7 @@ export const MultiBlankQuizArea = ({
       transition={{ duration: 0.5, delay: 0.3 }}
     >
       <div className="katex-inline mb-3.5 text-center text-[17px] font-extrabold leading-[1.8] text-gray-700">
-        {renderBlanks(renderBlank, solvedAnswers)}
+        {renderBlanks(renderBlank, solvedAnswers, { recentCorrectBlankId })}
       </div>
 
       <ChoicePanel

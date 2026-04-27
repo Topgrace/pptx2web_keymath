@@ -6,6 +6,10 @@ import { QuizArea } from '@/components/quiz'
 import { IntegerOverviewStage } from '@/components/content/integer-overview-stage'
 import { RationalOverviewStage } from '@/components/content/rational-overview-stage'
 import { RationalInclusionSummaryStage } from '@/components/content/rational-inclusion-summary-stage'
+import { ClassificationPracticeCarousel } from '@/components/content/classification-practice-carousel'
+import { PositiveNegativeNumbersStage } from '@/components/content/positive-negative-numbers-stage'
+import { SignedNumbersConceptStage } from '@/components/content/signed-numbers-concept-stage'
+import { SignedNumberPracticeCarousel } from '@/components/content/signed-number-practice-carousel'
 import { steps } from './steps-data'
 import shape2Character from '@/assets/images/shape_2.png'
 
@@ -64,80 +68,12 @@ export const meta = {
       <QuizArea
         stepId={4}
         quiz={steps[4].quiz}
-        renderBlanks={(blank) => (
-          <div className="space-y-3 text-left">
-            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
-              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(1)</div>
-              <div className="text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
-                +1, +2, +3, +4
-                <span className="ml-3 inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
-                  <span>(</span>
-                  {blank('q1')}
-                  <span>, 음의 정수)</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
-              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(2)</div>
-              <div className="text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
-                0
-                <span className="ml-3 inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
-                  <span>(</span>
-                  {blank('q2')}
-                  <span>, 정수)</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
-              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(3)</div>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
-                <span>-6/2, -10, -11, -12, -13</span>
-                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
-                  <span>(</span>
-                  {blank('q3')}
-                  <span>, 음의 정수)</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
-              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(4)</div>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
-                <span>+1/5, -3/2, -0.3</span>
-                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
-                  <span>(</span>
-                  {blank('q4')}
-                  <span>, 정수가 아닌 유리수)</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
-              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(5)</div>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
-                <span>+50, -1/4, -12</span>
-                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
-                  <span>(</span>
-                  {blank('q5')}
-                  <span>, 유리수)</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-[#E8E1C8] bg-[#FFFDF5] px-4 py-4 shadow-[0_8px_18px_rgba(80,60,20,0.06)]">
-              <div className="mb-2 text-[15px] font-black text-[#2B2B2B]">(6)</div>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[18px] font-extrabold leading-[1.9] text-[#2B2B2B]">
-                <span>+13, 6/5, 3.5</span>
-                <span className="inline-flex items-center gap-2 text-[17px] font-bold text-slide-gray">
-                  <span>(</span>
-                  {blank('q6')}
-                  <span>, 음의 유리수)</span>
-                </span>
-              </div>
-            </div>
-          </div>
+        renderBlanks={(blank, solvedAnswers, meta) => (
+          <ClassificationPracticeCarousel
+            blank={blank}
+            solvedAnswers={solvedAnswers}
+            recentCorrectBlankId={meta.recentCorrectBlankId}
+          />
         )}
       />
     )}
@@ -145,6 +81,32 @@ export const meta = {
 </Step>
 
 <Step id={5}>
+  <PositiveNegativeNumbersStage />
+</Step>
+
+<Step id={6}>
+  <SignedNumbersConceptStage />
+</Step>
+
+<Step id={7}>
+  <PracticeCard title="부호로 나타내기" subtitle="밑줄 친 부분을 + 또는 -를 사용하여 나타내자">
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlanks={(blank, solvedAnswers, meta) => (
+          <SignedNumberPracticeCarousel
+            blank={blank}
+            solvedAnswers={solvedAnswers}
+            recentCorrectBlankId={meta.recentCorrectBlankId}
+          />
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={8}>
   <CompleteCard emoji="🎯" title="정수와 유리수 학습 완료!">
     정수와 유리수의 관계를 이해했고,
     <br />

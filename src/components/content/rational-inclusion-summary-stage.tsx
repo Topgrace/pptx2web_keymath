@@ -92,6 +92,7 @@ export function RationalInclusionSummaryStage({
   const [fractionSolved, setFractionSolved] = useState(false)
   const [showCompletionMessage, setShowCompletionMessage] = useState(false)
   const completionTimeoutRef = useRef<number | null>(null)
+  const completionStartedRef = useRef(false)
   const allSolved = positiveSolved && negativeSolved && fractionSolved
 
   const handleChoiceSelect = (value: string) => {
@@ -132,8 +133,9 @@ export function RationalInclusionSummaryStage({
   )
 
   useEffect(() => {
-    if (!allSolved || showCompletionMessage) return
+    if (!allSolved || completionStartedRef.current) return
 
+    completionStartedRef.current = true
     setActiveBlank(null)
     setShowCompletionMessage(true)
     markSolved(stepId)
@@ -143,14 +145,7 @@ export function RationalInclusionSummaryStage({
         advanceStep()
       }
     }, 2200)
-
-    return () => {
-      if (completionTimeoutRef.current !== null) {
-        window.clearTimeout(completionTimeoutRef.current)
-        completionTimeoutRef.current = null
-      }
-    }
-  }, [advanceStep, allSolved, currentStep, markSolved, showCompletionMessage, stepId, totalSteps])
+  }, [advanceStep, allSolved, currentStep, markSolved, stepId, totalSteps])
 
   useEffect(() => {
     return () => {

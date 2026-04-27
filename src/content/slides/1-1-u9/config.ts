@@ -3,7 +3,7 @@ import type { SlideConfig } from '@/schemas/slide'
 export const slideConfig: SlideConfig = {
   slug: '1-1-u9-integers-and-rational-numbers',
   title: '2단원 - 정수와 유리수',
-  totalSteps: 6,
+  totalSteps: 9,
   themeColors: {
     background: '#CFE7D0',
     cardDefault: '#F8F8F8',
