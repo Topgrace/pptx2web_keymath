@@ -1,0 +1,64 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { QuizArea } from '@/components/quiz'
+import { NumberLinePointStage } from '@/components/content/number-line-point-stage'
+import { NumberLinePointPracticeCarousel } from '@/components/content/number-line-point-practice-carousel'
+import { NumberLineFractionStage } from '@/components/content/number-line-fraction-stage'
+import { steps } from './steps-data'
+import shape2Character from '@/assets/images/shape_2.png'
+
+export const meta = {
+  slug: '1-1-u10-number-line',
+  title: '수직선 위에 수 나타내기',
+  subtitle: '중1 수학 · 정수와 유리수',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg={shape2Character}
+    speechText="이번 시간에는 수직선 위에서 양수, 음수, 0의 위치를 살펴보고 수를 정확한 점으로 나타내는 방법을 배워볼거야"
+    topicTitle="10. 수직선 위에 수 나타내기"
+  >
+
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <>수직선에서 양수는 0의 {blank}에 있어요.</>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <NumberLinePointStage quiz={steps[1].quiz} />
+</Step>
+
+<Step id={2}>
+  <NumberLineFractionStage quiz={steps[2].quiz} />
+</Step>
+
+<Step id={3}>
+  <PracticeCard title="수직선 위의 점 찾기" subtitle="수직선 위의 점에 대응하는 수를 고르자">
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlanks={(blank, solvedAnswers, meta) => (
+          <NumberLinePointPracticeCarousel
+            blank={blank}
+            solvedAnswers={solvedAnswers}
+            recentCorrectBlankId={meta.recentCorrectBlankId}
+          />
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+</SlideContent>

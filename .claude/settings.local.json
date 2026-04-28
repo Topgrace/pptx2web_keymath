@@ -1,11 +1,13 @@
 {
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx tsc *)",
+      "Bash(npx vite *)"
+    ]
+  },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "code-review-graph"
-  ],
-  "permissions": {
-    "allow": [
-      "mcp__Claude_Preview__preview_start"
-    ]
-  }
+  ]
 }
