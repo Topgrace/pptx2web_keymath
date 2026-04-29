@@ -36,3 +36,9 @@ Fall back to Grep/Glob/Read **only** when the graph doesn't cover what you need.
 2. Use `detect_changes` for code review.
 3. Use `get_affected_flows` to understand impact.
 4. Use `query_graph` pattern="tests_for" to check coverage.
+
+## Verification Preference
+
+- Do not start or check the dev server, localhost URL, browser page, or HTTP response unless the user explicitly asks for it.
+- When verification is useful, prefer code-level checks such as type checking, build, lint, or slide data validation.
+- Browser-based interaction checks should only be performed when the user specifically requests browser or UI behavior verification.

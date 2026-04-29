@@ -100,6 +100,57 @@ const rawSteps = [
       ],
     },
   },
+  {
+    id: 4,
+    type: 'practice',
+    cardVariant: 'white',
+    quiz: {
+      kind: 'multi',
+      questionLabel: '수직선 위의 두 점 사이의 거리 구하기',
+      items: [
+        {
+          id: 'd1',
+          answer: '3',
+          blankType: 'normal',
+          choices: [
+            { label: '3', value: '3' },
+            { label: '-3', value: '-3' },
+            { label: '1', value: '1' },
+          ],
+        },
+        {
+          id: 'd2',
+          answer: '2',
+          blankType: 'normal',
+          choices: [
+            { label: '2', value: '2' },
+            { label: '-2', value: '-2' },
+            { label: '1.5', value: '1.5' },
+          ],
+        },
+        {
+          id: 'd3',
+          answer: '2.5',
+          blankType: 'normal',
+          choices: [
+            { label: '2.5', value: '2.5' },
+            { label: '-2.5', value: '-2.5' },
+            { label: '1.5', value: '1.5' },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: 5,
+    type: 'practice',
+    cardVariant: 'white',
+  },
+  {
+    id: 6,
+    type: 'complete',
+    cardVariant: 'default',
+  },
 ] satisfies Step[]
 
 export const steps = rawSteps

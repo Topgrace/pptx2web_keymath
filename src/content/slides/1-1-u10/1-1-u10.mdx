@@ -1,9 +1,13 @@
 import { Step, SlideContent } from '@/components/mdx/step-wrapper'
 import { IntroCard } from '@/components/cards/intro-card'
 import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
 import { QuizArea } from '@/components/quiz'
 import { NumberLinePointStage } from '@/components/content/number-line-point-stage'
 import { NumberLinePointPracticeCarousel } from '@/components/content/number-line-point-practice-carousel'
+import { NumberLinePointDragMissionCarousel } from '@/components/content/number-line-point-drag-mission-carousel'
+import { NumberLineDistancePracticeCarousel } from '@/components/content/number-line-distance-practice-carousel'
+import { NumberLineEquidistantPointCarousel } from '@/components/content/number-line-equidistant-point-carousel'
 import { NumberLineFractionStage } from '@/components/content/number-line-fraction-stage'
 import { steps } from './steps-data'
 import shape2Character from '@/assets/images/shape_2.png'
@@ -49,6 +53,7 @@ export const meta = {
       <QuizArea
         stepId={3}
         quiz={steps[3].quiz}
+        completionContent={<NumberLinePointDragMissionCarousel />}
         renderBlanks={(blank, solvedAnswers, meta) => (
           <NumberLinePointPracticeCarousel
             blank={blank}
@@ -59,6 +64,40 @@ export const meta = {
       />
     )}
   </PracticeCard>
+</Step>
+
+<Step id={4}>
+  <PracticeCard title="두 점 사이의 거리" subtitle="수직선 위의 두 점 사이의 거리를 구하자">
+    {steps[4].quiz && (
+      <QuizArea
+        stepId={4}
+        quiz={steps[4].quiz}
+        renderBlanks={(blank, solvedAnswers, meta) => (
+          <NumberLineDistancePracticeCarousel
+            blank={blank}
+            solvedAnswers={solvedAnswers}
+            recentCorrectBlankId={meta.recentCorrectBlankId}
+          />
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={5}>
+  <PracticeCard title="같은 거리에 있는 점" subtitle="두 점으로부터 같은 거리에 있는 점을 찾자">
+    <NumberLineEquidistantPointCarousel />
+  </PracticeCard>
+</Step>
+
+<Step id={6}>
+  <CompleteCard emoji="📍" title="수직선 위에 수 나타내기 완료!">
+    수직선에서 양수와 음수의 위치,
+    <br />
+    점에 대응하는 수와 두 점 사이의 거리,
+    <br />
+    같은 거리에 있는 점까지 모두 정리했어요.
+  </CompleteCard>
 </Step>
 
 </SlideContent>
