@@ -153,7 +153,7 @@ function NumberLinePointContent({
           <div className="flex w-[48%] flex-col items-center">
             <div className="relative w-full rounded-2xl border-2 border-[#bae6fd] bg-[#f0f9ff] p-3 text-center shadow-sm sm:p-5">
               <svg
-                className="absolute -top-[36px] left-[41.6%] z-10 h-[38px] w-[16px] -translate-x-1/2 sm:-top-[46px] sm:h-[48px] md:-top-[62px] md:h-[64px] md:w-[22px]"
+                className="absolute -top-[30px] left-[41.6%] z-10 h-[32px] w-[16px] -translate-x-1/2 sm:-top-[40px] sm:h-[42px] md:-top-[45px] md:h-[56px] md:w-[22px]"
                 preserveAspectRatio="none"
                 viewBox="0 0 100 100"
               >
@@ -208,7 +208,7 @@ function NumberLinePointContent({
           <div className="flex w-[48%] flex-col items-center">
             <div className="relative w-full rounded-2xl border-2 border-[#fbcfe8] bg-[#fff1f2] p-3 text-center shadow-sm sm:p-5">
               <svg
-                className="absolute -top-[36px] left-[51.4%] z-10 h-[38px] w-[16px] -translate-x-1/2 sm:-top-[46px] sm:h-[48px] md:-top-[62px] md:h-[64px] md:w-[22px]"
+                className="absolute -top-[30px] left-[51.4%] z-10 h-[32px] w-[16px] -translate-x-1/2 sm:-top-[40px] sm:h-[42px] md:-top-[45px] md:h-[56px] md:w-[22px]"
                 preserveAspectRatio="none"
                 viewBox="0 0 100 100"
               >
