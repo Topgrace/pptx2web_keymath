@@ -37,6 +37,7 @@ export function IntroCard({
             text={speechText}
             speed={40}
             enabled={visible}
+            className="whitespace-pre-line"
             onComplete={() => setSpeechDone(true)}
           />
         </div>

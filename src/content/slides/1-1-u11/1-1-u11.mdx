@@ -1,0 +1,96 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { QuizArea } from '@/components/quiz'
+import { AbsoluteValueMeaningStage } from '@/components/content/absolute-value-meaning-stage'
+import { steps } from './steps-data'
+import shape2Character from '@/assets/images/shape_2.png'
+
+export const meta = {
+  slug: '1-1-u11-absolute-value-and-comparison',
+  title: '절댓값과 크기 비교',
+  subtitle: '중1 수학 · 정수와 유리수',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg={shape2Character}
+    speechText={`이번 시간에 배울 내용
+1. 절댓값의 뜻 이해하기
+2. 절댓값이 같은 두 수 살펴보기
+3. 양수와 음수의 크기 비교하기`}
+    topicTitle="11. 절댓값과 크기 비교"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <div className="mx-auto max-w-[380px]">
+            <div className="mb-4 rounded-xl bg-white px-1 py-4 shadow-sm">
+              <svg
+                viewBox="0 0 500 142"
+                className="h-auto w-full overflow-visible"
+                role="img"
+                aria-label="점 A(-12)와 점 B(18)가 표시된 수직선"
+              >
+                <line x1="20" y1="70" x2="480" y2="70" stroke="#334155" strokeWidth="3" />
+                <polygon points="20,70 34,62 34,78" fill="#334155" />
+                <polygon points="480,70 466,62 466,78" fill="#334155" />
+
+                <line
+                  x1="124"
+                  y1="70"
+                  x2="439"
+                  y2="70"
+                  stroke="#f97316"
+                  strokeWidth="10"
+                  strokeLinecap="round"
+                  opacity="0.78"
+                />
+
+                <g fontSize="18" fontWeight="800" fill="#475569" textAnchor="middle" fontFamily="sans-serif">
+                  <g>
+                    <line x1="124" y1="58" x2="124" y2="82" stroke="#475569" strokeWidth="2.5" />
+                    <text x="124" y="118">-12</text>
+                  </g>
+                  <g>
+                    <line x1="250" y1="58" x2="250" y2="82" stroke="#475569" strokeWidth="2.5" />
+                    <text x="250" y="118">0</text>
+                  </g>
+                  <g>
+                    <line x1="439" y1="58" x2="439" y2="82" stroke="#475569" strokeWidth="2.5" />
+                    <text x="439" y="118">18</text>
+                  </g>
+                </g>
+
+                <g textAnchor="middle" fontFamily="sans-serif">
+                  <g>
+                    <line x1="124" y1="28" x2="124" y2="70" stroke="#2563eb" strokeWidth="3" strokeDasharray="5 4" />
+                    <circle cx="124" cy="70" r="9" fill="#2563eb" />
+                    <text x="124" y="22" fill="#111827" fontSize="28" fontWeight="900">A</text>
+                  </g>
+                  <g>
+                    <line x1="439" y1="28" x2="439" y2="70" stroke="#2E7D57" strokeWidth="3" strokeDasharray="5 4" />
+                    <circle cx="439" cy="70" r="9" fill="#2E7D57" />
+                    <text x="439" y="22" fill="#111827" fontSize="28" fontWeight="900">B</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div className="text-[17px] font-extrabold leading-[1.8] text-[#1F3554]">
+              두 점 A, B의 거리는 {blank}이다.
+            </div>
+          </div>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <AbsoluteValueMeaningStage />
+</Step>
+
+</SlideContent>
