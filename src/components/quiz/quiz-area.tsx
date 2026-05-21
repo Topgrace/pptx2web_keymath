@@ -20,6 +20,8 @@ interface QuizAreaProps {
   completionContent?: ReactNode
   /** Auto-advance delay when completionContent is shown. */
   completionAdvanceDelayMs?: number
+  /** Disable when completionContent owns the next-step action. */
+  autoAdvanceOnComplete?: boolean
 }
 
 export const QuizArea = ({
@@ -30,6 +32,7 @@ export const QuizArea = ({
   renderBlanks,
   completionContent,
   completionAdvanceDelayMs,
+  autoAdvanceOnComplete,
 }: QuizAreaProps) => {
   if (quiz.kind === 'multi') {
     return (
@@ -39,6 +42,7 @@ export const QuizArea = ({
         renderBlanks={renderBlanks}
         completionContent={completionContent}
         completionAdvanceDelayMs={completionAdvanceDelayMs}
+        autoAdvanceOnComplete={autoAdvanceOnComplete}
       />
     )
   }
@@ -51,6 +55,7 @@ export const QuizArea = ({
       renderBlank={renderBlank}
       completionContent={completionContent}
       completionAdvanceDelayMs={completionAdvanceDelayMs}
+      autoAdvanceOnComplete={autoAdvanceOnComplete}
     />
   )
 }

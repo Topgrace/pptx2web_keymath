@@ -3,7 +3,7 @@ import type { SlideConfig } from '@/schemas/slide'
 export const slideConfig: SlideConfig = {
   slug: '1-1-u10-number-line',
   title: '2단원 - 수직선 위에 수 나타내기',
-  totalSteps: 4,
+  totalSteps: 7,
   themeColors: {
     background: '#DDE7F5',
     cardDefault: '#F8F8F8',

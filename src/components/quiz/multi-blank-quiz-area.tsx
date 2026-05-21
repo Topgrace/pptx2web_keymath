@@ -17,6 +17,7 @@ interface MultiBlankQuizAreaProps {
   ) => ReactNode
   completionContent?: ReactNode
   completionAdvanceDelayMs?: number
+  autoAdvanceOnComplete?: boolean
 }
 
 export const MultiBlankQuizArea = ({
@@ -25,6 +26,7 @@ export const MultiBlankQuizArea = ({
   renderBlanks,
   completionContent,
   completionAdvanceDelayMs,
+  autoAdvanceOnComplete = true,
 }: MultiBlankQuizAreaProps) => {
   const { markSolved, advanceStep, currentStep, totalSteps, isSolved } = useSlideProgress()
   const solved = isSolved(stepId)
@@ -67,11 +69,13 @@ export const MultiBlankQuizArea = ({
       if (completionContent) {
         setShowCompletionContent(true)
       }
-      setTimeout(() => {
-        if (currentStep < totalSteps - 1) {
-          advanceStep()
-        }
-      }, completionContent ? (completionAdvanceDelayMs ?? 2200) : 1200)
+      if (autoAdvanceOnComplete) {
+        setTimeout(() => {
+          if (currentStep < totalSteps - 1) {
+            advanceStep()
+          }
+        }, completionContent ? (completionAdvanceDelayMs ?? 2200) : 1200)
+      }
     }
     return result.isCorrect
   }

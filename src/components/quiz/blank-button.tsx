@@ -12,6 +12,7 @@ export function BlankButton({
   blankType = 'normal',
   isLatex = false,
   solvedLatexFontSize,
+  className,
 }: {
   onClick: () => void
   solved: boolean
@@ -21,6 +22,7 @@ export function BlankButton({
   /** true일 때만 KaTeX 렌더링, false면 일반 텍스트(주변 폰트 유지) */
   isLatex?: boolean
   solvedLatexFontSize?: string
+  className?: string
 }) {
   const ref = useRef<HTMLButtonElement>(null)
 
@@ -82,6 +84,7 @@ export function BlankButton({
           : active
             ? 'bg-slide-accent/10 border-slide-accent text-slide-accent ring-2 ring-slide-accent/25'
             : 'bg-white border-slide-accent text-slide-accent',
+        className,
       )}
     >
       {!solved && <span className={isExp ? 'text-[11px] leading-none' : isSquare ? 'text-base' : 'text-xl'}>❓</span>}

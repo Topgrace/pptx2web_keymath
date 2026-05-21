@@ -14,6 +14,7 @@ interface SingleBlankQuizAreaProps {
   renderBlank?: (blank: ReactNode) => ReactNode
   completionContent?: ReactNode
   completionAdvanceDelayMs?: number
+  autoAdvanceOnComplete?: boolean
 }
 
 export const SingleBlankQuizArea = ({
@@ -23,6 +24,7 @@ export const SingleBlankQuizArea = ({
   renderBlank,
   completionContent,
   completionAdvanceDelayMs,
+  autoAdvanceOnComplete = true,
 }: SingleBlankQuizAreaProps) => {
   const { markSolved, advanceStep, currentStep, totalSteps } = useSlideProgress()
   const { isOpen, isSolved, feedback, feedbackType, toggleOpen, checkAnswer, solvedAnswer } = useQuiz(quiz)
@@ -35,11 +37,13 @@ export const SingleBlankQuizArea = ({
       if (completionContent) {
         setShowCompletionContent(true)
       }
-      setTimeout(() => {
-        if (currentStep < totalSteps - 1) {
-          advanceStep()
-        }
-      }, completionContent ? (completionAdvanceDelayMs ?? 2200) : 1200)
+      if (autoAdvanceOnComplete) {
+        setTimeout(() => {
+          if (currentStep < totalSteps - 1) {
+            advanceStep()
+          }
+        }, completionContent ? (completionAdvanceDelayMs ?? 2200) : 1200)
+      }
     }
     return correct
   }

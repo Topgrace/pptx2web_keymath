@@ -1,7 +1,14 @@
 import { Step, SlideContent } from '@/components/mdx/step-wrapper'
 import { IntroCard } from '@/components/cards/intro-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
 import { QuizArea } from '@/components/quiz'
 import { AbsoluteValueMeaningStage } from '@/components/content/absolute-value-meaning-stage'
+import { AbsoluteValueSameDistanceStage } from '@/components/content/absolute-value-same-distance-stage'
+import { AbsoluteValueSizeRuleStage } from '@/components/content/absolute-value-size-rule-stage'
+import { NumberLineOrderRuleStage } from '@/components/content/number-line-order-rule-stage'
+import { AbsoluteValuePracticeCarousel } from '@/components/content/absolute-value-practice-carousel'
+import { NumberComparisonPracticeCarousel } from '@/components/content/number-comparison-practice-carousel'
 import { steps } from './steps-data'
 import shape2Character from '@/assets/images/shape_2.png'
 
@@ -91,6 +98,77 @@ export const meta = {
 
 <Step id={1}>
   <AbsoluteValueMeaningStage />
+</Step>
+
+<Step id={2}>
+  <AbsoluteValueSameDistanceStage />
+</Step>
+
+<Step id={3}>
+  <PracticeCard title="절댓값 확인문제" subtitle="절댓값에 맞는 수를 고르자">
+    {steps[3].quiz && (
+      <QuizArea
+        stepId={3}
+        quiz={steps[3].quiz}
+        renderBlanks={(blank, solvedAnswers, meta) => (
+          <AbsoluteValuePracticeCarousel
+            blank={blank}
+            solvedAnswers={solvedAnswers}
+            recentCorrectBlankId={meta.recentCorrectBlankId}
+          />
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={4}>
+  <AbsoluteValueSizeRuleStage />
+</Step>
+
+<Step id={5}>
+  <NumberLineOrderRuleStage />
+  {steps[5].quiz && (
+    <PracticeCard title="크기 비교 확인" subtitle="수직선에서 더 오른쪽에 있는 수를 고르자">
+      <QuizArea
+        stepId={5}
+        quiz={steps[5].quiz}
+        renderBlank={(blank) => (
+          <div className="break-keep text-[18px] font-extrabold leading-[1.8] text-[#1F3554]">
+            -5와 -2 중 더 큰 수는 {blank}이다.
+          </div>
+        )}
+      />
+    </PracticeCard>
+  )}
+</Step>
+
+<Step id={6}>
+  <PracticeCard title="수의 크기 비교 연습" subtitle="절댓값과 수직선 위치를 함께 생각하자">
+    {steps[6].quiz && (
+      <QuizArea
+        stepId={6}
+        quiz={steps[6].quiz}
+        renderBlanks={(blank, solvedAnswers, meta) => (
+          <NumberComparisonPracticeCarousel
+            blank={blank}
+            solvedAnswers={solvedAnswers}
+            recentCorrectBlankId={meta.recentCorrectBlankId}
+          />
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={7}>
+  <CompleteCard emoji="📏" title="절댓값과 크기 비교 완료!">
+    원점에서 멀어질수록 절댓값이 커지고,
+    <br />
+    수직선에서는 오른쪽에 있을수록 큰 수예요.
+    <br />
+    음수 &lt; 0 &lt; 양수 관계까지 정리했어요.
+  </CompleteCard>
 </Step>
 
 </SlideContent>

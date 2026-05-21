@@ -54,6 +54,7 @@ export const meta = {
         stepId={3}
         quiz={steps[3].quiz}
         completionContent={<NumberLinePointDragMissionCarousel />}
+        autoAdvanceOnComplete={false}
         renderBlanks={(blank, solvedAnswers, meta) => (
           <NumberLinePointPracticeCarousel
             blank={blank}
