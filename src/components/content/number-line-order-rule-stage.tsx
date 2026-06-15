@@ -32,21 +32,6 @@ export function NumberLineOrderRuleStage({
               role="img"
               aria-label="오른쪽에 있을수록 큰 수를 나타내는 수직선"
             >
-              <defs>
-                <marker
-                  id="number-line-order-arrow"
-                  viewBox="0 0 10 10"
-                  refX="8"
-                  refY="5"
-                  markerWidth="5"
-                  markerHeight="5"
-                  markerUnits="userSpaceOnUse"
-                  orient="auto"
-                >
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#2E7D57" />
-                </marker>
-              </defs>
-
               <line x1="24" y1="78" x2="476" y2="78" stroke="#334155" strokeWidth="2.6" />
               <polygon points="24,78 37,71 37,85" fill="#334155" />
               <polygon points="476,78 463,71 463,85" fill="#334155" />
@@ -54,15 +39,22 @@ export function NumberLineOrderRuleStage({
               <motion.line
                 x1={valueToX(-3)}
                 y1="38"
-                x2={valueToX(4)}
+                x2={valueToX(4) - 18}
                 y2="38"
                 stroke="#2E7D57"
                 strokeWidth="9"
                 strokeLinecap="round"
-                markerEnd="url(#number-line-order-arrow)"
                 initial={{ pathLength: 0 }}
                 animate={visible ? { pathLength: 1 } : { pathLength: 0 }}
                 transition={{ duration: 0.75, delay: 0.35, ease: 'easeOut' }}
+              />
+              <motion.polygon
+                points={`${valueToX(4) + 8},38 ${valueToX(4) - 20},24 ${valueToX(4) - 20},52`}
+                fill="#2E7D57"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={visible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.25, delay: 1.05, ease: 'easeOut' }}
+                style={{ transformOrigin: `${valueToX(4) - 6}px 38px` }}
               />
               <text
                 x="292"

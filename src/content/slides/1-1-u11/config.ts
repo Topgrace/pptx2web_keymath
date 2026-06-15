@@ -3,7 +3,7 @@ import type { SlideConfig } from '@/schemas/slide'
 export const slideConfig: SlideConfig = {
   slug: '1-1-u11-absolute-value-and-comparison',
   title: '2단원 - 절댓값과 크기 비교',
-  totalSteps: 8,
+  totalSteps: 9,
   themeColors: {
     background: '#E8DDF1',
     cardDefault: '#F8F8F8',

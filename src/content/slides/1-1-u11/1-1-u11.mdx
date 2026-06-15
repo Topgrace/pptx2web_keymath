@@ -6,6 +6,7 @@ import { QuizArea } from '@/components/quiz'
 import { AbsoluteValueMeaningStage } from '@/components/content/absolute-value-meaning-stage'
 import { AbsoluteValueSameDistanceStage } from '@/components/content/absolute-value-same-distance-stage'
 import { AbsoluteValueSizeRuleStage } from '@/components/content/absolute-value-size-rule-stage'
+import { InequalitySymbolPracticeStage } from '@/components/content/inequality-symbol-practice-stage'
 import { NumberLineOrderRuleStage } from '@/components/content/number-line-order-rule-stage'
 import { AbsoluteValuePracticeCarousel } from '@/components/content/absolute-value-practice-carousel'
 import { NumberComparisonPracticeCarousel } from '@/components/content/number-comparison-practice-carousel'
@@ -127,12 +128,16 @@ export const meta = {
 </Step>
 
 <Step id={5}>
+  <InequalitySymbolPracticeStage />
+</Step>
+
+<Step id={6}>
   <NumberLineOrderRuleStage />
-  {steps[5].quiz && (
+  {steps[6].quiz && (
     <PracticeCard title="크기 비교 확인" subtitle="수직선에서 더 오른쪽에 있는 수를 고르자">
       <QuizArea
-        stepId={5}
-        quiz={steps[5].quiz}
+        stepId={6}
+        quiz={steps[6].quiz}
         renderBlank={(blank) => (
           <div className="break-keep text-[18px] font-extrabold leading-[1.8] text-[#1F3554]">
             -5와 -2 중 더 큰 수는 {blank}이다.
@@ -143,12 +148,12 @@ export const meta = {
   )}
 </Step>
 
-<Step id={6}>
+<Step id={7}>
   <PracticeCard title="수의 크기 비교 연습" subtitle="절댓값과 수직선 위치를 함께 생각하자">
-    {steps[6].quiz && (
+    {steps[7].quiz && (
       <QuizArea
-        stepId={6}
-        quiz={steps[6].quiz}
+        stepId={7}
+        quiz={steps[7].quiz}
         renderBlanks={(blank, solvedAnswers, meta) => (
           <NumberComparisonPracticeCarousel
             blank={blank}
@@ -161,7 +166,7 @@ export const meta = {
   </PracticeCard>
 </Step>
 
-<Step id={7}>
+<Step id={8}>
   <CompleteCard emoji="📏" title="절댓값과 크기 비교 완료!">
     원점에서 멀어질수록 절댓값이 커지고,
     <br />

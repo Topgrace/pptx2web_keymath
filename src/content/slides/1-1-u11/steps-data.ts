@@ -80,6 +80,11 @@ const rawSteps = [
     id: 5,
     type: 'concept',
     cardVariant: 'white',
+  },
+  {
+    id: 6,
+    type: 'concept',
+    cardVariant: 'white',
     quiz: {
       answer: '-2',
       blankType: 'normal',
@@ -92,7 +97,7 @@ const rawSteps = [
     },
   },
   {
-    id: 6,
+    id: 7,
     type: 'practice',
     cardVariant: 'white',
     quiz: {
@@ -133,7 +138,7 @@ const rawSteps = [
     },
   },
   {
-    id: 7,
+    id: 8,
     type: 'complete',
     cardVariant: 'default',
   },
@@ -142,5 +147,5 @@ const rawSteps = [
 export const steps = rawSteps
 
 export const quizStepIds: Set<number> = new Set(
-  [2, ...steps.filter((step) => step.quiz).map((step) => step.id)],
+  [2, 4, 5, ...steps.filter((step) => step.quiz).map((step) => step.id)],
 )
