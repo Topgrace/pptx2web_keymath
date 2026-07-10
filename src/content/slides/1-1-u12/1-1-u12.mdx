@@ -1,0 +1,114 @@
+import { Step, SlideContent } from '@/components/mdx/step-wrapper'
+import { IntroCard } from '@/components/cards/intro-card'
+import { PracticeCard } from '@/components/cards/practice-card'
+import { CompleteCard } from '@/components/cards/complete-card'
+import { QuizArea } from '@/components/quiz'
+import {
+  SameSignAdditionExpressionStage,
+  SameSignAdditionFormulaStage,
+  SameSignAdditionNumberLineStage,
+} from '@/components/content/same-sign-addition-stages'
+import { SameSignAdditionPracticeCarousel } from '@/components/content/same-sign-addition-practice-carousel'
+import { steps } from './steps-data'
+import shape2Character from '@/assets/images/shape_2.png'
+
+export const meta = {
+  slug: '1-1-u12-addition',
+  title: '덧셈',
+  subtitle: '중1 수학 · 정수와 유리수',
+}
+
+<SlideContent>
+
+<Step id={0}>
+  <IntroCard
+    characterImg={shape2Character}
+    speechText={`이번 시간에 배울 내용
+1. 같은 부호의 두 수를 식으로 더하기
+2. 수직선에서 같은 방향으로 이어서 움직이기
+3. 공통의 부호와 절댓값의 합으로 공식 정리하기`}
+    topicTitle="12. 덧셈"
+  >
+    {steps[0].quiz && (
+      <QuizArea
+        stepId={0}
+        quiz={steps[0].quiz}
+        renderBlank={(blank) => (
+          <div className="mx-auto max-w-[430px]">
+            <div className="rounded-[18px] bg-white px-5 py-4 text-center shadow-sm">
+              <div className="mb-3 text-[15px] font-extrabold text-[#2E7D57]">
+                같은 부호끼리 더하면?
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[30px] font-black leading-[1.4] text-[#1F2937]">
+                <span className="whitespace-nowrap">(+2)+(+1)</span>
+                <span>=</span>
+                <span className="inline-flex items-center whitespace-nowrap align-middle [&>button]:min-w-[44px] [&>button]:px-2 [&>button>span]:text-[17px]">
+                  {blank}3
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+      />
+    )}
+  </IntroCard>
+</Step>
+
+<Step id={1}>
+  <SameSignAdditionExpressionStage stepId={1} sign="positive" quiz={steps[1].quiz} />
+</Step>
+
+<Step id={2}>
+  <SameSignAdditionExpressionStage stepId={2} sign="negative" quiz={steps[2].quiz} />
+</Step>
+
+<Step id={3}>
+  <SameSignAdditionNumberLineStage stepId={3} sign="positive" quiz={steps[3].quiz} />
+</Step>
+
+<Step id={4}>
+  <SameSignAdditionNumberLineStage
+    stepId={4}
+    sign="negative"
+    quizTarget="total"
+    quiz={steps[4].quiz}
+  />
+</Step>
+
+<Step id={5}>
+  <SameSignAdditionFormulaStage stepId={5} sign="positive" quiz={steps[5].quiz} />
+</Step>
+
+<Step id={6}>
+  <SameSignAdditionFormulaStage stepId={6} sign="negative" quiz={steps[6].quiz} />
+</Step>
+
+<Step id={7}>
+  <PracticeCard title="같은 부호의 덧셈 확인문제" subtitle="공통의 부호를 쓰고 절댓값끼리 더하자">
+    {steps[7].quiz && (
+      <QuizArea
+        stepId={7}
+        quiz={steps[7].quiz}
+        renderBlanks={(blank, solvedAnswers, meta) => (
+          <SameSignAdditionPracticeCarousel
+            blank={blank}
+            solvedAnswers={solvedAnswers}
+            recentCorrectBlankId={meta.recentCorrectBlankId}
+          />
+        )}
+      />
+    )}
+  </PracticeCard>
+</Step>
+
+<Step id={8}>
+  <CompleteCard emoji="➕" title="같은 부호의 덧셈 정리 완료!">
+    같은 부호의 두 수는 공통의 부호를 쓰고,
+    <br />
+    절댓값끼리 더해서 계산해요.
+    <br />
+    이번 단원에서는 같은 부호의 덧셈까지 정리했어요.
+  </CompleteCard>
+</Step>
+
+</SlideContent>

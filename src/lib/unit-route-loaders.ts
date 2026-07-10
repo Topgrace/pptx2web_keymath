@@ -36,6 +36,7 @@ export const unitRouteLoaders = {
   '/1-1-u9': () => import('@/pages/1-1-u9'),
   '/1-1-u10': () => import('@/pages/1-1-u10'),
   '/1-1-u11': () => import('@/pages/1-1-u11'),
+  '/1-1-u12': () => import('@/pages/1-1-u12'),
   '/1-1-ch2-intro': () => import('@/pages/1-1-ch2-intro'),
 } satisfies Record<string, UnitRouteLoader>
 
@@ -59,6 +60,7 @@ export const unitPageRoutes = [
   { path: '/1-1-u9', loader: unitRouteLoaders['/1-1-u9'] },
   { path: '/1-1-u10', loader: unitRouteLoaders['/1-1-u10'] },
   { path: '/1-1-u11', loader: unitRouteLoaders['/1-1-u11'] },
+  { path: '/1-1-u12', loader: unitRouteLoaders['/1-1-u12'] },
   { path: '/1-1-ch2-intro', loader: unitRouteLoaders['/1-1-ch2-intro'] },
 ] as const
 
