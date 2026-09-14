@@ -20,6 +20,7 @@ type SignConfig = {
   text: string
   startValue: number
   resultValue: number
+  differentSigns?: boolean
 }
 
 const signConfigs: Record<SameSign, SignConfig> = {
@@ -52,6 +53,21 @@ const signConfigs: Record<SameSign, SignConfig> = {
 }
 
 const POSITIVE_TICKS = [0, 1, 2, 3]
+const getConfig = (sign: SameSign, differentSigns: boolean): SignConfig => {
+  const config = signConfigs[sign]
+  if (!differentSigns) return config
+  return {
+    ...config,
+    differentSigns: true,
+    label: sign === 'positive' ? '양수의 절댓값이 클 때' : '음수의 절댓값이 클 때',
+    title: `식으로 보기: ${sign === 'positive' ? '양수' : '음수'}의 절댓값이 클 때`,
+    result: sign === 'positive' ? '+2' : '−2',
+    lineFormula: sign === 'positive' ? '(+3)+(−1)=+2' : '(−3)+(+1)=−2',
+    startValue: sign === 'positive' ? 3 : -3,
+    resultValue: sign === 'positive' ? 2 : -2,
+  }
+}
+
 const NEGATIVE_TICKS = [-3, -2, -1, 0]
 
 const valueToNumberLineX = (sign: SameSign, value: number) =>
@@ -117,9 +133,11 @@ function ExpressionDiagram({
   visible: boolean
   resultBlank?: ReactNode
 }) {
-  const softGradientId = `expression-sign-soft-${sign}`
-  const strongGradientId = `expression-sign-strong-${sign}`
-  const arrowMarkerId = `expression-rule-arrow-${sign}`
+  const diagramId = `${sign}-${config.differentSigns ? 'different' : 'same'}`
+  const softGradientId = `expression-sign-soft-${diagramId}`
+  const strongGradientId = `expression-sign-strong-${diagramId}`
+  const arrowMarkerId = `expression-rule-arrow-${diagramId}`
+  const otherConfig = config.differentSigns ? signConfigs[sign === 'positive' ? 'negative' : 'positive'] : config
   const brown = '#8B5A14'
 
   return (
@@ -127,10 +145,15 @@ function ExpressionDiagram({
       viewBox="0 0 440 280"
       className="h-auto w-full"
       role="img"
-      aria-label={`${config.lineFormula}: 공통의 부호를 쓰고 절댓값의 합을 구한다`}
+      aria-label={config.differentSigns ? '다른 부호의 덧셈: 절댓값이 큰 수의 부호를 쓰고 절댓값의 차를 구한다' : `${config.lineFormula}: 공통의 부호를 쓰고 절댓값의 합을 구한다`}
       shapeRendering="geometricPrecision"
     >
       <defs>
+        <radialGradient id={`${softGradientId}-other`}>
+          <stop offset="0%" stopColor={otherConfig.soft} />
+          <stop offset="58%" stopColor={otherConfig.soft} stopOpacity="0.72" />
+          <stop offset="100%" stopColor={otherConfig.soft} stopOpacity="0" />
+        </radialGradient>
         <radialGradient id={softGradientId} cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor={config.soft} stopOpacity="0.95" />
           <stop offset="58%" stopColor={config.soft} stopOpacity="0.72" />
@@ -165,11 +188,11 @@ function ExpressionDiagram({
         <text x="34" y="74" fontSize="54">(</text>
         <circle cx="75" cy="56" r="28" fill={`url(#${softGradientId})`} />
         <text x="75" y="72" fontSize="46" textAnchor="middle">{config.sign}</text>
-        <text x="99" y="74" fontSize="54">2)</text>
+        <text x="99" y="74" fontSize="54">{config.differentSigns ? '3)' : '2)'}</text>
         <text x="176" y="74" fontSize="54">+</text>
         <text x="223" y="74" fontSize="54">(</text>
-        <circle cx="264" cy="56" r="28" fill={`url(#${softGradientId})`} />
-        <text x="264" y="72" fontSize="46" textAnchor="middle">{config.sign}</text>
+        <circle cx="264" cy="56" r="28" fill={`url(#${softGradientId}-other)`} />
+        <text x="264" y="72" fontSize="46" textAnchor="middle">{otherConfig.sign}</text>
         <text x="288" y="74" fontSize="54">1)</text>
       </motion.g>
 
@@ -188,6 +211,7 @@ function ExpressionDiagram({
           markerEnd={`url(#${arrowMarkerId})`}
         />
         <path
+          opacity={config.differentSigns ? 0 : 1}
           d="M 264 86 L 109 124"
           fill="none"
           stroke={brown}
@@ -196,9 +220,9 @@ function ExpressionDiagram({
           strokeLinecap="round"
           markerEnd={`url(#${arrowMarkerId})`}
         />
-        <circle cx="275" cy="111" r="15" fill={brown} />
+        <circle cx={config.differentSigns ? 133 : 275} cy="111" r="15" fill={brown} />
         <text
-          x="275"
+          x={config.differentSigns ? 133 : 275}
           y="117"
           fill="white"
           fontFamily="Nanum Gothic, sans-serif"
@@ -208,11 +232,11 @@ function ExpressionDiagram({
         >
           1
         </text>
-        <text x="297" y="109" fill={brown} fontFamily="Nanum Gothic, sans-serif" fontSize="18" fontWeight="900">
-          공통의 부호를
+        <text x={config.differentSigns ? 155 : 297} y={config.differentSigns ? 117 : 109} fill={brown} fontFamily="Nanum Gothic, sans-serif" fontSize={config.differentSigns ? 16 : 18} fontWeight="900">
+          {config.differentSigns ? '절댓값이 큰 수의 부호를 쓰고' : '공통의 부호를'}
         </text>
-        <text x="297" y="132" fill={brown} fontFamily="Nanum Gothic, sans-serif" fontSize="18" fontWeight="900">
-          쓰고
+        <text x={config.differentSigns ? 155 : 297} y="132" fill={brown} fontFamily="Nanum Gothic, sans-serif" fontSize="18" fontWeight="900">
+          {config.differentSigns ? '' : '쓰고'}
         </text>
       </motion.g>
 
@@ -227,7 +251,7 @@ function ExpressionDiagram({
         <text x="35" y="163" fontSize="54">=</text>
         <circle cx="92" cy="145" r="31" fill={`url(#${strongGradientId})`} />
         <text x="92" y="162" fontSize="48" textAnchor="middle">{config.sign}</text>
-        <text x="123" y="163" fontSize="54">(2+1)</text>
+        <text x="123" y="163" fontSize="54">{config.differentSigns ? '(3−1)' : '(2+1)'}</text>
       </motion.g>
 
       <motion.g
@@ -256,7 +280,7 @@ function ExpressionDiagram({
           2
         </text>
         <text x="248" y="212" fill={brown} fontFamily="Nanum Gothic, sans-serif" fontSize="19" fontWeight="900">
-          절댓값의 합
+          {config.differentSigns ? '절댓값의 차' : '절댓값의 합'}
         </text>
       </motion.g>
 
@@ -288,12 +312,12 @@ function FormulaDisplay({ config }: { config: SignConfig }) {
     <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[30px] font-black leading-[1.35] text-[#1F2937] sm:text-[40px]">
       <FormulaTerm config={config} variable="a" />
       <span>+</span>
-      <FormulaTerm config={config} variable="b" />
+      <FormulaTerm config={config.differentSigns ? signConfigs[config.sign === '+' ? 'negative' : 'positive'] : config} variable="b" />
       <span>=</span>
       <span className="inline-flex items-center whitespace-nowrap">
         <SignBadge sign={config.sign} color={config.soft} />
         <span>
-          (<span className="font-serif italic">a</span>+<span className="font-serif italic">b</span>)
+          (<span className="bg-[#FFF19B] px-1 text-[18px] align-middle sm:text-[22px]">{config.differentSigns ? '절댓값의 차' : '절댓값의 합'}</span>)
         </span>
       </span>
     </div>
@@ -371,16 +395,18 @@ function NumberLineArrow({
 
 export function SameSignAdditionExpressionStage({
   sign,
+  differentSigns = false,
   quiz,
   stepId,
   visible = false,
 }: {
   sign: SameSign
+  differentSigns?: boolean
   quiz?: Quiz
   stepId: number
   visible?: boolean
 }) {
-  const config = signConfigs[sign]
+  const config = getConfig(sign, differentSigns)
 
   return (
     <StepCard visible={visible} variant="white" className="px-4 py-6 sm:px-6">
@@ -454,7 +480,7 @@ function NumberLineContent({
           viewBox="0 0 500 230"
           className="h-auto w-full"
           role="img"
-          aria-label={`${config.lineFormula}를 수직선으로 나타낸 그림`}
+          aria-label={config.differentSigns ? `${formatNumberLineValue(config.startValue)}만큼 이동한 후 반대 방향으로 1만큼 이동하는 수직선` : `${config.lineFormula}를 수직선으로 나타낸 그림`}
           shapeRendering="geometricPrecision"
         >
           {guideValues.map((value) => {
@@ -490,7 +516,7 @@ function NumberLineContent({
             y={35}
             label={formatNumberLineValue(config.resultValue - config.startValue)}
             labelY={22}
-            color={config.soft}
+            color={config.differentSigns ? signConfigs[sign === 'positive' ? 'negative' : 'positive'].soft : config.soft}
             delay={0.7}
             visible={visible}
           />
@@ -530,7 +556,7 @@ function NumberLineContent({
       </div>
 
       <div className="mt-3 text-center text-[22px] font-black leading-[1.45] text-[#1F2937] sm:text-[28px]">
-        {config.lineFormula}
+        {config.differentSigns && totalArrowBlank ? config.lineFormula.split('=')[0] : config.lineFormula}
       </div>
     </>
   )
@@ -538,18 +564,20 @@ function NumberLineContent({
 
 export function SameSignAdditionNumberLineStage({
   sign,
+  differentSigns = false,
   quiz,
   stepId,
   quizTarget = 'first',
   visible = false,
 }: {
   sign: SameSign
+  differentSigns?: boolean
   quiz?: Quiz
   stepId: number
   quizTarget?: NumberLineQuizTarget
   visible?: boolean
 }) {
-  const config = signConfigs[sign]
+  const config = getConfig(sign, differentSigns)
 
   return (
     <StepCard visible={visible} variant="white" className="px-4 py-6 sm:px-6">
@@ -600,16 +628,18 @@ export function SameSignAdditionNumberLineStage({
 
 export function SameSignAdditionFormulaStage({
   sign,
+  differentSigns = false,
   quiz,
   stepId,
   visible = false,
 }: {
   sign: SameSign
+  differentSigns?: boolean
   quiz?: Quiz
   stepId: number
   visible?: boolean
 }) {
-  const config = signConfigs[sign]
+  const config = getConfig(sign, differentSigns)
 
   return (
     <StepCard visible={visible} variant="white" className="px-4 py-6 sm:px-6">
@@ -631,6 +661,13 @@ export function SameSignAdditionFormulaStage({
             style={{ borderColor: config.soft, backgroundColor: config.pale }}
           >
             <div className="rounded-[16px] bg-white px-4 py-5 text-center shadow-sm">
+              {differentSigns && (
+                <p className="mb-3 break-keep text-[18px] font-bold leading-relaxed">
+                  <span className="font-serif italic">a</span>, <span className="font-serif italic">b</span>는 양수이고,
+                  <br />
+                  <span className="font-serif italic">a</span>의 절댓값이 더 클 때
+                </p>
+              )}
               <FormulaDisplay config={config} />
             </div>
 
@@ -642,10 +679,10 @@ export function SameSignAdditionFormulaStage({
                   <div className="mx-auto mt-1 grid max-w-[720px] gap-3 text-left md:grid-cols-2">
                     <div className="rounded-[16px] bg-white px-4 py-4 text-center shadow-sm">
                       <div className="mb-2 text-[13px] font-black text-[#8B5E16]">
-                        공통의 부호
+                        {differentSigns ? '절댓값이 큰 수의 부호' : '공통의 부호'}
                       </div>
                       <div className="break-keep text-[18px] font-extrabold leading-[1.7] text-[#1F2937]">
-                        두 수의 공통 부호는 {blank('commonSign')}이다.
+                        {differentSigns ? '결과의 부호는 ' : '두 수의 공통 부호는 '}{blank('commonSign')}이다.
                       </div>
                     </div>
 
@@ -654,7 +691,7 @@ export function SameSignAdditionFormulaStage({
                         절댓값 계산
                       </div>
                       <div className="break-keep text-[18px] font-extrabold leading-[1.7] text-[#1F2937]">
-                        괄호 안에는 {blank('absoluteSum')}을 쓴다.
+                        괄호 안에는 {blank('absoluteSum')}{differentSigns ? '를' : '을'} 쓴다.
                       </div>
                     </div>
                   </div>

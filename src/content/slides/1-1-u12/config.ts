@@ -3,7 +3,7 @@ import type { SlideConfig } from '@/schemas/slide'
 export const slideConfig: SlideConfig = {
   slug: '1-1-u12-addition',
   title: '2단원 - 덧셈',
-  totalSteps: 9,
+  totalSteps: 17,
   themeColors: {
     background: '#DDEFE6',
     cardDefault: '#F8F8F8',

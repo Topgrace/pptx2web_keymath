@@ -96,12 +96,12 @@ const rawSteps = [
         },
         {
           id: 'absoluteSum',
-          answer: 'a+b',
+          answer: '절댓값의 합',
           blankType: 'normal',
           choices: [
-            { label: 'a+b', value: 'a+b' },
-            { label: 'a−b', value: 'a−b' },
-            { label: 'ab', value: 'ab' },
+            { label: '절댓값의 합', value: '절댓값의 합' },
+            { label: '절댓값의 차', value: '절댓값의 차' },
+            { label: '절댓값의 곱', value: '절댓값의 곱' },
           ],
         },
       ],
@@ -127,12 +127,12 @@ const rawSteps = [
         },
         {
           id: 'absoluteSum',
-          answer: 'a+b',
+          answer: '절댓값의 합',
           blankType: 'normal',
           choices: [
-            { label: 'a+b', value: 'a+b' },
-            { label: 'a−b', value: 'a−b' },
-            { label: 'ab', value: 'ab' },
+            { label: '절댓값의 합', value: '절댓값의 합' },
+            { label: '절댓값의 차', value: '절댓값의 차' },
+            { label: '절댓값의 곱', value: '절댓값의 곱' },
           ],
         },
       ],
@@ -181,6 +181,108 @@ const rawSteps = [
   },
   {
     id: 8,
+    type: 'concept',
+    cardVariant: 'white',
+    quiz: {
+      answer: '+2',
+      blankType: 'normal',
+      questionLabel: '(+3)+(−1)의 결과',
+      choices: [{ label: '+2', value: '+2' }, { label: '−2', value: '−2' }, { label: '+4', value: '+4' }],
+    },
+  },
+  {
+    id: 9,
+    type: 'concept',
+    cardVariant: 'white',
+    quiz: {
+      answer: '−2',
+      blankType: 'normal',
+      questionLabel: '(−3)+(+1)의 결과',
+      choices: [{ label: '−2', value: '−2' }, { label: '+2', value: '+2' }, { label: '−4', value: '−4' }],
+    },
+  },
+  {
+    id: 10,
+    type: 'concept',
+    cardVariant: 'white',
+    quiz: {
+      answer: '+2',
+      blankType: 'normal',
+      questionLabel: '전체 이동량',
+      choices: [{ label: '+2', value: '+2' }, { label: '−2', value: '−2' }, { label: '+3', value: '+3' }],
+    },
+  },
+  {
+    id: 11,
+    type: 'concept',
+    cardVariant: 'white',
+    quiz: {
+      answer: '−2',
+      blankType: 'normal',
+      questionLabel: '전체 이동량',
+      choices: [{ label: '−2', value: '−2' }, { label: '+2', value: '+2' }, { label: '−3', value: '−3' }],
+    },
+  },
+  {
+    id: 12,
+    type: 'concept',
+    cardVariant: 'white',
+    quiz: {
+      kind: 'multi',
+      questionLabel: '다른 부호의 덧셈: a>b>0일 때 부호와 절댓값의 차',
+      items: [
+        { id: 'commonSign', answer: '+', blankType: 'normal',
+          choices: [{ label: '+', value: '+' }, { label: '−', value: '−' }] },
+        { id: 'absoluteSum', answer: '절댓값의 차', blankType: 'normal',
+          choices: [{ label: '절댓값의 차', value: '절댓값의 차' }, { label: '절댓값의 합', value: '절댓값의 합' }, { label: '절댓값의 곱', value: '절댓값의 곱' }] },
+      ],
+    },
+  },
+  {
+    id: 13,
+    type: 'concept',
+    cardVariant: 'white',
+    quiz: {
+      kind: 'multi',
+      questionLabel: '다른 부호의 덧셈: a>b>0일 때 부호와 절댓값의 차',
+      items: [
+        { id: 'commonSign', answer: '−', blankType: 'normal',
+          choices: [{ label: '+', value: '+' }, { label: '−', value: '−' }] },
+        { id: 'absoluteSum', answer: '절댓값의 차', blankType: 'normal',
+          choices: [{ label: '절댓값의 차', value: '절댓값의 차' }, { label: '절댓값의 합', value: '절댓값의 합' }, { label: '절댓값의 곱', value: '절댓값의 곱' }] },
+      ],
+    },
+  },
+  {
+    id: 14,
+    type: 'concept',
+    cardVariant: 'white',
+    quiz: {
+      answer: '0',
+      blankType: 'normal',
+      questionLabel: '(+3)+(−3)의 결과',
+      choices: [{ label: '0', value: '0' }, { label: '+6', value: '+6' }, { label: '−6', value: '−6' }],
+    },
+  },
+  {
+    id: 15,
+    type: 'practice',
+    cardVariant: 'white',
+    quiz: {
+      kind: 'multi',
+      questionLabel: '다른 부호의 덧셈 확인문제',
+      items: [
+        { id: 'positive', answer: '+4', blankType: 'normal', choices: [
+          { label: '+4', value: '+4' }, { label: '−4', value: '−4' }, { label: '+10', value: '+10' }] },
+        { id: 'negative', answer: '−4', blankType: 'normal', choices: [
+          { label: '−4', value: '−4' }, { label: '+4', value: '+4' }, { label: '−10', value: '−10' }] },
+        { id: 'zero', answer: '0', blankType: 'normal', choices: [
+          { label: '0', value: '0' }, { label: '+10', value: '+10' }, { label: '−10', value: '−10' }] },
+      ],
+    },
+  },
+  {
+    id: 16,
     type: 'complete',
     cardVariant: 'default',
   },

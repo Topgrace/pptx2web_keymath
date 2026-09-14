@@ -2,6 +2,7 @@ import { Step, SlideContent } from '@/components/mdx/step-wrapper'
 import { IntroCard } from '@/components/cards/intro-card'
 import { PracticeCard } from '@/components/cards/practice-card'
 import { CompleteCard } from '@/components/cards/complete-card'
+import { StepCard } from '@/components/cards/step-card'
 import { QuizArea } from '@/components/quiz'
 import {
   SameSignAdditionExpressionStage,
@@ -25,8 +26,8 @@ export const meta = {
     characterImg={shape2Character}
     speechText={`이번 시간에 배울 내용
 1. 같은 부호의 두 수를 식으로 더하기
-2. 수직선에서 같은 방향으로 이어서 움직이기
-3. 공통의 부호와 절댓값의 합으로 공식 정리하기`}
+2. 다른 부호의 두 수를 식과 수직선으로 더하기
+3. 부호와 절댓값으로 덧셈 정리하기`}
     topicTitle="12. 덧셈"
   >
     {steps[0].quiz && (
@@ -102,12 +103,61 @@ export const meta = {
 </Step>
 
 <Step id={8}>
-  <CompleteCard emoji="➕" title="같은 부호의 덧셈 정리 완료!">
-    같은 부호의 두 수는 공통의 부호를 쓰고,
+  <h2 className="mb-6 border-b-2 border-[#2E7D57] py-4 text-center text-[28px] font-black text-[#2E7D57]">다른 부호의 덧셈</h2>
+  <SameSignAdditionExpressionStage stepId={8} sign="positive" differentSigns quiz={steps[8].quiz} />
+</Step>
+
+<Step id={9}>
+  <SameSignAdditionExpressionStage stepId={9} sign="negative" differentSigns quiz={steps[9].quiz} />
+</Step>
+
+<Step id={10}>
+  <SameSignAdditionNumberLineStage stepId={10} sign="positive" differentSigns quizTarget="total" quiz={steps[10].quiz} />
+</Step>
+
+<Step id={11}>
+  <SameSignAdditionNumberLineStage stepId={11} sign="negative" differentSigns quizTarget="total" quiz={steps[11].quiz} />
+</Step>
+
+<Step id={12}>
+  <SameSignAdditionFormulaStage stepId={12} sign="positive" differentSigns quiz={steps[12].quiz} />
+</Step>
+
+<Step id={13}>
+  <SameSignAdditionFormulaStage stepId={13} sign="negative" differentSigns quiz={steps[13].quiz} />
+</Step>
+
+<Step id={14}>
+  <StepCard variant="white">
+    <h2 className="text-center text-[24px] font-black text-[#2E7D57]">절댓값이 같을 때</h2>
+    <p className="mt-4 text-center text-[18px] leading-relaxed">부호가 다르고 절댓값이 같으면 합은 0이에요.</p>
+    <QuizArea stepId={14} quiz={steps[14].quiz} renderBlank={(blank) => (
+      <div className="flex flex-wrap items-center justify-center gap-2 text-[26px] font-black">
+        <span className="whitespace-nowrap">(+3)+(−3)</span><span>=</span>{blank}
+      </div>
+    )} />
+  </StepCard>
+</Step>
+
+<Step id={15}>
+  <PracticeCard title="다른 부호의 덧셈 확인문제" subtitle="절댓값이 큰 수의 부호를 쓰고 절댓값의 차를 구하자">
+    <QuizArea stepId={15} quiz={steps[15].quiz} renderBlanks={(blank) => (
+      <div className="grid gap-6 text-center text-[24px] font-black">
+        <div className="flex flex-wrap items-center justify-center gap-2"><span>(−3)+(+7)=</span>{blank('positive')}</div>
+        <div className="flex flex-wrap items-center justify-center gap-2"><span>(+3)+(−7)=</span>{blank('negative')}</div>
+        <div className="flex flex-wrap items-center justify-center gap-2"><span>(−5)+(+5)=</span>{blank('zero')}</div>
+      </div>
+    )} />
+  </PracticeCard>
+</Step>
+
+<Step id={16}>
+  <CompleteCard emoji="➕" title="같은 부호와 다른 부호의 덧셈 완료!">
+    같은 부호: 공통의 부호와 절댓값의 합
     <br />
-    절댓값끼리 더해서 계산해요.
+    다른 부호: 절댓값이 큰 수의 부호와 절댓값의 차
     <br />
-    이번 단원에서는 같은 부호의 덧셈까지 정리했어요.
+    부호가 다르고 절댓값이 같으면 합은 0이에요.
   </CompleteCard>
 </Step>
 
